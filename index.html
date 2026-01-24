@@ -1,16 +1,35 @@
 <!doctype html>
-<html lang="en" class="bg-gray-50 scroll-smooth">
-<head>
-    <!-- Keep existing head content but update styling -->
-</head>
+<html lang="en" class="bg-gray-50 dark:bg-gray-900 scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ApexToWWW - Free DNS Apex to www-subdomain Redirection Service</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+        <link rel="canonical" href="https://www.apextowww.com/" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCDJZQW377"></script>
+        <script async>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag("js", new Date()); gtag("config", "G-NCDJZQW377");</script>
+        <meta name="description" content="Free DNS Apex to www-subdomain redirection service supporting both HTTP and HTTPS and both IPv4 and IPv6."/>
+        <meta property="og:title" content="ApexToWWW - Free DNS Apex to www-subdomain Redirection Service" />
+        <meta property="og:description" content="Free DNS Apex to www-subdomain redirection service supporting both HTTP and HTTPS and both IPv4 and IPv6." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.apextowww.com/" />
+        <meta property="og:image" content="https://www.apextowww.com/favicon.svg" />
+        <meta property="og:site_name" content="ApexToWWW" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="ApexToWWW - Free DNS Apex to www-subdomain Redirection Service" />
+        <meta name="twitter:description" content="Free DNS Apex to www-subdomain redirection service supporting both HTTP and HTTPS and both IPv4 and IPv6." />
+        <meta name="twitter:image" content="https://www.apextowww.com/favicon.svg" />
+    </head>
 
-<body class="flex min-h-screen flex-col">
+<body class="flex min-h-screen flex-col bg-white dark:bg-gray-900">
     <!-- Modern Navigation -->
-    <header class="fixed z-50 w-full bg-gradient-to-r from-gray-900 to-gray-800">
+    <header class="fixed z-50 w-full bg-gradient-to-r from-gray-900 to-gray-800 dark:from-black dark:to-gray-900">
         <div class="container mx-auto px-4">
             <div class="flex h-16 items-center justify-between">
                 <a href="/" class="flex items-center">
-                    <h1 class="text-2xl font-bold text-white">ApexToWWW</h1>
+                    <h1 class="text-2xl font-bold text-white">ApexToWWW</h1><img src="/favicon.svg" alt="ApexToWWW Logo" class="h-8 w-8 mr-2 text-white" />
                 </a>
 
                 <nav class="hidden md:flex space-x-8">
@@ -22,8 +41,8 @@
 
                 <div class="flex items-center space-x-4">
                     <a href="#get-started"
-                       class="hidden md:inline-flex items-center px-4 py-2 border border-transparent rounded-md text-sm font-medium text-white bg-gray-700 hover:bg-gray-600 transition">
-                        Start Now
+                       class="hidden md:inline-flex items-center px-4 py-2 border border-transparent rounded-md text-sm font-medium text-white bg-gray-700 hover:bg-gray-600 transition dark:bg-gray-800 dark:hover:bg-gray-700">
+                           Get started
                     </a>
                 </div>
             </div>
@@ -31,10 +50,10 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="pt-32 pb-20 bg-gradient-to-b from-gray-900 to-gray-800">
+    <section class="pt-32 pb-20 bg-gradient-to-b from-gray-900 to-gray-800 dark:from-black dark:to-gray-900">
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto text-center">
-                <div class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gray-800 text-gray-200 mb-8">
+                <div class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gray-800 dark:bg-gray-700 text-gray-200 mb-8">
                     Free DNS Redirection Service
                 </div>
                 <h2 class="text-5xl font-bold text-white mb-6">
@@ -57,29 +76,408 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-20 bg-white">
+    <section id="features" class="py-20 bg-white dark:bg-gray-900">
         <div class="container mx-auto px-4">
             <div class="max-w-3xl mx-auto text-center mb-16">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Everything you need for domain redirection</h2>
-                <p class="text-xl text-gray-600">Simple setup with powerful features to handle all your domain redirection needs</p>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Everything you need for domain redirection</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400">Simple setup with powerful features to handle all your domain redirection needs</p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Feature cards here -->
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-gray-100 dark:border-gray-700">
+                    <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900 flex items-center justify-center mb-4">
+                        <i class="fas fa-rocket text-blue-600 dark:text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Simple Setup</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Set up your A and AAAA DNS records in minutes with our straightforward configuration.</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-gray-100 dark:border-gray-700">
+                    <div class="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900 flex items-center justify-center mb-4">
+                        <i class="fas fa-shield-alt text-green-600 dark:text-green-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">SSL/TLS Support</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Automatic SSL certificate provisioning for secure HTTPS redirections using Let's Encrypt.</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-gray-100 dark:border-gray-700">
+                    <div class="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900 flex items-center justify-center mb-4">
+                        <i class="fas fa-globe text-purple-600 dark:text-purple-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">IPv6 Ready</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Full support for both IPv4 and IPv6 ensuring compatibility with all modern clients.</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-gray-100 dark:border-gray-700">
+                    <div class="w-10 h-10 rounded-lg bg-red-100 dark:bg-red-900 flex items-center justify-center mb-4">
+                        <i class="fas fa-bolt text-red-600 dark:text-red-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">HTTP/3 Support</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Latest HTTP/3 protocol support for faster and more reliable connections.</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-gray-100 dark:border-gray-700">
+                    <div class="w-10 h-10 rounded-lg bg-yellow-100 dark:bg-yellow-900 flex items-center justify-center mb-4">
+                        <i class="fas fa-tag text-yellow-600 dark:text-yellow-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Free Forever</h3>
+                    <p class="text-gray-600 dark:text-gray-400">No hidden costs or subscription fees. Our service is completely free to use.</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-gray-100 dark:border-gray-700">
+                    <div class="w-10 h-10 rounded-lg bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center mb-4">
+                        <i class="fas fa-tachometer-alt text-indigo-600 dark:text-indigo-400"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Fast Response</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Quick response times powered by energy-efficient ARM64 processors.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Continue with other sections using similar modern styling -->
+    <!-- Get Started Section -->
+    <section id="get-started" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8">Get Started</h2>
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-8">
+                    <ol class="space-y-6">
+                        <li class="text-gray-800 dark:text-white">
+                            <span class="font-semibold"><i class="fas fa-cog mr-2 text-blue-500"></i>Set Up DNS Records</span>
+                            <p class="mt-2 text-gray-600 dark:text-gray-300 ml-6">Configure the following DNS records for your domain:</p>
+                            <div class="bg-gray-50 dark:bg-gray-600 rounded-md p-4 mt-2 ml-6">
+                                <p class="mb-2">A Record: <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">65.21.184.101</code></p>
+                                <p>AAAA Record: <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">2a01:4f9:c012:a304::1</code></p>
+                            </div>
+                        </li>
+                        <li class="text-gray-800 dark:text-white">
+                            <span class="font-semibold"><i class="fas fa-check-circle mr-2 text-green-500"></i>Done</span>
+                            <p class="mt-2 text-gray-600 dark:text-gray-300 ml-6">Your apex domain will now automatically redirect to your www subdomain.</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Test Configuration Section -->
+    <section id="test-configuration" class="py-20 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8">Test Your Configuration</h2>
+
+                <div class="bg-gray-900 dark:bg-black rounded-lg shadow-lg overflow-hidden border border-gray-700">
+                    <!-- Terminal Header -->
+                    <div class="bg-gray-800 p-3 flex items-center">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <div class="text-gray-300 text-sm mx-auto">Terminal</div>
+                    </div>
+
+                    <!-- Terminal Content -->
+                    <div class="p-4 font-mono text-sm">
+                        <div class="animate-terminal-typing-1">
+                            <span class="text-green-400">user@host</span><span class="text-gray-400">:</span><span class="text-blue-400">~</span><span class="text-gray-400">$</span>
+                            <span class="text-white typing-effect" data-text="curl -I http://yourdomain.com">curl -I http://yourdomain.com</span>
+                        </div>
+
+                        <div class="mt-2 text-white opacity-0 animate-terminal-output-1">
+                            <div>HTTP/3 301 Moved Permanently</div>
+                            <div>Date: <span id="current-date-1"></span></div>
+                            <div>Connection: keep-alive</div>
+                            <div class="text-yellow-300">Location: http://www.yourdomain.com/</div>
+                            <div>Content-Type: text/html</div>
+                        </div>
+
+                        <div class="mt-4 animate-terminal-typing-2">
+                            <span class="text-green-400">user@host</span><span class="text-gray-400">:</span><span class="text-blue-400">~</span><span class="text-gray-400">$</span>
+                            <span class="text-white typing-effect" data-text="curl -I https://yourdomain.com">curl -I https://yourdomain.com</span>
+                        </div>
+
+                        <div class="mt-2 text-white opacity-0 animate-terminal-output-2">
+                            <div>HTTP/3 301 Moved Permanently</div>
+                            <div>Date: <span id="current-date-2"></span></div>
+                            <div>Connection: keep-alive</div>
+                            <div class="text-yellow-300">Location: https://www.yourdomain.com/</div>
+                            <div>Content-Type: text/html</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 text-center text-gray-600 dark:text-gray-400">
+                    <p>Both commands should return <span class="font-mono bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">301 Moved Permanently</span> with the correct location header.</p>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            @keyframes typing {
+                from { width: 0 }
+                to { width: 100% }
+            }
+
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+
+            .animate-terminal-typing-1 {
+                overflow: hidden;
+                white-space: nowrap;
+                display: inline-block;
+                animation-delay: 0.5s;
+                animation: typing 2s steps(40, end);
+            }
+
+            .animate-terminal-output-1 {
+                animation: fadeIn 1s ease forwards;
+                animation-delay: 2.5s;
+            }
+
+            .animate-terminal-typing-2 {
+                overflow: hidden;
+                white-space: nowrap;
+                display: inline-block;
+                opacity: 0;
+                animation: fadeIn 0.3s ease forwards, typing 2s steps(40, end);
+                animation-delay: 5s, 5.3s;
+            }
+
+            .animate-terminal-output-2 {
+                animation: fadeIn 1s ease forwards;
+                animation-delay: 7.8s;
+            }
+        </style>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                function formatDate(date) {
+                    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+                    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+                    const day = days[date.getDay()];
+                    const dayNum = date.getDate();
+                    const month = months[date.getMonth()];
+                    const year = date.getFullYear();
+                    const hours = date.getHours().toString().padStart(2, '0');
+                    const minutes = date.getMinutes().toString().padStart(2, '0');
+                    const seconds = date.getSeconds().toString().padStart(2, '0');
+
+                    return `${day}, ${dayNum} ${month} ${year} ${hours}:${minutes}:${seconds} GMT`;
+                }
+
+                const now = new Date();
+                document.getElementById('current-date-1').textContent = formatDate(now);
+
+                // Add a small time difference for the second request
+                const secondDate = new Date(now.getTime() + 14000);
+                document.getElementById('current-date-2').textContent = formatDate(secondDate);
+            });
+        </script>
+    </section>
+
+    <!-- Apex Domain Problem Section -->
+    <section id="apex-domain-problem" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8">The Apex Domain Problem</h2>
+                <div class="prose prose-lg max-w-none dark:prose-invert">
+                    <p class="mb-4 text-gray-600 dark:text-gray-300">An apex domain (also called a naked domain) refers to your domain without the "www" prefix. Most modern cloud hosting platforms prefer or require websites to be served from a www subdomain because of several technical constraints:</p>
+
+                    <ul class="list-disc pl-6 space-y-4 mb-6">
+                        <li class="text-gray-600 dark:text-gray-300">
+                            <span class="font-semibold">DNS Limitations:</span> Apex domains can only use A/AAAA records pointing to specific IP addresses, while www subdomains can use CNAME records that point to another hostname, offering more flexibility.
+                        </li>
+                        <li class="text-gray-600 dark:text-gray-300">
+                            <span class="font-semibold">High Availability:</span> Using www allows services to change underlying server infrastructure without requiring you to update DNS records.
+                        </li>
+                        <li class="text-gray-600 dark:text-gray-300">
+                            <span class="font-semibold">CDN Integration:</span> Content Delivery Networks work more efficiently with www subdomains, improving your website's global performance and reliability.
+                        </li>
+                    </ul>
+
+                    <div class="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-500 p-4 mb-6">
+                        <h3 class="font-bold text-lg mb-2 dark:text-white">Popular Services With www Requirements:</h3>
+                        <ul class="list-disc pl-6 space-y-2 text-gray-600 dark:text-gray-300">
+                            <li><a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/about-custom-domains-and-github-pages" class="text-blue-600 dark:text-blue-400 hover:underline">GitHub Pages</a></li>
+                            <li><a href="https://docs.netlify.com/domains-https/custom-domains/" class="text-blue-600 dark:text-blue-400 hover:underline">Netlify</a></li>
+                            <li><a href="https://vercel.com/docs/projects/domains" class="text-blue-600 dark:text-blue-400 hover:underline">Vercel</a></li>
+                            <li><a href="https://devcenter.heroku.com/articles/custom-domains" class="text-blue-600 dark:text-blue-400 hover:underline">Heroku</a></li>
+                            <li><a href="https://firebase.google.com/docs/hosting/custom-domain" class="text-blue-600 dark:text-blue-400 hover:underline">Firebase Hosting</a></li>
+                            <li><a href="https://developers.cloudflare.com/pages/platform/custom-domains/" class="text-blue-600 dark:text-blue-400 hover:underline">Cloudflare Pages</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section id="comparison" class="py-20 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Domain Redirection Services Comparison</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400">See how ApexToWWW compares to other redirection services</p>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg">
+                    <thead>
+                        <tr class="bg-gray-100 dark:bg-gray-700">
+                            <th class="py-4 px-6 text-left text-sm font-semibold text-gray-900 dark:text-white">Feature</th>
+                            <th class="py-4 px-6 text-left text-sm font-semibold text-gray-900 dark:text-white">ApexToWWW</th>
+                            <th class="py-4 px-6 text-left text-sm font-semibold text-gray-900 dark:text-white">Other Services</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-750 transition">
+                            <td class="py-4 px-6 text-gray-800 dark:text-gray-200">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-lg bg-green-100 dark:bg-green-900 flex items-center justify-center mr-3">
+                                        <i class="fas fa-shield-alt text-green-600 dark:text-green-400"></i>
+                                    </div>
+                                    <span class="font-medium">SSL Support</span>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6 text-green-600 dark:text-green-400 font-medium">
+                                <i class="fas fa-check mr-2"></i> Included
+                            </td>
+                            <td class="py-4 px-6 text-red-600 dark:text-red-400 font-medium">
+                                <i class="fas fa-times mr-2"></i> Often Extra
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-750 transition">
+                            <td class="py-4 px-6 text-gray-800 dark:text-gray-200">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-lg bg-purple-100 dark:bg-purple-900 flex items-center justify-center mr-3">
+                                        <i class="fas fa-globe text-purple-600 dark:text-purple-400"></i>
+                                    </div>
+                                    <span class="font-medium">IPv6 Support</span>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6 text-green-600 dark:text-green-400 font-medium">
+                                <i class="fas fa-check mr-2"></i> Yes
+                            </td>
+                            <td class="py-4 px-6 text-red-600 dark:text-red-400 font-medium">
+                                <i class="fas fa-times mr-2"></i> Limited
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-750 transition">
+                            <td class="py-4 px-6 text-gray-800 dark:text-gray-200">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-lg bg-red-100 dark:bg-red-900 flex items-center justify-center mr-3">
+                                        <i class="fas fa-bolt text-red-600 dark:text-red-400"></i>
+                                    </div>
+                                    <span class="font-medium">HTTP/3</span>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6 text-green-600 dark:text-green-400 font-medium">
+                                <i class="fas fa-check mr-2"></i> Supported
+                            </td>
+                            <td class="py-4 px-6 text-red-600 dark:text-red-400 font-medium">
+                                <i class="fas fa-times mr-2"></i> Rare
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-750 transition">
+                            <td class="py-4 px-6 text-gray-800 dark:text-gray-200">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-lg bg-yellow-100 dark:bg-yellow-900 flex items-center justify-center mr-3">
+                                        <i class="fas fa-tag text-yellow-600 dark:text-yellow-400"></i>
+                                    </div>
+                                    <span class="font-medium">Price</span>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6 text-green-600 dark:text-green-400 font-medium">
+                                <i class="fas fa-check mr-2"></i> Free
+                            </td>
+                            <td class="py-4 px-6 text-gray-600 dark:text-gray-400 font-medium">
+                                Often Paid
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8">Frequently Asked Questions</h2>
+            <div class="max-w-3xl mx-auto space-y-6">
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">What is apex domain redirection?</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Apex domain redirection automatically forwards visitors from your naked domain (example.com) to your www subdomain (www.example.com).</p>
+                </div>
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Is SSL supported?</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Yes, we automatically provision SSL certificates through Let's Encrypt to ensure secure HTTPS redirections.</p>
+                </div>
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">How much does it cost?</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Our service is completely free with no hidden costs or subscription fees.</p>
+                </div>
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Why should I use www instead of an apex domain?</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Using www provides better CDN compatibility, more flexible DNS options, and improved reliability with services like GitHub Pages, Netlify, and Vercel.</p>
+                </div>
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">How long does redirection setup take?</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Setup is instant, but DNS propagation can take 5 minutes to 48 hours depending on your previous DNS configuration and provider.</p>
+                </div>
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Will this affect my SEO?</h3>
+                    <p class="text-gray-600 dark:text-gray-300">No, proper 301 redirects are search engine friendly and will transfer your SEO value from the apex domain to your www subdomain.</p>
+                </div>
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Does this work with all TLDs?</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Yes, our service works with all top-level domains including .com, .org, .net, country-specific TLDs, and newer extensions.</p>
+                </div>
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Are there any bandwidth limitations?</h3>
+                    <p class="text-gray-600 dark:text-gray-300">There are no specific bandwidth limitations for regular usage, but for extremely high-traffic domains, please contact us.</p>
+                </div>
+                <div class="bg-white dark:bg-gray-700 rounded-lg shadow-sm p-6">
+                    <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Can I redirect to a non-www subdomain?</h3>
+                    <p class="text-gray-600 dark:text-gray-300">No, this service is specifically designed to redirect from apex domains to www subdomains only.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="max-w-xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">Contact Us</h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-8">Have questions or need support? We're here to help!</p>
+                <div class="space-y-4">
+                    <a href="mailto:hi@apextowww.com" class="inline-flex items-center px-6 py-3 border border-transparent rounded-lg text-base font-medium text-white bg-blue-600 hover:bg-blue-700 transition">
+                        <i class="fas fa-envelope mr-2"></i>
+                        Email Us
+                    </a>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        <i class="fas fa-map-marker-alt mr-2"></i>
+                        P. O. Pedersens Vej 2<br>
+                        8200 Aarhus N<br>
+                        Denmark
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
+    <footer class="bg-gray-900 dark:bg-black text-white py-12">
         <div class="container mx-auto px-4">
             <div class="grid md:grid-cols-4 gap-8">
                 <!-- Footer content -->
             </div>
             <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 ApexToWWW. All rights reserved.</p>
+                <p>&copy; <script>document.write(new Date().getFullYear())</script> ApexToWWW. All rights reserved.</p>
             </div>
         </div>
     </footer>
