@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>How to Redirect Your Apex Domain to WWW (Step-by-Step Guide) | ApexToWWW</title>
+        <meta name="description" content="Learn how to redirect your apex domain to www using DNS records. Step-by-step instructions for Cloudflare, GoDaddy, Namecheap, and other DNS providers. Free 301 redirect setup." />
+        <meta name="keywords" content="redirect apex domain to www, apex domain redirect, naked domain redirect to www, root domain to www redirect, DNS redirect, 301 redirect" />
+        <link rel="canonical" href="https://www.apextowww.com/blog/how-to-redirect-apex-domain-to-www/" />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://www.apextowww.com/blog/how-to-redirect-apex-domain-to-www/" />
+        <meta property="og:title" content="How to Redirect Your Apex Domain to WWW (Step-by-Step Guide)" />
+        <meta property="og:description" content="Learn how to redirect your apex domain to www using DNS records. Step-by-step instructions for Cloudflare, GoDaddy, Namecheap, and other providers." />
+        <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
+        <meta property="og:site_name" content="ApexToWWW" />
+        <meta property="article:published_time" content="2026-04-11T00:00:00+00:00" />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="How to Redirect Your Apex Domain to WWW (Step-by-Step Guide)" />
+        <meta name="twitter:description" content="Learn how to redirect your apex domain to www using DNS records. Step-by-step instructions for Cloudflare, GoDaddy, Namecheap, and other providers." />
+        <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
+
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                darkMode: 'class',
+                theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] } } }
+            }
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCDJZQW377"></script>
+        <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-NCDJZQW377");</script>
+
+        <!-- Schema.org Article Structured Data -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "How to Redirect Your Apex Domain to WWW (Step-by-Step Guide)",
+            "description": "Learn how to redirect your apex domain to www using DNS records. Step-by-step instructions for Cloudflare, GoDaddy, Namecheap, and other DNS providers.",
+            "url": "https://www.apextowww.com/blog/how-to-redirect-apex-domain-to-www/",
+            "datePublished": "2026-04-11",
+            "dateModified": "2026-04-11",
+            "author": {
+                "@type": "Organization",
+                "name": "ApexToWWW",
+                "url": "https://www.apextowww.com"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "ApexToWWW",
+                "url": "https://www.apextowww.com"
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "https://www.apextowww.com/blog/how-to-redirect-apex-domain-to-www/"
+            }
+        }
+        </script>
+
+        <!-- HowTo Schema -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": "How to Redirect Your Apex Domain to WWW",
+            "description": "Set up a 301 redirect from your apex/naked domain to www using ApexToWWW's free DNS redirect service.",
+            "step": [
+                {
+                    "@type": "HowToStep",
+                    "name": "Log in to your DNS provider",
+                    "text": "Access your DNS management panel at your domain registrar or DNS provider."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Add an A record",
+                    "text": "Create an A record for your apex domain (@) pointing to 65.21.184.101."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Add an AAAA record",
+                    "text": "Create an AAAA record for your apex domain (@) pointing to 2a01:4f9:c012:a304::1."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Verify the redirect",
+                    "text": "Wait for DNS propagation and test with curl -I http://yourdomain.com to confirm the 301 redirect."
+                }
+            ]
+        }
+        </script>
+    </head>
+<body class="font-sans bg-white dark:bg-gray-950 text-gray-900 dark:text-white antialiased">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 dark:bg-gray-950/90 backdrop-blur border-b border-gray-200 dark:border-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <a href="/" class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-arrow-right text-white text-sm"></i>
+                    </div>
+                    <span class="text-xl font-bold">ApexToWWW</span>
+                </a>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="/#features" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">Features</a>
+                    <a href="/#how-it-works" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">How It Works</a>
+                    <a href="/#get-started" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">Setup</a>
+                    <a href="/#faq" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">FAQ</a>
+                    <a href="/blog/" class="text-sm font-semibold text-blue-600 dark:text-blue-400">Blog</a>
+                </nav>
+                <a href="/#get-started" class="hidden sm:inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
+                    Get Started
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <article class="max-w-3xl mx-auto">
+            <!-- Breadcrumbs -->
+            <nav aria-label="Breadcrumb" class="mb-8">
+                <ol class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                    <li><a href="/" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Home</a></li>
+                    <li><i class="fas fa-chevron-right text-xs mx-1"></i></li>
+                    <li><a href="/blog/" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Blog</a></li>
+                    <li><i class="fas fa-chevron-right text-xs mx-1"></i></li>
+                    <li class="text-gray-900 dark:text-white font-medium">How to Redirect Apex Domain to WWW</li>
+                </ol>
+            </nav>
+
+            <!-- Article Header -->
+            <header class="mb-10">
+                <div class="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400 mb-4">
+                    <time datetime="2026-04-11">April 11, 2026</time>
+                    <span>&middot;</span>
+                    <span>8 min read</span>
+                </div>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-6">How to Redirect Your Apex Domain to WWW (Step-by-Step Guide)</h1>
+                <p class="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">A complete guide to setting up a 301 redirect from your naked domain (example.com) to www (www.example.com) using free DNS records. Includes instructions for Cloudflare, GoDaddy, Namecheap, and verification steps.</p>
+            </header>
+
+            <!-- Article Body -->
+            <div class="prose prose-lg dark:prose-invert max-w-none
+                prose-headings:font-bold prose-headings:tracking-tight
+                prose-h2:text-2xl prose-h2:sm:text-3xl prose-h2:mt-12 prose-h2:mb-4
+                prose-h3:text-xl prose-h3:sm:text-2xl prose-h3:mt-8 prose-h3:mb-3
+                prose-p:text-gray-700 prose-p:dark:text-gray-300 prose-p:leading-relaxed prose-p:mb-4
+                prose-a:text-blue-600 prose-a:dark:text-blue-400 prose-a:underline prose-a:underline-offset-2
+                prose-strong:text-gray-900 prose-strong:dark:text-white
+                prose-code:bg-gray-100 prose-code:dark:bg-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
+                prose-li:text-gray-700 prose-li:dark:text-gray-300">
+
+                <!-- Section: What Is an Apex Domain Redirect -->
+                <h2 id="what-is-apex-domain-redirect">What Is an Apex Domain Redirect and Why Do You Need One?</h2>
+
+                <p>An <strong>apex domain</strong> (also called a root domain, bare domain, or naked domain) is your domain without any subdomain prefix. For example, <code>example.com</code> is the apex domain, while <code>www.example.com</code> is a subdomain.</p>
+
+                <p>An <strong>apex domain redirect</strong> automatically forwards visitors who type <code>example.com</code> into their browser to <code>www.example.com</code>. This is a 301 (permanent) redirect, which tells browsers and search engines that the www version is the canonical address for your site.</p>
+
+                <p>There are several important reasons to redirect your apex domain to www:</p>
+
+                <ul class="space-y-2 mb-6">
+                    <li><strong>CDN compatibility:</strong> Most CDN providers (Cloudflare, AWS CloudFront, Fastly) require a CNAME record to route traffic through their network. DNS standards do not allow CNAME records on the apex domain, so hosting your site on www makes CDN configuration straightforward.</li>
+                    <li><strong>Hosting requirements:</strong> Many platforms like GitHub Pages, Heroku, Netlify, and Vercel work best (or exclusively) with www subdomains for custom domains.</li>
+                    <li><strong>Cookie scoping:</strong> Cookies set on the apex domain are sent to every subdomain, which can hurt performance and create security issues. Using www keeps cookies isolated.</li>
+                    <li><strong>SEO consistency:</strong> Running the same content on both <code>example.com</code> and <code>www.example.com</code> creates duplicate content. A redirect consolidates all link equity and ranking signals to a single URL.</li>
+                    <li><strong>DNS flexibility:</strong> CNAME records on a subdomain give you more control over failover, load balancing, and provider switching without changing IP addresses.</li>
+                </ul>
+
+                <p>If your website is served from <code>www.example.com</code>, you need a redirect on <code>example.com</code> so visitors and search engines always reach the right place. The simplest way to do this is with a DNS-based redirect service like <a href="/#get-started">ApexToWWW</a>.</p>
+
+                <!-- Section: Step by Step with ApexToWWW -->
+                <h2 id="setup-with-apextowww">Step-by-Step: Redirect Apex Domain to WWW with ApexToWWW</h2>
+
+                <p><a href="/">ApexToWWW</a> is a free service that handles the apex domain redirect for you. It provides a server that accepts requests on your naked domain, provisions an SSL certificate automatically, and issues a 301 redirect to your www subdomain. There is no account to create, no dashboard to manage, and no cost involved.</p>
+
+                <p>The setup requires only two DNS records:</p>
+
+                <div class="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 my-8">
+                    <h3 class="text-lg font-bold mb-4 mt-0">DNS Records to Add</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-gray-200 dark:border-gray-700">
+                                    <th class="text-left py-2 pr-4 font-semibold">Type</th>
+                                    <th class="text-left py-2 pr-4 font-semibold">Name / Host</th>
+                                    <th class="text-left py-2 font-semibold">Value / Points To</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-100 dark:border-gray-800">
+                                    <td class="py-3 pr-4"><code class="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-0.5 rounded font-bold">A</code></td>
+                                    <td class="py-3 pr-4"><code>@</code></td>
+                                    <td class="py-3"><code>65.21.184.101</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 pr-4"><code class="text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/30 px-2 py-0.5 rounded font-bold">AAAA</code></td>
+                                    <td class="py-3 pr-4"><code>@</code></td>
+                                    <td class="py-3"><code>2a01:4f9:c012:a304::1</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <p>The <strong>A record</strong> handles IPv4 traffic, and the <strong>AAAA record</strong> handles IPv6 traffic. Together, they route all requests for your apex domain to the ApexToWWW redirect server. The server detects your domain name from the incoming request, obtains an SSL certificate via Let's Encrypt, and responds with a <code>301 Moved Permanently</code> redirect to <code>https://www.yourdomain.com</code>. The original path and query string are preserved, so <code>example.com/pricing?plan=pro</code> redirects to <code>www.example.com/pricing?plan=pro</code>.</p>
+
+                <p>Here is the general process, applicable to any DNS provider:</p>
+
+                <ol class="space-y-3 mb-6">
+                    <li><strong>Log in to your DNS provider</strong> or domain registrar where your domain's nameservers are managed.</li>
+                    <li><strong>Navigate to the DNS management page</strong> for the domain you want to redirect.</li>
+                    <li><strong>Remove any existing A or AAAA records</strong> on the apex domain (<code>@</code>) that point to a different server. Leave your <code>www</code> CNAME or A record intact.</li>
+                    <li><strong>Add a new A record:</strong> Set the host/name to <code>@</code> (or leave it blank, depending on your provider) and the value to <code>65.21.184.101</code>.</li>
+                    <li><strong>Add a new AAAA record:</strong> Set the host/name to <code>@</code> and the value to <code>2a01:4f9:c012:a304::1</code>.</li>
+                    <li><strong>Save your changes</strong> and wait for DNS propagation, which typically takes 5 to 30 minutes but can take up to 48 hours.</li>
+                </ol>
+
+                <!-- Section: Provider-Specific Instructions -->
+                <h2 id="dns-provider-instructions">How to Set Up the Redirect on Popular DNS Providers</h2>
+
+                <p>The steps above work universally, but the exact UI varies from provider to provider. Below are specific instructions for three of the most popular DNS services.</p>
+
+                <h3 id="cloudflare">Cloudflare</h3>
+
+                <ol class="space-y-2 mb-6">
+                    <li>Log in to the <strong>Cloudflare dashboard</strong> and select your domain.</li>
+                    <li>Go to <strong>DNS &gt; Records</strong>.</li>
+                    <li>Click <strong>Add Record</strong>.</li>
+                    <li>Set Type to <strong>A</strong>, Name to <strong>@</strong>, and IPv4 address to <code>65.21.184.101</code>. Set the Proxy status to <strong>DNS only</strong> (gray cloud). Click Save.</li>
+                    <li>Click <strong>Add Record</strong> again.</li>
+                    <li>Set Type to <strong>AAAA</strong>, Name to <strong>@</strong>, and IPv6 address to <code>2a01:4f9:c012:a304::1</code>. Set the Proxy status to <strong>DNS only</strong> (gray cloud). Click Save.</li>
+                </ol>
+
+                <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-4 my-6">
+                    <p class="flex items-start gap-2 mb-0"><i class="fas fa-exclamation-triangle text-amber-600 mt-1"></i> <strong>Important:</strong> Make sure the proxy toggle is set to <strong>DNS only</strong> (gray cloud icon), not Proxied (orange cloud). Cloudflare's proxy will intercept the request and prevent the redirect from working correctly.</p>
+                </div>
+
+                <h3 id="godaddy">GoDaddy</h3>
+
+                <ol class="space-y-2 mb-6">
+                    <li>Log in to your <strong>GoDaddy account</strong> and go to <strong>My Products &gt; DNS</strong> for your domain.</li>
+                    <li>Under the DNS Records section, click <strong>Add New Record</strong>.</li>
+                    <li>Select Type <strong>A</strong>, set Name to <strong>@</strong>, set Value to <code>65.21.184.101</code>, and TTL to <strong>1 Hour</strong>. Click Save.</li>
+                    <li>Click <strong>Add New Record</strong> again.</li>
+                    <li>Select Type <strong>AAAA</strong>, set Name to <strong>@</strong>, set Value to <code>2a01:4f9:c012:a304::1</code>, and TTL to <strong>1 Hour</strong>. Click Save.</li>
+                </ol>
+
+                <p>If GoDaddy has an existing A record for <code>@</code> (often pointing to a parked page), edit or delete it before adding the new one.</p>
+
+                <h3 id="namecheap">Namecheap</h3>
+
+                <ol class="space-y-2 mb-6">
+                    <li>Log in to <strong>Namecheap</strong> and go to <strong>Domain List</strong>. Click <strong>Manage</strong> next to your domain.</li>
+                    <li>Go to the <strong>Advanced DNS</strong> tab.</li>
+                    <li>In the Host Records section, click <strong>Add New Record</strong>.</li>
+                    <li>Select Type <strong>A Record</strong>, set Host to <strong>@</strong>, and Value to <code>65.21.184.101</code>. Set TTL to <strong>Automatic</strong>. Click the checkmark to save.</li>
+                    <li>Click <strong>Add New Record</strong> again.</li>
+                    <li>Select Type <strong>AAAA Record</strong>, set Host to <strong>@</strong>, and Value to <code>2a01:4f9:c012:a304::1</code>. Set TTL to <strong>Automatic</strong>. Click the checkmark to save.</li>
+                </ol>
+
+                <p>Namecheap may have default parking records. Remove any existing A/AAAA records for <code>@</code> that point to Namecheap's parking servers before adding the ApexToWWW records.</p>
+
+                <!-- Section: Verify the Redirect -->
+                <h2 id="verify-redirect">How to Verify the Redirect Works</h2>
+
+                <p>After adding the DNS records, you should verify that the redirect is functioning. DNS changes propagate at different speeds, so allow at least 15 minutes before testing.</p>
+
+                <h3 id="verify-dns">Step 1: Check DNS Propagation</h3>
+
+                <p>First, confirm that the DNS records are resolving to the correct IP addresses:</p>
+
+                <div class="bg-gray-900 dark:bg-black rounded-xl p-4 my-6 overflow-x-auto">
+                    <pre class="text-green-400 text-sm font-mono leading-relaxed mb-0"><code># Check the A record
+dig +short example.com A
+# Expected output: 65.21.184.101
+
+# Check the AAAA record
+dig +short example.com AAAA
+# Expected output: 2a01:4f9:c012:a304::1</code></pre>
+                </div>
+
+                <p>If you do not have <code>dig</code> installed, you can use <code>nslookup</code> instead:</p>
+
+                <div class="bg-gray-900 dark:bg-black rounded-xl p-4 my-6 overflow-x-auto">
+                    <pre class="text-green-400 text-sm font-mono leading-relaxed mb-0"><code>nslookup example.com</code></pre>
+                </div>
+
+                <h3 id="verify-http">Step 2: Test the HTTP Redirect</h3>
+
+                <p>Once DNS has propagated, use <code>curl</code> to test that the redirect is working:</p>
+
+                <div class="bg-gray-900 dark:bg-black rounded-xl p-4 my-6 overflow-x-auto">
+                    <pre class="text-green-400 text-sm font-mono leading-relaxed mb-0"><code>curl -I http://example.com</code></pre>
+                </div>
+
+                <p>You should see a response like this:</p>
+
+                <div class="bg-gray-900 dark:bg-black rounded-xl p-4 my-6 overflow-x-auto">
+                    <pre class="text-green-400 text-sm font-mono leading-relaxed mb-0"><code>HTTP/1.1 301 Moved Permanently
+Location: https://www.example.com/</code></pre>
+                </div>
+
+                <p>Also test the HTTPS redirect and path preservation:</p>
+
+                <div class="bg-gray-900 dark:bg-black rounded-xl p-4 my-6 overflow-x-auto">
+                    <pre class="text-green-400 text-sm font-mono leading-relaxed mb-0"><code># Test HTTPS redirect
+curl -I https://example.com
+
+# Test path preservation
+curl -I https://example.com/about?ref=test
+# Should redirect to: https://www.example.com/about?ref=test</code></pre>
+                </div>
+
+                <h3 id="verify-browser">Step 3: Test in a Browser</h3>
+
+                <p>Open an incognito/private browsing window (to avoid cached redirects) and type your apex domain into the address bar. You should be redirected to the www version within a second or two. Check that the URL in the address bar shows <code>www.example.com</code>.</p>
+
+                <!-- Section: Troubleshooting -->
+                <h2 id="troubleshooting">Troubleshooting Common Issues</h2>
+
+                <p>If the redirect is not working after 30 minutes, work through the following checks:</p>
+
+                <h3 id="dns-not-propagated">DNS Records Not Propagating</h3>
+
+                <p>DNS propagation can take up to 48 hours in rare cases. If <code>dig +short example.com A</code> does not return <code>65.21.184.101</code>, your DNS changes have not propagated yet. You can speed things up by lowering the TTL (Time to Live) on your records to 300 seconds (5 minutes) before making changes. You can also check propagation status globally with online tools like whatsmydns.net.</p>
+
+                <h3 id="ssl-error">SSL Certificate Error</h3>
+
+                <p>The first time someone visits your apex domain over HTTPS, ApexToWWW provisions an SSL certificate from Let's Encrypt. This happens automatically but may take 30 to 60 seconds on the very first request. If you see a certificate error, wait a minute and try again. If the error persists after several minutes, double-check that your DNS records are correct and that no other A/AAAA records conflict with the ones you added.</p>
+
+                <h3 id="cloudflare-proxy">Cloudflare Proxy Interfering</h3>
+
+                <p>If you use Cloudflare as your DNS provider, the proxy (orange cloud) must be turned <strong>off</strong> for the apex domain A and AAAA records. Cloudflare's proxy intercepts traffic before it reaches the ApexToWWW server, which prevents the redirect from working. Set the records to <strong>DNS only</strong> (gray cloud).</p>
+
+                <h3 id="conflicting-records">Conflicting DNS Records</h3>
+
+                <p>If you have multiple A or AAAA records for <code>@</code>, DNS may resolve to the wrong IP. Delete any old A/AAAA records for the apex domain that do not point to the ApexToWWW addresses. Keep your <code>www</code> CNAME or A record as-is since that is where your actual website is hosted.</p>
+
+                <h3 id="browser-cache">Browser Caching Old Results</h3>
+
+                <p>Browsers aggressively cache DNS results and redirects. If you previously visited your apex domain and it returned a different response, the browser may have cached that result. Clear your browser cache or test in an incognito/private window. You can also try a different browser or device to rule out caching.</p>
+
+                <h3 id="redirect-loop">Redirect Loop</h3>
+
+                <p>If you see an "ERR_TOO_MANY_REDIRECTS" error, your www record may also be pointing back to the apex domain or to ApexToWWW. The www CNAME or A record should point to your actual hosting provider (e.g., your Netlify, Vercel, GitHub Pages, or web server address), not to <code>65.21.184.101</code>. Only the apex domain records should use the ApexToWWW IP addresses.</p>
+
+                <!-- CTA Section -->
+                <div class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-8 my-12 text-center">
+                    <h2 class="text-2xl font-bold mb-3 mt-0">Ready to Set Up Your Redirect?</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">ApexToWWW is free, requires no account, and takes less than two minutes to configure. Add two DNS records and your naked domain redirect is live.</p>
+                    <a href="/#get-started" class="inline-flex items-center px-6 py-3 rounded-lg text-base font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
+                        Get Started Now <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </div>
+        </article>
+    </main>
+
+    <footer class="bg-gray-900 dark:bg-black py-12 border-t border-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <a href="/" class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-arrow-right text-white text-sm"></i>
+                    </div>
+                    <span class="text-lg font-bold text-white">ApexToWWW</span>
+                </a>
+                <nav class="flex items-center gap-6 text-sm">
+                    <a href="/#features" class="text-gray-400 hover:text-white transition">Features</a>
+                    <a href="/#get-started" class="text-gray-400 hover:text-white transition">Setup</a>
+                    <a href="/#faq" class="text-gray-400 hover:text-white transition">FAQ</a>
+                    <a href="/blog/" class="text-gray-400 hover:text-white transition">Blog</a>
+                </nav>
+                <p class="text-gray-500 text-sm">&copy; <script>document.write(new Date().getFullYear())</script> ApexToWWW. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dark mode: check for saved preference or system preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</body>
+</html>
