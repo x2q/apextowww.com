@@ -128,42 +128,66 @@
             "mainEntity": [
                 {
                     "@type": "Question",
-                    "name": "What is apex domain redirection?",
+                    "name": "What is an apex domain, and why does it need a redirect?",
                     "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Apex domain redirection automatically forwards visitors from your naked domain (example.com) to your www subdomain (www.example.com). This is useful when your hosting provider only supports www subdomains."
+                        "text": "An apex domain (also called root, naked, or bare domain) is your domain without any prefix — for example example.com rather than www.example.com. Due to how DNS works, apex domains can't use CNAME records, which means they're incompatible with most CDNs and hosting platforms like GitHub Pages, Netlify, and Vercel. A redirect solves this by automatically forwarding apex visitors to your www subdomain."
                     }
                 },
                 {
                     "@type": "Question",
-                    "name": "Is HTTPS supported?",
+                    "name": "How do I redirect my apex domain to www using ApexToWWW?",
                     "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Yes! We automatically provision SSL certificates through Let's Encrypt for your domain. Both HTTP and HTTPS requests are redirected securely to your www subdomain."
+                        "text": "Add two DNS records to your domain's apex (@): an A record pointing to 65.21.184.101 and an AAAA record pointing to 2a01:4f9:c012:a304::1. No signup or configuration needed. DNS changes typically propagate within 5-30 minutes."
                     }
                 },
                 {
                     "@type": "Question",
-                    "name": "How much does it cost?",
+                    "name": "Does it work with HTTPS? Do I need my own SSL certificate?",
                     "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Our service is completely free with no hidden costs, premium tiers, or usage limits."
+                        "text": "Yes, HTTPS is fully supported and you don't need your own certificate. We automatically provision and renew SSL certificates via Let's Encrypt for every domain."
                     }
                 },
                 {
                     "@type": "Question",
-                    "name": "How long does setup take?",
+                    "name": "Is ApexToWWW really free? What's the catch?",
                     "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "DNS changes typically propagate within 5-30 minutes, but can take up to 48 hours depending on your DNS provider and TTL settings. SSL certificates are provisioned automatically once DNS is verified."
+                        "text": "Completely free, no catch. No hidden costs, no premium tiers, no usage limits, no account required. We run on energy-efficient ARM64 infrastructure which keeps costs near zero."
                     }
                 },
                 {
                     "@type": "Question",
-                    "name": "Do you support path forwarding?",
+                    "name": "Does the redirect preserve the URL path and query string?",
                     "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Yes! The redirect preserves the original path and query string. For example, example.com/page?id=1 will redirect to www.example.com/page?id=1."
+                        "text": "Yes. The full path, query parameters, and fragments are preserved. For example, example.com/pricing?plan=pro redirects to www.example.com/pricing?plan=pro. This is a 301 permanent redirect, so search engines will transfer SEO value to your www URLs."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can I use this with GitHub Pages, Netlify, or Vercel?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Absolutely — that's one of the most common use cases. Point your www subdomain to your hosting provider via CNAME, then use ApexToWWW to redirect the apex domain to www. Works with GitHub Pages, Netlify, Vercel, Heroku, Firebase Hosting, and any platform that requires a CNAME."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Will the redirect affect my SEO or Google rankings?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "It helps SEO. We use a 301 (permanent) redirect, which tells search engines to transfer ranking signals to your www URL. Google recommends picking one canonical version and redirecting the other — which is exactly what ApexToWWW does."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Should I use www or non-www for my website?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "For most sites, www is the better choice. It supports CNAME records (required by most CDNs), enables better cookie isolation, and makes load balancing and migration easier. The important thing is to pick one and redirect the other."
                     }
                 }
             ]
@@ -203,18 +227,28 @@
                 transform: scale(0.95);
             }
             .faq-content {
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.3s ease-out;
+                display: grid;
+                grid-template-rows: 0fr;
+                transition: grid-template-rows 0.35s ease;
             }
             .faq-item.active .faq-content {
-                max-height: 200px;
+                grid-template-rows: 1fr;
+            }
+            .faq-content > div {
+                overflow: hidden;
             }
             .faq-item.active .faq-icon {
                 transform: rotate(180deg);
             }
             .faq-icon {
                 transition: transform 0.3s ease;
+            }
+            .faq-item {
+                transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            }
+            .faq-item.active {
+                border-color: rgba(99, 102, 241, 0.3);
+                box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.1);
             }
             /* Rotating word animation */
             #rotating-word {
@@ -794,63 +828,135 @@
     <section id="faq" class="py-24 bg-gray-50 dark:bg-gray-950">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-3xl mx-auto">
-                <div class="text-center mb-16">
+                <div class="text-center mb-12">
                     <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
                         Frequently Asked Questions
                     </h2>
                     <p class="text-lg text-gray-600 dark:text-gray-400">
-                        Everything you need to know about our service
+                        Common questions about apex domains, redirects, and our service
                     </p>
                 </div>
 
-                <div class="space-y-4">
-                    <div class="faq-item bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
-                        <button class="faq-trigger w-full px-6 py-4 flex items-center justify-between text-left" onclick="toggleFaq(this)">
-                            <span class="font-semibold text-gray-900 dark:text-white">What is apex domain redirection?</span>
-                            <i class="faq-icon fas fa-chevron-down text-gray-500"></i>
+                <div class="space-y-3">
+                    <!-- Q1: Core concept — targets "what is apex domain" -->
+                    <div class="faq-item bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
+                        <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left gap-4" onclick="toggleFaq(this)">
+                            <span class="font-semibold text-gray-900 dark:text-white">What is an apex domain, and why does it need a redirect?</span>
+                            <i class="faq-icon fas fa-chevron-down text-gray-400 dark:text-gray-500 flex-shrink-0"></i>
                         </button>
-                        <div class="faq-content px-6 pb-4">
-                            <p class="text-gray-600 dark:text-gray-400">Apex domain redirection automatically forwards visitors from your naked domain (example.com) to your www subdomain (www.example.com). This is useful when your hosting provider only supports www subdomains.</p>
+                        <div class="faq-content">
+                            <div class="px-6 pb-5">
+                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">An apex domain (also called root, naked, or bare domain) is your domain without any prefix &mdash; for example <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">example.com</code> rather than <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">www.example.com</code>. Due to how DNS works, apex domains can't use CNAME records, which means they're incompatible with most CDNs and hosting platforms like GitHub Pages, Netlify, and Vercel. A redirect solves this by automatically forwarding apex visitors to your www subdomain where your site actually lives.</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="faq-item bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
-                        <button class="faq-trigger w-full px-6 py-4 flex items-center justify-between text-left" onclick="toggleFaq(this)">
-                            <span class="font-semibold text-gray-900 dark:text-white">Is HTTPS supported?</span>
-                            <i class="faq-icon fas fa-chevron-down text-gray-500"></i>
+                    <!-- Q2: How it works — targets "how to redirect apex domain to www" -->
+                    <div class="faq-item bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
+                        <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left gap-4" onclick="toggleFaq(this)">
+                            <span class="font-semibold text-gray-900 dark:text-white">How do I redirect my apex domain to www using ApexToWWW?</span>
+                            <i class="faq-icon fas fa-chevron-down text-gray-400 dark:text-gray-500 flex-shrink-0"></i>
                         </button>
-                        <div class="faq-content px-6 pb-4">
-                            <p class="text-gray-600 dark:text-gray-400">Yes! We automatically provision SSL certificates through Let's Encrypt for your domain. Both HTTP and HTTPS requests are redirected securely to your www subdomain.</p>
+                        <div class="faq-content">
+                            <div class="px-6 pb-5">
+                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-3">Just add two DNS records to your domain's apex (@):</p>
+                                <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 font-mono text-sm mb-3 space-y-1">
+                                    <div><span class="text-gray-500">A</span> &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-gray-500">@</span> &nbsp;&rarr; <span class="text-blue-600 dark:text-blue-400">65.21.184.101</span></div>
+                                    <div><span class="text-gray-500">AAAA</span> <span class="text-gray-500">@</span> &nbsp;&rarr; <span class="text-blue-600 dark:text-blue-400">2a01:4f9:c012:a304::1</span></div>
+                                </div>
+                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">That's it. No signup, no configuration. DNS changes typically propagate within 5&ndash;30 minutes, and SSL certificates are provisioned automatically.</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="faq-item bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
-                        <button class="faq-trigger w-full px-6 py-4 flex items-center justify-between text-left" onclick="toggleFaq(this)">
-                            <span class="font-semibold text-gray-900 dark:text-white">How much does it cost?</span>
-                            <i class="faq-icon fas fa-chevron-down text-gray-500"></i>
+                    <!-- Q3: SSL — targets "apex domain HTTPS redirect" -->
+                    <div class="faq-item bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
+                        <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left gap-4" onclick="toggleFaq(this)">
+                            <span class="font-semibold text-gray-900 dark:text-white">Does it work with HTTPS? Do I need my own SSL certificate?</span>
+                            <i class="faq-icon fas fa-chevron-down text-gray-400 dark:text-gray-500 flex-shrink-0"></i>
                         </button>
-                        <div class="faq-content px-6 pb-4">
-                            <p class="text-gray-600 dark:text-gray-400">Our service is completely free with no hidden costs, premium tiers, or usage limits. We believe in providing essential internet infrastructure at no cost.</p>
+                        <div class="faq-content">
+                            <div class="px-6 pb-5">
+                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Yes, HTTPS is fully supported and you don't need your own certificate. We automatically provision and renew SSL certificates via Let's Encrypt for every domain. Both <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">http://example.com</code> and <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">https://example.com</code> redirect securely to your www subdomain.</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="faq-item bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
-                        <button class="faq-trigger w-full px-6 py-4 flex items-center justify-between text-left" onclick="toggleFaq(this)">
-                            <span class="font-semibold text-gray-900 dark:text-white">How long does setup take?</span>
-                            <i class="faq-icon fas fa-chevron-down text-gray-500"></i>
+                    <!-- Q4: Cost — targets "free domain redirect service" -->
+                    <div class="faq-item bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
+                        <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left gap-4" onclick="toggleFaq(this)">
+                            <span class="font-semibold text-gray-900 dark:text-white">Is ApexToWWW really free? What's the catch?</span>
+                            <i class="faq-icon fas fa-chevron-down text-gray-400 dark:text-gray-500 flex-shrink-0"></i>
                         </button>
-                        <div class="faq-content px-6 pb-4">
-                            <p class="text-gray-600 dark:text-gray-400">DNS changes typically propagate within 5-30 minutes, but can take up to 48 hours depending on your DNS provider and TTL settings. SSL certificates are provisioned automatically once DNS is verified.</p>
+                        <div class="faq-content">
+                            <div class="px-6 pb-5">
+                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Completely free, no catch. No hidden costs, no premium tiers, no usage limits, no account required. We run on energy-efficient ARM64 infrastructure which keeps costs near zero, and we believe basic internet plumbing like domain redirects should be free for everyone.</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="faq-item bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
-                        <button class="faq-trigger w-full px-6 py-4 flex items-center justify-between text-left" onclick="toggleFaq(this)">
-                            <span class="font-semibold text-gray-900 dark:text-white">Do you support path forwarding?</span>
-                            <i class="faq-icon fas fa-chevron-down text-gray-500"></i>
+                    <!-- Q5: Path forwarding — targets "domain redirect with path" -->
+                    <div class="faq-item bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
+                        <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left gap-4" onclick="toggleFaq(this)">
+                            <span class="font-semibold text-gray-900 dark:text-white">Does the redirect preserve the URL path and query string?</span>
+                            <i class="faq-icon fas fa-chevron-down text-gray-400 dark:text-gray-500 flex-shrink-0"></i>
                         </button>
-                        <div class="faq-content px-6 pb-4">
-                            <p class="text-gray-600 dark:text-gray-400">Yes! The redirect preserves the original path and query string. For example, example.com/page?id=1 will redirect to www.example.com/page?id=1.</p>
+                        <div class="faq-content">
+                            <div class="px-6 pb-5">
+                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Yes. The full path, query parameters, and fragments are preserved. For example, <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">example.com/pricing?plan=pro</code> redirects to <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">www.example.com/pricing?plan=pro</code>. This is a 301 permanent redirect, so search engines will transfer SEO value to your www URLs.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q6: GitHub Pages — targets "github pages apex domain" -->
+                    <div class="faq-item bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
+                        <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left gap-4" onclick="toggleFaq(this)">
+                            <span class="font-semibold text-gray-900 dark:text-white">Can I use this with GitHub Pages, Netlify, or Vercel?</span>
+                            <i class="faq-icon fas fa-chevron-down text-gray-400 dark:text-gray-500 flex-shrink-0"></i>
+                        </button>
+                        <div class="faq-content">
+                            <div class="px-6 pb-5">
+                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Absolutely &mdash; that's one of the most common use cases. Point your www subdomain to your hosting provider (e.g. a CNAME to <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">username.github.io</code>), then use ApexToWWW to redirect the apex domain to www. Works with GitHub Pages, Netlify, Vercel, Heroku, Firebase Hosting, Render, Fly.io, and any other platform that requires a CNAME.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q7: SEO — targets "301 redirect SEO apex domain" -->
+                    <div class="faq-item bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
+                        <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left gap-4" onclick="toggleFaq(this)">
+                            <span class="font-semibold text-gray-900 dark:text-white">Will the redirect affect my SEO or Google rankings?</span>
+                            <i class="faq-icon fas fa-chevron-down text-gray-400 dark:text-gray-500 flex-shrink-0"></i>
+                        </button>
+                        <div class="faq-content">
+                            <div class="px-6 pb-5">
+                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">It helps SEO. We use a 301 (permanent) redirect, which tells search engines to transfer ranking signals to your www URL. This consolidates your domain authority instead of splitting it between two addresses. Google recommends picking one canonical version (www or non-www) and redirecting the other &mdash; which is exactly what ApexToWWW does.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q8: Reliability — targets "apex domain redirect uptime" -->
+                    <div class="faq-item bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
+                        <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left gap-4" onclick="toggleFaq(this)">
+                            <span class="font-semibold text-gray-900 dark:text-white">How reliable is the service? What happens if your servers go down?</span>
+                            <i class="faq-icon fas fa-chevron-down text-gray-400 dark:text-gray-500 flex-shrink-0"></i>
+                        </button>
+                        <div class="faq-content">
+                            <div class="px-6 pb-5">
+                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Our redirect servers run on dedicated infrastructure with high availability. The redirect itself is a simple, stateless HTTP response (&lt;50ms) with no database or complex logic involved. Since it's a 301 permanent redirect, browsers also cache it locally &mdash; so even in the unlikely event of downtime, returning visitors would still reach your www site.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q9: vs www — targets "should I use www or non-www" -->
+                    <div class="faq-item bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
+                        <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left gap-4" onclick="toggleFaq(this)">
+                            <span class="font-semibold text-gray-900 dark:text-white">Should I use www or non-www for my website?</span>
+                            <i class="faq-icon fas fa-chevron-down text-gray-400 dark:text-gray-500 flex-shrink-0"></i>
+                        </button>
+                        <div class="faq-content">
+                            <div class="px-6 pb-5">
+                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">For most sites, www is the better choice. It supports CNAME records (required by most CDNs and hosting platforms), enables better cookie isolation between your main site and subdomains, and makes load balancing and domain migration easier. The important thing is to pick one and redirect the other &mdash; having both active without a redirect splits your SEO and confuses browsers.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
