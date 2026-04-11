@@ -41,6 +41,46 @@
             gtag("js", new Date());
             gtag("config", "G-NCDJZQW377");
         </script>
+        <!-- A/B/C Split Test -->
+        <script>
+            (function() {
+                var variants = {
+                    A: {
+                        line1: "Every Domain Deserves",
+                        line2: "a Working Front Door",
+                        subtitle: "Your apex domain visitors hit a dead end. ApexToWWW fixes that with a free, instant 301 redirect to www \u2014 with automatic SSL, IPv6, and HTTP/3."
+                    },
+                    B: {
+                        line1: "Two DNS Records. One Redirect.",
+                        line2: "Zero Cost.",
+                        subtitle: "Point your naked domain to www instantly. Free 301 redirect with automatic SSL, IPv6, and HTTP/3. No signup required."
+                    },
+                    C: {
+                        line1: "Apex to WWW in Two DNS Records",
+                        line2: "No Signup Required",
+                        subtitle: "The simplest way to redirect your naked domain. Free service with automatic SSL, IPv6, and HTTP/3 \u2014 just add two records and you\u2019re done."
+                    }
+                };
+                var key = 'ab_hero_variant';
+                var v = localStorage.getItem(key);
+                if (!v || !variants[v]) {
+                    var keys = Object.keys(variants);
+                    v = keys[Math.floor(Math.random() * keys.length)];
+                    localStorage.setItem(key, v);
+                }
+                window.__abVariant = v;
+                window.__abVariants = variants;
+                // Send variant to GA4 as user property + event
+                if (typeof gtag === 'function') {
+                    gtag('set', 'user_properties', { hero_variant: v });
+                    gtag('event', 'ab_test_impression', {
+                        test_name: 'hero_headline',
+                        variant: v,
+                        headline: variants[v].line1 + ' ' + variants[v].line2
+                    });
+                }
+            })();
+        </script>
         <meta name="description" content="Free DNS apex domain to www redirect service. Automatic SSL, IPv6, HTTP/3 support. Just add two DNS records - no account needed. Redirect your naked domain to www in seconds."/>
 
         <!-- Open Graph / Facebook -->
@@ -251,12 +291,12 @@
                     Trusted by 1,000+ developers
                 </div>
 
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
-                    <span class="block text-gray-900 dark:text-white">Stop Losing Visitors on</span>
-                    <span class="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient">Your Naked Domain</span>
+                <h1 id="hero-headline" class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
+                    <span id="hero-line1" class="block text-gray-900 dark:text-white">Every Domain Deserves</span>
+                    <span id="hero-line2" class="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient">a Working Front Door</span>
                 </h1>
 
-                <p class="text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+                <p id="hero-subtitle" class="text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
                     Your apex domain visitors hit a dead end. ApexToWWW fixes that with a free, instant 301 redirect to www &mdash; with automatic SSL, IPv6, and HTTP/3.
                 </p>
 
@@ -889,6 +929,49 @@
     <script>
         // Dynamic year
         document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // A/B/C Split Test — apply variant headline
+        (function() {
+            var v = window.__abVariant;
+            var variants = window.__abVariants;
+            if (v && variants && variants[v]) {
+                var d = variants[v];
+                var l1 = document.getElementById('hero-line1');
+                var l2 = document.getElementById('hero-line2');
+                var sub = document.getElementById('hero-subtitle');
+                if (l1) l1.textContent = d.line1;
+                if (l2) l2.textContent = d.line2;
+                if (sub) sub.textContent = d.subtitle;
+            }
+            // Track CTA clicks with variant info
+            document.querySelectorAll('a[href="#get-started"]').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'ab_test_cta_click', {
+                            test_name: 'hero_headline',
+                            variant: v,
+                            cta_location: btn.closest('section') ? 'hero' : 'other'
+                        });
+                    }
+                });
+            });
+            // Track scroll to get-started section (conversion proxy)
+            var observed = false;
+            var getStarted = document.getElementById('get-started');
+            if (getStarted && typeof IntersectionObserver !== 'undefined') {
+                new IntersectionObserver(function(entries) {
+                    if (entries[0].isIntersecting && !observed) {
+                        observed = true;
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'ab_test_scroll_to_setup', {
+                                test_name: 'hero_headline',
+                                variant: v
+                            });
+                        }
+                    }
+                }, { threshold: 0.5 }).observe(getStarted);
+            }
+        })();
 
         // Theme Toggle
         const themeToggle = document.getElementById('theme-toggle');
