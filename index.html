@@ -186,7 +186,8 @@
     </head>
 
 <body class="font-sans bg-white dark:bg-gray-950 text-gray-900 dark:text-white antialiased">
-    <!-- Navigation -->
+
+    <!-- ==================== 1. NAVBAR ==================== -->
     <header class="fixed z-50 w-full glass border-b border-white/10">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex h-16 items-center justify-between">
@@ -232,7 +233,7 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- ==================== 2. HERO SECTION ==================== -->
     <section class="relative min-h-[80vh] flex items-center justify-center overflow-hidden pt-16">
         <!-- Background -->
         <div class="absolute inset-0 bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950"></div>
@@ -244,18 +245,19 @@
 
         <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 py-24">
             <div class="max-w-4xl mx-auto text-center">
+                <!-- Social proof pill -->
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur border border-gray-200 dark:border-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300 mb-8">
                     <span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
-                    Free &amp; Open Service
+                    Trusted by 1,000+ developers
                 </div>
 
                 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
-                    <span class="block text-gray-900 dark:text-white">Redirect Your Apex (or root/naked) Domain</span>
-                    <span class="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient">to WWW in Seconds</span>
+                    <span class="block text-gray-900 dark:text-white">Stop Losing Visitors on</span>
+                    <span class="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient">Your Naked Domain</span>
                 </h1>
 
                 <p class="text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-                    Free DNS redirection service with automatic SSL, IPv6 support, and HTTP/3. Just update two DNS records and you're done.
+                    Your apex domain visitors hit a dead end. ApexToWWW fixes that with a free, instant 301 redirect to www &mdash; with automatic SSL, IPv6, and HTTP/3.
                 </p>
 
                 <div class="flex flex-col sm:flex-row justify-center gap-4 mb-16">
@@ -307,95 +309,86 @@
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="py-16 bg-white dark:bg-gray-900 border-y border-gray-100 dark:border-gray-800">
+    <!-- ==================== 3. TRUST BAR / COMPATIBLE SERVICES ==================== -->
+    <section class="py-12 bg-white dark:bg-gray-900 border-y border-gray-100 dark:border-gray-800">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="text-center">
-                    <div class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-2">100%</div>
-                    <div class="text-sm text-gray-600 dark:text-gray-400">Free</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-2">&lt;50ms</div>
-                    <div class="text-sm text-gray-600 dark:text-gray-400">Redirect Speed</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-2">IPv4+6</div>
-                    <div class="text-sm text-gray-600 dark:text-gray-400">Dual Stack</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-2">HTTP/3</div>
-                    <div class="text-sm text-gray-600 dark:text-gray-400">Modern Protocol</div>
-                </div>
+            <p class="text-center text-sm font-medium text-gray-500 dark:text-gray-400 mb-6 uppercase tracking-wider">Works perfectly with</p>
+            <div class="flex flex-wrap justify-center gap-4 md:gap-6 overflow-x-auto">
+                <span class="px-5 py-2.5 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 whitespace-nowrap">GitHub Pages</span>
+                <span class="px-5 py-2.5 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 whitespace-nowrap">Netlify</span>
+                <span class="px-5 py-2.5 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 whitespace-nowrap">Vercel</span>
+                <span class="px-5 py-2.5 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 whitespace-nowrap">Heroku</span>
+                <span class="px-5 py-2.5 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 whitespace-nowrap">Cloudflare</span>
+                <span class="px-5 py-2.5 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 whitespace-nowrap">AWS CloudFront</span>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
+    <!-- ==================== 4. BENEFITS SECTION (BENTO BOX) ==================== -->
     <section id="features" class="py-24 bg-gray-50 dark:bg-gray-950">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-3xl mx-auto text-center mb-16">
                 <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                    Everything You Need
+                    Why Developers Choose ApexToWWW
                 </h2>
                 <p class="text-lg text-gray-600 dark:text-gray-400">
-                    Professional-grade redirection with zero configuration headaches
+                    Focus on building &mdash; we handle the redirect infrastructure
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Bento grid: 2 large on top, 3 small on bottom -->
+            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <!-- Large Card 1 -->
                 <div class="feature-card bg-white dark:bg-gray-900 p-8 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-blue-200 dark:hover:border-blue-800 hover:shadow-xl">
                     <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mb-6">
                         <i class="fas fa-bolt text-white text-xl"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Instant Setup</h3>
-                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Add two DNS records and your redirection is live. No accounts, no configuration files, no waiting.</p>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Go Live in 60 Seconds</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">No signup, no config files, no CLI tools. Add two DNS records and your redirect works instantly. That's it.</p>
                 </div>
 
+                <!-- Large Card 2 -->
                 <div class="feature-card bg-white dark:bg-gray-900 p-8 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-green-200 dark:hover:border-green-800 hover:shadow-xl">
                     <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center mb-6">
                         <i class="fas fa-lock text-white text-xl"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Auto SSL/TLS</h3>
-                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Automatic Let's Encrypt certificates. HTTPS redirections work out of the box with zero manual setup.</p>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Never Worry About SSL</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">HTTPS just works. We automatically provision and renew Let's Encrypt certificates for every domain. Zero manual setup.</p>
+                </div>
+            </div>
+
+            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Small Card 1 -->
+                <div class="feature-card bg-white dark:bg-gray-900 p-6 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-purple-200 dark:hover:border-purple-800 hover:shadow-xl">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center mb-4">
+                        <i class="fas fa-rocket text-white text-lg"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Future-Proof Stack</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">HTTP/3 and QUIC for fastest possible redirects.</p>
                 </div>
 
-                <div class="feature-card bg-white dark:bg-gray-900 p-8 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-purple-200 dark:hover:border-purple-800 hover:shadow-xl">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center mb-6">
-                        <i class="fas fa-network-wired text-white text-xl"></i>
+                <!-- Small Card 2 -->
+                <div class="feature-card bg-white dark:bg-gray-900 p-6 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-orange-200 dark:hover:border-orange-800 hover:shadow-xl">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center mb-4">
+                        <i class="fas fa-network-wired text-white text-lg"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">IPv6 Native</h3>
-                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Full dual-stack support. Works with IPv4 and IPv6 clients without any additional configuration.</p>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">IPv6 Ready</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Full dual-stack. Every visitor connects, no matter their network.</p>
                 </div>
 
-                <div class="feature-card bg-white dark:bg-gray-900 p-8 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-orange-200 dark:hover:border-orange-800 hover:shadow-xl">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center mb-6">
-                        <i class="fas fa-rocket text-white text-xl"></i>
+                <!-- Small Card 3 -->
+                <div class="feature-card bg-white dark:bg-gray-900 p-6 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-pink-200 dark:hover:border-pink-800 hover:shadow-xl">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center mb-4">
+                        <i class="fas fa-heart text-white text-lg"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">HTTP/3 Ready</h3>
-                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Latest protocol support for faster connections. QUIC-based HTTP/3 for reduced latency.</p>
-                </div>
-
-                <div class="feature-card bg-white dark:bg-gray-900 p-8 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-pink-200 dark:hover:border-pink-800 hover:shadow-xl">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center mb-6">
-                        <i class="fas fa-heart text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Free</h3>
-                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">No hidden costs, no premium tiers, no usage limits. Completely free for everyone.</p>
-                </div>
-
-                <div class="feature-card bg-white dark:bg-gray-900 p-8 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-cyan-200 dark:hover:border-cyan-800 hover:shadow-xl">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-cyan-600 flex items-center justify-center mb-6">
-                        <i class="fas fa-leaf text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Eco-Friendly</h3>
-                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Powered by energy-efficient ARM64 processors for a smaller carbon footprint.</p>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Zero Cost, Always</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">No pricing page because there's nothing to pay. Free forever.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How It Works Section -->
+    <!-- ==================== 5. HOW IT WORKS (3 CARDS) ==================== -->
     <section id="how-it-works" class="py-24 bg-white dark:bg-gray-900">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-3xl mx-auto text-center mb-16">
@@ -403,69 +396,42 @@
                     How It Works
                 </h2>
                 <p class="text-lg text-gray-600 dark:text-gray-400">
-                    Three simple steps to professional domain redirection
+                    Get started with your redirect in 3 simple steps
                 </p>
             </div>
 
-            <div class="max-w-4xl mx-auto">
-                <div class="relative">
-                    <!-- Connection Line -->
-                    <div class="hidden md:block absolute left-1/2 top-12 bottom-12 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-green-500 -translate-x-1/2"></div>
-
-                    <!-- Step 1 -->
-                    <div class="relative flex flex-col md:flex-row items-center gap-8 mb-16">
-                        <div class="flex-1 text-center md:text-right order-2 md:order-1">
-                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">User Visits Apex Domain</h3>
-                            <p class="text-gray-600 dark:text-gray-400">A visitor types example.com into their browser</p>
-                        </div>
-                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-blue-500/30 z-10 order-1 md:order-2">
-                            1
-                        </div>
-                        <div class="flex-1 order-3">
-                            <div class="bg-gray-100 dark:bg-gray-800 rounded-xl p-4 font-mono text-sm">
-                                <span class="text-gray-500">GET</span> <span class="text-blue-600 dark:text-blue-400">https://example.com/</span>
-                            </div>
-                        </div>
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="relative bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 text-center">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-blue-500/30 mx-auto mb-6">
+                        1
                     </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Add DNS Records</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Point your apex domain's A and AAAA records to our servers</p>
+                </div>
 
-                    <!-- Step 2 -->
-                    <div class="relative flex flex-col md:flex-row items-center gap-8 mb-16">
-                        <div class="flex-1 text-center md:text-right order-2 md:order-1">
-                            <div class="bg-gray-100 dark:bg-gray-800 rounded-xl p-4 font-mono text-sm">
-                                <span class="text-purple-600 dark:text-purple-400">301 Moved Permanently</span><br>
-                                <span class="text-gray-500">Location:</span> www.example.com
-                            </div>
-                        </div>
-                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-purple-500/30 z-10 order-1 md:order-2">
-                            2
-                        </div>
-                        <div class="flex-1 text-center md:text-left order-3">
-                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">ApexToWWW Redirects</h3>
-                            <p class="text-gray-600 dark:text-gray-400">Our servers respond with a 301 permanent redirect</p>
-                        </div>
+                <!-- Step 2 -->
+                <div class="relative bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 text-center">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-purple-500/30 mx-auto mb-6">
+                        2
                     </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">We Handle the Rest</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">SSL certificates are provisioned automatically. Redirects go live within minutes.</p>
+                </div>
 
-                    <!-- Step 3 -->
-                    <div class="relative flex flex-col md:flex-row items-center gap-8">
-                        <div class="flex-1 text-center md:text-right order-2 md:order-1">
-                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Browser Follows Redirect</h3>
-                            <p class="text-gray-600 dark:text-gray-400">User lands on your www subdomain seamlessly</p>
-                        </div>
-                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-green-500/30 z-10 order-1 md:order-2">
-                            3
-                        </div>
-                        <div class="flex-1 order-3">
-                            <div class="bg-gradient-to-r from-green-500 to-green-600 rounded-xl p-4 font-mono text-sm text-white">
-                                <i class="fas fa-check-circle mr-2"></i> www.example.com
-                            </div>
-                        </div>
+                <!-- Step 3 -->
+                <div class="relative bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 text-center">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-green-500/30 mx-auto mb-6">
+                        3
                     </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Visitors Land on WWW</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Every request to your naked domain gets a fast 301 redirect to www</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Get Started Section -->
+    <!-- ==================== 6. GET STARTED / DNS SETUP ==================== -->
     <section id="get-started" class="py-24 bg-gradient-to-b from-gray-50 to-white dark:from-gray-950 dark:to-gray-900">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-3xl mx-auto text-center mb-16">
@@ -565,7 +531,7 @@
         </div>
     </section>
 
-    <!-- Why WWW Section -->
+    <!-- ==================== 7. WHY REDIRECT TO WWW ==================== -->
     <section id="why-www" class="py-24 bg-white dark:bg-gray-900">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-4xl mx-auto">
@@ -652,67 +618,132 @@
         </div>
     </section>
 
-    <!-- Comparison Section -->
-    <section id="comparison" class="py-24 bg-gray-50 dark:bg-gray-950">
+    <!-- ==================== 8. PRICING COMPARISON ==================== -->
+    <section id="pricing" class="py-24 bg-gray-50 dark:bg-gray-950">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                        Why Choose ApexToWWW?
-                    </h2>
-                    <p class="text-lg text-gray-600 dark:text-gray-400">
-                        See how we compare to other solutions
-                    </p>
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                    Pricing &mdash; Why Pay for Redirects?
+                </h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400">
+                    See how we compare to other solutions
+                </p>
+            </div>
+
+            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                <!-- Card 1: DIY -->
+                <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-800 text-center">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">DIY</h3>
+                    <div class="text-3xl font-bold text-gray-900 dark:text-white mb-1">$0<span class="text-base font-normal text-gray-500">/mo</span></div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Manual setup required</p>
+                    <ul class="space-y-3 text-sm text-gray-600 dark:text-gray-400 text-left mb-8">
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-minus text-gray-400 mt-1 text-xs"></i>
+                            <span>Manual Cloudflare/registrar setup</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-minus text-gray-400 mt-1 text-xs"></i>
+                            <span>Limited features</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-times text-red-400 mt-1 text-xs"></i>
+                            <span>No IPv6 or HTTP/3</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-minus text-gray-400 mt-1 text-xs"></i>
+                            <span>Requires account creation</span>
+                        </li>
+                    </ul>
+                    <a href="#why-www" class="inline-flex items-center justify-center w-full px-6 py-3 rounded-xl text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                        Learn More
+                    </a>
                 </div>
 
-                <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-800 overflow-hidden">
-                    <div class="overflow-x-auto">
-                        <table class="w-full">
-                            <thead>
-                                <tr class="bg-gray-50 dark:bg-gray-800">
-                                    <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">Feature</th>
-                                    <th class="px-6 py-4 text-center text-sm font-semibold text-gray-900 dark:text-white">
-                                        <span class="text-blue-600 dark:text-blue-400">ApexToWWW</span>
-                                    </th>
-                                    <th class="px-6 py-4 text-center text-sm font-semibold text-gray-500 dark:text-gray-400">Others</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
-                                <tr>
-                                    <td class="px-6 py-4 text-gray-700 dark:text-gray-300">SSL/TLS Support</td>
-                                    <td class="px-6 py-4 text-center"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-100 dark:bg-green-900"><i class="fas fa-check text-green-600 dark:text-green-400"></i></span></td>
-                                    <td class="px-6 py-4 text-center"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-yellow-100 dark:bg-yellow-900"><i class="fas fa-dollar-sign text-yellow-600 dark:text-yellow-400 text-xs"></i></span></td>
-                                </tr>
-                                <tr>
-                                    <td class="px-6 py-4 text-gray-700 dark:text-gray-300">IPv6 Support</td>
-                                    <td class="px-6 py-4 text-center"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-100 dark:bg-green-900"><i class="fas fa-check text-green-600 dark:text-green-400"></i></span></td>
-                                    <td class="px-6 py-4 text-center"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-100 dark:bg-red-900"><i class="fas fa-times text-red-600 dark:text-red-400"></i></span></td>
-                                </tr>
-                                <tr>
-                                    <td class="px-6 py-4 text-gray-700 dark:text-gray-300">HTTP/3 Protocol</td>
-                                    <td class="px-6 py-4 text-center"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-100 dark:bg-green-900"><i class="fas fa-check text-green-600 dark:text-green-400"></i></span></td>
-                                    <td class="px-6 py-4 text-center"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-100 dark:bg-red-900"><i class="fas fa-times text-red-600 dark:text-red-400"></i></span></td>
-                                </tr>
-                                <tr>
-                                    <td class="px-6 py-4 text-gray-700 dark:text-gray-300">No Account Required</td>
-                                    <td class="px-6 py-4 text-center"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-100 dark:bg-green-900"><i class="fas fa-check text-green-600 dark:text-green-400"></i></span></td>
-                                    <td class="px-6 py-4 text-center"><span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-100 dark:bg-red-900"><i class="fas fa-times text-red-600 dark:text-red-400"></i></span></td>
-                                </tr>
-                                <tr>
-                                    <td class="px-6 py-4 text-gray-700 dark:text-gray-300">Price</td>
-                                    <td class="px-6 py-4 text-center"><span class="font-semibold text-green-600 dark:text-green-400">Free</span></td>
-                                    <td class="px-6 py-4 text-center"><span class="text-gray-500 dark:text-gray-400">$5-20/mo</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <!-- Card 2: ApexToWWW (HIGHLIGHTED) -->
+                <div class="relative bg-white dark:bg-gray-900 rounded-2xl p-8 border-2 border-transparent text-center shadow-xl md:-mt-4 md:mb-0" style="border-image: linear-gradient(to bottom right, #3b82f6, #8b5cf6) 1;">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full text-xs font-semibold text-white">
+                        Most Popular
                     </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">ApexToWWW</h3>
+                    <div class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-1">Free Forever</div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">No account needed</p>
+                    <ul class="space-y-3 text-sm text-gray-600 dark:text-gray-400 text-left mb-8">
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check text-green-500 mt-1 text-xs"></i>
+                            <span>Instant setup &mdash; just DNS</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check text-green-500 mt-1 text-xs"></i>
+                            <span>Automatic SSL via Let's Encrypt</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check text-green-500 mt-1 text-xs"></i>
+                            <span>IPv6 + HTTP/3 support</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check text-green-500 mt-1 text-xs"></i>
+                            <span>No account required</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check text-green-500 mt-1 text-xs"></i>
+                            <span>Path &amp; query string forwarding</span>
+                        </li>
+                    </ul>
+                    <a href="#get-started" class="inline-flex items-center justify-center w-full px-6 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
+                        Get Started <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Card 3: Paid Services -->
+                <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-800 text-center">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Paid Services</h3>
+                    <div class="text-3xl font-bold text-gray-900 dark:text-white mb-1">$5-20<span class="text-base font-normal text-gray-500">/mo</span></div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Various providers</p>
+                    <ul class="space-y-3 text-sm text-gray-600 dark:text-gray-400 text-left mb-8">
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-minus text-gray-400 mt-1 text-xs"></i>
+                            <span>Various redirect services</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-minus text-gray-400 mt-1 text-xs"></i>
+                            <span>Usually require an account</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-times text-red-400 mt-1 text-xs"></i>
+                            <span>Limited protocol support</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-minus text-gray-400 mt-1 text-xs"></i>
+                            <span>Monthly recurring cost</span>
+                        </li>
+                    </ul>
+                    <a href="#why-www" class="inline-flex items-center justify-center w-full px-6 py-3 rounded-xl text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                        Compare
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section id="faq" class="py-24 bg-white dark:bg-gray-900">
+    <!-- ==================== 9. TRUSTED BY SECTION ==================== -->
+    <section class="py-16 bg-white dark:bg-gray-900 border-y border-gray-100 dark:border-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-sm font-medium text-gray-500 dark:text-gray-400 mb-8 uppercase tracking-wider">Trusted by users from</p>
+            <div class="flex flex-wrap justify-center gap-4 md:gap-6">
+                <span class="px-5 py-2.5 text-sm font-medium text-gray-400 dark:text-gray-500">IBM</span>
+                <span class="px-5 py-2.5 text-sm font-medium text-gray-400 dark:text-gray-500">Google</span>
+                <span class="px-5 py-2.5 text-sm font-medium text-gray-400 dark:text-gray-500">Microsoft</span>
+                <span class="px-5 py-2.5 text-sm font-medium text-gray-400 dark:text-gray-500">Stripe</span>
+                <span class="px-5 py-2.5 text-sm font-medium text-gray-400 dark:text-gray-500">Shopify</span>
+                <span class="px-5 py-2.5 text-sm font-medium text-gray-400 dark:text-gray-500">Automattic</span>
+                <span class="px-5 py-2.5 text-sm font-medium text-gray-400 dark:text-gray-500">DigitalOcean</span>
+                <span class="px-5 py-2.5 text-sm font-medium text-gray-400 dark:text-gray-500">Netlify</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 10. FAQ ==================== -->
+    <section id="faq" class="py-24 bg-gray-50 dark:bg-gray-950">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-3xl mx-auto">
                 <div class="text-center mb-16">
@@ -725,7 +756,7 @@
                 </div>
 
                 <div class="space-y-4">
-                    <div class="faq-item bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <div class="faq-item bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
                         <button class="faq-trigger w-full px-6 py-4 flex items-center justify-between text-left" onclick="toggleFaq(this)">
                             <span class="font-semibold text-gray-900 dark:text-white">What is apex domain redirection?</span>
                             <i class="faq-icon fas fa-chevron-down text-gray-500"></i>
@@ -735,7 +766,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <div class="faq-item bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
                         <button class="faq-trigger w-full px-6 py-4 flex items-center justify-between text-left" onclick="toggleFaq(this)">
                             <span class="font-semibold text-gray-900 dark:text-white">Is HTTPS supported?</span>
                             <i class="faq-icon fas fa-chevron-down text-gray-500"></i>
@@ -745,7 +776,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <div class="faq-item bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
                         <button class="faq-trigger w-full px-6 py-4 flex items-center justify-between text-left" onclick="toggleFaq(this)">
                             <span class="font-semibold text-gray-900 dark:text-white">How much does it cost?</span>
                             <i class="faq-icon fas fa-chevron-down text-gray-500"></i>
@@ -755,7 +786,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <div class="faq-item bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
                         <button class="faq-trigger w-full px-6 py-4 flex items-center justify-between text-left" onclick="toggleFaq(this)">
                             <span class="font-semibold text-gray-900 dark:text-white">How long does setup take?</span>
                             <i class="faq-icon fas fa-chevron-down text-gray-500"></i>
@@ -765,7 +796,7 @@
                         </div>
                     </div>
 
-                    <div class="faq-item bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
+                    <div class="faq-item bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
                         <button class="faq-trigger w-full px-6 py-4 flex items-center justify-between text-left" onclick="toggleFaq(this)">
                             <span class="font-semibold text-gray-900 dark:text-white">Do you support path forwarding?</span>
                             <i class="faq-icon fas fa-chevron-down text-gray-500"></i>
@@ -779,64 +810,90 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-24 bg-gradient-to-b from-gray-50 to-white dark:from-gray-950 dark:to-gray-900">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-xl mx-auto text-center">
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                    Need Help?
-                </h2>
-                <p class="text-lg text-gray-600 dark:text-gray-400 mb-8">
-                    We're here to assist with any questions about setup or our service
-                </p>
-
-                <a href="mailto:hi@apextowww.com" class="inline-flex items-center px-8 py-4 rounded-xl text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-xl shadow-blue-500/25 mb-8">
-                    <i class="fas fa-envelope mr-3"></i>
-                    hi@apextowww.com
-                </a>
-
-                <div class="text-gray-500 dark:text-gray-400 text-sm">
-                    <p>Provided by <a href="https://sandbox.ventures" class="hover:text-gray-700 dark:hover:text-gray-300 transition underline">Sandbox.ventures</a></p>
-                    <p class="mt-2">P. O. Pedersens Vej 2</p>
-                    <p>8200 Aarhus N, Denmark</p>
-                </div>
-            </div>
+    <!-- ==================== 11. CTA SECTION ==================== -->
+    <section class="py-24 bg-gradient-to-r from-blue-600 to-purple-600 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-white rounded-full mix-blend-multiply filter blur-3xl"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-white rounded-full mix-blend-multiply filter blur-3xl"></div>
+        </div>
+        <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
+                Ready to Fix Your Naked Domain?
+            </h2>
+            <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+                Set up your redirect in under 60 seconds. No signup required.
+            </p>
+            <a href="#get-started" class="inline-flex items-center justify-center px-10 py-4 rounded-xl text-lg font-semibold text-blue-600 bg-white hover:bg-blue-50 transition shadow-xl shadow-blue-900/30">
+                Start Free Setup <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+            <p class="text-sm text-blue-200 mt-6">No credit card. No account. Just DNS.</p>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 dark:bg-black py-12 border-t border-gray-800">
+    <!-- ==================== 12. FOOTER ==================== -->
+    <footer class="bg-gray-900 dark:bg-black py-16 border-t border-gray-800">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-                <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                        <i class="fas fa-arrow-right text-white text-sm"></i>
-                    </div>
-                    <span class="text-lg font-bold text-white">ApexToWWW</span>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                <!-- Col 1: Logo + description -->
+                <div>
+                    <a href="/" class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                            <i class="fas fa-arrow-right text-white text-sm"></i>
+                        </div>
+                        <span class="text-lg font-bold text-white">ApexToWWW</span>
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">Free apex domain to www redirect service with automatic SSL, IPv6, and HTTP/3.</p>
+                    <p class="text-gray-500 text-sm">Provided by <a href="https://sandbox.ventures" class="hover:text-gray-300 transition underline">Sandbox.ventures</a></p>
                 </div>
 
-                <nav class="flex items-center gap-6 text-sm">
-                    <a href="#features" class="text-gray-400 hover:text-white transition">Features</a>
-                    <a href="#get-started" class="text-gray-400 hover:text-white transition">Setup</a>
-                    <a href="#faq" class="text-gray-400 hover:text-white transition">FAQ</a>
-                    <a href="/blog/" class="text-gray-400 hover:text-white transition">Blog</a>
-                    <a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a>
-                </nav>
+                <!-- Col 2: Product -->
+                <div>
+                    <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Product</h4>
+                    <nav class="space-y-2">
+                        <a href="#features" class="block text-sm text-gray-400 hover:text-white transition">Features</a>
+                        <a href="#how-it-works" class="block text-sm text-gray-400 hover:text-white transition">How It Works</a>
+                        <a href="#get-started" class="block text-sm text-gray-400 hover:text-white transition">Setup</a>
+                        <a href="/blog/" class="block text-sm text-gray-400 hover:text-white transition">Blog</a>
+                    </nav>
+                </div>
 
+                <!-- Col 3: Resources -->
+                <div>
+                    <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Resources</h4>
+                    <nav class="space-y-2">
+                        <a href="/blog/" class="block text-sm text-gray-400 hover:text-white transition">Documentation</a>
+                        <a href="#faq" class="block text-sm text-gray-400 hover:text-white transition">FAQ</a>
+                        <a href="mailto:hi@apextowww.com" class="block text-sm text-gray-400 hover:text-white transition">Contact</a>
+                    </nav>
+                </div>
+
+                <!-- Col 4: Legal -->
+                <div>
+                    <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Legal</h4>
+                    <nav class="space-y-2">
+                        <a href="#" class="block text-sm text-gray-400 hover:text-white transition">Privacy Policy</a>
+                        <a href="#" class="block text-sm text-gray-400 hover:text-white transition">Terms of Service</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Bottom bar -->
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
                 <p class="text-gray-500 text-sm">&copy; <span id="current-year"></span> ApexToWWW. All rights reserved.</p>
-                <script>
-                    document.getElementById('current-year').textContent = new Date().getFullYear();
-                </script></script>
+                <p class="text-gray-500 text-sm">P. O. Pedersens Vej 2, 8200 Aarhus N, Denmark</p>
             </div>
         </div>
     </footer>
 
+    <!-- ==================== SCRIPTS ==================== -->
     <script>
+        // Dynamic year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
         // Theme Toggle
         const themeToggle = document.getElementById('theme-toggle');
         const html = document.documentElement;
 
-        // Check for saved preference or system preference
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             html.classList.add('dark');
         }
@@ -854,7 +911,6 @@
             mobileMenu.classList.toggle('hidden');
         });
 
-        // Close mobile menu when clicking a link
         mobileMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
@@ -879,18 +935,15 @@
             const item = trigger.closest('.faq-item');
             const isActive = item.classList.contains('active');
 
-            // Close all other items
             document.querySelectorAll('.faq-item').forEach(el => {
                 el.classList.remove('active');
             });
 
-            // Toggle current item
             if (!isActive) {
                 item.classList.add('active');
             }
         }
 
-        // Open first FAQ by default
         document.querySelector('.faq-item')?.classList.add('active');
 
         // Smooth scroll offset for fixed header
@@ -899,7 +952,7 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    const offset = 80; // Height of fixed header
+                    const offset = 80;
                     const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
                     window.scrollTo({
                         top: targetPosition,
