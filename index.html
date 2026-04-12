@@ -189,6 +189,14 @@
                         "@type": "Answer",
                         "text": "For most sites, www is the better choice. It supports CNAME records (required by most CDNs), enables better cookie isolation, and makes load balancing and migration easier. The important thing is to pick one and redirect the other."
                     }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Do you support wildcard domains?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "No. The free service only redirects domains that have their A/AAAA records pointed directly at our servers. We verify that your domain actually resolves to us before issuing an SSL certificate and serving redirects. Wildcard domains are not supported on the free tier. We may add wildcard support in a future premium version."
+                    }
                 }
             ]
         }
@@ -956,6 +964,19 @@
                         <div class="faq-content">
                             <div class="px-6 pb-5">
                                 <p class="text-gray-600 dark:text-gray-400 leading-relaxed">For most sites, www is the better choice. It supports CNAME records (required by most CDNs and hosting platforms), enables better cookie isolation between your main site and subdomains, and makes load balancing and domain migration easier. The important thing is to pick one and redirect the other &mdash; having both active without a redirect splits your SEO and confuses browsers.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q10: Wildcards — targets "wildcard domain redirect" -->
+                    <div class="faq-item bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
+                        <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left gap-4" onclick="toggleFaq(this)">
+                            <span class="font-semibold text-gray-900 dark:text-white">Do you support wildcard domains?</span>
+                            <i class="faq-icon fas fa-chevron-down text-gray-400 dark:text-gray-500 flex-shrink-0"></i>
+                        </button>
+                        <div class="faq-content">
+                            <div class="px-6 pb-5">
+                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">No. The free service only redirects domains that have their A/AAAA records pointed directly at our servers. We verify that your domain actually resolves to us before issuing an SSL certificate and serving redirects. Wildcard domains (e.g. <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">*.example.com</code>) are not supported on the free tier. We may add wildcard support in a future premium version &mdash; if that's something you need, <a href="mailto:hi@apextowww.com" class="text-blue-600 dark:text-blue-400 hover:underline">let us know</a>.</p>
                             </div>
                         </div>
                     </div>
