@@ -143,6 +143,15 @@
                     <span>8 min read</span>
                 </div>
                 <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-6">How to Redirect Your Apex Domain to WWW (Step-by-Step Guide)</h1>
+                <div class="my-8 p-6 rounded-2xl border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-900/20">
+                    <div class="flex items-center gap-2 mb-2">
+                        <i class="fas fa-bolt text-blue-600 dark:text-blue-400"></i>
+                        <span class="text-sm font-bold uppercase tracking-wide text-blue-600 dark:text-blue-400">TL;DR</span>
+                    </div>
+                    <p class="text-gray-800 dark:text-gray-200 leading-relaxed">
+                        Apex domains (example.com, without www) can't use CNAME records per RFC 1034, which breaks most CDN and hosting platforms. The fix is to add two DNS records &mdash; an A record and an AAAA record &mdash; pointing your apex to a redirect service like ApexToWWW, which returns a 301 to www. Free, no signup, works with any DNS provider.
+                    </p>
+                </div>
                 <p class="text-xl text-gray-600 dark:text-gray-400 leading-relaxed">A complete guide to setting up a 301 redirect from your naked domain (example.com) to www (www.example.com) using free DNS records. Includes instructions for Cloudflare, GoDaddy, Namecheap, and verification steps.</p>
             </header>
 

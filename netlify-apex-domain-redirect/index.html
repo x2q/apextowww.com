@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Netlify Apex Domain Redirect: Free Setup for Naked Domains</title>
+        <meta name="description" content="Redirect your apex domain to your Netlify site. Works with Netlify DNS or external DNS, free SSL, 2 DNS records. Solves the CNAME-at-root problem." />
+        <meta name="keywords" content="netlify apex domain, netlify naked domain, netlify custom domain www, apex-loadbalancer.netlify.com, netlify root domain, netlify DNS apex" />
+        <link rel="canonical" href="https://www.apextowww.com/netlify-apex-domain-redirect/" />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://www.apextowww.com/netlify-apex-domain-redirect/" />
+        <meta property="og:title" content="Netlify Apex Domain Redirect: Free Setup for Naked Domains" />
+        <meta property="og:description" content="Redirect your apex domain to your Netlify site. Works with Netlify DNS or external DNS, free SSL, 2 DNS records. Solves the CNAME-at-root problem." />
+        <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
+        <meta property="og:site_name" content="ApexToWWW" />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Netlify Apex Domain Redirect: Free Setup for Naked Domains" />
+        <meta name="twitter:description" content="Redirect your apex domain to your Netlify site. Works with Netlify DNS or external DNS, free SSL, 2 DNS records." />
+        <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
+
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                darkMode: 'class',
+                theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] } } }
+            }
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCDJZQW377"></script>
+        <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-NCDJZQW377");</script>
+
+        <!-- HowTo Schema -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": "How to Redirect Your Apex Domain to a Netlify Site",
+            "description": "Set up a 301 redirect from your apex/naked domain to your Netlify-hosted www subdomain using ApexToWWW's free DNS redirect service.",
+            "step": [
+                {
+                    "@type": "HowToStep",
+                    "name": "Add www to your Netlify site",
+                    "text": "In Netlify, go to Site Settings > Domain management and add www.yourdomain.com as a custom domain."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Add a CNAME for www",
+                    "text": "At your DNS provider, create a CNAME record for www pointing to apex-loadbalancer.netlify.com or your site's netlify.app subdomain."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Add an A record for the apex",
+                    "text": "Create an A record for the apex (@) pointing to 65.21.184.101."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Add an AAAA record for the apex",
+                    "text": "Create an AAAA record for the apex (@) pointing to 2a01:4f9:c012:a304::1."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Wait for DNS and SSL",
+                    "text": "Wait 5 to 30 minutes for DNS propagation. Netlify auto-provisions SSL for the www subdomain, and ApexToWWW provisions SSL for the apex."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Verify the redirect",
+                    "text": "Run curl -I https://yourdomain.com and confirm you get a 301 response with a Location header pointing to https://www.yourdomain.com."
+                }
+            ]
+        }
+        </script>
+    </head>
+<body class="font-sans bg-white dark:bg-gray-950 text-gray-900 dark:text-white antialiased">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 dark:bg-gray-950/90 backdrop-blur border-b border-gray-200 dark:border-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <a href="/" class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-arrow-right text-white text-sm"></i>
+                    </div>
+                    <span class="text-xl font-bold">ApexToWWW</span>
+                </a>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="/#features" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">Features</a>
+                    <a href="/#how-it-works" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">How It Works</a>
+                    <a href="/#get-started" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">Setup</a>
+                    <a href="/#faq" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">FAQ</a>
+                    <a href="/blog/" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">Blog</a>
+                </nav>
+                <a href="/#get-started" class="hidden sm:inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
+                    Get Started
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <article class="max-w-3xl mx-auto">
+            <!-- Breadcrumbs -->
+            <nav aria-label="Breadcrumb" class="mb-8">
+                <ol class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                    <li><a href="/" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Home</a></li>
+                    <li><i class="fas fa-chevron-right text-xs mx-1"></i></li>
+                    <li class="text-gray-900 dark:text-white font-medium">Netlify Apex Domain Redirect</li>
+                </ol>
+            </nav>
+
+            <!-- Hero -->
+            <header class="mb-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs font-semibold mb-5">
+                    <i class="fas fa-bolt"></i> Netlify Setup Guide
+                </div>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-6">Redirect Your Apex Domain to Your Netlify Site</h1>
+                <p class="text-xl text-gray-600 dark:text-gray-400 leading-relaxed mb-8">A free, no-account way to make <code class="font-mono text-base bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">yourdomain.com</code> 301-redirect to your Netlify-hosted <code class="font-mono text-base bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">www.yourdomain.com</code>. Auto-renewing SSL, two DNS records, five minutes of work.</p>
+                <a href="#get-started" class="inline-flex items-center px-6 py-3 rounded-lg text-base font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
+                    See Setup Steps <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </header>
+
+            <!-- TL;DR Box -->
+            <div class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-6 mb-12">
+                <div class="flex items-center gap-2 mb-3">
+                    <i class="fas fa-lightbulb text-blue-600 dark:text-blue-400"></i>
+                    <h2 class="text-base font-bold uppercase tracking-wide text-blue-700 dark:text-blue-300 m-0">TL;DR</h2>
+                </div>
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-0">Netlify recommends CNAME records for custom domains (<code class="font-mono text-sm bg-white dark:bg-gray-900 px-1.5 py-0.5 rounded">apex-loadbalancer.netlify.com</code>), but apex domains can&rsquo;t CNAME per RFC 1034. Either use <strong>Netlify DNS</strong> (which handles apex internally via an ALIAS) or point <code class="font-mono text-sm bg-white dark:bg-gray-900 px-1.5 py-0.5 rounded">www</code> to Netlify via CNAME and redirect the apex to www using <strong>ApexToWWW</strong>. Free, automatic SSL.</p>
+            </div>
+
+            <div class="prose prose-lg dark:prose-invert max-w-none
+                prose-headings:font-bold prose-headings:tracking-tight
+                prose-h2:text-2xl prose-h2:sm:text-3xl prose-h2:mt-12 prose-h2:mb-4
+                prose-h3:text-xl prose-h3:sm:text-2xl prose-h3:mt-8 prose-h3:mb-3
+                prose-p:text-gray-700 prose-p:dark:text-gray-300 prose-p:leading-relaxed prose-p:mb-4
+                prose-a:text-blue-600 prose-a:dark:text-blue-400 prose-a:underline prose-a:underline-offset-2
+                prose-strong:text-gray-900 prose-strong:dark:text-white
+                prose-code:bg-gray-100 prose-code:dark:bg-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
+                prose-li:text-gray-700 prose-li:dark:text-gray-300">
+
+                <h2 id="problem">Why the Netlify Apex Domain Is Tricky</h2>
+                <p>If you&rsquo;ve ever read Netlify&rsquo;s docs, you&rsquo;ve seen the recommendation: point your custom domain to <code>apex-loadbalancer.netlify.com</code> using a CNAME. That works perfectly for <code>www.yourdomain.com</code>. But the moment you try to set the same CNAME on the <strong>apex (root) domain</strong> &mdash; the bare <code>yourdomain.com</code> &mdash; DNS bites back. RFC 1034 forbids CNAME records at a zone apex, because the apex must coexist with SOA and NS records that a CNAME would override.</p>
+                <p>This is the classic <strong>CNAME-at-root problem</strong>. It affects every static host that uses a load-balancer hostname (Netlify, Vercel, Heroku, GitHub Pages, Cloudflare Pages, and more). Netlify offers two routes around it.</p>
+
+                <h2 id="approaches">Two Approaches for a Netlify Naked Domain</h2>
+
+                <div class="grid sm:grid-cols-2 gap-6 my-8 not-prose">
+                    <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <div class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center"><i class="fas fa-server text-blue-600 dark:text-blue-400"></i></div>
+                            <h3 class="text-lg font-bold m-0">Option A: Netlify DNS</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Move your nameservers to Netlify. Their DNS uses an internal ALIAS / flattened record at the apex, so <code class="text-xs">yourdomain.com</code> resolves directly to Netlify&rsquo;s load balancer.</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-0"><strong>Trade-off:</strong> all DNS lives in Netlify. Email MX, TXT, and third-party records must be re-created there.</p>
+                    </div>
+                    <div class="bg-white dark:bg-gray-900 border border-blue-300 dark:border-blue-700 rounded-2xl p-6 ring-1 ring-blue-200 dark:ring-blue-800">
+                        <div class="flex items-center gap-2 mb-3">
+                            <div class="w-8 h-8 rounded-lg bg-purple-100 dark:bg-purple-900/40 flex items-center justify-center"><i class="fas fa-arrow-right text-purple-600 dark:text-purple-400"></i></div>
+                            <h3 class="text-lg font-bold m-0">Option B: External DNS + ApexToWWW</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Keep your DNS at GoDaddy, Cloudflare, Route 53, Namecheap, etc. Point <code class="text-xs">www</code> to Netlify with a CNAME, and redirect the apex to www via two ApexToWWW records.</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-0"><strong>Trade-off:</strong> none worth mentioning &mdash; works with any registrar and any email provider.</p>
+                    </div>
+                </div>
+
+                <h2 id="get-started">Step-by-Step: Option B (External DNS + ApexToWWW)</h2>
+                <p>This is the most flexible setup and the one most Netlify users land on. You keep your existing DNS provider, point <code>www</code> at Netlify, and let ApexToWWW handle the bare <code>yourdomain.com</code>.</p>
+
+                <h3 id="step-1">Step 1: Add www to your Netlify site</h3>
+                <p>In the Netlify UI, open your site, then go to <strong>Site configuration &rarr; Domain management &rarr; Domains</strong>. Click <strong>Add a domain</strong> and enter <code>www.yourdomain.com</code>. Netlify will mark it as the primary domain and start preparing an SSL certificate for it.</p>
+
+                <h3 id="step-2">Step 2: Add a CNAME for www at your DNS provider</h3>
+                <p>At your DNS provider (Cloudflare, GoDaddy, Route 53, Namecheap, etc.), create a record:</p>
+                <ul>
+                    <li><strong>Type:</strong> CNAME</li>
+                    <li><strong>Name / Host:</strong> <code>www</code></li>
+                    <li><strong>Value:</strong> <code>apex-loadbalancer.netlify.com</code> &mdash; or, if you prefer, your unique site subdomain like <code>polite-otter-12345.netlify.app</code></li>
+                </ul>
+                <p>This is what tells the world that <code>www.yourdomain.com</code> lives on Netlify. If you&rsquo;re on Cloudflare, set the proxy toggle to <strong>DNS only</strong> (gray cloud) so Netlify can issue the certificate.</p>
+
+                <h3 id="step-3">Step 3: Add the apex A record</h3>
+                <p>Add an A record so the bare <code>yourdomain.com</code> resolves to ApexToWWW&rsquo;s redirect server:</p>
+                <ul>
+                    <li><strong>Type:</strong> A</li>
+                    <li><strong>Name / Host:</strong> <code>@</code> (or blank, depending on the provider)</li>
+                    <li><strong>Value:</strong> <code>65.21.184.101</code></li>
+                </ul>
+
+                <h3 id="step-4">Step 4: Add the apex AAAA record (IPv6)</h3>
+                <ul>
+                    <li><strong>Type:</strong> AAAA</li>
+                    <li><strong>Name / Host:</strong> <code>@</code></li>
+                    <li><strong>Value:</strong> <code>2a01:4f9:c012:a304::1</code></li>
+                </ul>
+
+                <h3 id="step-5">Step 5: Wait for DNS &amp; SSL</h3>
+                <p>Give DNS 5 to 30 minutes to propagate. Netlify automatically provisions a Let&rsquo;s Encrypt certificate for the <code>www</code> hostname; ApexToWWW does the same for the apex on first request. No manual cert work, ever.</p>
+
+                <h3 id="step-6">Step 6: Verify the redirect</h3>
+                <div class="bg-gray-900 dark:bg-black rounded-xl p-4 my-6 overflow-x-auto">
+                    <pre class="text-green-400 text-sm font-mono leading-relaxed mb-0"><code>curl -I https://yourdomain.com
+# HTTP/2 301
+# location: https://www.yourdomain.com/</code></pre>
+                </div>
+                <p>If you see a 301 with a <code>location</code> header pointing to your www subdomain, you&rsquo;re done. Open the apex in an incognito window and confirm the address bar resolves to <code>www.yourdomain.com</code> served by Netlify.</p>
+
+                <!-- DNS Records Table -->
+                <div class="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 my-8 not-prose">
+                    <h3 class="text-lg font-bold mb-4 mt-0">Final DNS Records</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-gray-200 dark:border-gray-700">
+                                    <th class="text-left py-2 pr-4 font-semibold">Type</th>
+                                    <th class="text-left py-2 pr-4 font-semibold">Name</th>
+                                    <th class="text-left py-2 font-semibold">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody class="font-mono">
+                                <tr class="border-b border-gray-100 dark:border-gray-800">
+                                    <td class="py-3 pr-4"><code class="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-0.5 rounded font-bold">A</code></td>
+                                    <td class="py-3 pr-4"><code>@</code></td>
+                                    <td class="py-3"><code>65.21.184.101</code></td>
+                                </tr>
+                                <tr class="border-b border-gray-100 dark:border-gray-800">
+                                    <td class="py-3 pr-4"><code class="text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/30 px-2 py-0.5 rounded font-bold">AAAA</code></td>
+                                    <td class="py-3 pr-4"><code>@</code></td>
+                                    <td class="py-3"><code>2a01:4f9:c012:a304::1</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 pr-4"><code class="text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 rounded font-bold">CNAME</code></td>
+                                    <td class="py-3 pr-4"><code>www</code></td>
+                                    <td class="py-3"><code>apex-loadbalancer.netlify.com</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <h2 id="comparison">Netlify DNS vs. External DNS &mdash; Which Should You Pick?</h2>
+                <div class="overflow-x-auto my-6 not-prose">
+                    <table class="w-full text-sm border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden">
+                        <thead class="bg-gray-50 dark:bg-gray-900">
+                            <tr>
+                                <th class="text-left py-3 px-4 font-semibold border-b border-gray-200 dark:border-gray-800">Feature</th>
+                                <th class="text-left py-3 px-4 font-semibold border-b border-gray-200 dark:border-gray-800">Netlify DNS</th>
+                                <th class="text-left py-3 px-4 font-semibold border-b border-gray-200 dark:border-gray-800">External DNS + ApexToWWW</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-100 dark:border-gray-800">
+                                <td class="py-3 px-4 font-medium">Move nameservers</td>
+                                <td class="py-3 px-4">Yes, required</td>
+                                <td class="py-3 px-4">No</td>
+                            </tr>
+                            <tr class="border-b border-gray-100 dark:border-gray-800">
+                                <td class="py-3 px-4 font-medium">Apex A record</td>
+                                <td class="py-3 px-4">Netlify ALIAS (internal)</td>
+                                <td class="py-3 px-4">ApexToWWW (<code class="text-xs">65.21.184.101</code>)</td>
+                            </tr>
+                            <tr class="border-b border-gray-100 dark:border-gray-800">
+                                <td class="py-3 px-4 font-medium">Works with email DNS (MX, SPF, DKIM)</td>
+                                <td class="py-3 px-4">Limited &mdash; must re-create at Netlify</td>
+                                <td class="py-3 px-4">Yes &mdash; unchanged</td>
+                            </tr>
+                            <tr class="border-b border-gray-100 dark:border-gray-800">
+                                <td class="py-3 px-4 font-medium">DNSSEC</td>
+                                <td class="py-3 px-4">Not supported</td>
+                                <td class="py-3 px-4">Depends on provider</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 font-medium">Cost</td>
+                                <td class="py-3 px-4">Free</td>
+                                <td class="py-3 px-4">Free</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>If your domain is brand new and you have no email or third-party DNS records to worry about, Netlify DNS is fine. If you already have a working DNS zone &mdash; especially with Google Workspace, Microsoft 365, or another mail provider &mdash; the external + ApexToWWW route is far less risky. You change two records, nothing else moves.</p>
+
+                <h2 id="other-platforms">Using a Different Host?</h2>
+                <p>The same apex-redirect pattern works for any platform that asks you to CNAME <code>www</code>. See guides for <a href="/vercel-apex-domain-redirect/">Vercel</a>, <a href="/heroku-apex-domain-redirect/">Heroku</a>, <a href="/github-pages-apex-redirect/">GitHub Pages</a>, and <a href="/cloudflare-pages-apex-redirect/">Cloudflare Pages</a>, or read the general <a href="/blog/how-to-redirect-apex-domain-to-www/">apex-to-www guide</a>.</p>
+
+                <h2 id="faq">Netlify-Specific FAQ</h2>
+
+                <h3>Does this work with Netlify Functions?</h3>
+                <p>Yes. Netlify Functions are exposed under your site at <code>/.netlify/functions/&lt;name&gt;</code> on whatever hostname Netlify serves. Since your real site lives on <code>www.yourdomain.com</code>, functions are reachable at <code>https://www.yourdomain.com/.netlify/functions/...</code>. Requests to the apex are simply redirected to the same path on www first, so a hit to <code>yourdomain.com/.netlify/functions/foo</code> 301s to <code>www.yourdomain.com/.netlify/functions/foo</code> &mdash; the function still runs.</p>
+
+                <h3>What about Netlify Forms submitted from the apex?</h3>
+                <p>Forms post to your Netlify site via the hostname they&rsquo;re served from. Because every visitor lands on www after the apex redirect, form submissions originate from <code>www.yourdomain.com</code> and are captured normally. You don&rsquo;t need any extra configuration. If you have legacy bookmarks that POST directly to the apex, those POSTs will be 301&rsquo;d &mdash; most clients downgrade to GET, so re-issue the form action as <code>https://www.yourdomain.com/...</code> to be safe.</p>
+
+                <h3>What about branch deploys and deploy previews?</h3>
+                <p>Branch deploys and deploy previews live on Netlify-owned subdomains like <code>deploy-preview-42--your-site.netlify.app</code>. They&rsquo;re completely independent of your apex DNS, so the ApexToWWW redirect doesn&rsquo;t affect them at all. You can keep using preview links exactly as before.</p>
+
+                <h3>Does this break Netlify Analytics?</h3>
+                <p>No. Netlify Analytics counts requests at the edge for any hostname attached to your site. Since traffic to the apex is redirected to www <em>before</em> hitting Netlify, those visits show up in Analytics as page views on <code>www.yourdomain.com</code> &mdash; which is what you want for clean, consolidated reporting. You won&rsquo;t see split stats between the apex and www.</p>
+
+                <h3>Can I use this with a custom Netlify Edge Function?</h3>
+                <p>Yes. Edge Functions run on requests to your site origin. The apex redirect happens before the request ever reaches Netlify&rsquo;s edge, so your edge functions only see the canonical www traffic.</p>
+
+                <!-- CTA Section -->
+                <div class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-8 my-12 text-center not-prose">
+                    <h2 class="text-2xl font-bold mb-3 mt-0">Set Up Your Netlify Apex Redirect</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">Two DNS records, free SSL, no account. Your naked domain forwards to your Netlify site in under five minutes.</p>
+                    <a href="/#get-started" class="inline-flex items-center px-6 py-3 rounded-lg text-base font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
+                        Get Started Now <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                    <p class="text-xs text-gray-500 dark:text-gray-500 mt-4 mb-0">Questions? Email <a href="mailto:hi@apextowww.com" class="text-blue-600 dark:text-blue-400">hi@apextowww.com</a></p>
+                </div>
+
+            </div>
+        </article>
+    </main>
+
+    <footer class="bg-gray-900 dark:bg-black py-12 border-t border-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <a href="/" class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-arrow-right text-white text-sm"></i>
+                    </div>
+                    <span class="text-lg font-bold text-white">ApexToWWW</span>
+                </a>
+                <nav class="flex items-center gap-6 text-sm">
+                    <a href="/#features" class="text-gray-400 hover:text-white transition">Features</a>
+                    <a href="/#get-started" class="text-gray-400 hover:text-white transition">Setup</a>
+                    <a href="/#faq" class="text-gray-400 hover:text-white transition">FAQ</a>
+                    <a href="/blog/" class="text-gray-400 hover:text-white transition">Blog</a>
+                    <a href="mailto:hi@apextowww.com" class="text-gray-400 hover:text-white transition">Contact</a>
+                </nav>
+                <p class="text-gray-500 text-sm">&copy; <script>document.write(new Date().getFullYear())</script> ApexToWWW. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</body>
+</html>

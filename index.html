@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>ApexToWWW - Free Apex Domain to WWW Redirect Service</title>
+        <title>Redirect Apex Domain to WWW — Free, 2 DNS Records, Auto SSL</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <script>
             tailwind.config = {
@@ -75,20 +75,20 @@
                 }
             })();
         </script>
-        <meta name="description" content="Free DNS apex domain to www redirect service. Automatic SSL, IPv6, HTTP/3 support. Just add two DNS records - no account needed. Redirect your naked domain to www in seconds."/>
+        <meta name="description" content="Redirect your apex domain to www with 2 DNS records. Free forever, no signup, automatic SSL, IPv6 and HTTP/3. Works with GitHub Pages, Vercel, Netlify, Heroku, Firebase."/>
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.apextowww.com/" />
-        <meta property="og:title" content="ApexToWWW - Free Apex Domain to WWW Redirect" />
-        <meta property="og:description" content="Redirect your apex/naked domain to www in seconds. Free service with automatic SSL, IPv6, and HTTP/3. No account needed." />
+        <meta property="og:title" content="Redirect Apex Domain to WWW — Free, 2 DNS Records, Auto SSL" />
+        <meta property="og:description" content="Point your apex domain's A/AAAA records to us, and we'll 301-redirect to www. Free forever. Automatic SSL. Works with GitHub Pages, Vercel, Netlify, Heroku, Firebase." />
         <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
         <meta property="og:site_name" content="ApexToWWW" />
 
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="ApexToWWW - Free Apex Domain to WWW Redirect" />
-        <meta name="twitter:description" content="Redirect your apex/naked domain to www in seconds. Free service with automatic SSL, IPv6, and HTTP/3." />
+        <meta name="twitter:title" content="Redirect Apex Domain to WWW — Free, 2 DNS Records, Auto SSL" />
+        <meta name="twitter:description" content="Point your apex domain's A/AAAA records to us, and we'll 301-redirect to www. Free. Auto SSL. IPv6. HTTP/3." />
         <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
 
         <!-- Schema.org JSON-LD Structured Data -->
@@ -854,7 +854,7 @@
                         </button>
                         <div class="faq-content">
                             <div class="px-6 pb-5">
-                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">An apex domain (also called root, naked, or bare domain) is your domain without any prefix &mdash; for example <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">example.com</code> rather than <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">www.example.com</code>. Due to how DNS works, apex domains can't use CNAME records, which means they're incompatible with most CDNs and hosting platforms like GitHub Pages, Netlify, and Vercel. A redirect solves this by automatically forwarding apex visitors to your www subdomain where your site actually lives.</p>
+                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">An apex domain (also called root, naked, or bare domain) is your domain without any prefix &mdash; for example <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">example.com</code> rather than <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">www.example.com</code>. Due to DNS standards (<a href="https://datatracker.ietf.org/doc/html/rfc1034#section-3.6.2" class="text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener">RFC 1034 &sect;3.6.2</a>), apex domains can't use CNAME records, which means they're incompatible with most CDNs and hosting platforms like GitHub Pages, Netlify, and Vercel. A redirect solves this by automatically forwarding apex visitors to your www subdomain where your site actually lives.</p>
                             </div>
                         </div>
                     </div>
@@ -911,7 +911,7 @@
                         </button>
                         <div class="faq-content">
                             <div class="px-6 pb-5">
-                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Yes. The full path, query parameters, and fragments are preserved. For example, <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">example.com/pricing?plan=pro</code> redirects to <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">www.example.com/pricing?plan=pro</code>. This is a 301 permanent redirect, so search engines will transfer SEO value to your www URLs.</p>
+                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Yes. The full path, query parameters, and fragments are preserved. For example, <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">example.com/pricing?plan=pro</code> redirects to <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">www.example.com/pricing?plan=pro</code>. This is a 301 permanent redirect per <a href="https://datatracker.ietf.org/doc/html/rfc7231#section-6.4.2" class="text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener">RFC 7231 &sect;6.4.2</a>, so search engines will transfer SEO value to your www URLs.</p>
                             </div>
                         </div>
                     </div>
@@ -963,7 +963,7 @@
                         </button>
                         <div class="faq-content">
                             <div class="px-6 pb-5">
-                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">For most sites, www is the better choice. It supports CNAME records (required by most CDNs and hosting platforms), enables better cookie isolation between your main site and subdomains, and makes load balancing and domain migration easier. The important thing is to pick one and redirect the other &mdash; having both active without a redirect splits your SEO and confuses browsers.</p>
+                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">For most sites, www is the better choice. It supports CNAME records (required by most CDNs and hosting platforms &mdash; the apex domain restriction is defined in <a href="https://datatracker.ietf.org/doc/html/rfc2181#section-10.1" class="text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener">RFC 2181 &sect;10.1</a>), enables better cookie isolation between your main site and subdomains, and makes load balancing and domain migration easier. The important thing is to pick one and redirect the other &mdash; having both active without a redirect splits your SEO and confuses browsers.</p>
                             </div>
                         </div>
                     </div>

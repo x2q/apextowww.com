@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Firebase Hosting Apex Domain Redirect: Free Naked Domain Setup</title>
+        <meta name="description" content="Redirect your apex domain to your Firebase Hosting site. Works with Firebase's A records or as a CNAME-based alternative. Free SSL, 2 DNS records, no signup." />
+        <meta name="keywords" content="firebase hosting apex domain, firebase naked domain redirect, firebase custom domain www, firebase apex record, firebase hosting root domain, firebase 151.101" />
+        <link rel="canonical" href="https://www.apextowww.com/firebase-hosting-apex-redirect/" />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://www.apextowww.com/firebase-hosting-apex-redirect/" />
+        <meta property="og:title" content="Firebase Hosting Apex Domain Redirect: Free Naked Domain Setup" />
+        <meta property="og:description" content="Redirect your apex domain to your Firebase Hosting site. Works with Firebase's A records or as a CNAME-based alternative. Free SSL, 2 DNS records, no signup." />
+        <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
+        <meta property="og:site_name" content="ApexToWWW" />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Firebase Hosting Apex Domain Redirect: Free Naked Domain Setup" />
+        <meta name="twitter:description" content="Redirect your apex domain to your Firebase Hosting site. Free SSL, 2 DNS records, no signup." />
+        <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
+
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                darkMode: 'class',
+                theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] } } }
+            }
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCDJZQW377"></script>
+        <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-NCDJZQW377");</script>
+
+        <!-- HowTo Schema -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": "How to Redirect Apex Domain to Firebase Hosting via WWW",
+            "description": "Set up a Firebase Hosting custom domain on www and redirect your naked apex domain to www using ApexToWWW.",
+            "step": [
+                {
+                    "@type": "HowToStep",
+                    "name": "Add custom domain in Firebase",
+                    "text": "Open Firebase Console, go to Hosting, click Add custom domain, and enter www.yourdomain.com."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Get the CNAME target from Firebase",
+                    "text": "Firebase will provide a CNAME target (or A record values) for your www subdomain."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Add a CNAME record for www",
+                    "text": "In your DNS provider, add a CNAME for www pointing to the target Firebase provided."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Add ApexToWWW A record",
+                    "text": "Create an A record for @ pointing to 65.21.184.101."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Add ApexToWWW AAAA record",
+                    "text": "Create an AAAA record for @ pointing to 2a01:4f9:c012:a304::1."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Wait for Firebase verification and SSL",
+                    "text": "Firebase verifies www and provisions an SSL certificate automatically. ApexToWWW provisions SSL for the apex on first request."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Test the redirect",
+                    "text": "Run curl -I https://yourdomain.com to confirm a 301 redirect to https://www.yourdomain.com."
+                }
+            ]
+        }
+        </script>
+    </head>
+<body class="font-sans bg-white dark:bg-gray-950 text-gray-900 dark:text-white antialiased">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 dark:bg-gray-950/90 backdrop-blur border-b border-gray-200 dark:border-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <a href="/" class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-arrow-right text-white text-sm"></i>
+                    </div>
+                    <span class="text-xl font-bold">ApexToWWW</span>
+                </a>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="/#features" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">Features</a>
+                    <a href="/#how-it-works" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">How It Works</a>
+                    <a href="/#get-started" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">Setup</a>
+                    <a href="/#faq" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">FAQ</a>
+                    <a href="/blog/" class="text-sm font-semibold text-blue-600 dark:text-blue-400">Blog</a>
+                </nav>
+                <a href="/#get-started" class="hidden sm:inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
+                    Get Started
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <article class="max-w-3xl mx-auto">
+            <!-- Breadcrumbs -->
+            <nav aria-label="Breadcrumb" class="mb-8">
+                <ol class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                    <li><a href="/" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Home</a></li>
+                    <li><i class="fas fa-chevron-right text-xs mx-1"></i></li>
+                    <li class="text-gray-900 dark:text-white font-medium">Firebase Hosting Apex Redirect</li>
+                </ol>
+            </nav>
+
+            <!-- Hero -->
+            <header class="mb-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 text-orange-700 dark:text-orange-300 text-xs font-semibold mb-5">
+                    <i class="fas fa-fire"></i> Firebase Hosting
+                </div>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-6">Redirect Your Apex Domain to Firebase Hosting</h1>
+                <p class="text-xl text-gray-600 dark:text-gray-400 leading-relaxed mb-8">Firebase Hosting works great on <code class="text-base bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded font-mono">www.yourdomain.com</code>, but the naked apex needs its own setup. Use Firebase's A records, or point apex to ApexToWWW for a free 301 redirect with stable IPs, IPv6, and HTTP/3.</p>
+                <a href="#setup" class="inline-flex items-center px-6 py-3 rounded-lg text-base font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
+                    Jump to Setup <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </header>
+
+            <!-- TL;DR -->
+            <div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 rounded-r-xl p-6 mb-12">
+                <div class="flex items-center gap-2 text-blue-700 dark:text-blue-300 font-bold text-sm uppercase tracking-wide mb-2"><i class="fas fa-bolt"></i> TL;DR</div>
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">Firebase Hosting provides A records for apex domains (<code class="bg-white dark:bg-gray-900 px-1.5 py-0.5 rounded text-sm">151.101.x.x</code>), but they change occasionally and don't cover every deployment scenario. For better reliability with CDN and SSL, point <code class="bg-white dark:bg-gray-900 px-1.5 py-0.5 rounded text-sm">www</code> to Firebase via CNAME and redirect apex to www using <a href="/" class="text-blue-600 dark:text-blue-400 underline font-semibold">ApexToWWW</a>. Free, automatic SSL, 2 DNS records.</p>
+            </div>
+
+            <div class="prose prose-lg dark:prose-invert max-w-none
+                prose-headings:font-bold prose-headings:tracking-tight
+                prose-h2:text-2xl prose-h2:sm:text-3xl prose-h2:mt-12 prose-h2:mb-4
+                prose-h3:text-xl prose-h3:sm:text-2xl prose-h3:mt-8 prose-h3:mb-3
+                prose-p:text-gray-700 prose-p:dark:text-gray-300 prose-p:leading-relaxed prose-p:mb-4
+                prose-a:text-blue-600 prose-a:dark:text-blue-400 prose-a:underline prose-a:underline-offset-2
+                prose-strong:text-gray-900 prose-strong:dark:text-white
+                prose-code:bg-gray-100 prose-code:dark:bg-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
+                prose-li:text-gray-700 prose-li:dark:text-gray-300">
+
+                <h2 id="firebase-official">Firebase's Official Approach</h2>
+                <p>When you connect a custom domain in the Firebase Hosting console, Google issues you a pair of A records that look like this:</p>
+
+                <div class="bg-gray-900 dark:bg-black rounded-xl p-4 my-6 overflow-x-auto">
+                    <pre class="text-green-400 text-sm font-mono leading-relaxed mb-0"><code>A    @    151.101.1.195
+A    @    151.101.65.195</code></pre>
+                </div>
+
+                <p>This works out of the box. Firebase serves your site directly from its global edge on the apex domain, and provisions a managed SSL certificate within minutes. For most sites this is fine. But there are a few real limitations of Firebase's apex direct setup:</p>
+
+                <ul class="space-y-2 mb-6">
+                    <li><strong>The IPs can change.</strong> Firebase has rotated edge IPs in the past during infrastructure migrations. When this happens, anyone hardcoding the old <code>151.101</code> addresses has to update their DNS or risk an outage. Google notifies customers, but missed emails happen.</li>
+                    <li><strong>No IPv6 on the apex.</strong> Firebase's apex A records are IPv4 only. Visitors on IPv6-only networks resolve via NAT64 or fail. There are no AAAA records for the apex direct configuration.</li>
+                    <li><strong>No HTTP/3 on the apex.</strong> The IPs Firebase issues for apex domains do not currently negotiate QUIC / HTTP/3. The <code>www</code> CNAME path does, because it routes through the full Firebase edge.</li>
+                </ul>
+
+                <p>None of this breaks Firebase. But if you want IPv6, HTTP/3, and a stable apex configuration that survives Firebase IP changes, the cleaner pattern is to put your site on <code>www</code> and redirect the apex.</p>
+
+                <h2 id="setup">The ApexToWWW Approach &mdash; Step by Step</h2>
+
+                <p>This setup keeps your Firebase site on <code>www.yourdomain.com</code> using the recommended CNAME path, and uses ApexToWWW to handle the apex 301 redirect. Total time: about 5 minutes plus DNS propagation.</p>
+
+                <ol class="space-y-3 mb-6">
+                    <li><strong>Step 1.</strong> Open the <a href="https://console.firebase.google.com/" target="_blank" rel="noopener">Firebase Console</a>, go to <strong>Hosting</strong>, and click <strong>Add custom domain</strong>. Enter <code>www.yourdomain.com</code>.</li>
+                    <li><strong>Step 2.</strong> Firebase will display a CNAME target (or, depending on the flow, an A record target) for your <code>www</code> subdomain. Copy this value.</li>
+                    <li><strong>Step 3.</strong> In your DNS provider, add a CNAME record: host <code>www</code>, value the target Firebase provided.</li>
+                    <li><strong>Step 4.</strong> Add an A record: host <code>@</code>, value <code>65.21.184.101</code>.</li>
+                    <li><strong>Step 5.</strong> Add an AAAA record: host <code>@</code>, value <code>2a01:4f9:c012:a304::1</code>.</li>
+                    <li><strong>Step 6.</strong> Wait for Firebase to verify <code>www</code> and provision its SSL certificate (usually a few minutes, occasionally up to 24 hours).</li>
+                    <li><strong>Step 7.</strong> Test: <code>curl -I https://yourdomain.com</code> &rarr; you should see <code>HTTP/2 301</code> with a <code>Location</code> header pointing at <code>https://www.yourdomain.com/</code>.</li>
+                </ol>
+
+                <h3 id="dns-records">DNS Records Summary</h3>
+
+                <div class="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 my-8 not-prose">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-gray-200 dark:border-gray-700">
+                                    <th class="text-left py-2 pr-4 font-semibold">Type</th>
+                                    <th class="text-left py-2 pr-4 font-semibold">Name</th>
+                                    <th class="text-left py-2 font-semibold">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-100 dark:border-gray-800">
+                                    <td class="py-3 pr-4"><code class="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-0.5 rounded font-bold">A</code></td>
+                                    <td class="py-3 pr-4"><code>@</code></td>
+                                    <td class="py-3"><code>65.21.184.101</code></td>
+                                </tr>
+                                <tr class="border-b border-gray-100 dark:border-gray-800">
+                                    <td class="py-3 pr-4"><code class="text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/30 px-2 py-0.5 rounded font-bold">AAAA</code></td>
+                                    <td class="py-3 pr-4"><code>@</code></td>
+                                    <td class="py-3"><code>2a01:4f9:c012:a304::1</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 pr-4"><code class="text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30 px-2 py-0.5 rounded font-bold">CNAME</code></td>
+                                    <td class="py-3 pr-4"><code>www</code></td>
+                                    <td class="py-3"><code class="text-gray-500">(Firebase target)</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <h2 id="comparison">Comparison: Firebase A Records vs ApexToWWW</h2>
+
+                <div class="overflow-x-auto my-6 not-prose">
+                    <table class="w-full text-sm border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden">
+                        <thead class="bg-gray-50 dark:bg-gray-900">
+                            <tr>
+                                <th class="text-left p-3 font-semibold border-b border-gray-200 dark:border-gray-800">Approach</th>
+                                <th class="text-center p-3 font-semibold border-b border-gray-200 dark:border-gray-800">IPv6</th>
+                                <th class="text-center p-3 font-semibold border-b border-gray-200 dark:border-gray-800">HTTP/3</th>
+                                <th class="text-center p-3 font-semibold border-b border-gray-200 dark:border-gray-800">IP changes</th>
+                                <th class="text-center p-3 font-semibold border-b border-gray-200 dark:border-gray-800">Apex SSL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-100 dark:border-gray-800">
+                                <td class="p-3 font-semibold">Firebase A records</td>
+                                <td class="p-3 text-center text-red-500"><i class="fas fa-times-circle"></i> No</td>
+                                <td class="p-3 text-center text-red-500"><i class="fas fa-times-circle"></i> No</td>
+                                <td class="p-3 text-center text-amber-600">Occasional</td>
+                                <td class="p-3 text-center text-green-600"><i class="fas fa-check-circle"></i> Yes</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold">ApexToWWW redirect</td>
+                                <td class="p-3 text-center text-green-600"><i class="fas fa-check-circle"></i> Yes</td>
+                                <td class="p-3 text-center text-green-600"><i class="fas fa-check-circle"></i> Yes</td>
+                                <td class="p-3 text-center text-green-600">Stable</td>
+                                <td class="p-3 text-center text-green-600"><i class="fas fa-check-circle"></i> Yes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 id="when-firebase">When to Use Firebase's A Records Instead</h2>
+
+                <p>The ApexToWWW pattern is not always the right choice. Stick with Firebase's apex A records if:</p>
+
+                <ul class="space-y-2 mb-6">
+                    <li><strong>You want apex as the primary URL.</strong> Some teams prefer <code>example.com</code> as their canonical domain (no <code>www</code> at all). In that case you want Firebase serving content on apex directly &mdash; no redirect needed.</li>
+                    <li><strong>You're OK with occasional DNS updates.</strong> Firebase IP rotations are rare, and Google notifies customers in advance. If your team has alerting on this, the maintenance overhead is low.</li>
+                    <li><strong>You don't need IPv6 or HTTP/3 on apex.</strong> Most users hit <code>www</code> through bookmarks, links, and search anyway, so the apex performance ceiling matters less.</li>
+                </ul>
+
+                <p>Otherwise, the redirect pattern wins on every dimension that matters &mdash; protocol support, IP stability, and zero ongoing maintenance.</p>
+
+                <h2 id="other-platforms">Other Hosting Platforms</h2>
+
+                <p>The same pattern works for any platform that prefers a CNAME on <code>www</code>:</p>
+
+                <ul class="space-y-2 mb-6">
+                    <li><a href="/cloudflare-pages-apex-redirect/">Cloudflare Pages apex redirect</a></li>
+                    <li><a href="/netlify-apex-domain-redirect/">Netlify apex domain redirect</a></li>
+                    <li><a href="/heroku-apex-domain-redirect/">Heroku apex domain redirect</a></li>
+                    <li><a href="/blog/github-pages-apex-domain-redirect/">GitHub Pages apex domain redirect</a></li>
+                </ul>
+
+                <h2 id="faq">Frequently Asked Questions</h2>
+
+                <h3 id="faq-app-check">Does this work with Firebase App Check?</h3>
+                <p>Yes. App Check protects your Firebase backend services (Firestore, Realtime Database, Cloud Functions) by verifying request origin, not by inspecting your DNS. Since the apex redirect happens outside Firebase entirely &mdash; ApexToWWW issues a 301 before the request ever reaches Firebase &mdash; App Check is unaffected. Your tokens are issued on the <code>www</code> origin where your app loads, just as they would be without the redirect.</p>
+
+                <h3 id="faq-functions">What about Firebase Cloud Functions?</h3>
+                <p>Cloud Functions called via Firebase Hosting rewrites work normally on the <code>www</code> origin. If you use a rewrite like <code>"source": "/api/**"</code>, requests to <code>https://www.yourdomain.com/api/foo</code> reach your function as expected. Direct requests to <code>https://yourdomain.com/api/foo</code> get 301'd to <code>https://www.yourdomain.com/api/foo</code> first, which works for GET but can break POST bodies on some clients. Best practice: always call your API at the <code>www</code> origin from your frontend code.</p>
+
+                <h3 id="faq-ssl">SSL certificate renewal?</h3>
+                <p>Both halves of the setup auto-renew. Firebase manages the certificate for <code>www.yourdomain.com</code> through Google's managed SSL infrastructure. ApexToWWW provisions a certificate for <code>yourdomain.com</code> via Let's Encrypt and renews it automatically every 60 days. There is nothing to monitor or rotate manually.</p>
+
+                <h3 id="faq-preview">Preview channels and custom domains?</h3>
+                <p>Firebase Hosting preview channels generate ephemeral URLs like <code>yourproject--branch-abc123.web.app</code>. These are independent of your custom domain and continue working the same way regardless of how your apex is configured. The ApexToWWW redirect only affects <code>yourdomain.com</code>; it doesn't interact with preview channels at all.</p>
+
+            </div>
+
+            <!-- CTA Section -->
+            <div class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-8 my-12 text-center">
+                <h2 class="text-2xl font-bold mb-3">Ready to Set Up Your Firebase Apex Redirect?</h2>
+                <p class="text-gray-600 dark:text-gray-400 mb-6">Add two DNS records and your naked domain redirects to your Firebase Hosting site over HTTPS. Free, no signup, automatic SSL.</p>
+                <a href="/#get-started" class="inline-flex items-center px-6 py-3 rounded-lg text-base font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
+                    Get Started Now <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+                <p class="text-xs text-gray-500 mt-4">Questions? Email <a href="mailto:hi@apextowww.com" class="text-blue-600 dark:text-blue-400 underline">hi@apextowww.com</a></p>
+            </div>
+        </article>
+    </main>
+
+    <footer class="bg-gray-900 dark:bg-black py-12 border-t border-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <a href="/" class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-arrow-right text-white text-sm"></i>
+                    </div>
+                    <span class="text-lg font-bold text-white">ApexToWWW</span>
+                </a>
+                <nav class="flex items-center gap-6 text-sm">
+                    <a href="/#features" class="text-gray-400 hover:text-white transition">Features</a>
+                    <a href="/#get-started" class="text-gray-400 hover:text-white transition">Setup</a>
+                    <a href="/#faq" class="text-gray-400 hover:text-white transition">FAQ</a>
+                    <a href="/blog/" class="text-gray-400 hover:text-white transition">Blog</a>
+                </nav>
+                <p class="text-gray-500 text-sm">&copy; <script>document.write(new Date().getFullYear())</script> ApexToWWW. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</body>
+</html>

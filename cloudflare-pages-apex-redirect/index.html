@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cloudflare Pages Apex Domain Redirect: Free apex&rarr;www Setup | ApexToWWW</title>
+        <meta name="description" content="Redirect your apex domain to your Cloudflare Pages site. Works even when Cloudflare isn't your DNS provider. Free SSL, two DNS records, no signup." />
+        <meta name="keywords" content="cloudflare pages apex domain, cloudflare pages naked domain, cloudflare pages custom domain www, cname flattening, pages.dev custom domain, cloudflare pages root domain" />
+        <link rel="canonical" href="https://www.apextowww.com/cloudflare-pages-apex-redirect/" />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://www.apextowww.com/cloudflare-pages-apex-redirect/" />
+        <meta property="og:title" content="Cloudflare Pages Apex Domain Redirect: Free apex&rarr;www Setup" />
+        <meta property="og:description" content="Redirect your apex domain to your Cloudflare Pages site. Works even when Cloudflare isn't your DNS provider. Free SSL, two DNS records, no signup." />
+        <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
+        <meta property="og:site_name" content="ApexToWWW" />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Cloudflare Pages Apex Domain Redirect: Free apex&rarr;www Setup" />
+        <meta name="twitter:description" content="Redirect your apex domain to your Cloudflare Pages site. Works even when Cloudflare isn't your DNS provider. Free SSL, two DNS records, no signup." />
+        <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
+
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                darkMode: 'class',
+                theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] } } }
+            }
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCDJZQW377"></script>
+        <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-NCDJZQW377");</script>
+
+        <!-- HowTo Schema -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": "How to Redirect an Apex Domain to a Cloudflare Pages Site",
+            "description": "Set up an apex/naked domain redirect for a Cloudflare Pages project when your DNS is hosted outside Cloudflare. Uses ApexToWWW for the apex redirect and a CNAME on www to your pages.dev project.",
+            "step": [
+                {
+                    "@type": "HowToStep",
+                    "name": "Add www custom domain in Cloudflare Pages",
+                    "text": "In your Cloudflare Pages project, open Custom domains and add www.yourdomain.com."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Copy the CNAME target",
+                    "text": "Cloudflare Pages will display a CNAME target like your-project.pages.dev."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Add a CNAME for www",
+                    "text": "At your DNS provider (Route53, GoDaddy, Namecheap, etc.), add a CNAME record from www to your-project.pages.dev."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Add an A record on the apex",
+                    "text": "Add an A record for @ pointing to 65.21.184.101 to enable the apex redirect through ApexToWWW."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Add an AAAA record on the apex",
+                    "text": "Add an AAAA record for @ pointing to 2a01:4f9:c012:a304::1 for IPv6 support."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Verify the redirect and the Pages site",
+                    "text": "Run curl -I http://yourdomain.com to confirm a 301 redirect to https://www.yourdomain.com, then load www.yourdomain.com in a browser."
+                }
+            ]
+        }
+        </script>
+
+        <!-- FAQ Schema -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Does CNAME flattening work with email MX records?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Yes. Cloudflare's CNAME flattening only resolves the apex A/AAAA records and does not affect MX, TXT, or other record types. Your email routing keeps working as long as you keep the MX records configured." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can I combine the Cloudflare proxy with ApexToWWW?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "No. If Cloudflare's orange-cloud proxy is enabled on the apex A/AAAA records, Cloudflare terminates TLS itself and the request never reaches the ApexToWWW redirect server. Set the apex records to DNS only (gray cloud), or use Cloudflare's own CNAME flattening if Cloudflare is your DNS provider." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What if I use Cloudflare Workers instead of Pages?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "The same pattern applies. Bind your Worker to www.yourdomain.com and use ApexToWWW (or Cloudflare CNAME flattening) on the apex. Workers can also handle redirects natively if you want to manage everything inside Cloudflare." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Is ApexToWWW compatible with DNSSEC?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Yes. ApexToWWW is plain A/AAAA records on your apex. DNSSEC signing happens at your DNS provider and is independent of where the records point. Sign the zone as usual." }
+                }
+            ]
+        }
+        </script>
+    </head>
+<body class="font-sans bg-white dark:bg-gray-950 text-gray-900 dark:text-white antialiased">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 dark:bg-gray-950/90 backdrop-blur border-b border-gray-200 dark:border-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <a href="/" class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-arrow-right text-white text-sm"></i>
+                    </div>
+                    <span class="text-xl font-bold">ApexToWWW</span>
+                </a>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="/#features" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">Features</a>
+                    <a href="/#how-it-works" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">How It Works</a>
+                    <a href="/#get-started" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">Setup</a>
+                    <a href="/#faq" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">FAQ</a>
+                    <a href="/blog/" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">Blog</a>
+                </nav>
+                <a href="/#get-started" class="hidden sm:inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
+                    Get Started
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <article class="max-w-3xl mx-auto">
+            <!-- Breadcrumbs -->
+            <nav aria-label="Breadcrumb" class="mb-8">
+                <ol class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                    <li><a href="/" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Home</a></li>
+                    <li><i class="fas fa-chevron-right text-xs mx-1"></i></li>
+                    <li class="text-gray-900 dark:text-white font-medium">Cloudflare Pages Apex Redirect</li>
+                </ol>
+            </nav>
+
+            <!-- Hero -->
+            <header class="mb-12">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 text-orange-700 dark:text-orange-300 text-xs font-semibold mb-6">
+                    <i class="fas fa-cloud"></i> Cloudflare Pages
+                </div>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-6">Redirect Your Apex Domain to <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Cloudflare Pages</span></h1>
+                <p class="text-xl text-gray-600 dark:text-gray-400 leading-relaxed mb-8">Cloudflare Pages serves your site from <code class="text-base font-mono bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">www.yourdomain.com</code> via a CNAME to <code class="text-base font-mono bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">your-project.pages.dev</code>. The apex (naked) domain needs separate handling. Here's the right approach for both DNS scenarios.</p>
+                <a href="#get-started" class="inline-flex items-center px-6 py-3 rounded-lg text-base font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
+                    Set Up Apex Redirect <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </header>
+
+            <!-- TL;DR -->
+            <div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 rounded-r-xl p-6 mb-12">
+                <div class="flex items-center gap-2 text-blue-700 dark:text-blue-300 font-semibold mb-2 text-sm uppercase tracking-wide">
+                    <i class="fas fa-bolt"></i> TL;DR
+                </div>
+                <p class="text-gray-800 dark:text-gray-200 leading-relaxed m-0">Cloudflare Pages requires a CNAME to <code class="font-mono bg-white dark:bg-gray-900 px-1.5 py-0.5 rounded text-sm">&lt;project&gt;.pages.dev</code>, but apex domains can't use CNAME per RFC 1034. <strong>If Cloudflare is your DNS</strong>, CNAME flattening handles this automatically. <strong>If you use another DNS</strong> (Route53, GoDaddy, etc.), use ApexToWWW to redirect apex&rarr;www. Free.</p>
+            </div>
+
+            <div class="prose prose-lg dark:prose-invert max-w-none
+                prose-headings:font-bold prose-headings:tracking-tight
+                prose-h2:text-2xl prose-h2:sm:text-3xl prose-h2:mt-12 prose-h2:mb-4
+                prose-h3:text-xl prose-h3:sm:text-2xl prose-h3:mt-8 prose-h3:mb-3
+                prose-p:text-gray-700 prose-p:dark:text-gray-300 prose-p:leading-relaxed prose-p:mb-4
+                prose-a:text-blue-600 prose-a:dark:text-blue-400 prose-a:underline prose-a:underline-offset-2
+                prose-strong:text-gray-900 prose-strong:dark:text-white
+                prose-code:bg-gray-100 prose-code:dark:bg-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
+                prose-li:text-gray-700 prose-li:dark:text-gray-300">
+
+                <h2 id="two-scenarios">Two Scenarios for Cloudflare Pages Custom Domains</h2>
+
+                <p>Whether you can use Cloudflare's native solution or need a third-party redirect depends entirely on <strong>where your DNS is hosted</strong>, not where your site is hosted. Cloudflare Pages happily serves your site no matter who runs your authoritative DNS. The apex problem is purely a DNS problem.</p>
+
+                <div class="grid sm:grid-cols-2 gap-4 my-8 not-prose">
+                    <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class="fas fa-cloud text-orange-500 text-xl"></i>
+                            <h3 class="text-lg font-bold m-0">Cloudflare is your nameserver</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 m-0">Use Cloudflare's <strong>CNAME flattening</strong>. Add a CNAME on the apex pointing to <code class="text-xs">your-project.pages.dev</code> and Cloudflare flattens it to A/AAAA records at query time. It just works.</p>
+                    </div>
+                    <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class="fas fa-server text-blue-500 text-xl"></i>
+                            <h3 class="text-lg font-bold m-0">DNS lives elsewhere</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 m-0">Route53, GoDaddy, Namecheap, Google Domains, etc. don't all support CNAME flattening (or call it ALIAS/ANAME). Use <strong>ApexToWWW</strong> for a free apex&rarr;www 301 redirect.</p>
+                    </div>
+                </div>
+
+                <h2 id="get-started">Step-by-Step: Cloudflare Pages with Non-Cloudflare DNS</h2>
+
+                <p>This is the most common case: you've shipped a Cloudflare Pages site but your domain's DNS is still at the registrar where you bought it. Here is the complete setup.</p>
+
+                <ol class="space-y-3 mb-6">
+                    <li><strong>Open your Cloudflare Pages project</strong> in the Cloudflare dashboard, then go to <strong>Custom domains</strong>.</li>
+                    <li><strong>Click "Set up a custom domain"</strong> and enter <code>www.yourdomain.com</code>. Cloudflare verifies ownership and provisions an SSL certificate.</li>
+                    <li><strong>Copy the CNAME target</strong> Cloudflare gives you. It looks like <code>your-project.pages.dev</code>.</li>
+                    <li><strong>At your DNS provider, add a CNAME record</strong>: name <code>www</code>, value <code>your-project.pages.dev</code>. TTL: 1 hour or auto.</li>
+                    <li><strong>Add an A record on the apex</strong>: name <code>@</code>, value <code>65.21.184.101</code>.</li>
+                    <li><strong>Add an AAAA record on the apex</strong>: name <code>@</code>, value <code>2a01:4f9:c012:a304::1</code>.</li>
+                    <li><strong>Verify</strong> with <code>curl -I http://yourdomain.com</code> &mdash; you should see <code>301 Moved Permanently</code> with <code>Location: https://www.yourdomain.com/</code>. Then load <code>www.yourdomain.com</code> to confirm the Pages site is live.</li>
+                </ol>
+
+                <div class="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 my-8 not-prose">
+                    <h3 class="text-lg font-bold mb-4 mt-0">DNS Records Summary</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-gray-200 dark:border-gray-700">
+                                    <th class="text-left py-2 pr-4 font-semibold">Type</th>
+                                    <th class="text-left py-2 pr-4 font-semibold">Name</th>
+                                    <th class="text-left py-2 font-semibold">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-100 dark:border-gray-800">
+                                    <td class="py-3 pr-4"><code class="text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30 px-2 py-0.5 rounded font-bold">CNAME</code></td>
+                                    <td class="py-3 pr-4"><code>www</code></td>
+                                    <td class="py-3"><code>your-project.pages.dev</code></td>
+                                </tr>
+                                <tr class="border-b border-gray-100 dark:border-gray-800">
+                                    <td class="py-3 pr-4"><code class="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-0.5 rounded font-bold">A</code></td>
+                                    <td class="py-3 pr-4"><code>@</code></td>
+                                    <td class="py-3"><code>65.21.184.101</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 pr-4"><code class="text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/30 px-2 py-0.5 rounded font-bold">AAAA</code></td>
+                                    <td class="py-3 pr-4"><code>@</code></td>
+                                    <td class="py-3"><code>2a01:4f9:c012:a304::1</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-4 mb-0">The CNAME points <code>www</code> at your Cloudflare Pages project. The A and AAAA records send apex traffic to ApexToWWW, which 301-redirects to <code>https://www.yourdomain.com</code>.</p>
+                </div>
+
+                <h2 id="when-not-to-use">When NOT to Use ApexToWWW for Cloudflare Pages</h2>
+
+                <p>We're a focused tool, not a hammer. Skip ApexToWWW if:</p>
+
+                <ul class="space-y-2 mb-6">
+                    <li><strong>Your DNS is on Cloudflare.</strong> Use CNAME flattening. It's native, faster, and one less external dependency. Add a CNAME on <code>@</code> pointing to <code>your-project.pages.dev</code> and Cloudflare flattens it automatically.</li>
+                    <li><strong>You want the apex to serve your site directly</strong> (no redirect, no www in the URL). For that you need ALIAS/ANAME records, which only some DNS providers offer. Cloudflare DNS does this transparently via flattening; if you can move DNS to Cloudflare, that's the cleanest path.</li>
+                    <li><strong>You're already using Cloudflare Workers</strong> for routing logic. Bind a route on the apex and write the redirect in code &mdash; one fewer moving part.</li>
+                </ul>
+
+                <p>ApexToWWW is the right answer when you <strong>can't or won't move DNS to Cloudflare</strong> &mdash; for example, your team owns DNS in Route53 with Terraform, your registrar's DNS is managed by IT, or you simply prefer to keep nameservers and CDN separate.</p>
+
+                <h2 id="dogfood">Meta-Note: This Site Runs on Cloudflare Pages</h2>
+
+                <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-5 my-6">
+                    <p class="m-0 flex items-start gap-3"><i class="fas fa-utensils text-amber-600 mt-1"></i> <span><strong>Eat your own dogfood:</strong> apextowww.com itself runs on Cloudflare Pages. There's a CNAME on <code>www</code> pointing to <code>apextowww-73y.pages.dev</code>, and the apex redirect is handled by the same service we ship to you. The setup on this page is exactly what we do.</span></p>
+                </div>
+
+                <h2 id="other-platforms">Other Platforms</h2>
+
+                <p>The apex&rarr;www pattern is identical across most modern hosts. Same two records on the apex, only the <code>www</code> CNAME target changes:</p>
+
+                <ul class="space-y-2 mb-6">
+                    <li><a href="/vercel-apex-redirect/">Vercel apex domain redirect</a></li>
+                    <li><a href="/netlify-apex-redirect/">Netlify naked domain setup</a></li>
+                    <li><a href="/heroku-apex-redirect/">Heroku custom apex domain</a></li>
+                    <li><a href="/github-pages-apex-redirect/">GitHub Pages apex redirect</a></li>
+                    <li><a href="/firebase-apex-redirect/">Firebase Hosting apex domain</a></li>
+                </ul>
+
+                <h2 id="faq">FAQ</h2>
+
+                <h3>Does CNAME flattening work with email MX records?</h3>
+                <p>Yes. CNAME flattening only resolves the apex A/AAAA queries; MX, TXT, SPF, DKIM, and DMARC records are unaffected. You can run Google Workspace or Fastmail on the apex while Cloudflare flattens the CNAME for HTTP traffic. The classic "CNAME at apex breaks email" problem doesn't apply to flattened records.</p>
+
+                <h3>Can I combine the Cloudflare proxy (orange cloud) with ApexToWWW?</h3>
+                <p>No. If the orange cloud is on for the apex A/AAAA records, Cloudflare terminates TLS at its edge and the request never reaches the ApexToWWW server, so the redirect can't happen. Either set the apex records to <strong>DNS only</strong> (gray cloud), or use Cloudflare's CNAME flattening if Cloudflare is your DNS provider. You can absolutely keep the orange cloud on for the <code>www</code> record &mdash; that's between Cloudflare and your Pages project and works fine.</p>
+
+                <h3>What if I use Cloudflare Workers instead of Pages?</h3>
+                <p>Same shape. Bind your Worker to <code>www.yourdomain.com</code> via a route, then handle the apex with either ApexToWWW or CNAME flattening. Workers can also do the redirect themselves &mdash; a four-line script returning a 301 from <code>example.com</code> to <code>https://www.example.com</code> bound to the apex route is a perfectly good alternative if you're already paying for the platform.</p>
+
+                <h3>Is ApexToWWW compatible with DNSSEC?</h3>
+                <p>Fully. ApexToWWW is just A and AAAA records on your apex. DNSSEC is signed by your DNS provider over the zone contents and doesn't care what the records resolve to. Sign the zone as you normally would; the redirect works regardless.</p>
+
+                <!-- CTA Section -->
+                <div class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-8 my-12 text-center not-prose">
+                    <h2 class="text-2xl font-bold mb-3 mt-0">Ship Your Cloudflare Pages Apex Redirect</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">Two DNS records, free forever, automatic SSL via Let's Encrypt. Works with any DNS provider that accepts A and AAAA records.</p>
+                    <a href="/#get-started" class="inline-flex items-center px-6 py-3 rounded-lg text-base font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
+                        Get Started Free <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-4 mb-0">Questions? <a href="mailto:hi@apextowww.com" class="text-blue-600 dark:text-blue-400">hi@apextowww.com</a></p>
+                </div>
+
+            </div>
+        </article>
+    </main>
+
+    <footer class="bg-gray-900 dark:bg-black py-12 border-t border-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <a href="/" class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-arrow-right text-white text-sm"></i>
+                    </div>
+                    <span class="text-lg font-bold text-white">ApexToWWW</span>
+                </a>
+                <nav class="flex items-center gap-6 text-sm">
+                    <a href="/#features" class="text-gray-400 hover:text-white transition">Features</a>
+                    <a href="/#get-started" class="text-gray-400 hover:text-white transition">Setup</a>
+                    <a href="/#faq" class="text-gray-400 hover:text-white transition">FAQ</a>
+                    <a href="/blog/" class="text-gray-400 hover:text-white transition">Blog</a>
+                    <a href="mailto:hi@apextowww.com" class="text-gray-400 hover:text-white transition">Contact</a>
+                </nav>
+                <p class="text-gray-500 text-sm">&copy; <script>document.write(new Date().getFullYear())</script> ApexToWWW. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</body>
+</html>
