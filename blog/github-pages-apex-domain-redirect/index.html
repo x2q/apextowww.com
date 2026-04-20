@@ -107,6 +107,15 @@
                         <span>7 min read</span>
                     </div>
                     <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">How to Set Up Apex Domain Redirect for GitHub Pages</h1>
+                    <div class="my-8 p-6 rounded-2xl border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-900/20">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fas fa-bolt text-blue-600 dark:text-blue-400"></i>
+                            <span class="text-sm font-bold uppercase tracking-wide text-blue-600 dark:text-blue-400">TL;DR</span>
+                        </div>
+                        <p class="text-gray-800 dark:text-gray-200 leading-relaxed">
+                            GitHub Pages requires a CNAME to <code>&lt;username&gt;.github.io</code>, but apex domains can't CNAME per RFC 1034. Solution: set www as your CNAME target for GitHub Pages, then add A+AAAA records on the apex pointing to ApexToWWW, which 301-redirects apex traffic to www. Two DNS records, free, automatic SSL.
+                        </p>
+                    </div>
                     <p class="text-xl text-gray-600 dark:text-gray-400">GitHub Pages works best with a www subdomain. Here is how to redirect your naked domain so visitors always reach your site.</p>
                 </header>
 

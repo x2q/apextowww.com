@@ -106,6 +106,15 @@
                     <span>6 min read</span>
                 </div>
                 <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight mb-6">Apex Domain vs WWW: What's the Difference and Which Should You Use?</h1>
+                <div class="my-8 p-6 rounded-2xl border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-900/20">
+                    <div class="flex items-center gap-2 mb-2">
+                        <i class="fas fa-bolt text-blue-600 dark:text-blue-400"></i>
+                        <span class="text-sm font-bold uppercase tracking-wide text-blue-600 dark:text-blue-400">TL;DR</span>
+                    </div>
+                    <p class="text-gray-800 dark:text-gray-200 leading-relaxed">
+                        An apex domain is your domain without any subdomain (example.com); www is a subdomain (www.example.com). The critical technical difference: apex domains can't use CNAME records, so they can't point to most CDNs. For production sites, www is usually the better choice &mdash; it supports CNAME, works with all hosting platforms, and enables better cookie isolation. Pick one as canonical and 301 the other.
+                    </p>
+                </div>
                 <p class="text-xl text-gray-600 dark:text-gray-400">Every website owner faces this choice: should visitors reach your site at <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">example.com</code> or <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">www.example.com</code>? The answer has real technical consequences for performance, reliability, and hosting compatibility.</p>
             </header>
 

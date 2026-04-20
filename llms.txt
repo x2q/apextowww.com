@@ -1,0 +1,102 @@
+# ApexToWWW
+
+> Free DNS service that 301-redirects apex/naked domains to their www subdomain. Two DNS records, automatic SSL via Let's Encrypt, IPv6 and HTTP/3 support, no signup required.
+
+## Quick facts
+
+- **What it does**: HTTP 301 redirect from `example.com` to `www.example.com`
+- **Setup**: Point apex A record to `65.21.184.101` and AAAA to `2a01:4f9:c012:a304::1`
+- **Cost**: Free, no premium tier, no usage limits, no account required
+- **SSL**: Automatic Let's Encrypt certificates, provisioned on first request
+- **Protocols**: HTTP/1.1, HTTP/2, HTTP/3 (QUIC)
+- **IP stack**: IPv4 + IPv6 dual-stack
+- **Redirect latency**: Under 50ms
+- **Path preservation**: Full path + query string preserved (301 redirect is RFC 7231 compliant)
+- **Infrastructure**: ARM64 servers (Hetzner), energy-efficient
+- **Provider**: Sandbox.ventures, based in Aarhus, Denmark
+- **Contact**: hi@apextowww.com
+
+## The problem ApexToWWW solves
+
+Apex domains (also called root, naked, or bare domains — the domain without any prefix, e.g. `example.com` rather than `www.example.com`) cannot use CNAME records. This is mandated by [RFC 1034 §3.6.2](https://datatracker.ietf.org/doc/html/rfc1034#section-3.6.2) and [RFC 2181 §10.1](https://datatracker.ietf.org/doc/html/rfc2181#section-10.1), which forbid CNAME records at the zone apex because they conflict with the required SOA and NS records.
+
+Most modern hosting platforms (GitHub Pages, Netlify, Vercel, Heroku, Firebase Hosting, Cloudflare Pages) require a CNAME for custom domains. This creates an incompatibility: users expect `example.com` to work, but DNS doesn't allow it to CNAME to the hosting provider.
+
+Common workarounds include:
+- **ALIAS / ANAME records** — not universally supported, often paid DNS
+- **CNAME flattening** — requires moving nameservers to Cloudflare
+- **Provider-specific A records** — can break when the provider changes IPs
+- **A/AAAA redirect to www** — what ApexToWWW does, permanently and for free
+
+## How it works
+
+1. User types `example.com` in a browser
+2. DNS resolves apex to `65.21.184.101` (or IPv6 equivalent)
+3. ApexToWWW server receives the request and detects the Host header
+4. Server responds with `HTTP/1.1 301 Moved Permanently` and `Location: https://www.example.com[original path]`
+5. Browser follows redirect to www subdomain, which points to the user's actual hosting
+
+The SSL certificate for the apex domain is provisioned automatically via Let's Encrypt using the HTTP-01 challenge on first request.
+
+## Setup guide
+
+```
+A     @     65.21.184.101
+AAAA  @     2a01:4f9:c012:a304::1
+```
+
+That's it. No signup, no dashboard, no API keys.
+
+DNS propagation typically takes 5-30 minutes. SSL is provisioned on first HTTPS request to the apex.
+
+## Verification
+
+```
+curl -I https://example.com
+```
+
+Expected response:
+```
+HTTP/1.1 301 Moved Permanently
+Location: https://www.example.com/
+```
+
+## Limitations
+
+- **Wildcard domains are not supported** — we verify DNS ownership before issuing certificates
+- Your www subdomain must be configured separately (CNAME to your hosting provider)
+- Not suitable if you want apex to serve content directly (use ALIAS records instead)
+
+## Works with
+
+- GitHub Pages
+- Netlify
+- Vercel
+- Heroku
+- Firebase Hosting
+- Cloudflare Pages
+- AWS CloudFront
+- Render
+- Fly.io
+- Any hosting platform requiring www CNAME
+
+## Resources
+
+- Main site: https://www.apextowww.com/
+- How to redirect apex to www (tutorial): https://www.apextowww.com/blog/how-to-redirect-apex-domain-to-www/
+- What is an apex domain (explainer): https://www.apextowww.com/blog/what-is-an-apex-domain/
+- Apex domain vs WWW (comparison): https://www.apextowww.com/blog/apex-domain-vs-www/
+- GitHub Pages apex redirect: https://www.apextowww.com/blog/github-pages-apex-domain-redirect/
+- Heroku apex redirect: https://www.apextowww.com/heroku-apex-domain-redirect/
+- Vercel apex redirect: https://www.apextowww.com/vercel-apex-domain-redirect/
+- Netlify apex redirect: https://www.apextowww.com/netlify-apex-domain-redirect/
+- Cloudflare Pages apex redirect: https://www.apextowww.com/cloudflare-pages-apex-redirect/
+- Firebase Hosting apex redirect: https://www.apextowww.com/firebase-hosting-apex-redirect/
+- Free subdomain forwarding: https://www.apextowww.com/blog/free-subdomain-forwarding/
+
+## Standards and references
+
+- [RFC 1034 — Domain names: concepts and facilities](https://datatracker.ietf.org/doc/html/rfc1034) — defines the zone apex and CNAME exclusivity rule
+- [RFC 2181 — Clarifications to the DNS Specification](https://datatracker.ietf.org/doc/html/rfc2181#section-10.1) — clarifies SOA/NS/CNAME interaction at zone apex
+- [RFC 7231 §6.4.2](https://datatracker.ietf.org/doc/html/rfc7231#section-6.4.2) — 301 Moved Permanently semantics
+- [Let's Encrypt](https://letsencrypt.org/) — certificate authority used for automatic SSL
