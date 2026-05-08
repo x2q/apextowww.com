@@ -3,32 +3,26 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Vercel Apex Domain Redirect: Free Apex&rarr;WWW for Vercel Apps</title>
-        <meta name="description" content="Redirect your apex domain to your Vercel deployment. Free DNS-based 301 redirect, automatic SSL, works alongside Vercel's CNAME setup. 2 records, no signup." />
+        <title>Vercel Apex&rarr;WWW Redirect — Free, 76.76.21.21 Alternative</title>
+        <meta name="description" content="Redirect your apex domain to a Vercel app in 60 seconds. Free 301, auto-SSL, IPv6, HTTP/3. Works alongside cname.vercel-dns.com — 2 DNS records, no signup." />
         <meta name="keywords" content="vercel apex domain, vercel naked domain redirect, cname.vercel-dns.com, vercel custom domain www, 76.76.21.21 alternative, vercel root domain" />
         <link rel="canonical" href="https://www.apextowww.com/vercel-apex-domain-redirect/" />
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://www.apextowww.com/vercel-apex-domain-redirect/" />
-        <meta property="og:title" content="Vercel Apex Domain Redirect: Free Apex&rarr;WWW for Vercel Apps" />
-        <meta property="og:description" content="Redirect your apex domain to your Vercel deployment. Free DNS-based 301 redirect, automatic SSL, works alongside Vercel's CNAME setup. 2 records, no signup." />
+        <meta property="og:title" content="Vercel Apex&rarr;WWW Redirect — Free, 76.76.21.21 Alternative" />
+        <meta property="og:description" content="Redirect your apex domain to a Vercel app in 60 seconds. Free 301, auto-SSL, IPv6, HTTP/3. Works alongside cname.vercel-dns.com — 2 DNS records, no signup." />
         <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
         <meta property="og:site_name" content="ApexToWWW" />
 
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Vercel Apex Domain Redirect: Free Apex&rarr;WWW for Vercel Apps" />
-        <meta name="twitter:description" content="Redirect your apex domain to your Vercel deployment. Free DNS-based 301 redirect, automatic SSL, works alongside Vercel's CNAME setup. 2 records, no signup." />
+        <meta name="twitter:title" content="Vercel Apex&rarr;WWW Redirect — Free, 76.76.21.21 Alternative" />
+        <meta name="twitter:description" content="Redirect your apex domain to a Vercel app in 60 seconds. Free 301, auto-SSL, IPv6, HTTP/3. Works alongside cname.vercel-dns.com — 2 DNS records, no signup." />
         <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
 
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                darkMode: 'class',
-                theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] } } }
-            }
-        </script>
+        <link rel="stylesheet" href="/styles.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -74,6 +68,41 @@
                     "@type": "HowToStep",
                     "name": "Verify the redirect",
                     "text": "Run curl -I https://yourdomain.com and confirm a 301 response with Location: https://www.yourdomain.com/."
+                }
+            ]
+        }
+        </script>
+
+        <!-- FAQ Schema -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What is 76.76.21.21 and do I still need it?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "76.76.21.21 is Vercel's Anycast IPv4 address for apex (naked) domains. It is not required if you redirect the apex to www instead. Use a CNAME on www pointing to cname.vercel-dns.com for your real traffic, then point the apex A record at ApexToWWW (65.21.184.101) for a free 301 redirect with IPv6 and HTTP/3." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Does this work with Vercel Edge Functions?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Yes. All real traffic still hits Vercel through the www CNAME, which is the canonical setup that Edge Functions, middleware, and Edge Config expect. ApexToWWW only handles the bare-domain hit and immediately 301s to www, where Vercel takes over and runs your edge logic exactly as designed." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can I still use Vercel Analytics?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Yes. Vercel Analytics, Speed Insights, and Web Analytics all attach to the project, not the hostname. Once www.yourdomain.com is set as primary in Vercel and traffic redirects there, every analytics event is recorded normally. The redirect happens at the network layer before any page renders, so there is no double-counting." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What about Vercel preview deployments?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Untouched. Preview deployments use Vercel-generated subdomains (your-project-git-branch.vercel.app) and never resolve through your apex. ApexToWWW only sees requests to your registered apex domain, so previews, branch deployments, and the production *.vercel.app URL all keep working." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Does this preserve Vercel's SSL certificate?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Yes, on both ends. Vercel continues to issue and renew its own Let's Encrypt certificate for www.yourdomain.com. ApexToWWW issues a separate Let's Encrypt certificate for the apex automatically on first request. After the 301 the browser is on Vercel's certificate. No mixed content, no manual cert management." }
                 }
             ]
         }
@@ -141,6 +170,34 @@
                     </div>
                     <p class="text-base sm:text-lg text-gray-800 dark:text-gray-200 leading-relaxed mb-0">
                         Vercel serves custom domains via <code class="font-mono text-sm bg-white/60 dark:bg-black/30 px-1.5 py-0.5 rounded">cname.vercel-dns.com</code>, which requires a CNAME record. But apex domains (<code class="font-mono text-sm bg-white/60 dark:bg-black/30 px-1.5 py-0.5 rounded">yourdomain.com</code>) can&rsquo;t use CNAME per RFC 1034. The fix: point <code class="font-mono text-sm bg-white/60 dark:bg-black/30 px-1.5 py-0.5 rounded">www</code> to Vercel via CNAME, then redirect apex to www using ApexToWWW. Free, two DNS records, auto SSL.
+                    </p>
+                </aside>
+
+                <!-- Quick reference card -->
+                <aside class="bg-gray-900 dark:bg-gray-950 rounded-2xl p-6 sm:p-8 my-8 shadow-lg border border-gray-800">
+                    <div class="flex items-center gap-2 mb-5">
+                        <i class="fas fa-server text-blue-400"></i>
+                        <span class="text-xs font-bold tracking-widest uppercase text-blue-400">DNS Records &mdash; Vercel + ApexToWWW</span>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="grid grid-cols-12 gap-3 items-center">
+                            <span class="col-span-2 text-xs font-semibold text-gray-400 uppercase tracking-wide">A</span>
+                            <code class="col-span-2 text-xs font-mono text-gray-400">@</code>
+                            <code class="col-span-8 text-sm font-mono text-green-400 break-all">65.21.184.101 <span class="text-gray-500">&larr; ApexToWWW (replaces 76.76.21.21)</span></code>
+                        </div>
+                        <div class="grid grid-cols-12 gap-3 items-center">
+                            <span class="col-span-2 text-xs font-semibold text-gray-400 uppercase tracking-wide">AAAA</span>
+                            <code class="col-span-2 text-xs font-mono text-gray-400">@</code>
+                            <code class="col-span-8 text-sm font-mono text-green-400 break-all">2a01:4f9:c012:a304::1 <span class="text-gray-500">&larr; ApexToWWW (IPv6)</span></code>
+                        </div>
+                        <div class="grid grid-cols-12 gap-3 items-center">
+                            <span class="col-span-2 text-xs font-semibold text-gray-400 uppercase tracking-wide">CNAME</span>
+                            <code class="col-span-2 text-xs font-mono text-gray-400">www</code>
+                            <code class="col-span-8 text-sm font-mono text-blue-400 break-all">cname.vercel-dns.com <span class="text-gray-500">&larr; Vercel</span></code>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-5 leading-relaxed">
+                        Result: <code class="font-mono text-blue-400">yourdomain.com</code> &rarr; HTTP 301 &rarr; <code class="font-mono text-blue-400">https://www.yourdomain.com</code> (Vercel). Free, auto-SSL, IPv6, HTTP/3.
                     </p>
                 </aside>
 
@@ -292,7 +349,7 @@
                     <a href="/#get-started" class="inline-flex items-center px-6 py-3 rounded-lg text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
                         Get Started <i class="fas fa-arrow-right ml-2"></i>
                     </a>
-                    <p class="text-sm text-gray-500 dark:text-gray-500 mt-4">Questions? Email <a href="mailto:hi@apextowww.com" class="text-blue-600 dark:text-blue-400 underline">hi@apextowww.com</a></p>
+                    <p class="text-sm text-gray-500 dark:text-gray-500 mt-4">Questions? Email <a href="#" data-email-user="hi" data-email-domain="apextowww.com" class="js-email text-blue-600 dark:text-blue-400 underline">hi@apextowww.com</a></p>
                 </div>
             </div>
         </article>
@@ -323,6 +380,14 @@
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         }
+    </script>
+    <!-- Construct mailto: links at runtime so Cloudflare email obfuscation does not 404 crawlers -->
+    <script>
+        document.querySelectorAll('a.js-email').forEach(function(a){
+            var addr = a.dataset.emailUser + '\u0040' + a.dataset.emailDomain;
+            a.setAttribute('href', 'mail' + 'to:' + addr);
+            if (a.textContent.trim() === '') a.textContent = addr;
+        });
     </script>
 </body>
 </html>

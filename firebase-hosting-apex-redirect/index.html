@@ -3,32 +3,26 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Firebase Hosting Apex Domain Redirect: Free Naked Domain Setup</title>
-        <meta name="description" content="Redirect your apex domain to your Firebase Hosting site. Works with Firebase's A records or as a CNAME-based alternative. Free SSL, 2 DNS records, no signup." />
+        <title>Firebase Hosting Apex&rarr;WWW Redirect — Free, 2 DNS Records</title>
+        <meta name="description" content="Redirect your apex domain to a Firebase Hosting site in 60 seconds. Free 301, auto-SSL, IPv6, HTTP/3. CNAME alternative — 2 DNS records, no signup." />
         <meta name="keywords" content="firebase hosting apex domain, firebase naked domain redirect, firebase custom domain www, firebase apex record, firebase hosting root domain, firebase 151.101" />
         <link rel="canonical" href="https://www.apextowww.com/firebase-hosting-apex-redirect/" />
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://www.apextowww.com/firebase-hosting-apex-redirect/" />
-        <meta property="og:title" content="Firebase Hosting Apex Domain Redirect: Free Naked Domain Setup" />
-        <meta property="og:description" content="Redirect your apex domain to your Firebase Hosting site. Works with Firebase's A records or as a CNAME-based alternative. Free SSL, 2 DNS records, no signup." />
+        <meta property="og:title" content="Firebase Hosting Apex&rarr;WWW Redirect — Free, 2 DNS Records" />
+        <meta property="og:description" content="Redirect your apex domain to a Firebase Hosting site in 60 seconds. Free 301, auto-SSL, IPv6, HTTP/3. CNAME alternative — 2 DNS records, no signup." />
         <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
         <meta property="og:site_name" content="ApexToWWW" />
 
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Firebase Hosting Apex Domain Redirect: Free Naked Domain Setup" />
-        <meta name="twitter:description" content="Redirect your apex domain to your Firebase Hosting site. Free SSL, 2 DNS records, no signup." />
+        <meta name="twitter:title" content="Firebase Hosting Apex&rarr;WWW Redirect — Free, 2 DNS Records" />
+        <meta name="twitter:description" content="Redirect your apex domain to a Firebase Hosting site in 60 seconds. Free 301, auto-SSL, IPv6, HTTP/3. 2 records, no signup." />
         <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
 
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                darkMode: 'class',
-                theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] } } }
-            }
-        </script>
+        <link rel="stylesheet" href="/styles.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -291,7 +285,7 @@ A    @    151.101.65.195</code></pre>
                 <a href="/#get-started" class="inline-flex items-center px-6 py-3 rounded-lg text-base font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
                     Get Started Now <i class="fas fa-arrow-right ml-2"></i>
                 </a>
-                <p class="text-xs text-gray-500 mt-4">Questions? Email <a href="mailto:hi@apextowww.com" class="text-blue-600 dark:text-blue-400 underline">hi@apextowww.com</a></p>
+                <p class="text-xs text-gray-500 mt-4">Questions? Email <a href="#" data-email-user="hi" data-email-domain="apextowww.com" class="js-email text-blue-600 dark:text-blue-400 underline">hi@apextowww.com</a></p>
             </div>
         </article>
     </main>
@@ -320,6 +314,14 @@ A    @    151.101.65.195</code></pre>
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         }
+    </script>
+    <!-- Construct mailto: links at runtime so Cloudflare email obfuscation does not 404 crawlers -->
+    <script>
+        document.querySelectorAll('a.js-email').forEach(function(a){
+            var addr = a.dataset.emailUser + '\u0040' + a.dataset.emailDomain;
+            a.setAttribute('href', 'mail' + 'to:' + addr);
+            if (a.textContent.trim() === '') a.textContent = addr;
+        });
     </script>
 </body>
 </html>

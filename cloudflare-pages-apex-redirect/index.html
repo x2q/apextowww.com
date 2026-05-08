@@ -3,32 +3,26 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Cloudflare Pages Apex Domain Redirect: Free apex&rarr;www Setup | ApexToWWW</title>
-        <meta name="description" content="Redirect your apex domain to your Cloudflare Pages site. Works even when Cloudflare isn't your DNS provider. Free SSL, two DNS records, no signup." />
+        <title>Cloudflare Pages Apex&rarr;WWW Redirect — Free, 2 DNS Records</title>
+        <meta name="description" content="Redirect your apex domain to a Cloudflare Pages site in 60 seconds. Free 301 redirect, automatic Let's Encrypt SSL, IPv6, HTTP/3. Works without Cloudflare DNS." />
         <meta name="keywords" content="cloudflare pages apex domain, cloudflare pages naked domain, cloudflare pages custom domain www, cname flattening, pages.dev custom domain, cloudflare pages root domain" />
         <link rel="canonical" href="https://www.apextowww.com/cloudflare-pages-apex-redirect/" />
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://www.apextowww.com/cloudflare-pages-apex-redirect/" />
-        <meta property="og:title" content="Cloudflare Pages Apex Domain Redirect: Free apex&rarr;www Setup" />
-        <meta property="og:description" content="Redirect your apex domain to your Cloudflare Pages site. Works even when Cloudflare isn't your DNS provider. Free SSL, two DNS records, no signup." />
+        <meta property="og:title" content="Cloudflare Pages Apex&rarr;WWW Redirect — Free, 2 DNS Records" />
+        <meta property="og:description" content="Redirect your apex domain to a Cloudflare Pages site in 60 seconds. Free 301 redirect, automatic Let's Encrypt SSL, IPv6, HTTP/3. Works without Cloudflare DNS." />
         <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
         <meta property="og:site_name" content="ApexToWWW" />
 
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Cloudflare Pages Apex Domain Redirect: Free apex&rarr;www Setup" />
-        <meta name="twitter:description" content="Redirect your apex domain to your Cloudflare Pages site. Works even when Cloudflare isn't your DNS provider. Free SSL, two DNS records, no signup." />
+        <meta name="twitter:title" content="Cloudflare Pages Apex&rarr;WWW Redirect — Free, 2 DNS Records" />
+        <meta name="twitter:description" content="Redirect your apex domain to a Cloudflare Pages site in 60 seconds. Free 301 redirect, automatic Let's Encrypt SSL, IPv6, HTTP/3. Works without Cloudflare DNS." />
         <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
 
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                darkMode: 'class',
-                theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] } } }
-            }
-        </script>
+        <link rel="stylesheet" href="/styles.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -294,7 +288,7 @@
                     <a href="/#get-started" class="inline-flex items-center px-6 py-3 rounded-lg text-base font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
                         Get Started Free <i class="fas fa-arrow-right ml-2"></i>
                     </a>
-                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-4 mb-0">Questions? <a href="mailto:hi@apextowww.com" class="text-blue-600 dark:text-blue-400">hi@apextowww.com</a></p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-4 mb-0">Questions? <a href="#" data-email-user="hi" data-email-domain="apextowww.com" class="js-email text-blue-600 dark:text-blue-400">hi@apextowww.com</a></p>
                 </div>
 
             </div>
@@ -315,7 +309,7 @@
                     <a href="/#get-started" class="text-gray-400 hover:text-white transition">Setup</a>
                     <a href="/#faq" class="text-gray-400 hover:text-white transition">FAQ</a>
                     <a href="/blog/" class="text-gray-400 hover:text-white transition">Blog</a>
-                    <a href="mailto:hi@apextowww.com" class="text-gray-400 hover:text-white transition">Contact</a>
+                    <a href="#" data-email-user="hi" data-email-domain="apextowww.com" class="js-email text-gray-400 hover:text-white transition">Contact</a>
                 </nav>
                 <p class="text-gray-500 text-sm">&copy; <script>document.write(new Date().getFullYear())</script> ApexToWWW. All rights reserved.</p>
             </div>
@@ -326,6 +320,14 @@
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         }
+    </script>
+    <!-- Construct mailto: links at runtime so Cloudflare email obfuscation does not 404 crawlers -->
+    <script>
+        document.querySelectorAll('a.js-email').forEach(function(a){
+            var addr = a.dataset.emailUser + '\u0040' + a.dataset.emailDomain;
+            a.setAttribute('href', 'mail' + 'to:' + addr);
+            if (a.textContent.trim() === '') a.textContent = addr;
+        });
     </script>
 </body>
 </html>

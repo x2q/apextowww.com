@@ -3,32 +3,26 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Heroku Apex Domain Redirect: Fix the Naked Domain Problem (Free)</title>
-        <meta name="description" content="Heroku requires www subdomain for custom domains. Redirect your apex domain to www in 2 DNS records — free, automatic SSL, no signup." />
+        <title>Heroku Apex&rarr;WWW Redirect — Free, 2 DNS Records, Auto-SSL</title>
+        <meta name="description" content="Heroku needs a www subdomain. Redirect your apex domain to www in 60 seconds — 2 DNS records, free 301, auto Let's Encrypt SSL, IPv6, HTTP/3. No signup." />
         <meta name="keywords" content="heroku apex domain, heroku naked domain, heroku custom domain www, heroku apex record, heroku root domain, heroku dns target, herokudns.com CNAME" />
         <link rel="canonical" href="https://www.apextowww.com/heroku-apex-domain-redirect/" />
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://www.apextowww.com/heroku-apex-domain-redirect/" />
-        <meta property="og:title" content="Heroku Apex Domain Redirect: Fix the Naked Domain Problem (Free)" />
-        <meta property="og:description" content="Heroku requires www subdomain for custom domains. Redirect your apex domain to www in 2 DNS records — free, automatic SSL, no signup." />
+        <meta property="og:title" content="Heroku Apex&rarr;WWW Redirect — Free, 2 DNS Records, Auto-SSL" />
+        <meta property="og:description" content="Heroku needs a www subdomain. Redirect your apex domain to www in 60 seconds — 2 DNS records, free 301, auto Let's Encrypt SSL, IPv6, HTTP/3. No signup." />
         <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
         <meta property="og:site_name" content="ApexToWWW" />
 
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Heroku Apex Domain Redirect: Fix the Naked Domain Problem (Free)" />
-        <meta name="twitter:description" content="Heroku requires www subdomain for custom domains. Redirect your apex domain to www in 2 DNS records — free, automatic SSL, no signup." />
+        <meta name="twitter:title" content="Heroku Apex&rarr;WWW Redirect — Free, 2 DNS Records, Auto-SSL" />
+        <meta name="twitter:description" content="Heroku needs a www subdomain. Redirect your apex domain to www in 60 seconds — 2 DNS records, free 301, auto Let's Encrypt SSL, IPv6, HTTP/3. No signup." />
         <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
 
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                darkMode: 'class',
-                theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] } } }
-            }
-        </script>
+        <link rel="stylesheet" href="/styles.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -388,7 +382,7 @@ Location: https://www.yourdomain.com/</code></pre>
                     <a href="/#get-started" class="text-gray-400 hover:text-white transition">Setup</a>
                     <a href="/#faq" class="text-gray-400 hover:text-white transition">FAQ</a>
                     <a href="/blog/" class="text-gray-400 hover:text-white transition">Blog</a>
-                    <a href="mailto:hi@apextowww.com" class="text-gray-400 hover:text-white transition">Contact</a>
+                    <a href="#" data-email-user="hi" data-email-domain="apextowww.com" class="js-email text-gray-400 hover:text-white transition">Contact</a>
                 </nav>
                 <p class="text-gray-500 text-sm">&copy; <script>document.write(new Date().getFullYear())</script> ApexToWWW. All rights reserved.</p>
             </div>
@@ -399,6 +393,14 @@ Location: https://www.yourdomain.com/</code></pre>
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         }
+    </script>
+    <!-- Construct mailto: links at runtime so Cloudflare email obfuscation does not 404 crawlers -->
+    <script>
+        document.querySelectorAll('a.js-email').forEach(function(a){
+            var addr = a.dataset.emailUser + '\u0040' + a.dataset.emailDomain;
+            a.setAttribute('href', 'mail' + 'to:' + addr);
+            if (a.textContent.trim() === '') a.textContent = addr;
+        });
     </script>
 </body>
 </html>

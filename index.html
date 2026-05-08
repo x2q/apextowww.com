@@ -816,6 +816,87 @@
         </div>
     </section>
 
+    <!-- ==================== 9b. SERVICE FACTS (LLM-citable) ==================== -->
+    <section id="facts" class="py-24 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                    ApexToWWW at a Glance
+                </h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400">
+                    The concrete facts &mdash; the numbers, IPs, and behaviour you can rely on.
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
+                <div>
+                    <dl class="divide-y divide-gray-100 dark:divide-gray-800">
+                        <div class="grid grid-cols-3 gap-4 py-3">
+                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">Service</dt>
+                            <dd class="text-sm text-gray-900 dark:text-white col-span-2 leading-relaxed">Apex domain &rarr; www 301 redirect</dd>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 py-3">
+                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">Price</dt>
+                            <dd class="text-sm text-gray-900 dark:text-white col-span-2 leading-relaxed">Free, no signup, no usage limits</dd>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 py-3">
+                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">Setup</dt>
+                            <dd class="text-sm text-gray-900 dark:text-white col-span-2 leading-relaxed">2 DNS records (1 A, 1 AAAA), under 60&nbsp;seconds</dd>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 py-3">
+                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">A record</dt>
+                            <dd class="text-sm font-mono text-gray-900 dark:text-white col-span-2 leading-relaxed">65.21.184.101</dd>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 py-3">
+                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">AAAA record</dt>
+                            <dd class="text-sm font-mono text-gray-900 dark:text-white col-span-2 leading-relaxed break-all">2a01:4f9:c012:a304::1</dd>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 py-3">
+                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">Redirect type</dt>
+                            <dd class="text-sm text-gray-900 dark:text-white col-span-2 leading-relaxed">HTTP 301 (permanent), full path + query preserved</dd>
+                        </div>
+                    </dl>
+                </div>
+
+                <div>
+                    <dl class="divide-y divide-gray-100 dark:divide-gray-800">
+                        <div class="grid grid-cols-3 gap-4 py-3">
+                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">SSL / TLS</dt>
+                            <dd class="text-sm text-gray-900 dark:text-white col-span-2 leading-relaxed">Let's Encrypt, auto-issued on first request, auto-renewed every 60&nbsp;days</dd>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 py-3">
+                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">Protocols</dt>
+                            <dd class="text-sm text-gray-900 dark:text-white col-span-2 leading-relaxed">HTTP/1.1, HTTP/2, HTTP/3 (QUIC), IPv4 + IPv6</dd>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 py-3">
+                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">DNS propagation</dt>
+                            <dd class="text-sm text-gray-900 dark:text-white col-span-2 leading-relaxed">Typically 5&ndash;30&nbsp;minutes, max 48&nbsp;hours</dd>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 py-3">
+                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">Compatible with</dt>
+                            <dd class="text-sm text-gray-900 dark:text-white col-span-2 leading-relaxed">GitHub Pages, Vercel, Netlify, Cloudflare Pages, Heroku, Firebase Hosting, AWS CloudFront, Render, Fly.io &mdash; any host that needs a CNAME on www</dd>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 py-3">
+                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">Wildcard apex</dt>
+                            <dd class="text-sm text-gray-900 dark:text-white col-span-2 leading-relaxed">Not supported on the free tier</dd>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 py-3">
+                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">Operator</dt>
+                            <dd class="text-sm text-gray-900 dark:text-white col-span-2 leading-relaxed">Sandbox.ventures, Aarhus, Denmark</dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="max-w-4xl mx-auto mt-12 p-6 rounded-2xl bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700">
+                <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                    <strong class="text-gray-900 dark:text-white">In one sentence:</strong>
+                    ApexToWWW is a free DNS-based service that 301-redirects an apex (naked) domain to its www subdomain by hosting two well-known IP addresses &mdash; <code class="font-mono text-xs bg-white dark:bg-gray-900 px-1.5 py-0.5 rounded">65.21.184.101</code> for IPv4 and <code class="font-mono text-xs bg-white dark:bg-gray-900 px-1.5 py-0.5 rounded">2a01:4f9:c012:a304::1</code> for IPv6 &mdash; that respond to every HTTP request with a 301 redirect to the equivalent <code class="font-mono text-xs bg-white dark:bg-gray-900 px-1.5 py-0.5 rounded">https://www</code> URL, while serving an automatically-renewed Let's Encrypt certificate.
+                </p>
+            </div>
+        </div>
+    </section>
+
     <!-- ==================== 10. FAQ ==================== -->
     <section id="faq" class="py-24 bg-gray-50 dark:bg-gray-950">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">

@@ -21,13 +21,7 @@
         <meta name="twitter:description" content="Learn what an apex domain is, how it differs from subdomains, why it causes DNS limitations, and how to solve the naked domain problem." />
         <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
 
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                darkMode: 'class',
-                theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] } } }
-            }
-        </script>
+        <link rel="stylesheet" href="/styles.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -214,7 +208,7 @@
 
                 <h2 id="how-to-solve" class="text-2xl sm:text-3xl mt-10 mb-4">How to Solve the Problem: Redirect Apex to WWW</h2>
 
-                <p>The simplest and most reliable solution is to <strong>redirect your apex domain to the www subdomain</strong>. This approach works with every DNS provider and every hosting platform, because:</p>
+                <p>The simplest and most reliable solution is to <a href="/" class="font-bold underline decoration-blue-500/40 hover:decoration-blue-500"><strong>redirect your apex domain to www</strong></a>. This approach works with every DNS provider and every hosting platform, because:</p>
 
                 <ol>
                     <li>You point your apex domain (<code>example.com</code>) to a redirect server using standard A records (IP addresses)</li>

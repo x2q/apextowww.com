@@ -3,32 +3,26 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Netlify Apex Domain Redirect: Free Setup for Naked Domains</title>
-        <meta name="description" content="Redirect your apex domain to your Netlify site. Works with Netlify DNS or external DNS, free SSL, 2 DNS records. Solves the CNAME-at-root problem." />
+        <title>Netlify Apex&rarr;WWW Redirect — Free, 2 DNS Records, Auto-SSL</title>
+        <meta name="description" content="Redirect your apex domain to a Netlify site in 60 seconds. Free 301, auto-SSL, IPv6, HTTP/3. Works with Netlify DNS or any external DNS — 2 records, no signup." />
         <meta name="keywords" content="netlify apex domain, netlify naked domain, netlify custom domain www, apex-loadbalancer.netlify.com, netlify root domain, netlify DNS apex" />
         <link rel="canonical" href="https://www.apextowww.com/netlify-apex-domain-redirect/" />
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://www.apextowww.com/netlify-apex-domain-redirect/" />
-        <meta property="og:title" content="Netlify Apex Domain Redirect: Free Setup for Naked Domains" />
-        <meta property="og:description" content="Redirect your apex domain to your Netlify site. Works with Netlify DNS or external DNS, free SSL, 2 DNS records. Solves the CNAME-at-root problem." />
+        <meta property="og:title" content="Netlify Apex&rarr;WWW Redirect — Free, 2 DNS Records, Auto-SSL" />
+        <meta property="og:description" content="Redirect your apex domain to a Netlify site in 60 seconds. Free 301, auto-SSL, IPv6, HTTP/3. Works with Netlify DNS or any external DNS — 2 records, no signup." />
         <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
         <meta property="og:site_name" content="ApexToWWW" />
 
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Netlify Apex Domain Redirect: Free Setup for Naked Domains" />
-        <meta name="twitter:description" content="Redirect your apex domain to your Netlify site. Works with Netlify DNS or external DNS, free SSL, 2 DNS records." />
+        <meta name="twitter:title" content="Netlify Apex&rarr;WWW Redirect — Free, 2 DNS Records, Auto-SSL" />
+        <meta name="twitter:description" content="Redirect your apex domain to a Netlify site in 60 seconds. Free 301, auto-SSL, IPv6, HTTP/3. 2 records, no signup." />
         <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
 
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                darkMode: 'class',
-                theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] } } }
-            }
-        </script>
+        <link rel="stylesheet" href="/styles.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -313,7 +307,7 @@
                     <a href="/#get-started" class="inline-flex items-center px-6 py-3 rounded-lg text-base font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
                         Get Started Now <i class="fas fa-arrow-right ml-2"></i>
                     </a>
-                    <p class="text-xs text-gray-500 dark:text-gray-500 mt-4 mb-0">Questions? Email <a href="mailto:hi@apextowww.com" class="text-blue-600 dark:text-blue-400">hi@apextowww.com</a></p>
+                    <p class="text-xs text-gray-500 dark:text-gray-500 mt-4 mb-0">Questions? Email <a href="#" data-email-user="hi" data-email-domain="apextowww.com" class="js-email text-blue-600 dark:text-blue-400">hi@apextowww.com</a></p>
                 </div>
 
             </div>
@@ -334,7 +328,7 @@
                     <a href="/#get-started" class="text-gray-400 hover:text-white transition">Setup</a>
                     <a href="/#faq" class="text-gray-400 hover:text-white transition">FAQ</a>
                     <a href="/blog/" class="text-gray-400 hover:text-white transition">Blog</a>
-                    <a href="mailto:hi@apextowww.com" class="text-gray-400 hover:text-white transition">Contact</a>
+                    <a href="#" data-email-user="hi" data-email-domain="apextowww.com" class="js-email text-gray-400 hover:text-white transition">Contact</a>
                 </nav>
                 <p class="text-gray-500 text-sm">&copy; <script>document.write(new Date().getFullYear())</script> ApexToWWW. All rights reserved.</p>
             </div>
@@ -345,6 +339,14 @@
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         }
+    </script>
+    <!-- Construct mailto: links at runtime so Cloudflare email obfuscation does not 404 crawlers -->
+    <script>
+        document.querySelectorAll('a.js-email').forEach(function(a){
+            var addr = a.dataset.emailUser + '\u0040' + a.dataset.emailDomain;
+            a.setAttribute('href', 'mail' + 'to:' + addr);
+            if (a.textContent.trim() === '') a.textContent = addr;
+        });
     </script>
 </body>
 </html>
