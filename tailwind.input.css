@@ -1,7 +1,13 @@
 @import "tailwindcss";
 
 @source "./index.html";
+@source "./blog/index.html";
 @source "./blog/**/*.html";
+@source "./cloudflare-pages-apex-redirect/index.html";
+@source "./vercel-apex-domain-redirect/index.html";
+@source "./heroku-apex-domain-redirect/index.html";
+@source "./netlify-apex-domain-redirect/index.html";
+@source "./firebase-hosting-apex-redirect/index.html";
 
 @custom-variant dark (&:where(.dark, .dark *));
 

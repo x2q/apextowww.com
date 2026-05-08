@@ -22,13 +22,7 @@
         <meta name="twitter:description" content="Understand the technical differences between apex domains and www subdomains, why it matters for CDNs and hosting, and which one to choose." />
         <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
 
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                darkMode: 'class',
-                theme: { extend: { fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] } } }
-            }
-        </script>
+        <link rel="stylesheet" href="/styles.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -206,17 +200,17 @@
                     </div>
                 </div>
 
-                <p>If you use any of these platforms (or similar PaaS/Jamstack providers), configuring <code>www</code> as your primary domain and redirecting the apex to it is the path of least friction.</p>
+                <p>If you use any of these platforms (or similar PaaS/Jamstack providers), configuring <code>www</code> as your primary domain and <a href="/" class="font-semibold underline decoration-blue-500/40 hover:decoration-blue-500">redirecting the apex domain to www</a> is the path of least friction.</p>
 
                 <h2 class="text-2xl sm:text-3xl mt-12 mb-4" id="how-to-redirect">How to Redirect Your Apex Domain to WWW</h2>
                 <p>Once you decide to use <code>www</code> as your canonical domain, you need to ensure that visitors who type the bare domain still reach your site. The best approach is a <strong>301 permanent redirect</strong> from the apex to www. This tells browsers and search engines that the www version is the definitive address.</p>
-                <p>With <a href="https://www.apextowww.com/">ApexToWWW</a>, setting up this redirect takes just two DNS records and no account or configuration:</p>
+                <p>With <a href="/">ApexToWWW</a>, setting up this <a href="/" class="font-semibold underline decoration-blue-500/40 hover:decoration-blue-500">free apex&rarr;www redirect</a> takes just two DNS records and no account or configuration:</p>
 
                 <div class="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 my-8">
                     <p class="font-semibold text-gray-900 dark:text-white mb-3">Add these records at your DNS provider:</p>
                     <div class="font-mono text-sm space-y-2">
-                        <p><span class="text-green-600 dark:text-green-400">@</span> &nbsp; A &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="text-blue-600 dark:text-blue-400">65.109.111.88</span></p>
-                        <p><span class="text-green-600 dark:text-green-400">@</span> &nbsp; AAAA &nbsp;&nbsp;&nbsp; <span class="text-blue-600 dark:text-blue-400">2a01:4f9:5a:3e92::2</span></p>
+                        <p><span class="text-green-600 dark:text-green-400">@</span> &nbsp; A &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="text-blue-600 dark:text-blue-400">65.21.184.101</span></p>
+                        <p><span class="text-green-600 dark:text-green-400">@</span> &nbsp; AAAA &nbsp;&nbsp;&nbsp; <span class="text-blue-600 dark:text-blue-400">2a01:4f9:c012:a304::1</span></p>
                     </div>
                 </div>
 
