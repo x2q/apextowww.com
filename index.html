@@ -79,6 +79,40 @@
         <script type="application/ld+json">
         {
             "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": "How to Redirect Your Apex Domain to WWW",
+            "description": "Set up a free 301 redirect from your apex (naked) domain to your www subdomain using two DNS records. Works with GitHub Pages, Vercel, Netlify, Cloudflare Pages, Heroku, Firebase, and any host that needs a CNAME on www. Automatic Let's Encrypt SSL.",
+            "totalTime": "PT2M",
+            "estimatedCost": { "@type": "MonetaryAmount", "currency": "USD", "value": "0" },
+            "tool": [
+                { "@type": "HowToTool", "name": "Your DNS provider's control panel (Route53, Cloudflare, GoDaddy, Namecheap, etc.)" }
+            ],
+            "step": [
+                {
+                    "@type": "HowToStep",
+                    "name": "Add an A record on the apex",
+                    "text": "At your DNS provider, add an A record with host @ (the apex) pointing to 65.21.184.101.",
+                    "url": "https://www.apextowww.com/#get-started"
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Add an AAAA record on the apex",
+                    "text": "Add an AAAA record with host @ pointing to 2a01:4f9:c012:a304::1 so IPv6 visitors get the same redirect.",
+                    "url": "https://www.apextowww.com/#get-started"
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Verify the redirect",
+                    "text": "After DNS propagates (typically 5-30 minutes), run curl -I http://yourdomain.com and confirm a 301 response with Location: https://www.yourdomain.com/. SSL is provisioned automatically on the first request via Let's Encrypt.",
+                    "url": "https://www.apextowww.com/#get-started"
+                }
+            ]
+        }
+        </script>
+
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
             "@type": "WebApplication",
             "name": "ApexToWWW",
             "url": "https://www.apextowww.com",
