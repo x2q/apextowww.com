@@ -255,16 +255,46 @@
                     <p class="m-0 flex items-start gap-3"><i class="fas fa-utensils text-amber-600 mt-1"></i> <span><strong>Eat your own dogfood:</strong> apextowww.com itself runs on Cloudflare Pages. There's a CNAME on <code>www</code> pointing to <code>apextowww-73y.pages.dev</code>, and the apex redirect is handled by the same service we ship to you. The setup on this page is exactly what we do.</span></p>
                 </div>
 
+                <h2 id="reverse-direction">Wanted the Opposite? Cloudflare Pages Redirect WWW to Apex</h2>
+
+                <p>If you landed here looking to redirect <code>www.yourdomain.com</code> &rarr; <code>yourdomain.com</code> (the reverse direction), the setup is different &mdash; and Cloudflare gives you better tools than we do for that case, because the canonical destination is the apex.</p>
+
+                <p>You need two things:</p>
+
+                <ol class="space-y-3 mb-6">
+                    <li><strong>Resolve the apex to your Pages project.</strong> Add a CNAME on <code>@</code> pointing to <code>your-project.pages.dev</code>, with Cloudflare DNS doing CNAME flattening (this is automatic when DNS is on Cloudflare). Or, if your DNS provider supports ALIAS/ANAME records, point ALIAS <code>@</code> at <code>your-project.pages.dev</code>.</li>
+                    <li><strong>Redirect www to the apex with a Cloudflare rule.</strong> The cleanest path is a Single Redirect Rule (under <em>Rules &rarr; Redirect Rules</em>):
+                        <ul class="mt-3 mb-2">
+                            <li>Match: <code>(http.host eq "www.yourdomain.com")</code></li>
+                            <li>Action: Dynamic redirect to <code>concat("https://yourdomain.com", http.request.uri.path)</code></li>
+                            <li>Status code: 301</li>
+                        </ul>
+                    On the legacy free plan you can use Page Rules instead with <code>www.yourdomain.com/*</code> &rarr; <code>https://yourdomain.com/$1</code>, 301.
+                    </li>
+                </ol>
+
+                <p>If you prefer code, a four-line Cloudflare Worker bound to <code>www.yourdomain.com/*</code> does the same job:</p>
+
+                <pre class="text-sm bg-gray-900 text-gray-100 rounded-xl p-4 overflow-x-auto"><code>export default {
+  fetch(req) {
+    const url = new URL(req.url);
+    url.hostname = "yourdomain.com";
+    return Response.redirect(url.toString(), 301);
+  }
+};</code></pre>
+
+                <p class="text-sm text-gray-600 dark:text-gray-400"><strong>Should you pick apex or www as canonical?</strong> Both work. <strong>www</strong> gives you CNAME-based routing, cookie isolation between subdomains, and the path of least friction on every modern host. <strong>Apex</strong> is shorter and feels more modern, at the cost of needing ALIAS/ANAME or CNAME flattening, and the historical "cookie bleed" issue where cookies on the apex are sent to every subdomain. For most projects the apex&rarr;www direction is the safer default &mdash; which is what the rest of this page describes &mdash; but if you really want www&rarr;apex on Cloudflare Pages, the rule above is the right answer.</p>
+
                 <h2 id="other-platforms">Other Platforms</h2>
 
                 <p>The apex&rarr;www pattern is identical across most modern hosts. Same two records on the apex, only the <code>www</code> CNAME target changes:</p>
 
                 <ul class="space-y-2 mb-6">
-                    <li><a href="/vercel-apex-redirect/">Vercel apex domain redirect</a></li>
-                    <li><a href="/netlify-apex-redirect/">Netlify naked domain setup</a></li>
-                    <li><a href="/heroku-apex-redirect/">Heroku custom apex domain</a></li>
-                    <li><a href="/github-pages-apex-redirect/">GitHub Pages apex redirect</a></li>
-                    <li><a href="/firebase-apex-redirect/">Firebase Hosting apex domain</a></li>
+                    <li><a href="/vercel-apex-domain-redirect/">Vercel apex domain redirect</a></li>
+                    <li><a href="/netlify-apex-domain-redirect/">Netlify naked domain setup</a></li>
+                    <li><a href="/heroku-apex-domain-redirect/">Heroku custom apex domain</a></li>
+                    <li><a href="/blog/github-pages-apex-domain-redirect/">GitHub Pages apex redirect</a></li>
+                    <li><a href="/firebase-hosting-apex-redirect/">Firebase Hosting apex domain</a></li>
                 </ul>
 
                 <h2 id="faq">FAQ</h2>

@@ -3,23 +3,23 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Vercel Apex&rarr;WWW Redirect — Free, 76.76.21.21 Alternative</title>
-        <meta name="description" content="Redirect your apex domain to a Vercel app in 60 seconds. Free 301, auto-SSL, IPv6, HTTP/3. Works alongside cname.vercel-dns.com — 2 DNS records, no signup." />
+        <title>Vercel Apex Domain Redirect — Free, 2 DNS Records, Auto-SSL</title>
+        <meta name="description" content="Redirect your Vercel apex domain to www in 60 seconds. Free 301, auto-SSL, IPv6, HTTP/3. Works with cname.vercel-dns.com or replaces 76.76.21.21. 2 DNS records." />
         <meta name="keywords" content="vercel apex domain, vercel naked domain redirect, cname.vercel-dns.com, vercel custom domain www, 76.76.21.21 alternative, vercel root domain" />
         <link rel="canonical" href="https://www.apextowww.com/vercel-apex-domain-redirect/" />
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://www.apextowww.com/vercel-apex-domain-redirect/" />
-        <meta property="og:title" content="Vercel Apex&rarr;WWW Redirect — Free, 76.76.21.21 Alternative" />
-        <meta property="og:description" content="Redirect your apex domain to a Vercel app in 60 seconds. Free 301, auto-SSL, IPv6, HTTP/3. Works alongside cname.vercel-dns.com — 2 DNS records, no signup." />
+        <meta property="og:title" content="Vercel Apex Domain Redirect — Free, 2 DNS Records, Auto-SSL" />
+        <meta property="og:description" content="Redirect your Vercel apex domain to www in 60 seconds. Free 301, auto-SSL, IPv6, HTTP/3. Works with cname.vercel-dns.com or replaces 76.76.21.21. 2 DNS records." />
         <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
         <meta property="og:site_name" content="ApexToWWW" />
 
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Vercel Apex&rarr;WWW Redirect — Free, 76.76.21.21 Alternative" />
-        <meta name="twitter:description" content="Redirect your apex domain to a Vercel app in 60 seconds. Free 301, auto-SSL, IPv6, HTTP/3. Works alongside cname.vercel-dns.com — 2 DNS records, no signup." />
+        <meta name="twitter:title" content="Vercel Apex Domain Redirect — Free, 2 DNS Records, Auto-SSL" />
+        <meta name="twitter:description" content="Redirect your Vercel apex domain to www in 60 seconds. Free 301, auto-SSL, IPv6, HTTP/3. Works with cname.vercel-dns.com or replaces 76.76.21.21. 2 DNS records." />
         <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
 
         <link rel="stylesheet" href="/styles.css" />
@@ -314,15 +314,51 @@
 
                     <p>The redirect path is what most production Vercel sites end up doing once they outgrow the quick-start A record.</p>
 
+                    <!-- Reverse direction -->
+                    <h2 id="reverse-direction">Wanted the Opposite? Vercel Redirect WWW to Apex Domain</h2>
+
+                    <p>If you landed here looking for <code>www.yourdomain.com</code> &rarr; <code>yourdomain.com</code> (the reverse direction), Vercel actually handles that natively &mdash; you do not need ApexToWWW for it. There are two clean ways to do it.</p>
+
+                    <p><strong>Option 1: Vercel's domain settings.</strong> In your project's <em>Settings &rarr; Domains</em>, add both <code>www.yourdomain.com</code> and <code>yourdomain.com</code>. Click the three-dot menu on the www entry and choose <em>Redirect to yourdomain.com</em>. Vercel issues a 308 redirect at the edge before any function runs. Set the apex as <em>Primary Domain</em>. The DNS shape is then: an A record on <code>@</code> pointing to <code>76.76.21.21</code> (Vercel's apex Anycast IP), and a CNAME on <code>www</code> pointing to <code>cname.vercel-dns.com</code>.</p>
+
+                    <p><strong>Option 2: <code>next.config.js</code> redirects (Next.js apps).</strong> Add a host-matched redirect so the rule lives in code:</p>
+
+                    <pre class="text-sm bg-gray-900 text-gray-100 rounded-xl p-4 overflow-x-auto"><code>// next.config.js
+module.exports = {
+  async redirects() {
+    return [{
+      source: '/:path*',
+      has: [{ type: 'host', value: 'www.yourdomain.com' }],
+      destination: 'https://yourdomain.com/:path*',
+      permanent: true,
+    }];
+  },
+};</code></pre>
+
+                    <p><strong>Or with <code>vercel.json</code></strong> for any framework:</p>
+
+                    <pre class="text-sm bg-gray-900 text-gray-100 rounded-xl p-4 overflow-x-auto"><code>// vercel.json
+{
+  "redirects": [{
+    "source": "/:path*",
+    "has": [{ "type": "host", "value": "www.yourdomain.com" }],
+    "destination": "https://yourdomain.com/:path*",
+    "permanent": true
+  }]
+}</code></pre>
+
+                    <p class="text-sm text-gray-600 dark:text-gray-400"><strong>Should you redirect apex&rarr;www or www&rarr;apex?</strong> Both work. <strong>www&rarr;apex</strong> is shorter and a bit more modern, but you stay on <code>76.76.21.21</code> on the apex and lose the geo-aware CNAME routing that <code>cname.vercel-dns.com</code> provides. <strong>Apex&rarr;www</strong> (what the rest of this page describes) keeps your real traffic on Vercel's CNAME-based edge routing &mdash; usually the better choice for production sites. If you specifically want the apex as your canonical URL, the rules above are the right answer.</p>
+
                     <!-- Other platforms -->
                     <h2 id="other-platforms">Works With Other Platforms Too</h2>
 
                     <p>The same two records work for any host that prefers a CNAME on www. If you are not on Vercel, see the platform-specific guides:</p>
 
                     <ul class="space-y-2 mb-6">
-                        <li><a href="/">Heroku apex domain redirect</a> &mdash; Heroku DNS targets need a CNAME, exactly like Vercel.</li>
-                        <li><a href="/">Netlify apex domain redirect</a> &mdash; an alternative to Netlify&rsquo;s load-balancer A record.</li>
-                        <li><a href="/">GitHub Pages apex domain redirect</a> &mdash; for users who want a single canonical www URL.</li>
+                        <li><a href="/cloudflare-pages-apex-redirect/">Cloudflare Pages apex domain redirect</a> &mdash; for the Cloudflare Pages setup with CNAME flattening or external DNS.</li>
+                        <li><a href="/heroku-apex-domain-redirect/">Heroku apex domain redirect</a> &mdash; Heroku DNS targets need a CNAME, exactly like Vercel.</li>
+                        <li><a href="/netlify-apex-domain-redirect/">Netlify apex domain redirect</a> &mdash; an alternative to Netlify&rsquo;s load-balancer A record.</li>
+                        <li><a href="/blog/github-pages-apex-domain-redirect/">GitHub Pages apex domain redirect</a> &mdash; for users who want a single canonical www URL.</li>
                     </ul>
 
                     <!-- FAQ -->
