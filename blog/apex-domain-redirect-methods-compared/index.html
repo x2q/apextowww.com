@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Apex Domain Redirect: 5 Methods Compared (Free &amp; Paid)</title>
+        <meta name="description" content="Compare 5 ways to redirect an apex domain to www: DNS redirect services, Cloudflare Redirect Rules, ALIAS/ANAME records, registrar forwarding, and self-hosted nginx." />
+        <link rel="canonical" href="https://www.apextowww.com/blog/apex-domain-redirect-methods-compared/" />
+
+        <!-- Open Graph -->
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://www.apextowww.com/blog/apex-domain-redirect-methods-compared/" />
+        <meta property="og:title" content="Apex Domain Redirect: 5 Methods Compared (Free &amp; Paid)" />
+        <meta property="og:description" content="Compare 5 ways to redirect an apex domain to www: DNS redirect services, Cloudflare Redirect Rules, ALIAS/ANAME records, registrar forwarding, and self-hosted nginx." />
+        <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
+        <meta property="og:site_name" content="ApexToWWW" />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Apex Domain Redirect: 5 Methods Compared (Free &amp; Paid)" />
+        <meta name="twitter:description" content="Compare 5 ways to redirect an apex domain to www: DNS redirect services, Cloudflare Redirect Rules, ALIAS/ANAME, registrar forwarding, and self-hosted nginx." />
+        <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
+
+        <link rel="stylesheet" href="/styles.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCDJZQW377"></script>
+        <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-NCDJZQW377");</script>
+
+        <!-- Article Structured Data -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Apex Domain Redirect: 5 Methods Compared (Free & Paid)",
+            "description": "Compare 5 ways to redirect an apex domain to www: DNS redirect services, Cloudflare Redirect Rules, ALIAS/ANAME records, registrar forwarding, and self-hosted nginx.",
+            "url": "https://www.apextowww.com/blog/apex-domain-redirect-methods-compared/",
+            "datePublished": "2026-07-02",
+            "dateModified": "2026-07-02",
+            "publisher": {
+                "@type": "Organization",
+                "name": "ApexToWWW",
+                "url": "https://www.apextowww.com"
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "https://www.apextowww.com/blog/apex-domain-redirect-methods-compared/"
+            }
+        }
+        </script>
+
+        <!-- FAQ Schema -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What is the best way to redirect an apex domain to www?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "For most sites, a free DNS-based redirect service like ApexToWWW is the best option: it's standards-compliant, works with any DNS provider, needs no server or account, and returns a proper 301 with automatic SSL. Cloudflare Redirect Rules are a strong alternative if Cloudflare is already your DNS provider." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Is domain forwarding from my registrar good enough?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "It depends on the registrar. Some offer proper 301 redirects with free SSL, which is fine. Others use frame-based forwarding or a meta refresh with no HTTPS support, which hurts SEO and looks broken to visitors. Check whether your registrar's forwarding returns an HTTP 301 status code and provisions an SSL certificate before relying on it." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Do I need to run my own server to redirect an apex domain?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "No. Self-hosted nginx or Apache redirects work but require you to run, patch, and monitor a server plus manage your own TLS certificates. DNS-based redirect services like ApexToWWW and Cloudflare Redirect Rules achieve the identical result -- a 301 to www -- without any server to maintain." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Does the redirect method affect SEO?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Only if it's implemented incorrectly. A proper HTTP 301 (permanent redirect) preserves search ranking signals and is what Google recommends. Frame-based forwarding, meta refresh redirects, and 302 (temporary) redirects can all cause SEO problems -- duplicate content, lost ranking signals, or search engines refusing to consolidate the two URLs. Always verify your chosen method returns a real 301." }
+                }
+            ]
+        }
+        </script>
+    </head>
+<body class="font-sans bg-white dark:bg-gray-950 text-gray-900 dark:text-white antialiased">
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 dark:bg-gray-950/90 backdrop-blur border-b border-gray-200 dark:border-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <a href="/" class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-arrow-right text-white text-sm"></i>
+                    </div>
+                    <span class="text-xl font-bold">ApexToWWW</span>
+                </a>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">Home</a>
+                    <a href="/#features" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">Features</a>
+                    <a href="/#how-it-works" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">How It Works</a>
+                    <a href="/#get-started" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">Setup</a>
+                    <a href="/#faq" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">FAQ</a>
+                    <a href="/blog/" class="text-sm font-semibold text-blue-600 dark:text-blue-400">Blog</a>
+                </nav>
+                <a href="/#get-started" class="hidden sm:inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
+                    Get Started
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="max-w-3xl mx-auto">
+
+            <!-- Breadcrumbs -->
+            <nav aria-label="Breadcrumb" class="mb-8">
+                <ol class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                    <li><a href="/" class="hover:text-gray-900 dark:hover:text-white transition">Home</a></li>
+                    <li><span class="mx-1">/</span></li>
+                    <li><a href="/blog/" class="hover:text-gray-900 dark:hover:text-white transition">Blog</a></li>
+                    <li><span class="mx-1">/</span></li>
+                    <li class="text-gray-900 dark:text-white font-medium">Apex Domain Redirect Methods Compared</li>
+                </ol>
+            </nav>
+
+            <!-- Article Header -->
+            <header class="mb-10">
+                <div class="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400 mb-4">
+                    <time datetime="2026-07-02">July 2, 2026</time>
+                    <span>&middot;</span>
+                    <span>8 min read</span>
+                </div>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">Apex Domain Redirect: 5 Methods Compared</h1>
+                <div class="my-8 p-6 rounded-2xl border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-900/20">
+                    <div class="flex items-center gap-2 mb-2">
+                        <i class="fas fa-bolt text-blue-600 dark:text-blue-400"></i>
+                        <span class="text-sm font-bold uppercase tracking-wide text-blue-600 dark:text-blue-400">TL;DR</span>
+                    </div>
+                    <p class="text-gray-800 dark:text-gray-200 leading-relaxed">
+                        There are five common ways to redirect an apex domain to www: a free DNS redirect service (ApexToWWW), Cloudflare Redirect Rules, ALIAS/ANAME records, registrar-provided domain forwarding, or a self-hosted nginx/Apache redirect. For most sites, a DNS redirect service wins on setup time, SSL handling, and DNS-provider compatibility &mdash; the others make sense in specific situations covered below.
+                    </p>
+                </div>
+                <p class="text-lg text-gray-600 dark:text-gray-400">If you already know you need to redirect an apex domain but aren't sure which method fits your setup, this breaks down the trade-offs of each.</p>
+            </header>
+
+            <!-- Article Body -->
+            <article class="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:before:content-none prose-code:after:content-none">
+
+                <h2 id="the-problem" class="text-2xl sm:text-3xl mt-10 mb-4">Why You Need to Redirect the Apex at All</h2>
+
+                <p>Per <a href="https://www.rfc-editor.org/rfc/rfc1034" target="_blank" rel="noopener">RFC 1034</a>, DNS doesn't allow a CNAME record at the apex (root) of a zone. Most modern hosting platforms &mdash; Vercel, Netlify, GitHub Pages, Cloudflare Pages, Heroku &mdash; hand you a hostname, not an IP address, which means they expect a CNAME. That works fine on <code>www</code> but not on the apex. See <a href="/blog/what-is-an-apex-domain/">What Is an Apex Domain?</a> for the full technical breakdown.</p>
+
+                <p>The standard fix is to serve your site from <code>www</code> (which can take a CNAME) and redirect the apex to it with an HTTP 301. There are several ways to implement that redirect. Here's how they stack up.</p>
+
+                <h2 id="comparison-table" class="text-2xl sm:text-3xl mt-10 mb-4">Comparison at a Glance</h2>
+
+                <div class="overflow-x-auto my-6 not-prose">
+                    <table class="w-full text-sm border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden">
+                        <thead class="bg-gray-50 dark:bg-gray-900">
+                            <tr>
+                                <th class="text-left p-3 font-semibold border-b border-gray-200 dark:border-gray-800">Method</th>
+                                <th class="text-center p-3 font-semibold border-b border-gray-200 dark:border-gray-800">Cost</th>
+                                <th class="text-center p-3 font-semibold border-b border-gray-200 dark:border-gray-800">Setup time</th>
+                                <th class="text-center p-3 font-semibold border-b border-gray-200 dark:border-gray-800">Any DNS provider</th>
+                                <th class="text-center p-3 font-semibold border-b border-gray-200 dark:border-gray-800">Server to maintain</th>
+                                <th class="text-center p-3 font-semibold border-b border-gray-200 dark:border-gray-800">Auto SSL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-100 dark:border-gray-800 bg-blue-50/40 dark:bg-blue-900/10">
+                                <td class="p-3 font-semibold">DNS redirect service (ApexToWWW)</td>
+                                <td class="p-3 text-center text-green-600">Free</td>
+                                <td class="p-3 text-center">~2 min</td>
+                                <td class="p-3 text-center text-green-600"><i class="fas fa-check-circle"></i> Yes</td>
+                                <td class="p-3 text-center text-green-600"><i class="fas fa-check-circle"></i> None</td>
+                                <td class="p-3 text-center text-green-600"><i class="fas fa-check-circle"></i> Yes</td>
+                            </tr>
+                            <tr class="border-b border-gray-100 dark:border-gray-800">
+                                <td class="p-3 font-semibold">Cloudflare Redirect Rules</td>
+                                <td class="p-3 text-center text-green-600">Free</td>
+                                <td class="p-3 text-center">~5 min</td>
+                                <td class="p-3 text-center text-red-500"><i class="fas fa-times-circle"></i> Cloudflare only</td>
+                                <td class="p-3 text-center text-green-600"><i class="fas fa-check-circle"></i> None</td>
+                                <td class="p-3 text-center text-green-600"><i class="fas fa-check-circle"></i> Yes</td>
+                            </tr>
+                            <tr class="border-b border-gray-100 dark:border-gray-800">
+                                <td class="p-3 font-semibold">ALIAS / ANAME record</td>
+                                <td class="p-3 text-center text-green-600">Free</td>
+                                <td class="p-3 text-center">~5 min</td>
+                                <td class="p-3 text-center text-red-500"><i class="fas fa-times-circle"></i> Provider-dependent</td>
+                                <td class="p-3 text-center text-green-600"><i class="fas fa-check-circle"></i> None</td>
+                                <td class="p-3 text-center text-amber-600">Depends on target</td>
+                            </tr>
+                            <tr class="border-b border-gray-100 dark:border-gray-800">
+                                <td class="p-3 font-semibold">Registrar domain forwarding</td>
+                                <td class="p-3 text-center text-amber-600">Free&ndash;varies</td>
+                                <td class="p-3 text-center">~2 min</td>
+                                <td class="p-3 text-center text-green-600"><i class="fas fa-check-circle"></i> Yes</td>
+                                <td class="p-3 text-center text-green-600"><i class="fas fa-check-circle"></i> None</td>
+                                <td class="p-3 text-center text-red-500">Often no</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold">Self-hosted nginx/Apache</td>
+                                <td class="p-3 text-center text-amber-600">Server cost</td>
+                                <td class="p-3 text-center">30&ndash;60 min</td>
+                                <td class="p-3 text-center text-green-600"><i class="fas fa-check-circle"></i> Yes</td>
+                                <td class="p-3 text-center text-red-500"><i class="fas fa-times-circle"></i> Yes</td>
+                                <td class="p-3 text-center text-amber-600">Manual (Certbot)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 id="method-1" class="text-2xl sm:text-3xl mt-10 mb-4">1. DNS Redirect Service (ApexToWWW)</h2>
+
+                <p>A DNS-based redirect service points your apex domain's A and AAAA records at servers that do nothing but respond with a 301 to your <code>www</code> URL. <a href="/">ApexToWWW</a> is one implementation of this pattern: add an A record (<code>65.21.184.101</code>) and an AAAA record (<code>2a01:4f9:c012:a304::1</code>) to your apex, and every request to <code>yourdomain.com</code> gets redirected to <code>https://www.yourdomain.com</code>, path and query string intact, with SSL provisioned automatically via Let's Encrypt.</p>
+
+                <p><strong>Best for:</strong> sites hosted on any CNAME-based platform (Vercel, Netlify, GitHub Pages, Heroku, and similar), regardless of which company manages your DNS. No account, no server, no ongoing maintenance.</p>
+
+                <h2 id="method-2" class="text-2xl sm:text-3xl mt-10 mb-4">2. Cloudflare Redirect Rules (or Page Rules)</h2>
+
+                <p>If Cloudflare is already your authoritative DNS provider, you can create a Redirect Rule matching your apex hostname and 301 it to <code>www</code>, entirely inside the Cloudflare dashboard. This is free on every Cloudflare plan and avoids adding a third-party redirect service to the chain.</p>
+
+                <p><strong>Best for:</strong> teams already running Cloudflare DNS who don't mind Cloudflare being the single point of control for both DNS and the redirect rule. See our <a href="/cloudflare-pages-apex-redirect/">Cloudflare Pages apex redirect guide</a> for the exact rule configuration.</p>
+
+                <h2 id="method-3" class="text-2xl sm:text-3xl mt-10 mb-4">3. ALIAS / ANAME Records</h2>
+
+                <p>Some DNS providers (Route 53, DNSimple, and others) offer ALIAS or ANAME record types that resolve like a CNAME but are legal at the apex. Instead of redirecting, this serves your site directly on the apex &mdash; no <code>www</code> redirect hop at all.</p>
+
+                <p><strong>Best for:</strong> teams who want the apex domain itself as their canonical URL (no <code>www</code>), and whose DNS provider supports ALIAS/ANAME. The trade-off: you're locked into providers that support the feature, and it only works if your hosting platform's target hostname resolves cleanly through it.</p>
+
+                <h2 id="method-4" class="text-2xl sm:text-3xl mt-10 mb-4">4. Registrar Domain Forwarding</h2>
+
+                <p>Most domain registrars (GoDaddy, Namecheap, and others) include a basic "domain forwarding" feature in their dashboard. Quality varies a lot: some registrars implement a real HTTP 301 with SSL; others use frame-based forwarding (the browser URL never changes, which confuses users and hurts SEO) or a meta-refresh redirect with no HTTPS support at all.</p>
+
+                <p><strong>Best for:</strong> quick, low-stakes redirects where you've confirmed your specific registrar returns a proper 301 with SSL. Always test with <code>curl -I</code> before relying on it &mdash; see the <a href="/blog/how-to-redirect-apex-domain-to-www/">step-by-step redirect guide</a> for the exact command.</p>
+
+                <h2 id="method-5" class="text-2xl sm:text-3xl mt-10 mb-4">5. Self-Hosted nginx or Apache</h2>
+
+                <p>You can run your own server (a small VPS is enough) with an nginx or Apache config that 301-redirects the apex to <code>www</code>. This gives you full control &mdash; custom redirect logic, header manipulation, whatever you need.</p>
+
+                <p><strong>Best for:</strong> teams with existing infrastructure and ops capacity who want the redirect logic to live inside their own stack. The cost is real: a server to patch and monitor, and your own TLS certificate lifecycle (Certbot/Let's Encrypt, renewed on a cron job) to manage indefinitely for a task that's otherwise a two-record DNS change.</p>
+
+                <h2 id="which-to-choose" class="text-2xl sm:text-3xl mt-10 mb-4">Which Method Should You Use?</h2>
+
+                <ul class="space-y-2 mb-6">
+                    <li><strong>Default choice for most people:</strong> a DNS redirect service like ApexToWWW &mdash; free, fastest setup, works regardless of DNS provider or hosting platform.</li>
+                    <li><strong>Already on Cloudflare DNS:</strong> Cloudflare Redirect Rules keep everything in one dashboard.</li>
+                    <li><strong>Want apex as canonical, DNS provider supports it:</strong> ALIAS/ANAME avoids the redirect hop entirely.</li>
+                    <li><strong>Already running your own infrastructure:</strong> self-hosted nginx/Apache if the ops overhead is a non-issue for your team.</li>
+                    <li><strong>Avoid:</strong> registrar forwarding you haven't verified returns a real 301 with SSL &mdash; test it first.</li>
+                </ul>
+
+                <h2 id="faq" class="text-2xl sm:text-3xl mt-10 mb-4">Frequently Asked Questions</h2>
+
+                <h3 id="faq-best" class="text-xl sm:text-2xl mt-8 mb-3">What is the best way to redirect an apex domain to www?</h3>
+                <p>For most sites, a free DNS-based redirect service like ApexToWWW is the best option: it's standards-compliant, works with any DNS provider, needs no server or account, and returns a proper 301 with automatic SSL. Cloudflare Redirect Rules are a strong alternative if Cloudflare is already your DNS provider.</p>
+
+                <h3 id="faq-registrar" class="text-xl sm:text-2xl mt-8 mb-3">Is domain forwarding from my registrar good enough?</h3>
+                <p>It depends on the registrar. Some offer proper 301 redirects with free SSL, which is fine. Others use frame-based forwarding or a meta refresh with no HTTPS support, which hurts SEO and looks broken to visitors. Check whether your registrar's forwarding returns an HTTP 301 status code and provisions an SSL certificate before relying on it.</p>
+
+                <h3 id="faq-server" class="text-xl sm:text-2xl mt-8 mb-3">Do I need to run my own server to redirect an apex domain?</h3>
+                <p>No. Self-hosted nginx or Apache redirects work but require you to run, patch, and monitor a server plus manage your own TLS certificates. DNS-based redirect services like ApexToWWW and Cloudflare Redirect Rules achieve the identical result &mdash; a 301 to www &mdash; without any server to maintain.</p>
+
+                <h3 id="faq-seo" class="text-xl sm:text-2xl mt-8 mb-3">Does the redirect method affect SEO?</h3>
+                <p>Only if it's implemented incorrectly. A proper HTTP 301 (permanent redirect) preserves search ranking signals and is what Google recommends. Frame-based forwarding, meta refresh redirects, and 302 (temporary) redirects can all cause SEO problems &mdash; duplicate content, lost ranking signals, or search engines refusing to consolidate the two URLs. Always verify your chosen method returns a real 301.</p>
+
+                <div class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/50 dark:to-purple-950/50 border border-blue-200 dark:border-blue-800 rounded-xl p-6 my-8">
+                    <h3 class="text-lg font-bold mb-2 text-gray-900 dark:text-white">Try the fastest option</h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">Add two DNS records, and ApexToWWW handles the rest &mdash; automatic SSL, IPv6, and HTTP/3 included. No account required.</p>
+                    <a href="/#get-started" class="inline-flex items-center px-5 py-2.5 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
+                        Get Started Free <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </article>
+
+            <!-- Author / Share -->
+            <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Published on <time datetime="2026-07-02">July 2, 2026</time></p>
+                    <a href="/blog/" class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline">&larr; Back to all articles</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 dark:bg-black py-12 border-t border-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <a href="/" class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-arrow-right text-white text-sm"></i>
+                    </div>
+                    <span class="text-lg font-bold text-white">ApexToWWW</span>
+                </a>
+                <nav class="flex items-center gap-6 text-sm">
+                    <a href="/#features" class="text-gray-400 hover:text-white transition">Features</a>
+                    <a href="/#get-started" class="text-gray-400 hover:text-white transition">Setup</a>
+                    <a href="/#faq" class="text-gray-400 hover:text-white transition">FAQ</a>
+                    <a href="/blog/" class="text-gray-400 hover:text-white transition">Blog</a>
+                </nav>
+                <p class="text-gray-500 text-sm">&copy; <script>document.write(new Date().getFullYear())</script> ApexToWWW. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

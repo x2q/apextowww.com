@@ -8,6 +8,9 @@
 @source "./heroku-apex-domain-redirect/index.html";
 @source "./netlify-apex-domain-redirect/index.html";
 @source "./firebase-hosting-apex-redirect/index.html";
+@source "./render-apex-domain-redirect/index.html";
+@source "./aws-amplify-apex-domain-redirect/index.html";
+@source "./redirect-www-to-apex-domain/index.html";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
