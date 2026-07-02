@@ -288,7 +288,7 @@
   }
 };</code></pre>
 
-                <p class="text-sm text-gray-600 dark:text-gray-400"><strong>Should you pick apex or www as canonical?</strong> Both work. <strong>www</strong> gives you CNAME-based routing, cookie isolation between subdomains, and the path of least friction on every modern host. <strong>Apex</strong> is shorter and feels more modern, at the cost of needing ALIAS/ANAME or CNAME flattening, and the historical "cookie bleed" issue where cookies on the apex are sent to every subdomain. For most projects the apex&rarr;www direction is the safer default &mdash; which is what the rest of this page describes &mdash; but if you really want www&rarr;apex on Cloudflare Pages, the rule above is the right answer.</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400"><strong>Should you pick apex or www as canonical?</strong> Both work. <strong>www</strong> gives you CNAME-based routing, cookie isolation between subdomains, and the path of least friction on every modern host. <strong>Apex</strong> is shorter and feels more modern, at the cost of needing ALIAS/ANAME or CNAME flattening, and the historical "cookie bleed" issue where cookies on the apex are sent to every subdomain. For most projects the apex&rarr;www direction is the safer default &mdash; which is what the rest of this page describes &mdash; but if you really want www&rarr;apex on Cloudflare Pages, the rule above is the right answer. For other platforms, see the full <a href="/redirect-www-to-apex-domain/">redirect www to apex guide</a>.</p>
 
                 <h2 id="other-platforms">Other Platforms</h2>
 
@@ -300,6 +300,8 @@
                     <li><a href="/heroku-apex-domain-redirect/">Heroku custom apex domain</a></li>
                     <li><a href="/blog/github-pages-apex-domain-redirect/">GitHub Pages apex redirect</a></li>
                     <li><a href="/firebase-hosting-apex-redirect/">Firebase Hosting apex domain</a></li>
+                    <li><a href="/render-apex-domain-redirect/">Render apex domain redirect</a></li>
+                    <li><a href="/aws-amplify-apex-domain-redirect/">AWS Amplify apex domain redirect</a></li>
                 </ul>
 
                 <h2 id="faq">FAQ</h2>

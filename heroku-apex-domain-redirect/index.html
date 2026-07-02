@@ -329,11 +329,13 @@ Location: https://www.yourdomain.com/</code></pre>
                     <p>The same setup works for any host that requires (or recommends) a <code>www</code> subdomain. If you're considering moving off Heroku or running a multi-cloud setup, ApexToWWW handles the apex redirect identically across providers:</p>
 
                     <ul>
-                        <li><a href="/">Vercel apex domain redirect</a> — Vercel recommends www and uses CNAME for custom domains.</li>
-                        <li><a href="/">Netlify apex redirect</a> — Same CNAME pattern as Heroku and Vercel.</li>
-                        <li><a href="/blog/how-to-redirect-apex-domain-to-www/">GitHub Pages apex setup</a> — A records exist but lack IPv6 and SSL nuances; many users still prefer www.</li>
-                        <li><a href="/">Firebase Hosting</a> — Firebase issues a CNAME target for custom domains.</li>
-                        <li><a href="/">Render, Fly.io, Cloud Run</a> — All issue CNAME targets and benefit from the same redirect pattern.</li>
+                        <li><a href="/vercel-apex-domain-redirect/">Vercel apex domain redirect</a> — Vercel recommends www and uses CNAME for custom domains.</li>
+                        <li><a href="/netlify-apex-domain-redirect/">Netlify apex redirect</a> — Same CNAME pattern as Heroku and Vercel.</li>
+                        <li><a href="/cloudflare-pages-apex-redirect/">Cloudflare Pages apex redirect</a> — CNAME flattening or ApexToWWW, depending on your DNS provider.</li>
+                        <li><a href="/blog/github-pages-apex-domain-redirect/">GitHub Pages apex setup</a> — A records exist but lack IPv6 and SSL nuances; many users still prefer www.</li>
+                        <li><a href="/firebase-hosting-apex-redirect/">Firebase Hosting</a> — Firebase issues a CNAME target for custom domains.</li>
+                        <li><a href="/render-apex-domain-redirect/">Render apex domain redirect</a> — issues a CNAME target and benefits from the same redirect pattern.</li>
+                        <li><a href="/aws-amplify-apex-domain-redirect/">AWS Amplify apex domain redirect</a> — for teams not using Route 53 DNS.</li>
                     </ul>
 
                     <h2 id="faq">Frequently Asked Questions</h2>
