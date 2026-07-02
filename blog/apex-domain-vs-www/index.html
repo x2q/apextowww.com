@@ -220,6 +220,7 @@
                 <h2 class="text-2xl sm:text-3xl mt-12 mb-4" id="conclusion">Conclusion: Use WWW and Redirect the Apex</h2>
                 <p>For most websites, especially those using CDNs, PaaS hosting, or any service that relies on CNAME records, <strong>www is the better choice</strong> as your canonical domain. It gives you more flexibility with DNS, cleaner cookie scoping, easier provider migrations, and compatibility with the widest range of hosting services.</p>
                 <p>The best practice is straightforward: set <code>www.example.com</code> as your primary domain, then redirect <code>example.com</code> to it with a 301 redirect. Your visitors will never notice the difference, but your infrastructure will be more resilient and easier to manage.</p>
+                <p>This same "pick one authoritative URL and make every signal agree" principle applies to canonical tags and, if your site is multilingual, hreflang. See our <a href="/blog/hreflang-and-canonical-tags/">guide to hreflang and canonical tags</a> for how they interact and the mistakes that break them.</p>
                 <p>Ready to set up your apex-to-www redirect? <a href="/#get-started">Get started with ApexToWWW</a> in under a minute &mdash; just add two DNS records and you are done.</p>
             </div>
         </article>
