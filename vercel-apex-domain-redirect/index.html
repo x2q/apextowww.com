@@ -3,23 +3,23 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Vercel Apex Domain Redirect — Free, 2 DNS Records, Auto-SSL</title>
-        <meta name="description" content="Redirect your Vercel apex domain to www in 60 seconds. Free 301, auto-SSL, IPv6, HTTP/3. Works with cname.vercel-dns.com or replaces 76.76.21.21. 2 DNS records." />
-        <meta name="keywords" content="vercel apex domain, vercel naked domain redirect, cname.vercel-dns.com, vercel custom domain www, 76.76.21.21 alternative, vercel root domain" />
+        <title>Vercel: Apex ⇄ WWW Redirect (Either Direction), Free</title>
+        <meta name="description" content="Redirect apex↔www on Vercel. Free apex→www via ApexToWWW (2 DNS records, replaces 76.76.21.21) or native www→apex using Vercel's domain redirect / next.config.js." />
+        <meta name="keywords" content="vercel apex domain, vercel naked domain redirect, cname.vercel-dns.com, vercel custom domain www, 76.76.21.21 alternative, vercel root domain, vercel redirect www to apex domain" />
         <link rel="canonical" href="https://www.apextowww.com/vercel-apex-domain-redirect/" />
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://www.apextowww.com/vercel-apex-domain-redirect/" />
-        <meta property="og:title" content="Vercel Apex Domain Redirect — Free, 2 DNS Records, Auto-SSL" />
-        <meta property="og:description" content="Redirect your Vercel apex domain to www in 60 seconds. Free 301, auto-SSL, IPv6, HTTP/3. Works with cname.vercel-dns.com or replaces 76.76.21.21. 2 DNS records." />
+        <meta property="og:title" content="Vercel: Apex ⇄ WWW Redirect (Either Direction), Free" />
+        <meta property="og:description" content="Redirect apex↔www on Vercel. Free apex→www via ApexToWWW (2 DNS records, replaces 76.76.21.21) or native www→apex using Vercel's domain redirect / next.config.js." />
         <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
         <meta property="og:site_name" content="ApexToWWW" />
 
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Vercel Apex Domain Redirect — Free, 2 DNS Records, Auto-SSL" />
-        <meta name="twitter:description" content="Redirect your Vercel apex domain to www in 60 seconds. Free 301, auto-SSL, IPv6, HTTP/3. Works with cname.vercel-dns.com or replaces 76.76.21.21. 2 DNS records." />
+        <meta name="twitter:title" content="Vercel: Apex ⇄ WWW Redirect (Either Direction), Free" />
+        <meta name="twitter:description" content="Redirect apex↔www on Vercel. Free apex→www via ApexToWWW (2 DNS records, replaces 76.76.21.21) or native www→apex using Vercel's domain redirect / next.config.js." />
         <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
 
         <link rel="stylesheet" href="/styles.css" />
@@ -103,6 +103,11 @@
                     "@type": "Question",
                     "name": "Does this preserve Vercel's SSL certificate?",
                     "acceptedAnswer": { "@type": "Answer", "text": "Yes, on both ends. Vercel continues to issue and renew its own Let's Encrypt certificate for www.yourdomain.com. ApexToWWW issues a separate Let's Encrypt certificate for the apex automatically on first request. After the 301 the browser is on Vercel's certificate. No mixed content, no manual cert management." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How do I redirect www to apex on Vercel (the reverse direction)?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Vercel handles this natively, without ApexToWWW. Add both www.yourdomain.com and yourdomain.com in Settings > Domains, use the three-dot menu on the www entry to redirect it to the apex, and set the apex as primary. Alternatively, add a host-matched redirect rule in next.config.js (redirects() with a host condition) or vercel.json." }
                 }
             ]
         }
@@ -169,7 +174,7 @@
                         <span class="text-xs font-bold tracking-widest uppercase text-blue-700 dark:text-blue-300">TL;DR</span>
                     </div>
                     <p class="text-base sm:text-lg text-gray-800 dark:text-gray-200 leading-relaxed mb-0">
-                        Vercel serves custom domains via <code class="font-mono text-sm bg-white/60 dark:bg-black/30 px-1.5 py-0.5 rounded">cname.vercel-dns.com</code>, which requires a CNAME record. But apex domains (<code class="font-mono text-sm bg-white/60 dark:bg-black/30 px-1.5 py-0.5 rounded">yourdomain.com</code>) can&rsquo;t use CNAME per RFC 1034. The fix: point <code class="font-mono text-sm bg-white/60 dark:bg-black/30 px-1.5 py-0.5 rounded">www</code> to Vercel via CNAME, then redirect apex to www using ApexToWWW. Free, two DNS records, auto SSL.
+                        Vercel serves custom domains via <code class="font-mono text-sm bg-white/60 dark:bg-black/30 px-1.5 py-0.5 rounded">cname.vercel-dns.com</code>, which requires a CNAME record. But apex domains (<code class="font-mono text-sm bg-white/60 dark:bg-black/30 px-1.5 py-0.5 rounded">yourdomain.com</code>) can&rsquo;t use CNAME per RFC 1034. The fix: point <code class="font-mono text-sm bg-white/60 dark:bg-black/30 px-1.5 py-0.5 rounded">www</code> to Vercel via CNAME, then redirect apex to www using ApexToWWW. Free, two DNS records, auto SSL. Want it the <a href="#reverse-direction" class="underline decoration-blue-500/50 hover:decoration-blue-500">other way round (www&rarr;apex)</a>? Jump straight there.
                     </p>
                 </aside>
 
@@ -375,6 +380,9 @@ module.exports = {
 
                     <h3>Does it preserve Vercel&rsquo;s SSL?</h3>
                     <p>Yes, on both ends. Vercel continues to issue and renew its own Let&rsquo;s Encrypt certificate for <code>www.yourdomain.com</code>. ApexToWWW issues a separate Let&rsquo;s Encrypt certificate for <code>yourdomain.com</code> automatically on first request, so HTTPS works on the apex too &mdash; and after the 301 the browser is on Vercel&rsquo;s certificate. No mixed-content warnings, no manual cert management.</p>
+
+                    <h3 id="faq-reverse">How do I redirect www to apex on Vercel (the reverse direction)?</h3>
+                    <p>Vercel handles this natively &mdash; you don&rsquo;t need ApexToWWW. Add both <code>www.yourdomain.com</code> and <code>yourdomain.com</code> in <em>Settings &rarr; Domains</em>, then use the three-dot menu on the www entry to redirect it to the apex, and set the apex as primary. Or add a host-matched rule in <code>next.config.js</code> or <code>vercel.json</code>. See the <a href="#reverse-direction">full walkthrough above</a>.</p>
 
                 </div>
 

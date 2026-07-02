@@ -3,23 +3,23 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Cloudflare Pages Apex&rarr;WWW Redirect — Free, 2 DNS Records</title>
-        <meta name="description" content="Redirect your apex domain to a Cloudflare Pages site in 60 seconds. Free 301 redirect, automatic Let's Encrypt SSL, IPv6, HTTP/3. Works without Cloudflare DNS." />
-        <meta name="keywords" content="cloudflare pages apex domain, cloudflare pages naked domain, cloudflare pages custom domain www, cname flattening, pages.dev custom domain, cloudflare pages root domain" />
+        <title>Cloudflare Pages: Apex ⇄ WWW Redirect (Either Direction), Free</title>
+        <meta name="description" content="Redirect apex↔www on Cloudflare Pages. Free apex→www via ApexToWWW (2 DNS records, auto-SSL) or native www→apex using Redirect Rules / CNAME flattening." />
+        <meta name="keywords" content="cloudflare pages apex domain, cloudflare pages naked domain, cloudflare pages custom domain www, cname flattening, pages.dev custom domain, cloudflare pages root domain, cloudflare pages redirect www to apex" />
         <link rel="canonical" href="https://www.apextowww.com/cloudflare-pages-apex-redirect/" />
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://www.apextowww.com/cloudflare-pages-apex-redirect/" />
-        <meta property="og:title" content="Cloudflare Pages Apex&rarr;WWW Redirect — Free, 2 DNS Records" />
-        <meta property="og:description" content="Redirect your apex domain to a Cloudflare Pages site in 60 seconds. Free 301 redirect, automatic Let's Encrypt SSL, IPv6, HTTP/3. Works without Cloudflare DNS." />
+        <meta property="og:title" content="Cloudflare Pages: Apex ⇄ WWW Redirect (Either Direction), Free" />
+        <meta property="og:description" content="Redirect apex↔www on Cloudflare Pages. Free apex→www via ApexToWWW (2 DNS records, auto-SSL) or native www→apex using Redirect Rules / CNAME flattening." />
         <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
         <meta property="og:site_name" content="ApexToWWW" />
 
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Cloudflare Pages Apex&rarr;WWW Redirect — Free, 2 DNS Records" />
-        <meta name="twitter:description" content="Redirect your apex domain to a Cloudflare Pages site in 60 seconds. Free 301 redirect, automatic Let's Encrypt SSL, IPv6, HTTP/3. Works without Cloudflare DNS." />
+        <meta name="twitter:title" content="Cloudflare Pages: Apex ⇄ WWW Redirect (Either Direction), Free" />
+        <meta name="twitter:description" content="Redirect apex↔www on Cloudflare Pages. Free apex→www via ApexToWWW (2 DNS records, auto-SSL) or native www→apex using Redirect Rules / CNAME flattening." />
         <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
 
         <link rel="stylesheet" href="/styles.css" />
@@ -98,6 +98,11 @@
                     "@type": "Question",
                     "name": "Is ApexToWWW compatible with DNSSEC?",
                     "acceptedAnswer": { "@type": "Answer", "text": "Yes. ApexToWWW is plain A/AAAA records on your apex. DNSSEC signing happens at your DNS provider and is independent of where the records point. Sign the zone as usual." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How do I redirect www to apex on Cloudflare Pages (the reverse direction)?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Point the apex at your Cloudflare Pages project (CNAME flattening on @ to your-project.pages.dev, or an ALIAS/ANAME record if your DNS provider supports one), then add a Cloudflare Redirect Rule matching http.host eq \"www.yourdomain.com\" that 301s to https://yourdomain.com. On the legacy free plan, a Page Rule (www.yourdomain.com/* -> https://yourdomain.com/$1, 301) does the same job. ApexToWWW is not used in this direction since it only redirects apex to www." }
                 }
             ]
         }
@@ -156,7 +161,7 @@
                 <div class="flex items-center gap-2 text-blue-700 dark:text-blue-300 font-semibold mb-2 text-sm uppercase tracking-wide">
                     <i class="fas fa-bolt"></i> TL;DR
                 </div>
-                <p class="text-gray-800 dark:text-gray-200 leading-relaxed m-0">Cloudflare Pages requires a CNAME to <code class="font-mono bg-white dark:bg-gray-900 px-1.5 py-0.5 rounded text-sm">&lt;project&gt;.pages.dev</code>, but apex domains can't use CNAME per RFC 1034. <strong>If Cloudflare is your DNS</strong>, CNAME flattening handles this automatically. <strong>If you use another DNS</strong> (Route53, GoDaddy, etc.), use ApexToWWW to redirect apex&rarr;www. Free.</p>
+                <p class="text-gray-800 dark:text-gray-200 leading-relaxed m-0">Cloudflare Pages requires a CNAME to <code class="font-mono bg-white dark:bg-gray-900 px-1.5 py-0.5 rounded text-sm">&lt;project&gt;.pages.dev</code>, but apex domains can't use CNAME per RFC 1034. <strong>If Cloudflare is your DNS</strong>, CNAME flattening handles this automatically. <strong>If you use another DNS</strong> (Route53, GoDaddy, etc.), use ApexToWWW to redirect apex&rarr;www. Free. Want it the <a href="#reverse-direction" class="underline decoration-blue-400/50 hover:decoration-blue-400">other way round (www&rarr;apex)</a>? Jump straight there.</p>
             </div>
 
             <div class="prose prose-lg dark:prose-invert max-w-none
@@ -310,6 +315,9 @@
 
                 <h3>Is ApexToWWW compatible with DNSSEC?</h3>
                 <p>Fully. ApexToWWW is just A and AAAA records on your apex. DNSSEC is signed by your DNS provider over the zone contents and doesn't care what the records resolve to. Sign the zone as you normally would; the redirect works regardless.</p>
+
+                <h3 id="faq-reverse">How do I redirect www to apex on Cloudflare Pages (the reverse direction)?</h3>
+                <p>Point the apex at your Cloudflare Pages project &mdash; CNAME flattening on <code>@</code> to <code>your-project.pages.dev</code>, or an ALIAS/ANAME record if your DNS provider supports one &mdash; then add a Cloudflare Redirect Rule matching <code>http.host eq "www.yourdomain.com"</code> that 301s to <code>https://yourdomain.com</code>. On the legacy free plan, a Page Rule (<code>www.yourdomain.com/*</code> &rarr; <code>https://yourdomain.com/$1</code>, 301) does the same job. See the <a href="#reverse-direction">full walkthrough above</a>.</p>
 
                 <!-- CTA Section -->
                 <div class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-8 my-12 text-center not-prose">
