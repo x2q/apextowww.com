@@ -3,22 +3,22 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>How to Set Up Apex Domain Redirect for GitHub Pages | ApexToWWW</title>
-        <meta name="description" content="Learn how to set up a custom apex domain redirect for GitHub Pages. Step-by-step guide to redirecting your naked domain to www for GitHub Pages sites using ApexToWWW." />
+        <title>GitHub Pages Apex Domain Redirect — Free, 2 DNS Records</title>
+        <meta name="description" content="Redirect your apex domain to a GitHub Pages custom domain in 5 steps. Free 301, auto-SSL via Let's Encrypt, IPv6. CNAME on www, ApexToWWW on the apex." />
         <link rel="canonical" href="https://www.apextowww.com/blog/github-pages-apex-domain-redirect/" />
 
         <!-- Open Graph -->
         <meta property="og:type" content="article" />
         <meta property="og:url" content="https://www.apextowww.com/blog/github-pages-apex-domain-redirect/" />
-        <meta property="og:title" content="How to Set Up Apex Domain Redirect for GitHub Pages" />
-        <meta property="og:description" content="Step-by-step guide to redirecting your apex domain to www for GitHub Pages custom domains. Free, no account needed." />
+        <meta property="og:title" content="GitHub Pages Apex Domain Redirect — Free, 2 DNS Records" />
+        <meta property="og:description" content="Redirect your apex domain to a GitHub Pages custom domain in 5 steps. Free 301, auto-SSL via Let's Encrypt, IPv6. CNAME on www, ApexToWWW on the apex." />
         <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
         <meta property="og:site_name" content="ApexToWWW" />
 
         <!-- Twitter Card -->
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="How to Set Up Apex Domain Redirect for GitHub Pages" />
-        <meta name="twitter:description" content="Step-by-step guide to redirecting your apex domain to www for GitHub Pages custom domains." />
+        <meta name="twitter:title" content="GitHub Pages Apex Domain Redirect — Free, 2 DNS Records" />
+        <meta name="twitter:description" content="Redirect your apex domain to a GitHub Pages custom domain in 5 steps. Free 301, auto-SSL, IPv6. CNAME on www, ApexToWWW on the apex." />
         <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
 
         <link rel="stylesheet" href="/styles.css" />
@@ -53,6 +53,45 @@
                 "@id": "https://www.apextowww.com/blog/github-pages-apex-domain-redirect/"
             },
             "keywords": ["github pages apex domain", "github pages custom domain redirect", "github pages naked domain"]
+        }
+        </script>
+
+        <!-- HowTo Schema -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": "How to Set Up GitHub Pages with a Custom Domain and Apex Redirect",
+            "description": "Set up a GitHub Pages custom domain on www and redirect your apex (naked) domain to www using ApexToWWW's free DNS redirect.",
+            "totalTime": "PT10M",
+            "estimatedCost": { "@type": "MonetaryAmount", "currency": "USD", "value": "0" },
+            "step": [
+                {
+                    "@type": "HowToStep",
+                    "name": "Add a CNAME file to your repository",
+                    "text": "In the root of your GitHub Pages repository (or the docs/ folder if that's your publishing source), create a file named CNAME containing a single line: www.yourdomain.com. Commit and push it, or set the custom domain under repository Settings > Pages."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Configure the www CNAME record",
+                    "text": "At your DNS provider, add a CNAME record: host www, value username.github.io (replace username with your GitHub username or organization)."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Set up the apex redirect with ApexToWWW",
+                    "text": "Add an A record for @ pointing to 65.21.184.101 and an AAAA record for @ pointing to 2a01:4f9:c012:a304::1. ApexToWWW responds to apex requests with a 301 redirect to www, preserving the path and query string, with SSL provisioned automatically."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Enable HTTPS in GitHub Pages settings",
+                    "text": "Once DNS propagates (5-30 minutes), go to Settings > Pages, confirm the custom domain is detected, and check Enforce HTTPS. GitHub provisions a Let's Encrypt certificate for www.yourdomain.com."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Verify the redirect",
+                    "text": "Run curl -I yourdomain.com and confirm a 301 Moved Permanently response with a Location header pointing to https://www.yourdomain.com. Test all four URL variations (http/https, apex/www) to confirm they resolve to the same www destination."
+                }
+            ]
         }
         </script>
     </head>
