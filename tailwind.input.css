@@ -11,6 +11,7 @@
 @source "./render-apex-domain-redirect/index.html";
 @source "./aws-amplify-apex-domain-redirect/index.html";
 @source "./redirect-www-to-apex-domain/index.html";
+@source "./404.html";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
