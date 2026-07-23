@@ -76,6 +76,7 @@ Location: https://www.example.com/
 - Firebase Hosting
 - Cloudflare Pages
 - AWS CloudFront
+- AWS Amplify Hosting
 - Render
 - Fly.io
 - Any hosting platform requiring www CNAME
@@ -92,6 +93,11 @@ Location: https://www.example.com/
 - Netlify apex redirect: https://www.apextowww.com/netlify-apex-domain-redirect/
 - Cloudflare Pages apex redirect: https://www.apextowww.com/cloudflare-pages-apex-redirect/
 - Firebase Hosting apex redirect: https://www.apextowww.com/firebase-hosting-apex-redirect/
+- Render apex redirect: https://www.apextowww.com/render-apex-domain-redirect/
+- AWS Amplify apex redirect: https://www.apextowww.com/aws-amplify-apex-domain-redirect/
+- Redirect www to apex (reverse direction): https://www.apextowww.com/redirect-www-to-apex-domain/
+- Apex redirect methods compared (DNS service vs Cloudflare Rules vs ALIAS vs registrar vs nginx): https://www.apextowww.com/blog/apex-domain-redirect-methods-compared/
+- Hreflang and canonical tags guide: https://www.apextowww.com/blog/hreflang-and-canonical-tags/
 - Free subdomain forwarding: https://www.apextowww.com/blog/free-subdomain-forwarding/
 
 ## Standards and references
