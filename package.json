@@ -1,0 +1,13 @@
+{
+  "name": "apextowww.com",
+  "private": true,
+  "description": "Static site for apextowww.com. Only the CSS build lives here; deploy with ./deploy.sh.",
+  "scripts": {
+    "build:css": "tailwindcss -i tailwind.input.css -o styles.css --minify"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "4.3.3",
+    "@tailwindcss/typography": "0.5.19",
+    "tailwindcss": "4.3.3"
+  }
+}

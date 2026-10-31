@@ -12,6 +12,8 @@
 @source "./redirect-www-to-apex-domain/index.html";
 @source "./404.html";
 
+@plugin "@tailwindcss/typography";
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
@@ -30,4 +32,118 @@
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-20px); }
   }
+
+  /* Palette shared with the homepage (index.html tokens). Neutral greys are a
+     cool slate; blue and purple both resolve to the indigo accent, so the old
+     blue-to-purple gradients render as flat indigo. Semantic colours (green,
+     red, amber, orange) are left at the Tailwind defaults. */
+  --color-gray-50: #f6f7fb;
+  --color-gray-100: #edeff6;
+  --color-gray-200: #dde1ea;
+  --color-gray-300: #c4cad8;
+  --color-gray-400: #8f9bb8;
+  --color-gray-500: #66718a;
+  --color-gray-600: #4b5568;
+  --color-gray-700: #374055;
+  --color-gray-800: #243050;
+  --color-gray-900: #121a2e;
+  --color-gray-950: #0a0f1d;
+
+  --color-blue-50: #ecefff;
+  --color-blue-100: #e0e3ff;
+  --color-blue-200: #c7ccff;
+  --color-blue-300: #a9b0ff;
+  --color-blue-400: #9aa2ff;
+  --color-blue-500: #6d6ff0;
+  --color-blue-600: #4338ca;
+  --color-blue-700: #3a31b0;
+  --color-blue-800: #2f2a8c;
+  --color-blue-900: #24216a;
+  --color-blue-950: #17153f;
+
+  --color-purple-50: #ecefff;
+  --color-purple-100: #e0e3ff;
+  --color-purple-200: #c7ccff;
+  --color-purple-300: #a9b0ff;
+  --color-purple-400: #9aa2ff;
+  --color-purple-500: #6d6ff0;
+  --color-purple-600: #4338ca;
+  --color-purple-700: #3a31b0;
+  --color-purple-800: #2f2a8c;
+  --color-purple-900: #24216a;
+  --color-purple-950: #17153f;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --bg: #f6f7fb;
+    --surface: #ffffff;
+    --ink: #0b1020;
+    --muted: #4b5568;
+    --line: #dde1ea;
+    --accent: #4338ca;
+    --accent-soft: #ecefff;
+    --on-accent: #ffffff;
+  }
+  .dark {
+    color-scheme: dark;
+    --bg: #0a0f1d;
+    --surface: #121a2e;
+    --ink: #edf0f8;
+    --muted: #a3aec6;
+    --line: #243050;
+    --accent: #9aa2ff;
+    --accent-soft: #1a2347;
+    --on-accent: #0b1020;
+  }
+  /* The header is sticky, so in-page anchors need room above them. */
+  html { scroll-padding-top: 84px; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto !important; }
+  }
+  a:focus-visible,
+  button:focus-visible,
+  summary:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 8px;
+  }
+}
+
+/* Inline code renders as a chip (see prose-code:bg-*), not with typography's
+   default backticks. Unlayered so it wins over the plugin's utilities layer. */
+.prose code::before,
+.prose code::after { content: none; }
+/* Long inline URLs and paths must wrap instead of widening the page. */
+.prose :not(pre) > code { overflow-wrap: anywhere; }
+
+/* Site chrome (header, footer, skip link). Same markup and look as the
+   homepage, which inlines these rules in index.html. */
+@layer components {
+  .skip { position: absolute; left: -9999px; top: 8px; background: var(--accent); color: var(--on-accent); padding: 10px 16px; border-radius: 8px; font-weight: 600; z-index: 60; }
+  .skip:focus { left: 8px; }
+  .nav-links a { color: var(--muted); text-decoration: none; padding: 10px 0; }
+  .nav-links a:hover { color: var(--ink); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: 12px; font-family: inherit; font-weight: 600; font-size: 16px; text-decoration: none; border: 1px solid transparent; cursor: pointer; transition: background .15s, border-color .15s, filter .15s; }
+  .btn-primary { background: var(--accent); color: var(--on-accent); }
+  .btn-primary:hover { filter: brightness(1.12); }
+  .btn-sm { min-height: 44px; padding: 0 18px; font-size: 15px; }
+  .icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; border-radius: 12px; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; }
+  .icon-btn:hover { border-color: var(--ink); }
+  .icon-sun { display: none; }
+  .dark .icon-sun { display: block; }
+  .dark .icon-moon { display: none; }
+  @media (max-width: 820px) { .nav-links { display: none !important; } }
+  @media (max-width: 520px) {
+    .hide-xs { display: none; }
+    .hdr { gap: 12px !important; padding: 0 16px !important; }
+    .hdr > a { font-size: 18px !important; }
+  }
+  @media (max-width: 360px) {
+    .hdr { gap: 8px !important; padding: 0 12px !important; }
+    .hdr > a { gap: 8px !important; }
+    .hdr .btn-sm { padding: 0 12px !important; font-size: 14px !important; }
+  }
+  @media (prefers-reduced-motion: reduce) { .btn, .btn-primary { transition: none; } }
 }
