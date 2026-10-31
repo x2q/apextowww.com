@@ -10,7 +10,7 @@
 - **SSL**: Automatic Let's Encrypt certificates, provisioned on first request
 - **Protocols**: HTTP/1.1, HTTP/2, HTTP/3 (QUIC)
 - **IP stack**: IPv4 + IPv6 dual-stack
-- **Redirect latency**: Under 50ms
+- **Redirect latency**: About 100 ms end to end, TLS handshake included (measured from Denmark)
 - **Path preservation**: Full path + query string preserved (301 redirect is RFC 7231 compliant)
 - **Infrastructure**: ARM64 servers (Hetzner), energy-efficient
 - **Provider**: Sandbox.ventures, based in Aarhus, Denmark

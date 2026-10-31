@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-@source "./index.html";
 @source "./blog/index.html";
 @source "./blog/**/*.html";
 @source "./cloudflare-pages-apex-redirect/index.html";

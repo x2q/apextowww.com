@@ -1,1328 +1,471 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Redirect Apex Domain to WWW — Free, 2 DNS Records, Auto SSL</title>
-        <link rel="stylesheet" href="/styles.css" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-        <link rel="icon" href="/favicon.ico" sizes="32x32" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-            integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        />
-        <link rel="canonical" href="https://www.apextowww.com/" />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCDJZQW377"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() { dataLayer.push(arguments); }
-            gtag("js", new Date());
-            gtag("config", "G-NCDJZQW377");
-        </script>
-        <!-- A/B/C Split Test -->
-        <script>
-            (function() {
-                var variants = {
-                    A: {
-                        subtitle: "Your apex domain visitors hit a dead end. ApexToWWW fixes that with a free, instant 301 redirect to www \u2014 with automatic SSL, IPv6, and HTTP/3."
-                    },
-                    B: {
-                        subtitle: "Free 301 redirect with automatic SSL, IPv6, and HTTP/3. Just add two DNS records \u2014 no signup, no cost, no hassle."
-                    },
-                    C: {
-                        subtitle: "The simplest way to redirect your naked domain. Add two DNS records and you\u2019re done \u2014 with automatic SSL, IPv6, and HTTP/3."
-                    }
-                };
-                var key = 'ab_hero_variant';
-                var v = localStorage.getItem(key);
-                if (!v || !variants[v]) {
-                    var keys = Object.keys(variants);
-                    v = keys[Math.floor(Math.random() * keys.length)];
-                    localStorage.setItem(key, v);
-                }
-                window.__abVariant = v;
-                window.__abVariants = variants;
-                // Send variant to GA4 as user property + event
-                if (typeof gtag === 'function') {
-                    gtag('set', 'user_properties', { hero_variant: v });
-                    gtag('event', 'ab_test_impression', {
-                        test_name: 'hero_headline',
-                        variant: v,
-                        headline: variants[v].line1 + ' ' + variants[v].line2
-                    });
-                }
-            })();
-        </script>
-        <meta name="description" content="Redirect your apex domain to www with 2 DNS records. Free, no signup, auto SSL, IPv6, HTTP/3. Works with GitHub Pages, Vercel, Netlify."/>
-
-        <!-- Open Graph / Facebook -->
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.apextowww.com/" />
-        <meta property="og:title" content="Redirect Apex Domain to WWW — Free, 2 DNS Records, Auto SSL" />
-        <meta property="og:description" content="Point your apex domain's A/AAAA records to us, and we'll 301-redirect to www. Free forever. Automatic SSL. Works with GitHub Pages, Vercel, Netlify, Heroku, Firebase." />
-        <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
-        <meta property="og:site_name" content="ApexToWWW" />
-
-        <!-- Twitter Card -->
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Redirect Apex Domain to WWW — Free, 2 DNS Records, Auto SSL" />
-        <meta name="twitter:description" content="Point your apex domain's A/AAAA records to us, and we'll 301-redirect to www. Free. Auto SSL. IPv6. HTTP/3." />
-        <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
-
-        <!-- Schema.org JSON-LD Structured Data -->
-        <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "HowTo",
-            "name": "How to Redirect Your Apex Domain to WWW",
-            "description": "Set up a free 301 redirect from your apex (naked) domain to your www subdomain using two DNS records. Works with GitHub Pages, Vercel, Netlify, Cloudflare Pages, Heroku, Firebase, and any host that needs a CNAME on www. Automatic Let's Encrypt SSL.",
-            "totalTime": "PT2M",
-            "estimatedCost": { "@type": "MonetaryAmount", "currency": "USD", "value": "0" },
-            "tool": [
-                { "@type": "HowToTool", "name": "Your DNS provider's control panel (Route53, Cloudflare, GoDaddy, Namecheap, etc.)" }
-            ],
-            "step": [
-                {
-                    "@type": "HowToStep",
-                    "name": "Add an A record on the apex",
-                    "text": "At your DNS provider, add an A record with host @ (the apex) pointing to 65.21.184.101.",
-                    "url": "https://www.apextowww.com/#get-started"
-                },
-                {
-                    "@type": "HowToStep",
-                    "name": "Add an AAAA record on the apex",
-                    "text": "Add an AAAA record with host @ pointing to 2a01:4f9:c012:a304::1 so IPv6 visitors get the same redirect.",
-                    "url": "https://www.apextowww.com/#get-started"
-                },
-                {
-                    "@type": "HowToStep",
-                    "name": "Verify the redirect",
-                    "text": "After DNS propagates (typically 5-30 minutes), run curl -I http://yourdomain.com and confirm a 301 response with Location: https://www.yourdomain.com/. SSL is provisioned automatically on the first request via Let's Encrypt.",
-                    "url": "https://www.apextowww.com/#get-started"
-                }
-            ]
-        }
-        </script>
-
-        <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "WebApplication",
-            "name": "ApexToWWW",
-            "url": "https://www.apextowww.com",
-            "description": "Free DNS apex domain to www redirect service with automatic SSL, IPv6, and HTTP/3 support.",
-            "applicationCategory": "DeveloperApplication",
-            "operatingSystem": "Any",
-            "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD"
-            },
-            "provider": {
-                "@type": "Organization",
-                "name": "Sandbox.ventures",
-                "url": "https://sandbox.ventures",
-                "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": "P. O. Pedersens Vej 2",
-                    "addressLocality": "Aarhus N",
-                    "postalCode": "8200",
-                    "addressCountry": "DK"
-                }
-            },
-            "featureList": ["301 redirect", "Automatic SSL/TLS", "IPv6 support", "HTTP/3", "Free", "No account required"]
-        }
-        </script>
-        <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-                {
-                    "@type": "Question",
-                    "name": "What is an apex domain, and why does it need a redirect?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "An apex domain (also called root, naked, or bare domain) is your domain without any prefix — for example example.com rather than www.example.com. Due to how DNS works, apex domains can't use CNAME records, which means they're incompatible with most CDNs and hosting platforms like GitHub Pages, Netlify, and Vercel. A redirect solves this by automatically forwarding apex visitors to your www subdomain."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "How do I redirect my apex domain to www using ApexToWWW?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Add two DNS records to your domain's apex (@): an A record pointing to 65.21.184.101 and an AAAA record pointing to 2a01:4f9:c012:a304::1. No signup or configuration needed. DNS changes typically propagate within 5-30 minutes."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Does it work with HTTPS? Do I need my own SSL certificate?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Yes, HTTPS is fully supported and you don't need your own certificate. We automatically provision and renew SSL certificates via Let's Encrypt for every domain."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Is ApexToWWW really free? What's the catch?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Completely free, no catch. No hidden costs, no premium tiers, no usage limits, no account required. We run on energy-efficient ARM64 infrastructure which keeps costs near zero."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Does the redirect preserve the URL path and query string?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Yes. The full path, query parameters, and fragments are preserved. For example, example.com/pricing?plan=pro redirects to www.example.com/pricing?plan=pro. This is a 301 permanent redirect, so search engines will transfer SEO value to your www URLs."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Can I use this with GitHub Pages, Netlify, or Vercel?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "Absolutely — that's one of the most common use cases. Point your www subdomain to your hosting provider via CNAME, then use ApexToWWW to redirect the apex domain to www. Works with GitHub Pages, Netlify, Vercel, Heroku, Firebase Hosting, and any platform that requires a CNAME."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Will the redirect affect my SEO or Google rankings?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "It helps SEO. We use a 301 (permanent) redirect, which tells search engines to transfer ranking signals to your www URL. Google recommends picking one canonical version and redirecting the other — which is exactly what ApexToWWW does."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Should I use www or non-www for my website?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "For most sites, www is the better choice. It supports CNAME records (required by most CDNs), enables better cookie isolation, and makes load balancing and migration easier. The important thing is to pick one and redirect the other."
-                    }
-                },
-                {
-                    "@type": "Question",
-                    "name": "Do you support wildcard domains?",
-                    "acceptedAnswer": {
-                        "@type": "Answer",
-                        "text": "No. The free service only redirects domains that have their A/AAAA records pointed directly at our servers. We verify that your domain actually resolves to us before issuing an SSL certificate and serving redirects. Wildcard domains are not supported on the free tier. We may add wildcard support in a future premium version."
-                    }
-                }
-            ]
-        }
-        </script>
-        <style>
-            @keyframes gradient {
-                0%, 100% { background-position: 0% 50%; }
-                50% { background-position: 100% 50%; }
-            }
-            @keyframes float {
-                0%, 100% { transform: translateY(0px); }
-                50% { transform: translateY(-20px); }
-            }
-            .animate-gradient {
-                background-size: 200% 200%;
-                animation: gradient 8s ease infinite;
-            }
-            .glass {
-                background: rgba(255, 255, 255, 0.05);
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-            }
-            .dark .glass {
-                background: rgba(0, 0, 0, 0.2);
-            }
-            .feature-card {
-                transition: all 0.3s ease;
-            }
-            .feature-card:hover {
-                transform: translateY(-4px);
-            }
-            .copy-btn {
-                transition: all 0.2s ease;
-            }
-            .copy-btn:active {
-                transform: scale(0.95);
-            }
-            .faq-content {
-                display: grid;
-                grid-template-rows: 0fr;
-                transition: grid-template-rows 0.35s ease;
-            }
-            .faq-item.active .faq-content {
-                grid-template-rows: 1fr;
-            }
-            .faq-content > div {
-                overflow: hidden;
-            }
-            .faq-item.active .faq-icon {
-                transform: rotate(180deg);
-            }
-            .faq-icon {
-                transition: transform 0.3s ease;
-            }
-            .faq-item {
-                transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            }
-            .faq-item.active {
-                border-color: rgba(99, 102, 241, 0.3);
-                box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.1);
-            }
-            /* Rotating word animation */
-            #rotating-word {
-                position: relative;
-                height: 1.15em;
-                vertical-align: bottom;
-            }
-            .rotating-word-inner {
-                display: inline-block;
-                animation: wordFadeIn 0.5s ease;
-            }
-            @keyframes wordFadeIn {
-                0% { opacity: 0; transform: translateY(40px); filter: blur(4px); }
-                100% { opacity: 1; transform: translateY(0); filter: blur(0); }
-            }
-        </style>
-    </head>
-
-<body class="font-sans bg-white dark:bg-gray-950 text-gray-900 dark:text-white antialiased">
-
-    <!-- ==================== 1. NAVBAR ==================== -->
-    <header class="fixed z-50 w-full glass border-b border-white/10">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex h-16 items-center justify-between">
-                <a href="/" class="flex items-center gap-2 group">
-                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                        <i class="fas fa-arrow-right text-white text-sm"></i>
-                    </div>
-                    <span class="text-xl font-bold text-gray-900 dark:text-white">ApexToWWW</span>
-                </a>
-
-                <nav class="hidden md:flex items-center space-x-8">
-                    <a href="#features" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">Features</a>
-                    <a href="#how-it-works" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">How It Works</a>
-                    <a href="#get-started" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">Setup</a>
-                    <a href="#faq" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">FAQ</a>
-                    <a href="/blog/" class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition">Blog</a>
-                </nav>
-
-                <div class="flex items-center gap-4">
-                    <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition" aria-label="Toggle dark mode">
-                        <i class="fas fa-moon text-gray-600 dark:hidden"></i>
-                        <i class="fas fa-sun text-yellow-400 hidden dark:block"></i>
-                    </button>
-                    <a href="#get-started" class="hidden sm:inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
-                        Get Started
-                    </a>
-                    <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" aria-label="Open menu">
-                        <i class="fas fa-bars text-gray-600 dark:text-gray-300"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
-            <nav class="container mx-auto px-4 py-4 space-y-2">
-                <a href="#features" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Features</a>
-                <a href="#how-it-works" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">How It Works</a>
-                <a href="#get-started" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Setup</a>
-                <a href="#faq" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">FAQ</a>
-                <a href="/blog/" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">Blog</a>
-            </nav>
-        </div>
-    </header>
-
-    <!-- ==================== 2. HERO SECTION ==================== -->
-    <section class="relative min-h-[80vh] flex items-center justify-center overflow-hidden pt-16">
-        <!-- Background -->
-        <div class="absolute inset-0 bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950"></div>
-        <div class="absolute inset-0 opacity-30 dark:opacity-20">
-            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl animate-pulse-slow"></div>
-            <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
-            <div class="absolute bottom-1/4 left-1/3 w-96 h-96 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl animate-pulse-slow" style="animation-delay: 4s;"></div>
-        </div>
-
-        <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 py-24">
-            <div class="max-w-4xl mx-auto text-center">
-                <!-- Social proof pill -->
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur border border-gray-200 dark:border-gray-700 text-sm font-medium text-gray-700 dark:text-gray-300 mb-8">
-                    <span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
-                    Trusted by 1,000+ developers
-                </div>
-
-                <h1 id="hero-headline" class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
-                    <span class="block text-gray-900 dark:text-white">Point Your <span id="rotating-word" class="inline-block overflow-hidden align-bottom"><span class="rotating-word-inner bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">naked</span></span> Domain</span>
-                    <span class="block text-gray-900 dark:text-white">to WWW in Seconds</span>
-                </h1>
-
-                <p id="hero-subtitle" class="text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-                    Your apex domain visitors hit a dead end. ApexToWWW fixes that with a free, instant 301 redirect to www &mdash; with automatic SSL, IPv6, and HTTP/3.
-                </p>
-
-                <div class="flex flex-col sm:flex-row justify-center gap-4 mb-16">
-                    <a href="#get-started" class="inline-flex items-center justify-center px-8 py-4 rounded-xl text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-xl shadow-blue-500/25 hover:shadow-blue-500/40">
-                        Start Free Setup
-                        <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                    <a href="#how-it-works" class="inline-flex items-center justify-center px-8 py-4 rounded-xl text-base font-semibold text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition">
-                        <i class="fas fa-play-circle mr-2"></i>
-                        See How It Works
-                    </a>
-                </div>
-
-                <!-- Visual Demo -->
-                <div class="relative max-w-2xl mx-auto">
-                    <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 p-6 sm:p-8">
-                        <div class="flex items-center gap-2 mb-6">
-                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                            <span class="ml-4 text-sm text-gray-500 font-mono">Browser</span>
-                        </div>
-                        <div class="flex items-center justify-center gap-4 sm:gap-8">
-                            <div class="text-center">
-                                <div class="px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg font-mono text-sm sm:text-base text-gray-700 dark:text-gray-300">
-                                    example.com
-                                </div>
-                                <span class="text-xs text-gray-500 mt-2 block">Apex Domain</span>
-                            </div>
-                            <div class="flex flex-col items-center">
-                                <i class="fas fa-arrow-right text-2xl text-blue-500 animate-pulse"></i>
-                                <span class="text-xs text-blue-500 font-semibold mt-1">301</span>
-                            </div>
-                            <div class="text-center">
-                                <div class="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg font-mono text-sm sm:text-base text-white">
-                                    www.example.com
-                                </div>
-                                <span class="text-xs text-gray-500 mt-2 block">WWW Subdomain</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Scroll indicator -->
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-            <i class="fas fa-chevron-down text-gray-400"></i>
-        </div>
-    </section>
-
-    <!-- ==================== 3. TRUST BAR / COMPATIBLE SERVICES ==================== -->
-    <section class="py-12 bg-white dark:bg-gray-900 border-y border-gray-100 dark:border-gray-800">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <p class="text-center text-sm font-medium text-gray-500 dark:text-gray-400 mb-6 uppercase tracking-wider">Works perfectly with</p>
-            <div class="flex flex-wrap justify-center gap-4 md:gap-6 overflow-x-auto">
-                <a href="/blog/github-pages-apex-domain-redirect/" class="px-5 py-2.5 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 whitespace-nowrap hover:border-blue-300 dark:hover:border-blue-700 transition">GitHub Pages</a>
-                <a href="/netlify-apex-domain-redirect/" class="px-5 py-2.5 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 whitespace-nowrap hover:border-blue-300 dark:hover:border-blue-700 transition">Netlify</a>
-                <a href="/vercel-apex-domain-redirect/" class="px-5 py-2.5 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 whitespace-nowrap hover:border-blue-300 dark:hover:border-blue-700 transition">Vercel</a>
-                <a href="/heroku-apex-domain-redirect/" class="px-5 py-2.5 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 whitespace-nowrap hover:border-blue-300 dark:hover:border-blue-700 transition">Heroku</a>
-                <a href="/cloudflare-pages-apex-redirect/" class="px-5 py-2.5 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 whitespace-nowrap hover:border-blue-300 dark:hover:border-blue-700 transition">Cloudflare</a>
-                <a href="/firebase-hosting-apex-redirect/" class="px-5 py-2.5 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 whitespace-nowrap hover:border-blue-300 dark:hover:border-blue-700 transition">Firebase</a>
-                <a href="/render-apex-domain-redirect/" class="px-5 py-2.5 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 whitespace-nowrap hover:border-blue-300 dark:hover:border-blue-700 transition">Render</a>
-                <a href="/aws-amplify-apex-domain-redirect/" class="px-5 py-2.5 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 whitespace-nowrap hover:border-blue-300 dark:hover:border-blue-700 transition">AWS Amplify</a>
-                <span class="px-5 py-2.5 bg-gray-50 dark:bg-gray-800 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 whitespace-nowrap">AWS CloudFront</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== 4. BENEFITS SECTION (BENTO BOX) ==================== -->
-    <section id="features" class="py-24 bg-gray-50 dark:bg-gray-950">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl mx-auto text-center mb-16">
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                    Why Developers Choose ApexToWWW
-                </h2>
-                <p class="text-lg text-gray-600 dark:text-gray-400">
-                    Focus on building &mdash; we handle the redirect infrastructure
-                </p>
-            </div>
-
-            <!-- Bento grid: 2 large on top, 3 small on bottom -->
-            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <!-- Large Card 1 -->
-                <div class="feature-card bg-white dark:bg-gray-900 p-8 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-blue-200 dark:hover:border-blue-800 hover:shadow-xl">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mb-6">
-                        <i class="fas fa-bolt text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Go Live in 60 Seconds</h3>
-                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">No signup, no config files, no CLI tools. Add two DNS records and your redirect works instantly. That's it.</p>
-                </div>
-
-                <!-- Large Card 2 -->
-                <div class="feature-card bg-white dark:bg-gray-900 p-8 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-green-200 dark:hover:border-green-800 hover:shadow-xl">
-                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center mb-6">
-                        <i class="fas fa-lock text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Never Worry About SSL</h3>
-                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">HTTPS just works. We automatically provision and renew Let's Encrypt certificates for every domain. Zero manual setup.</p>
-                </div>
-            </div>
-
-            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Small Card 1 -->
-                <div class="feature-card bg-white dark:bg-gray-900 p-6 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-purple-200 dark:hover:border-purple-800 hover:shadow-xl">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center mb-4">
-                        <i class="fas fa-rocket text-white text-lg"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Future-Proof Stack</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">HTTP/3 and QUIC for fastest possible redirects.</p>
-                </div>
-
-                <!-- Small Card 2 -->
-                <div class="feature-card bg-white dark:bg-gray-900 p-6 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-orange-200 dark:hover:border-orange-800 hover:shadow-xl">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center mb-4">
-                        <i class="fas fa-network-wired text-white text-lg"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">IPv6 Ready</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Full dual-stack. Every visitor connects, no matter their network.</p>
-                </div>
-
-                <!-- Small Card 3 -->
-                <div class="feature-card bg-white dark:bg-gray-900 p-6 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-pink-200 dark:hover:border-pink-800 hover:shadow-xl">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center mb-4">
-                        <i class="fas fa-heart text-white text-lg"></i>
-                    </div>
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Zero Cost, Always</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">No pricing page because there's nothing to pay. Free forever.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== 5. HOW IT WORKS (3 CARDS) ==================== -->
-    <section id="how-it-works" class="py-24 bg-white dark:bg-gray-900">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl mx-auto text-center mb-16">
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                    How It Works
-                </h2>
-                <p class="text-lg text-gray-600 dark:text-gray-400">
-                    Get started with your redirect in 3 simple steps
-                </p>
-            </div>
-
-            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Step 1 -->
-                <div class="relative bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 text-center">
-                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-blue-500/30 mx-auto mb-6">
-                        1
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Add DNS Records</h3>
-                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Point your apex domain's A and AAAA records to our servers</p>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="relative bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 text-center">
-                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-purple-500/30 mx-auto mb-6">
-                        2
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">We Handle the Rest</h3>
-                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">SSL certificates are provisioned automatically. Redirects go live within minutes.</p>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="relative bg-gray-50 dark:bg-gray-800 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 text-center">
-                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-green-500/30 mx-auto mb-6">
-                        3
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Visitors Land on WWW</h3>
-                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Every request to your naked domain gets a fast 301 redirect to www</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== 6. GET STARTED / DNS SETUP ==================== -->
-    <section id="get-started" class="py-24 bg-gradient-to-b from-gray-50 to-white dark:from-gray-950 dark:to-gray-900">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl mx-auto text-center mb-16">
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                    Get Started in Minutes
-                </h2>
-                <p class="text-lg text-gray-600 dark:text-gray-400">
-                    Just add these DNS records to your domain
-                </p>
-            </div>
-
-            <div class="max-w-2xl mx-auto">
-                <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-800 overflow-hidden">
-                    <!-- DNS Records -->
-                    <div class="p-8">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-                            <i class="fas fa-server text-blue-500"></i>
-                            DNS Records
-                        </h3>
-
-                        <div class="space-y-4">
-                            <!-- A Record -->
-                            <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-4">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-sm font-medium text-gray-600 dark:text-gray-400">A Record (IPv4)</span>
-                                    <button onclick="copyToClipboard('65.21.184.101', this)" class="copy-btn text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 flex items-center gap-1">
-                                        <i class="far fa-copy"></i>
-                                        <span>Copy</span>
-                                    </button>
-                                </div>
-                                <code class="block text-lg font-mono text-gray-900 dark:text-white">65.21.184.101</code>
-                            </div>
-
-                            <!-- AAAA Record -->
-                            <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-4">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-sm font-medium text-gray-600 dark:text-gray-400">AAAA Record (IPv6)</span>
-                                    <button onclick="copyToClipboard('2a01:4f9:c012:a304::1', this)" class="copy-btn text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 flex items-center gap-1">
-                                        <i class="far fa-copy"></i>
-                                        <span>Copy</span>
-                                    </button>
-                                </div>
-                                <code class="block text-lg font-mono text-gray-900 dark:text-white">2a01:4f9:c012:a304::1</code>
-                            </div>
-                        </div>
-
-                        <div class="mt-6 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-xl border border-blue-100 dark:border-blue-800">
-                            <div class="flex gap-3">
-                                <i class="fas fa-info-circle text-blue-500 mt-0.5"></i>
-                                <div class="text-sm text-blue-800 dark:text-blue-200">
-                                    <p class="font-medium mb-1">Point these records at your apex domain (@)</p>
-                                    <p class="text-blue-600 dark:text-blue-300">Changes typically propagate within 5-30 minutes, but can take up to 48 hours.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Verification -->
-                    <div class="border-t border-gray-100 dark:border-gray-800 p-8 bg-gray-50 dark:bg-gray-800/50">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-                            <i class="fas fa-check-double text-green-500"></i>
-                            Verify Your Setup
-                        </h3>
-
-                        <div class="space-y-4">
-                            <div class="bg-gray-900 rounded-xl p-4 overflow-x-auto">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-gray-400 text-sm">Test HTTP</span>
-                                    <button onclick="copyToClipboard('curl -I http://yourdomain.com', this)" class="copy-btn text-sm text-gray-400 hover:text-white flex items-center gap-1">
-                                        <i class="far fa-copy"></i>
-                                    </button>
-                                </div>
-                                <code class="text-green-400 font-mono text-sm">curl -I http://yourdomain.com</code>
-                            </div>
-
-                            <div class="bg-gray-900 rounded-xl p-4 overflow-x-auto">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-gray-400 text-sm">Test HTTPS</span>
-                                    <button onclick="copyToClipboard('curl -I https://yourdomain.com', this)" class="copy-btn text-sm text-gray-400 hover:text-white flex items-center gap-1">
-                                        <i class="far fa-copy"></i>
-                                    </button>
-                                </div>
-                                <code class="text-green-400 font-mono text-sm">curl -I https://yourdomain.com</code>
-                            </div>
-
-                            <div class="bg-gray-900 rounded-xl p-4 overflow-x-auto">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-gray-400 text-sm">Expected Response</span>
-                                </div>
-                                <pre class="text-gray-300 font-mono text-sm"><span class="text-yellow-400">HTTP/1.1 301 Moved Permanently</span>
-<span class="text-blue-400">Location:</span> https://www.yourdomain.com/</pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== 7. WHY REDIRECT TO WWW ==================== -->
-    <section id="why-www" class="py-24 bg-white dark:bg-gray-900">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                        Why Redirect to WWW?
-                    </h2>
-                    <p class="text-lg text-gray-600 dark:text-gray-400">
-                        Understanding the apex domain limitation
-                    </p>
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-8 mb-12">
-                    <div class="bg-red-50 dark:bg-red-900/20 rounded-2xl p-8 border border-red-100 dark:border-red-800">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 rounded-full bg-red-100 dark:bg-red-800 flex items-center justify-center">
-                                <i class="fas fa-times text-red-600 dark:text-red-400"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Apex Domain Limitations</h3>
-                        </div>
-                        <ul class="space-y-3 text-gray-600 dark:text-gray-400">
-                            <li class="flex items-start gap-2">
-                                <i class="fas fa-minus text-red-500 mt-1.5 text-xs"></i>
-                                <span>Can only use A/AAAA records</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fas fa-minus text-red-500 mt-1.5 text-xs"></i>
-                                <span>No CNAME support at root</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fas fa-minus text-red-500 mt-1.5 text-xs"></i>
-                                <span>Limited CDN compatibility</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fas fa-minus text-red-500 mt-1.5 text-xs"></i>
-                                <span>Harder to load balance</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-green-50 dark:bg-green-900/20 rounded-2xl p-8 border border-green-100 dark:border-green-800">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-800 flex items-center justify-center">
-                                <i class="fas fa-check text-green-600 dark:text-green-400"></i>
-                            </div>
-                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">WWW Subdomain Benefits</h3>
-                        </div>
-                        <ul class="space-y-3 text-gray-600 dark:text-gray-400">
-                            <li class="flex items-start gap-2">
-                                <i class="fas fa-plus text-green-500 mt-1.5 text-xs"></i>
-                                <span>Full CNAME support</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fas fa-plus text-green-500 mt-1.5 text-xs"></i>
-                                <span>Works with all CDNs</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fas fa-plus text-green-500 mt-1.5 text-xs"></i>
-                                <span>Easy load balancing</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fas fa-plus text-green-500 mt-1.5 text-xs"></i>
-                                <span>Better cookie isolation</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Services that need WWW -->
-                <div class="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8">
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-6 text-center">
-                        Popular Services Requiring WWW Subdomain
-                    </h3>
-                    <div class="flex flex-wrap justify-center gap-4">
-                        <span class="px-4 py-2 bg-white dark:bg-gray-700 rounded-lg text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-600">GitHub Pages</span>
-                        <span class="px-4 py-2 bg-white dark:bg-gray-700 rounded-lg text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-600">Netlify</span>
-                        <span class="px-4 py-2 bg-white dark:bg-gray-700 rounded-lg text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-600">Vercel</span>
-                        <span class="px-4 py-2 bg-white dark:bg-gray-700 rounded-lg text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-600">Heroku</span>
-                        <span class="px-4 py-2 bg-white dark:bg-gray-700 rounded-lg text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-600">Firebase Hosting</span>
-                        <span class="px-4 py-2 bg-white dark:bg-gray-700 rounded-lg text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-600">AWS CloudFront</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== 8. PRICING COMPARISON ==================== -->
-    <section id="pricing" class="py-24 bg-gray-50 dark:bg-gray-950">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl mx-auto text-center mb-16">
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                    Pricing &mdash; Why Pay for Redirects?
-                </h2>
-                <p class="text-lg text-gray-600 dark:text-gray-400">
-                    See how we compare to other solutions
-                </p>
-            </div>
-
-            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-                <!-- Card 1: DIY -->
-                <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-800 text-center">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">DIY</h3>
-                    <div class="text-3xl font-bold text-gray-900 dark:text-white mb-1">$0<span class="text-base font-normal text-gray-500">/mo</span></div>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Manual setup required</p>
-                    <ul class="space-y-3 text-sm text-gray-600 dark:text-gray-400 text-left mb-8">
-                        <li class="flex items-start gap-2">
-                            <i class="fas fa-minus text-gray-400 mt-1 text-xs"></i>
-                            <span>Manual Cloudflare/registrar setup</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <i class="fas fa-minus text-gray-400 mt-1 text-xs"></i>
-                            <span>Limited features</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <i class="fas fa-times text-red-400 mt-1 text-xs"></i>
-                            <span>No IPv6 or HTTP/3</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <i class="fas fa-minus text-gray-400 mt-1 text-xs"></i>
-                            <span>Requires account creation</span>
-                        </li>
-                    </ul>
-                    <a href="#why-www" class="inline-flex items-center justify-center w-full px-6 py-3 rounded-xl text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
-                        Learn More
-                    </a>
-                </div>
-
-                <!-- Card 2: ApexToWWW (HIGHLIGHTED) -->
-                <div class="relative bg-white dark:bg-gray-900 rounded-2xl p-8 border-2 border-transparent text-center shadow-xl md:-mt-4 md:mb-0" style="border-image: linear-gradient(to bottom right, #3b82f6, #8b5cf6) 1;">
-                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full text-xs font-semibold text-white">
-                        Most Popular
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">ApexToWWW</h3>
-                    <div class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-1">Free Forever</div>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">No account needed</p>
-                    <ul class="space-y-3 text-sm text-gray-600 dark:text-gray-400 text-left mb-8">
-                        <li class="flex items-start gap-2">
-                            <i class="fas fa-check text-green-500 mt-1 text-xs"></i>
-                            <span>Instant setup &mdash; just DNS</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <i class="fas fa-check text-green-500 mt-1 text-xs"></i>
-                            <span>Automatic SSL via Let's Encrypt</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <i class="fas fa-check text-green-500 mt-1 text-xs"></i>
-                            <span>IPv6 + HTTP/3 support</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <i class="fas fa-check text-green-500 mt-1 text-xs"></i>
-                            <span>No account required</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <i class="fas fa-check text-green-500 mt-1 text-xs"></i>
-                            <span>Path &amp; query string forwarding</span>
-                        </li>
-                    </ul>
-                    <a href="#get-started" class="inline-flex items-center justify-center w-full px-6 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
-                        Get Started <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
-                </div>
-
-                <!-- Card 3: Paid Services -->
-                <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-800 text-center">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Paid Services</h3>
-                    <div class="text-3xl font-bold text-gray-900 dark:text-white mb-1">$5-20<span class="text-base font-normal text-gray-500">/mo</span></div>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Various providers</p>
-                    <ul class="space-y-3 text-sm text-gray-600 dark:text-gray-400 text-left mb-8">
-                        <li class="flex items-start gap-2">
-                            <i class="fas fa-minus text-gray-400 mt-1 text-xs"></i>
-                            <span>Various redirect services</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <i class="fas fa-minus text-gray-400 mt-1 text-xs"></i>
-                            <span>Usually require an account</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <i class="fas fa-times text-red-400 mt-1 text-xs"></i>
-                            <span>Limited protocol support</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <i class="fas fa-minus text-gray-400 mt-1 text-xs"></i>
-                            <span>Monthly recurring cost</span>
-                        </li>
-                    </ul>
-                    <a href="#why-www" class="inline-flex items-center justify-center w-full px-6 py-3 rounded-xl text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
-                        Compare
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== 9. TRUSTED BY SECTION ==================== -->
-    <section class="py-16 bg-white dark:bg-gray-900 border-y border-gray-100 dark:border-gray-800">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <p class="text-center text-sm font-medium text-gray-500 dark:text-gray-400 mb-8 uppercase tracking-wider">Trusted by users from</p>
-            <div class="flex flex-wrap justify-center gap-4 md:gap-6">
-                <span class="px-5 py-2.5 text-sm font-medium text-gray-400 dark:text-gray-500">IBM</span>
-                <span class="px-5 py-2.5 text-sm font-medium text-gray-400 dark:text-gray-500">Google</span>
-                <span class="px-5 py-2.5 text-sm font-medium text-gray-400 dark:text-gray-500">Microsoft</span>
-                <span class="px-5 py-2.5 text-sm font-medium text-gray-400 dark:text-gray-500">Stripe</span>
-                <span class="px-5 py-2.5 text-sm font-medium text-gray-400 dark:text-gray-500">Shopify</span>
-                <span class="px-5 py-2.5 text-sm font-medium text-gray-400 dark:text-gray-500">Automattic</span>
-                <span class="px-5 py-2.5 text-sm font-medium text-gray-400 dark:text-gray-500">DigitalOcean</span>
-                <span class="px-5 py-2.5 text-sm font-medium text-gray-400 dark:text-gray-500">Netlify</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== 9b. SERVICE FACTS (LLM-citable) ==================== -->
-    <section id="facts" class="py-24 bg-white dark:bg-gray-900">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl mx-auto text-center mb-12">
-                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                    ApexToWWW at a Glance
-                </h2>
-                <p class="text-lg text-gray-600 dark:text-gray-400">
-                    The concrete facts &mdash; the numbers, IPs, and behaviour you can rely on.
-                </p>
-            </div>
-
-            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
-                <div>
-                    <dl class="divide-y divide-gray-100 dark:divide-gray-800">
-                        <div class="grid grid-cols-3 gap-4 py-3">
-                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">Service</dt>
-                            <dd class="text-sm text-gray-900 dark:text-white col-span-2 leading-relaxed">Apex domain &rarr; www 301 redirect</dd>
-                        </div>
-                        <div class="grid grid-cols-3 gap-4 py-3">
-                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">Price</dt>
-                            <dd class="text-sm text-gray-900 dark:text-white col-span-2 leading-relaxed">Free, no signup, no usage limits</dd>
-                        </div>
-                        <div class="grid grid-cols-3 gap-4 py-3">
-                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">Setup</dt>
-                            <dd class="text-sm text-gray-900 dark:text-white col-span-2 leading-relaxed">2 DNS records (1 A, 1 AAAA), under 60&nbsp;seconds</dd>
-                        </div>
-                        <div class="grid grid-cols-3 gap-4 py-3">
-                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">A record</dt>
-                            <dd class="text-sm font-mono text-gray-900 dark:text-white col-span-2 leading-relaxed">65.21.184.101</dd>
-                        </div>
-                        <div class="grid grid-cols-3 gap-4 py-3">
-                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">AAAA record</dt>
-                            <dd class="text-sm font-mono text-gray-900 dark:text-white col-span-2 leading-relaxed break-all">2a01:4f9:c012:a304::1</dd>
-                        </div>
-                        <div class="grid grid-cols-3 gap-4 py-3">
-                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">Redirect type</dt>
-                            <dd class="text-sm text-gray-900 dark:text-white col-span-2 leading-relaxed">HTTP 301 (permanent), full path + query preserved</dd>
-                        </div>
-                    </dl>
-                </div>
-
-                <div>
-                    <dl class="divide-y divide-gray-100 dark:divide-gray-800">
-                        <div class="grid grid-cols-3 gap-4 py-3">
-                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">SSL / TLS</dt>
-                            <dd class="text-sm text-gray-900 dark:text-white col-span-2 leading-relaxed">Let's Encrypt, auto-issued on first request, auto-renewed every 60&nbsp;days</dd>
-                        </div>
-                        <div class="grid grid-cols-3 gap-4 py-3">
-                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">Protocols</dt>
-                            <dd class="text-sm text-gray-900 dark:text-white col-span-2 leading-relaxed">HTTP/1.1, HTTP/2, HTTP/3 (QUIC), IPv4 + IPv6</dd>
-                        </div>
-                        <div class="grid grid-cols-3 gap-4 py-3">
-                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">DNS propagation</dt>
-                            <dd class="text-sm text-gray-900 dark:text-white col-span-2 leading-relaxed">Typically 5&ndash;30&nbsp;minutes, max 48&nbsp;hours</dd>
-                        </div>
-                        <div class="grid grid-cols-3 gap-4 py-3">
-                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">Compatible with</dt>
-                            <dd class="text-sm text-gray-900 dark:text-white col-span-2 leading-relaxed">GitHub Pages, Vercel, Netlify, Cloudflare Pages, Heroku, Firebase Hosting, AWS CloudFront, Render, Fly.io &mdash; any host that needs a CNAME on www</dd>
-                        </div>
-                        <div class="grid grid-cols-3 gap-4 py-3">
-                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">Wildcard apex</dt>
-                            <dd class="text-sm text-gray-900 dark:text-white col-span-2 leading-relaxed">Not supported on the free tier</dd>
-                        </div>
-                        <div class="grid grid-cols-3 gap-4 py-3">
-                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 col-span-1">Operator</dt>
-                            <dd class="text-sm text-gray-900 dark:text-white col-span-2 leading-relaxed">Sandbox.ventures, Aarhus, Denmark</dd>
-                        </div>
-                    </dl>
-                </div>
-            </div>
-
-            <div class="max-w-4xl mx-auto mt-12 p-6 rounded-2xl bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700">
-                <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                    <strong class="text-gray-900 dark:text-white">In one sentence:</strong>
-                    ApexToWWW is a free DNS-based service that 301-redirects an apex (naked) domain to its www subdomain by hosting two well-known IP addresses &mdash; <code class="font-mono text-xs bg-white dark:bg-gray-900 px-1.5 py-0.5 rounded">65.21.184.101</code> for IPv4 and <code class="font-mono text-xs bg-white dark:bg-gray-900 px-1.5 py-0.5 rounded">2a01:4f9:c012:a304::1</code> for IPv6 &mdash; that respond to every HTTP request with a 301 redirect to the equivalent <code class="font-mono text-xs bg-white dark:bg-gray-900 px-1.5 py-0.5 rounded">https://www</code> URL, while serving an automatically-renewed Let's Encrypt certificate.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== 10. FAQ ==================== -->
-    <section id="faq" class="py-24 bg-gray-50 dark:bg-gray-950">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-3xl mx-auto">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                        Frequently Asked Questions
-                    </h2>
-                    <p class="text-lg text-gray-600 dark:text-gray-400">
-                        Common questions about apex domains, redirects, and our service
-                    </p>
-                </div>
-
-                <div class="space-y-3">
-                    <!-- Q1: Core concept — targets "what is apex domain" -->
-                    <div class="faq-item bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
-                        <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left gap-4" onclick="toggleFaq(this)">
-                            <span class="font-semibold text-gray-900 dark:text-white">What is an apex domain, and why does it need a redirect?</span>
-                            <i class="faq-icon fas fa-chevron-down text-gray-400 dark:text-gray-500 flex-shrink-0"></i>
-                        </button>
-                        <div class="faq-content">
-                            <div class="px-6 pb-5">
-                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">An apex domain (also called root, naked, or bare domain) is your domain without any prefix &mdash; for example <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">example.com</code> rather than <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">www.example.com</code>. Due to DNS standards (<a href="https://datatracker.ietf.org/doc/html/rfc1034#section-3.6.2" class="text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener">RFC 1034 &sect;3.6.2</a>), apex domains can't use CNAME records, which means they're incompatible with most CDNs and hosting platforms like GitHub Pages, Netlify, and Vercel. A redirect solves this by automatically forwarding apex visitors to your www subdomain where your site actually lives.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Q2: How it works — targets "how to redirect apex domain to www" -->
-                    <div class="faq-item bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
-                        <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left gap-4" onclick="toggleFaq(this)">
-                            <span class="font-semibold text-gray-900 dark:text-white">How do I redirect my apex domain to www using ApexToWWW?</span>
-                            <i class="faq-icon fas fa-chevron-down text-gray-400 dark:text-gray-500 flex-shrink-0"></i>
-                        </button>
-                        <div class="faq-content">
-                            <div class="px-6 pb-5">
-                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-3">Just add two DNS records to your domain's apex (@):</p>
-                                <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-3 font-mono text-sm mb-3 space-y-1">
-                                    <div><span class="text-gray-500">A</span> &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-gray-500">@</span> &nbsp;&rarr; <span class="text-blue-600 dark:text-blue-400">65.21.184.101</span></div>
-                                    <div><span class="text-gray-500">AAAA</span> <span class="text-gray-500">@</span> &nbsp;&rarr; <span class="text-blue-600 dark:text-blue-400">2a01:4f9:c012:a304::1</span></div>
-                                </div>
-                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">That's it. No signup, no configuration. DNS changes typically propagate within 5&ndash;30 minutes, and SSL certificates are provisioned automatically.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Q3: SSL — targets "apex domain HTTPS redirect" -->
-                    <div class="faq-item bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
-                        <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left gap-4" onclick="toggleFaq(this)">
-                            <span class="font-semibold text-gray-900 dark:text-white">Does it work with HTTPS? Do I need my own SSL certificate?</span>
-                            <i class="faq-icon fas fa-chevron-down text-gray-400 dark:text-gray-500 flex-shrink-0"></i>
-                        </button>
-                        <div class="faq-content">
-                            <div class="px-6 pb-5">
-                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Yes, HTTPS is fully supported and you don't need your own certificate. We automatically provision and renew SSL certificates via Let's Encrypt for every domain. Both <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">http://example.com</code> and <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">https://example.com</code> redirect securely to your www subdomain.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Q4: Cost — targets "free domain redirect service" -->
-                    <div class="faq-item bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
-                        <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left gap-4" onclick="toggleFaq(this)">
-                            <span class="font-semibold text-gray-900 dark:text-white">Is ApexToWWW really free? What's the catch?</span>
-                            <i class="faq-icon fas fa-chevron-down text-gray-400 dark:text-gray-500 flex-shrink-0"></i>
-                        </button>
-                        <div class="faq-content">
-                            <div class="px-6 pb-5">
-                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Completely free, no catch. No hidden costs, no premium tiers, no usage limits, no account required. We run on energy-efficient ARM64 infrastructure which keeps costs near zero, and we believe basic internet plumbing like domain redirects should be free for everyone.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Q5: Path forwarding — targets "domain redirect with path" -->
-                    <div class="faq-item bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
-                        <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left gap-4" onclick="toggleFaq(this)">
-                            <span class="font-semibold text-gray-900 dark:text-white">Does the redirect preserve the URL path and query string?</span>
-                            <i class="faq-icon fas fa-chevron-down text-gray-400 dark:text-gray-500 flex-shrink-0"></i>
-                        </button>
-                        <div class="faq-content">
-                            <div class="px-6 pb-5">
-                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Yes. The full path, query parameters, and fragments are preserved. For example, <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">example.com/pricing?plan=pro</code> redirects to <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">www.example.com/pricing?plan=pro</code>. This is a 301 permanent redirect per <a href="https://datatracker.ietf.org/doc/html/rfc7231#section-6.4.2" class="text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener">RFC 7231 &sect;6.4.2</a>, so search engines will transfer SEO value to your www URLs.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Q6: GitHub Pages — targets "github pages apex domain" -->
-                    <div class="faq-item bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
-                        <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left gap-4" onclick="toggleFaq(this)">
-                            <span class="font-semibold text-gray-900 dark:text-white">Can I use this with GitHub Pages, Netlify, or Vercel?</span>
-                            <i class="faq-icon fas fa-chevron-down text-gray-400 dark:text-gray-500 flex-shrink-0"></i>
-                        </button>
-                        <div class="faq-content">
-                            <div class="px-6 pb-5">
-                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Absolutely &mdash; that's one of the most common use cases. Point your www subdomain to your hosting provider (e.g. a CNAME to <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">username.github.io</code>), then use ApexToWWW to redirect the apex domain to www. Works with GitHub Pages, Netlify, Vercel, Heroku, Firebase Hosting, Render, Fly.io, and any other platform that requires a CNAME.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Q7: SEO — targets "301 redirect SEO apex domain" -->
-                    <div class="faq-item bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
-                        <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left gap-4" onclick="toggleFaq(this)">
-                            <span class="font-semibold text-gray-900 dark:text-white">Will the redirect affect my SEO or Google rankings?</span>
-                            <i class="faq-icon fas fa-chevron-down text-gray-400 dark:text-gray-500 flex-shrink-0"></i>
-                        </button>
-                        <div class="faq-content">
-                            <div class="px-6 pb-5">
-                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">It helps SEO. We use a 301 (permanent) redirect, which tells search engines to transfer ranking signals to your www URL. This consolidates your domain authority instead of splitting it between two addresses. Google recommends picking one canonical version (www or non-www) and redirecting the other &mdash; which is exactly what ApexToWWW does.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Q8: Reliability — targets "apex domain redirect uptime" -->
-                    <div class="faq-item bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
-                        <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left gap-4" onclick="toggleFaq(this)">
-                            <span class="font-semibold text-gray-900 dark:text-white">How reliable is the service? What happens if your servers go down?</span>
-                            <i class="faq-icon fas fa-chevron-down text-gray-400 dark:text-gray-500 flex-shrink-0"></i>
-                        </button>
-                        <div class="faq-content">
-                            <div class="px-6 pb-5">
-                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Our redirect servers run on dedicated infrastructure with high availability. The redirect itself is a simple, stateless HTTP response (&lt;50ms) with no database or complex logic involved. Since it's a 301 permanent redirect, browsers also cache it locally &mdash; so even in the unlikely event of downtime, returning visitors would still reach your www site.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Q9: vs www — targets "should I use www or non-www" -->
-                    <div class="faq-item bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
-                        <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left gap-4" onclick="toggleFaq(this)">
-                            <span class="font-semibold text-gray-900 dark:text-white">Should I use www or non-www for my website?</span>
-                            <i class="faq-icon fas fa-chevron-down text-gray-400 dark:text-gray-500 flex-shrink-0"></i>
-                        </button>
-                        <div class="faq-content">
-                            <div class="px-6 pb-5">
-                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">For most sites, www is the better choice. It supports CNAME records (required by most CDNs and hosting platforms &mdash; the apex domain restriction is defined in <a href="https://datatracker.ietf.org/doc/html/rfc2181#section-10.1" class="text-blue-600 dark:text-blue-400 hover:underline" target="_blank" rel="noopener">RFC 2181 &sect;10.1</a>), enables better cookie isolation between your main site and subdomains, and makes load balancing and domain migration easier. The important thing is to pick one and redirect the other &mdash; having both active without a redirect splits your SEO and confuses browsers.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Q10: Wildcards — targets "wildcard domain redirect" -->
-                    <div class="faq-item bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800">
-                        <button class="faq-trigger w-full px-6 py-5 flex items-center justify-between text-left gap-4" onclick="toggleFaq(this)">
-                            <span class="font-semibold text-gray-900 dark:text-white">Do you support wildcard domains?</span>
-                            <i class="faq-icon fas fa-chevron-down text-gray-400 dark:text-gray-500 flex-shrink-0"></i>
-                        </button>
-                        <div class="faq-content">
-                            <div class="px-6 pb-5">
-                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">No. The free service only redirects domains that have their A/AAAA records pointed directly at our servers. We verify that your domain actually resolves to us before issuing an SSL certificate and serving redirects. Wildcard domains (e.g. <code class="text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">*.example.com</code>) are not supported on the free tier. We may add wildcard support in a future premium version &mdash; if that's something you need, <a href="#" data-email-user="hi" data-email-domain="apextowww.com" class="js-email text-blue-600 dark:text-blue-400 hover:underline">let us know</a>.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ==================== 11. CTA SECTION ==================== -->
-    <section class="py-24 bg-gradient-to-r from-blue-600 to-purple-600 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-white rounded-full mix-blend-multiply filter blur-3xl"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-white rounded-full mix-blend-multiply filter blur-3xl"></div>
-        </div>
-        <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-                Ready to Fix Your Naked Domain?
-            </h2>
-            <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
-                Set up your redirect in under 60 seconds. No signup required.
-            </p>
-            <a href="#get-started" class="inline-flex items-center justify-center px-10 py-4 rounded-xl text-lg font-semibold text-blue-600 bg-white hover:bg-blue-50 transition shadow-xl shadow-blue-900/30">
-                Start Free Setup <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-            <p class="text-sm text-blue-200 mt-6">No credit card. No account. Just DNS.</p>
-        </div>
-    </section>
-
-    <!-- ==================== 12. FOOTER ==================== -->
-    <footer class="bg-gray-900 dark:bg-black py-16 border-t border-gray-800">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-                <!-- Col 1: Logo + description -->
-                <div>
-                    <a href="/" class="flex items-center gap-2 mb-4">
-                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                            <i class="fas fa-arrow-right text-white text-sm"></i>
-                        </div>
-                        <span class="text-lg font-bold text-white">ApexToWWW</span>
-                    </a>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-4">Free apex domain to www redirect service with automatic SSL, IPv6, and HTTP/3.</p>
-                    <p class="text-gray-500 text-sm">Provided by <a href="https://sandbox.ventures" class="hover:text-gray-300 transition underline">Sandbox.ventures</a></p>
-                </div>
-
-                <!-- Col 2: Product -->
-                <div>
-                    <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Product</h4>
-                    <nav class="space-y-2">
-                        <a href="#features" class="block text-sm text-gray-400 hover:text-white transition">Features</a>
-                        <a href="#how-it-works" class="block text-sm text-gray-400 hover:text-white transition">How It Works</a>
-                        <a href="#get-started" class="block text-sm text-gray-400 hover:text-white transition">Setup</a>
-                        <a href="/blog/" class="block text-sm text-gray-400 hover:text-white transition">Blog</a>
-                    </nav>
-                </div>
-
-                <!-- Col 3: Resources -->
-                <div>
-                    <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Resources</h4>
-                    <nav class="space-y-2">
-                        <a href="/blog/how-to-redirect-apex-domain-to-www/" class="block text-sm text-gray-400 hover:text-white transition">How to redirect apex to www</a>
-                        <a href="/blog/what-is-an-apex-domain/" class="block text-sm text-gray-400 hover:text-white transition">What is an apex domain?</a>
-                        <a href="/blog/apex-domain-vs-www/" class="block text-sm text-gray-400 hover:text-white transition">Apex domain vs www</a>
-                        <a href="/blog/apex-domain-redirect-methods-compared/" class="block text-sm text-gray-400 hover:text-white transition">Redirect methods compared</a>
-                        <a href="/redirect-www-to-apex-domain/" class="block text-sm text-gray-400 hover:text-white transition">Redirect www to apex</a>
-                        <a href="/blog/hreflang-and-canonical-tags/" class="block text-sm text-gray-400 hover:text-white transition">Hreflang &amp; canonical tags</a>
-                        <a href="/blog/" class="block text-sm text-gray-400 hover:text-white transition">All guides</a>
-                        <a href="#faq" class="block text-sm text-gray-400 hover:text-white transition">FAQ</a>
-                        <a href="#" data-email-user="hi" data-email-domain="apextowww.com" class="js-email block text-sm text-gray-400 hover:text-white transition">Contact</a>
-                    </nav>
-                </div>
-
-                <!-- Col 4: Legal -->
-                <div>
-                    <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Legal</h4>
-                    <nav class="space-y-2">
-                        <a href="#" class="block text-sm text-gray-400 hover:text-white transition">Privacy Policy</a>
-                        <a href="#" class="block text-sm text-gray-400 hover:text-white transition">Terms of Service</a>
-                    </nav>
-                </div>
-            </div>
-
-            <!-- Bottom bar -->
-            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-                <p class="text-gray-500 text-sm">&copy; <span id="current-year"></span> ApexToWWW. All rights reserved.</p>
-                <p class="text-gray-500 text-sm">P. O. Pedersens Vej 2, 8200 Aarhus N, Denmark</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- ==================== SCRIPTS ==================== -->
-    <script>
-        // Dynamic year
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-
-        // A/B/C Split Test — apply variant subtitle
-        (function() {
-            var v = window.__abVariant;
-            var variants = window.__abVariants;
-            if (v && variants && variants[v]) {
-                var sub = document.getElementById('hero-subtitle');
-                if (sub) sub.textContent = variants[v].subtitle;
-            }
-            // Track CTA clicks with variant info
-            document.querySelectorAll('a[href="#get-started"]').forEach(function(btn) {
-                btn.addEventListener('click', function() {
-                    if (typeof gtag === 'function') {
-                        gtag('event', 'ab_test_cta_click', {
-                            test_name: 'hero_headline',
-                            variant: v,
-                            cta_location: btn.closest('section') ? 'hero' : 'other'
-                        });
-                    }
-                });
-            });
-            // Track scroll to get-started section (conversion proxy)
-            var observed = false;
-            var getStarted = document.getElementById('get-started');
-            if (getStarted && typeof IntersectionObserver !== 'undefined') {
-                new IntersectionObserver(function(entries) {
-                    if (entries[0].isIntersecting && !observed) {
-                        observed = true;
-                        if (typeof gtag === 'function') {
-                            gtag('event', 'ab_test_scroll_to_setup', {
-                                test_name: 'hero_headline',
-                                variant: v
-                            });
-                        }
-                    }
-                }, { threshold: 0.5 }).observe(getStarted);
-            }
-        })();
-
-        // Rotating word animation
-        (function() {
-            var words = ['naked', 'bare', 'apex', 'root', 'raw', 'base', 'top', 'zone'];
-            var el = document.getElementById('rotating-word');
-            if (!el) return;
-            var idx = 0;
-            var inner = el.querySelector('.rotating-word-inner');
-
-            setInterval(function() {
-                idx = (idx + 1) % words.length;
-                // Animate out
-                inner.style.transition = 'opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease';
-                inner.style.opacity = '0';
-                inner.style.transform = 'translateY(-20px)';
-                inner.style.filter = 'blur(4px)';
-
-                setTimeout(function() {
-                    inner.textContent = words[idx];
-                    // Reset position below
-                    inner.style.transition = 'none';
-                    inner.style.transform = 'translateY(20px)';
-                    // Animate in
-                    requestAnimationFrame(function() {
-                        inner.style.transition = 'opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease';
-                        inner.style.opacity = '1';
-                        inner.style.transform = 'translateY(0)';
-                        inner.style.filter = 'blur(0)';
-                    });
-                }, 300);
-            }, 2200);
-        })();
-
-        // Theme Toggle
-        const themeToggle = document.getElementById('theme-toggle');
-        const html = document.documentElement;
-
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            html.classList.add('dark');
-        }
-
-        themeToggle.addEventListener('click', () => {
-            html.classList.toggle('dark');
-            localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
-        });
-
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-
-        // Copy to Clipboard
-        function copyToClipboard(text, button) {
-            navigator.clipboard.writeText(text).then(() => {
-                const originalHtml = button.innerHTML;
-                button.innerHTML = '<i class="fas fa-check"></i> <span>Copied!</span>';
-                button.classList.add('text-green-500');
-                setTimeout(() => {
-                    button.innerHTML = originalHtml;
-                    button.classList.remove('text-green-500');
-                }, 2000);
-            });
-        }
-
-        // FAQ Accordion
-        function toggleFaq(trigger) {
-            const item = trigger.closest('.faq-item');
-            const isActive = item.classList.contains('active');
-
-            document.querySelectorAll('.faq-item').forEach(el => {
-                el.classList.remove('active');
-            });
-
-            if (!isActive) {
-                item.classList.add('active');
-            }
-        }
-
-        document.querySelector('.faq-item')?.classList.add('active');
-
-        // Wire up obfuscated email links at runtime (avoids Cloudflare email
-        // obfuscation rewriting to /cdn-cgi/l/email-protection which 404s for
-        // crawlers that don't execute JS).
-        document.querySelectorAll('a.js-email').forEach(a => {
-            const addr = a.dataset.emailUser + '\u0040' + a.dataset.emailDomain;
-            a.setAttribute('href', 'mail' + 'to:' + addr);
-            if (a.textContent.trim() === '') a.textContent = addr;
-        });
-
-        // Smooth scroll offset for fixed header
-        document.querySelectorAll('a[href^="#"]:not(.js-email)').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const offset = 80;
-                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Redirect Apex Domain to WWW — Free, 2 DNS Records, Auto SSL</title>
+<meta name="description" content="Redirect your apex domain to www with 2 DNS records. Free, no signup, auto SSL, IPv6, HTTP/3. Works with GitHub Pages, Vercel, Netlify.">
+<link rel="canonical" href="https://www.apextowww.com/">
+<meta name="theme-color" content="#4338CA">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.apextowww.com/">
+<meta property="og:title" content="Redirect Apex Domain to WWW — Free, 2 DNS Records, Auto SSL">
+<meta property="og:description" content="Point your apex domain's A and AAAA records at ApexToWWW and it 301-redirects to www. Free, automatic SSL, IPv6 and HTTP/3. Works with GitHub Pages, Vercel, Netlify, Cloudflare Pages, Heroku, Firebase, Render and AWS Amplify.">
+<meta property="og:image" content="https://www.apextowww.com/og-image.png">
+<meta property="og:site_name" content="ApexToWWW">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Redirect Apex Domain to WWW — Free, 2 DNS Records, Auto SSL">
+<meta name="twitter:description" content="Point your apex domain's A/AAAA records to us and we 301-redirect to www. Free. Auto SSL. IPv6. HTTP/3.">
+<meta name="twitter:image" content="https://www.apextowww.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "ApexToWWW",
+  "url": "https://www.apextowww.com",
+  "description": "Free DNS apex domain to www redirect service with automatic SSL, IPv6, and HTTP/3 support.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "provider": {
+    "@type": "Organization",
+    "name": "Sandbox.ventures",
+    "url": "https://sandbox.ventures",
+    "address": { "@type": "PostalAddress", "streetAddress": "P. O. Pedersens Vej 2", "addressLocality": "Aarhus N", "postalCode": "8200", "addressCountry": "DK" }
+  },
+  "featureList": ["301 redirect", "Automatic SSL/TLS", "IPv6 support", "HTTP/3", "Free", "No account required"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Redirect Your Apex Domain to WWW",
+  "description": "Set up a free 301 redirect from your apex (naked) domain to your www subdomain using two DNS records.",
+  "totalTime": "PT2M",
+  "estimatedCost": { "@type": "MonetaryAmount", "currency": "USD", "value": "0" },
+  "step": [
+    { "@type": "HowToStep", "name": "Add the A record", "text": "At your DNS provider, add an A record with host @ (the apex) pointing to 65.21.184.101.", "url": "https://www.apextowww.com/#how" },
+    { "@type": "HowToStep", "name": "Add the AAAA record", "text": "Add an AAAA record with host @ pointing to 2a01:4f9:c012:a304::1 so IPv6 visitors get the same redirect.", "url": "https://www.apextowww.com/#how" },
+    { "@type": "HowToStep", "name": "Test the 301", "text": "After DNS propagates (typically 5 to 30 minutes), run curl -I http://yourdomain.com and confirm a 301 response with Location: https://www.yourdomain.com/.", "url": "https://www.apextowww.com/#how" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "What is an apex domain, and why does it need a redirect?", "acceptedAnswer": { "@type": "Answer", "text": "An apex domain (also called a root, naked, or bare domain) is your domain without any prefix: example.com rather than www.example.com. DNS does not allow a CNAME record at the apex (RFC 1034), so it cannot point at most hosts and CDNs, such as GitHub Pages, Netlify and Vercel. A redirect sends apex visitors to your www subdomain, where your site lives." } },
+    { "@type": "Question", "name": "How do I redirect my apex domain to www with ApexToWWW?", "acceptedAnswer": { "@type": "Answer", "text": "Add an A record for @ pointing to 65.21.184.101 and an AAAA record for @ pointing to 2a01:4f9:c012:a304::1. There is nothing to sign up for or configure. DNS changes typically propagate within 5 to 30 minutes." } },
+    { "@type": "Question", "name": "Do I need my own SSL certificate?", "acceptedAnswer": { "@type": "Answer", "text": "No. ApexToWWW issues a Let's Encrypt certificate for your apex domain on the first HTTPS request and renews it automatically. Your www site keeps the certificate from your own host." } },
+    { "@type": "Question", "name": "Is ApexToWWW really free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. There is no account, no usage limit and no paid tier today. It runs on small ARM64 servers, which keeps costs low." } },
+    { "@type": "Question", "name": "Does the redirect keep the URL path and query string?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. example.com/pricing?plan=pro redirects to www.example.com/pricing?plan=pro. It is a 301 (permanent) redirect, so search engines treat the www URL as the canonical address." } },
+    { "@type": "Question", "name": "Which hosting providers does it work with?", "acceptedAnswer": { "@type": "Answer", "text": "Any host where www is a CNAME, including GitHub Pages, Netlify, Vercel, Cloudflare Pages, Heroku, Firebase Hosting, Render and AWS Amplify. Keep your www record pointing at your host. ApexToWWW only handles the apex." } },
+    { "@type": "Question", "name": "Does ApexToWWW redirect www to the apex instead?", "acceptedAnswer": { "@type": "Answer", "text": "No. It only redirects the apex to www. To go the other way, use your host's own redirect feature. Our guide to redirecting www to apex covers Cloudflare, Vercel, Netlify and other hosts." } },
+    { "@type": "Question", "name": "Will the redirect affect my SEO?", "acceptedAnswer": { "@type": "Answer", "text": "A 301 tells search engines that www is the canonical address, which consolidates ranking signals on one URL. Keep a canonical tag on each page pointing at the same www URL, and list only www URLs in your sitemap." } },
+    { "@type": "Question", "name": "Are wildcard domains supported?", "acceptedAnswer": { "@type": "Answer", "text": "No. The free service only redirects domains whose A and AAAA records point directly at its servers. That is verified before a certificate is issued. Wildcard domains are not supported." } }
+  ]
+}
+</script>
+<script>
+(function () {
+  try {
+    var t = localStorage.theme;
+    if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  } catch (e) {}
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--bg:#F6F7FB;--surface:#FFFFFF;--ink:#0B1020;--muted:#4B5568;--line:#DDE1EA;--accent:#4338CA;--accent-soft:#ECEEFF;--on-accent:#FFFFFF;--ok:#0F7A47;--dot:#D5DAE6;--code-bg:#0C1222;--code-line:#222C47;--code-ink:#DCE3F5;--code-muted:#8F9BB8;--code-green:#86E3B0;--code-blue:#9DBBFF;--code-amber:#FFD08A}
+html.dark{color-scheme:dark;--bg:#0A0F1D;--surface:#121A2E;--ink:#EDF0F8;--muted:#A3AEC6;--line:#243050;--accent:#9AA2FF;--accent-soft:#1A2347;--on-accent:#0B1020;--ok:#5FD08F;--dot:#1B2544;--code-bg:#060A15;--code-line:#1E2742;--code-ink:#DCE3F5;--code-muted:#8F9BB8;--code-green:#86E3B0;--code-blue:#9DBBFF;--code-amber:#FFD08A}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.page *{box-sizing:border-box}
+.page a{color:inherit}
+.page section[id],.page #records{scroll-margin-top:84px}
+.skip{position:absolute;left:-9999px;top:8px;background:var(--accent);color:var(--on-accent);padding:10px 16px;border-radius:8px;font-weight:600;z-index:50}
+.skip:focus{left:8px}
+.page a:focus-visible,.page button:focus-visible,.page summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px}
+.nav-links a{color:var(--muted);text-decoration:none;padding:10px 0}
+.nav-links a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:12px;font-family:inherit;font-weight:600;font-size:16px;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:background .15s,border-color .15s,filter .15s}
+.page .btn-primary{background:var(--accent);color:var(--on-accent)}
+.btn-primary:hover{filter:brightness(1.12)}
+.page .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--ink)}
+.btn-sm{min-height:44px;padding:0 18px;font-size:15px}
+.page a.link{color:var(--accent);font-weight:600;text-decoration:none}
+.page a.link:hover{text-decoration:underline}
+.page a.card{display:block;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;text-decoration:none;color:var(--ink);transition:border-color .15s,transform .15s}
+.page a.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.copy{min-height:44px;min-width:84px;padding:0 14px;border-radius:10px;border:1px solid var(--code-line);background:transparent;color:var(--code-ink);font-family:inherit;font-weight:600;font-size:14px;cursor:pointer}
+.copy:hover{border-color:var(--code-ink)}
+details.faq{border-bottom:1px solid var(--line)}
+details.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;font-weight:600;font-size:18px;line-height:1.4}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq summary::after{content:"+";font-size:26px;line-height:1;color:var(--accent);flex:none}
+details.faq[open] summary::after{content:"\2212"}
+details.faq p{margin:0 0 24px;color:var(--muted);font-size:16px;max-width:760px}
+@media (max-width:820px){.nav-links{display:none !important}}
+@media (max-width:520px){.rec{grid-template-columns:auto 1fr auto !important}.rec>code{order:3;grid-column:1/-1}.fact{grid-template-columns:minmax(0,1fr) !important;gap:2px !important}.fact dd{overflow-wrap:anywhere}}
+@media (prefers-reduced-motion:reduce){.page *{transition:none !important}}
+.alias{display:block;height:0;scroll-margin-top:84px}
+.icon-btn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.icon-btn:hover{border-color:var(--ink)}
+.icon-sun{display:none}
+html.dark .icon-sun{display:block}
+html.dark .icon-moon{display:none}
+@media (max-width:520px){.hide-xs{display:none}.hdr{gap:12px !important;padding:0 16px !important}.hdr>a{font-size:18px !important}}
+@media (max-width:360px){.hdr{gap:8px !important;padding:0 12px !important}.hdr>a{gap:8px !important}.hdr .btn-sm{padding:0 12px !important;font-size:14px !important}}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NCDJZQW377"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag() { dataLayer.push(arguments); }
+gtag("js", new Date());
+gtag("config", "G-NCDJZQW377");
+</script>
+</head>
+<body class="page">
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header style="position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)">
+  <div class="hdr" style="max-width:1160px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="/" aria-label="ApexToWWW home" style="display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:20px;letter-spacing:-0.02em">
+      <span aria-hidden="true" style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#3B82F6,#9333EA);display:flex;align-items:center;justify-content:center;color:#fff">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+      </span>
+      ApexToWWW
+    </a>
+    <nav aria-label="Primary" class="nav-links" style="display:flex;gap:28px;font-size:15px;font-weight:500">
+      <a href="#how">How it works</a>
+      <a href="#providers">Providers</a>
+      <a href="#guides">Guides</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Dark mode" aria-pressed="false">
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      </button>
+      <a class="btn btn-primary btn-sm" href="#records"><span>Get <span class="hide-xs">the </span>records</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section style="position:relative;overflow:hidden">
+  <div aria-hidden="true" style="position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,var(--dot) 1px,transparent 0);background-size:24px 24px;-webkit-mask-image:linear-gradient(to bottom,#000 0%,transparent 85%);mask-image:linear-gradient(to bottom,#000 0%,transparent 85%)"></div>
+  <div style="position:relative;max-width:1160px;margin:0 auto;padding:72px 24px 88px;display:flex;flex-wrap:wrap;gap:56px;align-items:center">
+
+    <div style="flex:1 1 480px;min-width:0">
+      <p style="display:inline-flex;align-items:center;gap:8px;margin:0 0 24px;padding:6px 14px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:14px;font-weight:600">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+        Free apex to www redirect
+      </p>
+      <h1 style="margin:0 0 24px;font-size:clamp(38px,5.2vw,62px);line-height:1.04;letter-spacing:-0.03em;font-weight:800">Redirect your apex domain to www with <span style="color:var(--accent)">two DNS records.</span></h1>
+      <p style="margin:0 0 32px;max-width:540px;font-size:19px;line-height:1.6;color:var(--muted)"><strong style="color:var(--ink);font-weight:700">Never lose visitors who type your bare domain.</strong> Point your apex at ApexToWWW and every visit to example.com is sent to www.example.com with a 301, keeping the path and query string. SSL is issued automatically. Free, with no account to create.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px">
+        <a class="btn btn-primary" href="#records">Get the two records</a>
+        <a class="btn btn-ghost" href="#how">How it works</a>
+      </div>
+      <ul style="list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px 24px;font-size:15px;font-weight:500">
+        <li style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>301 permanent redirect</li>
+        <li style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Automatic SSL</li>
+        <li style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>IPv4 + IPv6</li>
+        <li style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>HTTP/3</li>
+        <li style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>No signup</li>
+      </ul>
+    </div>
+
+    <div id="records" style="flex:1 1 440px;min-width:0;max-width:560px;margin:0 auto;background:var(--code-bg);border:1px solid var(--code-line);border-radius:20px;padding:28px;color:var(--code-ink);box-shadow:0 24px 60px -24px rgba(11,16,32,0.45)"><span id="get-started" class="alias" style="margin-top:-28px"></span>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin-bottom:20px">
+        <h2 style="margin:0;font-size:16px;font-weight:700;letter-spacing:-0.01em">DNS records for @ (the apex)</h2>
+        <span style="font-size:13px;color:var(--code-muted)">Add at your DNS provider</span>
+      </div>
+
+      <div class="rec" style="display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;gap:12px;align-items:center;padding:14px 0;border-top:1px solid var(--code-line)">
+        <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:500;padding:4px 10px;border-radius:6px;background:var(--code-line);color:var(--code-blue)">A</span>
+        <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;color:var(--code-muted)">@</span>
+        <code style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:15px;overflow-wrap:anywhere">65.21.184.101</code>
+        <button type="button" class="copy" data-copy="65.21.184.101" aria-label="Copy A record value 65.21.184.101">Copy</button>
+      </div>
+      <div class="rec" style="display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;gap:12px;align-items:center;padding:14px 0;border-top:1px solid var(--code-line);border-bottom:1px solid var(--code-line)">
+        <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:500;padding:4px 10px;border-radius:6px;background:var(--code-line);color:var(--code-green)">AAAA</span>
+        <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;color:var(--code-muted)">@</span>
+        <code style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:15px;overflow-wrap:anywhere">2a01:4f9:c012:a304::1</code>
+        <button type="button" class="copy" data-copy="2a01:4f9:c012:a304::1" aria-label="Copy AAAA record value 2a01:4f9:c012:a304::1">Copy</button>
+      </div>
+
+      <p style="margin:20px 0 10px;font-size:13px;color:var(--code-muted)">Then, from any terminal:</p>
+      <pre style="margin:0;padding:16px 18px;border-radius:12px;background:var(--bg-inset,rgba(255,255,255,0.04));border:1px solid var(--code-line);font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;line-height:1.7;overflow-x:auto;white-space:pre-wrap;overflow-wrap:anywhere"><span style="display:block"><span style="color:var(--code-muted)">$</span> curl -I https://example.com</span><span style="display:block;color:var(--code-amber)">HTTP/2 301</span><span style="display:block"><span style="color:var(--code-blue)">location:</span> https://www.example.com/</span></pre>
+      <p style="margin:16px 0 0;font-size:13px;color:var(--code-muted)">Path and query string are kept. The certificate is issued on the first HTTPS request.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- QUICK ANSWER (definition, snippet length) -->
+<section style="background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div style="max-width:1160px;margin:0 auto;padding:56px 24px;display:flex;flex-wrap:wrap;gap:24px 56px;align-items:flex-start">
+    <h2 style="flex:1 1 260px;margin:0;font-size:28px;line-height:1.2;letter-spacing:-0.02em;font-weight:700">What is an apex domain?</h2>
+    <div style="flex:2 1 460px;min-width:0">
+      <p style="margin:0 0 16px;font-size:18px;line-height:1.65">An <strong>apex domain</strong>, also called a root, naked or bare domain, is a domain name with no prefix in front of it: <code style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:16px;background:var(--accent-soft);color:var(--accent);padding:2px 8px;border-radius:6px">example.com</code>, not <code style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:16px;background:var(--accent-soft);color:var(--accent);padding:2px 8px;border-radius:6px">www.example.com</code>. DNS does not allow a CNAME record at the apex, so most hosts cannot serve it directly. A redirect to www solves that.</p>
+      <a class="link" href="/blog/what-is-an-apex-domain/">Read the full guide: what is an apex domain →</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS (matches HowTo JSON-LD) -->
+<section id="how">
+  <span id="how-it-works" class="alias"></span>
+  <div style="max-width:1160px;margin:0 auto;padding:96px 24px 40px">
+    <h2 style="margin:0 0 12px;font-size:clamp(30px,3.6vw,42px);line-height:1.1;letter-spacing:-0.025em;font-weight:800">Set it up in three steps</h2>
+    <p style="margin:0 0 40px;max-width:640px;font-size:18px;color:var(--muted)">Your www record stays at your host. ApexToWWW only takes over the apex.</p>
+    <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:20px">
+      <li style="background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px">
+        <span aria-hidden="true" style="display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;border:2px solid var(--accent);color:var(--accent);font-weight:700;margin-bottom:20px">1</span>
+        <h3 style="margin:0 0 8px;font-size:20px;letter-spacing:-0.01em">Add the A record</h3>
+        <p style="margin:0 0 16px;color:var(--muted)">At your DNS provider, create an A record for @ (the apex).</p>
+        <code style="display:block;padding:12px 14px;border-radius:10px;background:var(--code-bg);color:var(--code-ink);font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;overflow-x:auto">A&nbsp;&nbsp;@&nbsp;&nbsp;65.21.184.101</code>
+      </li>
+      <li style="background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px">
+        <span aria-hidden="true" style="display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;border:2px solid var(--accent);color:var(--accent);font-weight:700;margin-bottom:20px">2</span>
+        <h3 style="margin:0 0 8px;font-size:20px;letter-spacing:-0.01em">Add the AAAA record</h3>
+        <p style="margin:0 0 16px;color:var(--muted)">Add an AAAA record for @ so IPv6 visitors get the same redirect.</p>
+        <code style="display:block;padding:12px 14px;border-radius:10px;background:var(--code-bg);color:var(--code-ink);font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;overflow-x:auto">AAAA&nbsp;&nbsp;@&nbsp;&nbsp;2a01:4f9:c012:a304::1</code>
+      </li>
+      <li style="background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px">
+        <span aria-hidden="true" style="display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;border:2px solid var(--accent);color:var(--accent);font-weight:700;margin-bottom:20px">3</span>
+        <h3 style="margin:0 0 8px;font-size:20px;letter-spacing:-0.01em">Test the 301</h3>
+        <p style="margin:0 0 16px;color:var(--muted)">After DNS propagates (typically 5 to 30 minutes), check the response.</p>
+        <code style="display:block;padding:12px 14px;border-radius:10px;background:var(--code-bg);color:var(--code-ink);font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;overflow-x:auto">curl -I http://yourdomain.com</code>
+      </li>
+    </ol>
+    <p style="margin:28px 0 0;max-width:760px;color:var(--muted);font-size:16px">Remove any existing A or AAAA records on @ first. Keep your www CNAME pointing at your host. Not sure how your host handles www? <a class="link" href="#providers">Pick your provider below →</a></p>
+  </div>
+</section>
+
+<!-- PROVIDERS (internal links) -->
+<section id="providers">
+  <div style="max-width:1160px;margin:0 auto;padding:72px 24px 40px">
+    <h2 style="margin:0 0 12px;font-size:clamp(30px,3.6vw,42px);line-height:1.1;letter-spacing:-0.025em;font-weight:800">Guides for your hosting provider</h2>
+    <p style="margin:0 0 40px;max-width:640px;font-size:18px;color:var(--muted)">The same two records work wherever www is a CNAME. Each guide covers that platform's specifics.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:20px">
+      <a class="card" href="/cloudflare-pages-apex-redirect/"><h3 style="margin:0 0 8px;font-size:19px">Cloudflare Pages</h3><p style="margin:0 0 16px;color:var(--muted);font-size:15px">CNAME flattening if Cloudflare is your DNS. ApexToWWW if it is not.</p><span style="color:var(--accent);font-weight:600;font-size:15px">Apex redirect guide →</span></a>
+      <a class="card" href="/vercel-apex-domain-redirect/"><h3 style="margin:0 0 8px;font-size:19px">Vercel</h3><p style="margin:0 0 16px;color:var(--muted);font-size:15px">Point www at cname.vercel-dns.com and redirect the apex. No 76.76.21.21 needed.</p><span style="color:var(--accent);font-weight:600;font-size:15px">Apex redirect guide →</span></a>
+      <a class="card" href="/netlify-apex-domain-redirect/"><h3 style="margin:0 0 8px;font-size:19px">Netlify</h3><p style="margin:0 0 16px;color:var(--muted);font-size:15px">Works with Netlify DNS or any external DNS provider.</p><span style="color:var(--accent);font-weight:600;font-size:15px">Apex redirect guide →</span></a>
+      <a class="card" href="/blog/github-pages-apex-domain-redirect/"><h3 style="margin:0 0 8px;font-size:19px">GitHub Pages</h3><p style="margin:0 0 16px;color:var(--muted);font-size:15px">A CNAME file and www on GitHub, the apex redirect with two records.</p><span style="color:var(--accent);font-weight:600;font-size:15px">Apex redirect guide →</span></a>
+      <a class="card" href="/heroku-apex-domain-redirect/"><h3 style="margin:0 0 8px;font-size:19px">Heroku</h3><p style="margin:0 0 16px;color:var(--muted);font-size:15px">Heroku needs a www subdomain. Fix the naked domain.</p><span style="color:var(--accent);font-weight:600;font-size:15px">Apex redirect guide →</span></a>
+      <a class="card" href="/firebase-hosting-apex-redirect/"><h3 style="margin:0 0 8px;font-size:19px">Firebase Hosting</h3><p style="margin:0 0 16px;color:var(--muted);font-size:15px">Skip the IPv4-only apex A records. Get IPv6 and HTTP/3 on the apex.</p><span style="color:var(--accent);font-weight:600;font-size:15px">Apex redirect guide →</span></a>
+      <a class="card" href="/render-apex-domain-redirect/"><h3 style="margin:0 0 8px;font-size:19px">Render</h3><p style="margin:0 0 16px;color:var(--muted);font-size:15px">No ALIAS or ANAME support needed at your DNS provider.</p><span style="color:var(--accent);font-weight:600;font-size:15px">Apex redirect guide →</span></a>
+      <a class="card" href="/aws-amplify-apex-domain-redirect/"><h3 style="margin:0 0 8px;font-size:19px">AWS Amplify</h3><p style="margin:0 0 16px;color:var(--muted);font-size:15px">No Route 53 migration required.</p><span style="color:var(--accent);font-weight:600;font-size:15px">Apex redirect guide →</span></a>
+      <a class="card" href="/redirect-www-to-apex-domain/" style="border-style:dashed"><h3 style="margin:0 0 8px;font-size:19px">Other direction?</h3><p style="margin:0 0 16px;color:var(--muted);font-size:15px">ApexToWWW only redirects apex to www. To redirect www to apex, use your host's native methods.</p><span style="color:var(--accent);font-weight:600;font-size:15px">Redirect www to apex →</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FACTS (citable) -->
+<section id="facts">
+  <span id="features" class="alias"></span>
+  <div style="max-width:1160px;margin:0 auto;padding:72px 24px 40px">
+    <h2 style="margin:0 0 12px;font-size:clamp(30px,3.6vw,42px);line-height:1.1;letter-spacing:-0.025em;font-weight:800">ApexToWWW at a glance</h2>
+    <p style="margin:0 0 32px;max-width:640px;font-size:18px;color:var(--muted)">The values and behaviour, in one place.</p>
+    <div style="background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:12px 32px 32px">
+      <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:0 56px">
+        <div class="fact" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:1px solid var(--line)"><dt style="color:var(--muted);font-size:14px;font-weight:500">Service</dt><dd style="margin:0;font-size:15px">Apex domain to www, HTTP 301</dd></div>
+        <div class="fact" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:1px solid var(--line)"><dt style="color:var(--muted);font-size:14px;font-weight:500">Price</dt><dd style="margin:0;font-size:15px">Free, no signup, no usage limits</dd></div>
+        <div class="fact" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:1px solid var(--line)"><dt style="color:var(--muted);font-size:14px;font-weight:500">Setup</dt><dd style="margin:0;font-size:15px">2 DNS records (1 A, 1 AAAA)</dd></div>
+        <div class="fact" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:1px solid var(--line)"><dt style="color:var(--muted);font-size:14px;font-weight:500">A record (IPv4)</dt><dd style="margin:0;font-size:15px;font-family:'JetBrains Mono',ui-monospace,monospace">65.21.184.101</dd></div>
+        <div class="fact" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:1px solid var(--line)"><dt style="color:var(--muted);font-size:14px;font-weight:500">AAAA record (IPv6)</dt><dd style="margin:0;font-size:15px;font-family:'JetBrains Mono',ui-monospace,monospace;overflow-wrap:anywhere">2a01:4f9:c012:a304::1</dd></div>
+        <div class="fact" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:1px solid var(--line)"><dt style="color:var(--muted);font-size:14px;font-weight:500">Redirect</dt><dd style="margin:0;font-size:15px">301 permanent. Path and query string preserved.</dd></div>
+        <div class="fact" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:1px solid var(--line)"><dt style="color:var(--muted);font-size:14px;font-weight:500">SSL/TLS</dt><dd style="margin:0;font-size:15px">Let's Encrypt, issued on first request, renewed automatically</dd></div>
+        <div class="fact" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:1px solid var(--line)"><dt style="color:var(--muted);font-size:14px;font-weight:500">Protocols</dt><dd style="margin:0;font-size:15px">HTTP/1.1, HTTP/2, HTTP/3 (QUIC). IPv4 and IPv6.</dd></div>
+        <div class="fact" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:1px solid var(--line)"><dt style="color:var(--muted);font-size:14px;font-weight:500">DNS propagation</dt><dd style="margin:0;font-size:15px">Typically 5 to 30 minutes, up to 48 hours</dd></div>
+        <div class="fact" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:1px solid var(--line)"><dt style="color:var(--muted);font-size:14px;font-weight:500">Works with</dt><dd style="margin:0;font-size:15px">GitHub Pages, Vercel, Netlify, Cloudflare Pages, Heroku, Firebase Hosting, Render, AWS Amplify, and any host where www is a CNAME</dd></div>
+        <div class="fact" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:1px solid var(--line)"><dt style="color:var(--muted);font-size:14px;font-weight:500">Not supported</dt><dd style="margin:0;font-size:15px">Wildcard domains. Redirecting www to apex.</dd></div>
+        <div class="fact" style="display:grid;grid-template-columns:140px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:1px solid var(--line)"><dt style="color:var(--muted);font-size:14px;font-weight:500">Operator</dt><dd style="margin:0;font-size:15px">Sandbox.ventures, Aarhus, Denmark</dd></div>
+      </dl>
+      <p style="margin:28px 0 0;padding:20px 24px;border-radius:12px;background:var(--accent-soft);font-size:16px;line-height:1.65"><strong>In one sentence:</strong> ApexToWWW is a free DNS-based service that 301-redirects an apex (naked) domain to its www subdomain. You add one A record (65.21.184.101) and one AAAA record (2a01:4f9:c012:a304::1) at the apex, and every request is answered with a 301 to the matching https://www URL, over an automatically renewed Let's Encrypt certificate.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section id="compare">
+  <div style="max-width:1160px;margin:0 auto;padding:72px 24px 40px">
+    <h2 style="margin:0 0 12px;font-size:clamp(30px,3.6vw,42px);line-height:1.1;letter-spacing:-0.025em;font-weight:800">Why a redirect, and not ALIAS or CNAME flattening?</h2>
+    <p style="margin:0 0 32px;max-width:720px;font-size:18px;color:var(--muted)">ALIAS, ANAME and CNAME flattening serve your site on the apex directly, but only some DNS providers offer them. A redirect works with every provider and keeps your real traffic on www.</p>
+    <div style="overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:16px">
+      <table style="width:100%;min-width:680px;border-collapse:collapse;font-size:15px;text-align:left">
+        <caption style="position:absolute;left:-9999px">Comparison of apex redirect approaches</caption>
+        <thead>
+          <tr style="border-bottom:1px solid var(--line)">
+            <th scope="col" style="padding:16px 20px;font-weight:600;color:var(--muted)"><span style="position:absolute;left:-9999px">Criterion</span></th>
+            <th scope="col" style="padding:16px 20px;font-weight:700;color:var(--accent)">ApexToWWW redirect</th>
+            <th scope="col" style="padding:16px 20px;font-weight:600">ALIAS / ANAME / flattening</th>
+            <th scope="col" style="padding:16px 20px;font-weight:600">Registrar forwarding</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--line)"><th scope="row" style="padding:16px 20px;font-weight:500;color:var(--muted)">Works on any DNS provider</th><td style="padding:16px 20px">Yes</td><td style="padding:16px 20px">Only some providers</td><td style="padding:16px 20px">Yes</td></tr>
+          <tr style="border-bottom:1px solid var(--line)"><th scope="row" style="padding:16px 20px;font-weight:500;color:var(--muted)">Real 301 over HTTPS</th><td style="padding:16px 20px">Yes</td><td style="padding:16px 20px">Not a redirect: the apex serves the site</td><td style="padding:16px 20px">Varies. Check with curl -I.</td></tr>
+          <tr style="border-bottom:1px solid var(--line)"><th scope="row" style="padding:16px 20px;font-weight:500;color:var(--muted)">Apex serves the site itself</th><td style="padding:16px 20px">No, it redirects to www</td><td style="padding:16px 20px">Yes</td><td style="padding:16px 20px">No</td></tr>
+          <tr><th scope="row" style="padding:16px 20px;font-weight:500;color:var(--muted)">Cost</th><td style="padding:16px 20px">Free</td><td style="padding:16px 20px">Depends on the provider</td><td style="padding:16px 20px">Often free</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin:24px 0 0;max-width:760px;color:var(--muted);font-size:16px">If you want the apex itself to serve your site and your DNS provider supports ALIAS or ANAME, use that instead. <a class="link" href="/blog/apex-domain-redirect-methods-compared/">Compare all five methods →</a></p>
+  </div>
+</section>
+
+<!-- GUIDES -->
+<section id="guides">
+  <div style="max-width:1160px;margin:0 auto;padding:72px 24px 40px">
+    <h2 style="margin:0 0 12px;font-size:clamp(30px,3.6vw,42px);line-height:1.1;letter-spacing:-0.025em;font-weight:800">Guides</h2>
+    <p style="margin:0 0 40px;max-width:640px;font-size:18px;color:var(--muted)">Background on apex domains, DNS and canonical URLs.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:20px">
+      <a class="card" href="/blog/how-to-redirect-apex-domain-to-www/"><h3 style="margin:0 0 8px;font-size:19px;line-height:1.3">How to redirect your apex domain to www</h3><p style="margin:0 0 16px;color:var(--muted);font-size:15px">Step by step, with instructions for Cloudflare, GoDaddy, Namecheap and more.</p><span style="color:var(--accent);font-weight:600;font-size:15px">Read the guide →</span></a>
+      <a class="card" href="/blog/what-is-an-apex-domain/"><h3 style="margin:0 0 8px;font-size:19px;line-height:1.3">What is an apex domain?</h3><p style="margin:0 0 16px;color:var(--muted);font-size:15px">Root, bare, naked, zone apex: how DNS hierarchy works and why the apex cannot take a CNAME.</p><span style="color:var(--accent);font-weight:600;font-size:15px">Read the guide →</span></a>
+      <a class="card" href="/blog/apex-domain-vs-www/"><h3 style="margin:0 0 8px;font-size:19px;line-height:1.3">Apex domain vs www</h3><p style="margin:0 0 16px;color:var(--muted);font-size:15px">Technical differences, CDN compatibility, and which one to make canonical.</p><span style="color:var(--accent);font-weight:600;font-size:15px">Read the guide →</span></a>
+      <a class="card" href="/blog/apex-domain-redirect-methods-compared/"><h3 style="margin:0 0 8px;font-size:19px;line-height:1.3">Apex domain redirect: 5 methods compared</h3><p style="margin:0 0 16px;color:var(--muted);font-size:15px">DNS service, Cloudflare Redirect Rules, ALIAS/ANAME, registrar forwarding or nginx.</p><span style="color:var(--accent);font-weight:600;font-size:15px">Read the guide →</span></a>
+      <a class="card" href="/redirect-www-to-apex-domain/"><h3 style="margin:0 0 8px;font-size:19px;line-height:1.3">Redirect www to apex</h3><p style="margin:0 0 16px;color:var(--muted);font-size:15px">The reverse direction: native methods for Cloudflare, Vercel, Netlify and any host.</p><span style="color:var(--accent);font-weight:600;font-size:15px">Read the guide →</span></a>
+      <a class="card" href="/blog/hreflang-and-canonical-tags/"><h3 style="margin:0 0 8px;font-size:19px;line-height:1.3">Hreflang and canonical tags</h3><p style="margin:0 0 16px;color:var(--muted);font-size:15px">How rel=canonical and hreflang work, and why they conflict when misconfigured.</p><span style="color:var(--accent);font-weight:600;font-size:15px">Read the guide →</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ (matches FAQPage JSON-LD) -->
+<section id="faq">
+  <div style="max-width:900px;margin:0 auto;padding:72px 24px 40px">
+    <h2 style="margin:0 0 32px;font-size:clamp(30px,3.6vw,42px);line-height:1.1;letter-spacing:-0.025em;font-weight:800">Frequently asked questions</h2>
+    <div style="border-top:1px solid var(--line)">
+      <details class="faq" open><summary>What is an apex domain, and why does it need a redirect?</summary><p>An apex domain (also called a root, naked, or bare domain) is your domain without any prefix: example.com rather than www.example.com. DNS does not allow a CNAME record at the apex (RFC 1034), so it cannot point at most hosts and CDNs, such as GitHub Pages, Netlify and Vercel. A redirect sends apex visitors to your www subdomain, where your site lives.</p></details>
+      <details class="faq"><summary>How do I redirect my apex domain to www with ApexToWWW?</summary><p>Add an A record for @ pointing to 65.21.184.101 and an AAAA record for @ pointing to 2a01:4f9:c012:a304::1. There is nothing to sign up for or configure. DNS changes typically propagate within 5 to 30 minutes.</p></details>
+      <details class="faq"><summary>Do I need my own SSL certificate?</summary><p>No. ApexToWWW issues a Let's Encrypt certificate for your apex domain on the first HTTPS request and renews it automatically. Your www site keeps the certificate from your own host.</p></details>
+      <details class="faq"><summary>Is ApexToWWW really free?</summary><p>Yes. There is no account, no usage limit and no paid tier today. It runs on small ARM64 servers, which keeps costs low.</p></details>
+      <details class="faq"><summary>Does the redirect keep the URL path and query string?</summary><p>Yes. example.com/pricing?plan=pro redirects to www.example.com/pricing?plan=pro. It is a 301 (permanent) redirect, so search engines treat the www URL as the canonical address.</p></details>
+      <details class="faq"><summary>Which hosting providers does it work with?</summary><p>Any host where www is a CNAME, including GitHub Pages, Netlify, Vercel, Cloudflare Pages, Heroku, Firebase Hosting, Render and AWS Amplify. Keep your www record pointing at your host. ApexToWWW only handles the apex.</p></details>
+      <details class="faq"><summary>Does ApexToWWW redirect www to the apex instead?</summary><p>No. It only redirects the apex to www. To go the other way, use your host's own redirect feature. Our <a class="link" href="/redirect-www-to-apex-domain/">guide to redirecting www to apex</a> covers Cloudflare, Vercel, Netlify and other hosts.</p></details>
+      <details class="faq"><summary>Will the redirect affect my SEO?</summary><p>A 301 tells search engines that www is the canonical address, which consolidates ranking signals on one URL. Keep a canonical tag on each page pointing at the same www URL, and list only www URLs in your sitemap.</p></details>
+      <details class="faq"><summary>Are wildcard domains supported?</summary><p>No. The free service only redirects domains whose A and AAAA records point directly at its servers. That is verified before a certificate is issued. Wildcard domains are not supported.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section>
+  <div style="max-width:1160px;margin:0 auto;padding:56px 24px 96px">
+    <div style="background:var(--code-bg);color:var(--code-ink);border-radius:24px;padding:56px 40px;display:flex;flex-wrap:wrap;gap:32px;align-items:center;justify-content:space-between">
+      <div style="flex:1 1 380px;min-width:0">
+        <h2 style="margin:0 0 12px;font-size:clamp(28px,3.4vw,40px);line-height:1.1;letter-spacing:-0.025em;font-weight:800">Two records. That is the whole setup.</h2>
+        <p style="margin:0;font-size:17px;color:var(--code-muted);max-width:520px">A 65.21.184.101 and AAAA 2a01:4f9:c012:a304::1, both on @. Free, no account.</p>
+      </div>
+      <a class="btn btn-primary" href="#records">Copy the records</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer style="background:var(--surface);border-top:1px solid var(--line)">
+  <div style="max-width:1160px;margin:0 auto;padding:64px 24px 32px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:40px 32px;margin-bottom:48px">
+      <div>
+        <a href="/" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:18px;margin-bottom:16px">
+          <span aria-hidden="true" style="width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#3B82F6,#9333EA);display:flex;align-items:center;justify-content:center;color:#fff"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></span>
+          ApexToWWW
+        </a>
+        <p style="margin:0 0 12px;color:var(--muted);font-size:15px">Free apex domain to www redirect with automatic SSL, IPv6 and HTTP/3.</p>      </div>
+      <nav aria-label="Hosting guides">
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Hosting guides</h2>
+        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:15px">
+          <li><a href="/cloudflare-pages-apex-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Cloudflare Pages</a></li>
+          <li><a href="/vercel-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Vercel</a></li>
+          <li><a href="/netlify-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Netlify</a></li>
+          <li><a href="/blog/github-pages-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">GitHub Pages</a></li>
+          <li><a href="/heroku-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Heroku</a></li>
+          <li><a href="/firebase-hosting-apex-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Firebase Hosting</a></li>
+          <li><a href="/render-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Render</a></li>
+          <li><a href="/aws-amplify-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">AWS Amplify</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Guides">
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Guides</h2>
+        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:15px">
+          <li><a href="/blog/how-to-redirect-apex-domain-to-www/" style="display:inline-block;padding:6px 0;text-decoration:none">How to redirect apex to www</a></li>
+          <li><a href="/blog/what-is-an-apex-domain/" style="display:inline-block;padding:6px 0;text-decoration:none">What is an apex domain?</a></li>
+          <li><a href="/blog/apex-domain-vs-www/" style="display:inline-block;padding:6px 0;text-decoration:none">Apex domain vs www</a></li>
+          <li><a href="/blog/apex-domain-redirect-methods-compared/" style="display:inline-block;padding:6px 0;text-decoration:none">Redirect methods compared</a></li>
+          <li><a href="/redirect-www-to-apex-domain/" style="display:inline-block;padding:6px 0;text-decoration:none">Redirect www to apex</a></li>
+          <li><a href="/blog/hreflang-and-canonical-tags/" style="display:inline-block;padding:6px 0;text-decoration:none">Hreflang &amp; canonical tags</a></li>
+          <li><a href="/blog/free-subdomain-forwarding/" style="display:inline-block;padding:6px 0;text-decoration:none">Free subdomain forwarding</a></li>
+          <li><a href="/blog/" style="display:inline-block;padding:6px 0;text-decoration:none;font-weight:600">All guides</a></li>
+        </ul>
+      </nav>
+      <div>
+        <span id="contact" class="alias"></span>
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Contact</h2>
+        <p style="margin:0 0 8px;font-size:15px"><a href="#" class="js-email" data-email-user="hi" data-email-domain="apextowww.com" data-show-address style="display:inline-block;padding:6px 0">Email us</a></p>
+        <address style="font-style:normal;color:var(--muted);font-size:14px;line-height:1.6">Sandbox.ventures<br>P. O. Pedersens Vej 2<br>8200 Aarhus N, Denmark</address>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--line);padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;color:var(--muted);font-size:14px">
+      <span>&copy; <span id="current-year">2026</span> ApexToWWW. All rights reserved.</span>
+      <span>A service provided by <a href="https://sandbox.ventures" rel="noopener" style="color:var(--ink);font-weight:600;text-decoration:underline">Sandbox.ventures</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var y = document.getElementById('current-year');
+  if (y) y.textContent = new Date().getFullYear();
+
+  var root = document.documentElement;
+  var toggle = document.getElementById('theme-toggle');
+  if (toggle) {
+    toggle.setAttribute('aria-pressed', String(root.classList.contains('dark')));
+    toggle.addEventListener('click', function () {
+      var dark = root.classList.toggle('dark');
+      toggle.setAttribute('aria-pressed', String(dark));
+      try { localStorage.theme = dark ? 'dark' : 'light'; } catch (e) {}
+    });
+  }
+
+  document.querySelectorAll('button.copy[data-copy]').forEach(function (btn) {
+    var timer;
+    btn.addEventListener('click', function () {
+      if (!navigator.clipboard || !navigator.clipboard.writeText) return;
+      navigator.clipboard.writeText(btn.getAttribute('data-copy')).then(function () {
+        btn.textContent = 'Copied';
+        clearTimeout(timer);
+        timer = setTimeout(function () { btn.textContent = 'Copy'; }, 1800);
+      }, function () {});
+    });
+  });
+
+  // Wire up obfuscated email links at runtime (avoids Cloudflare email
+  // obfuscation rewriting to /cdn-cgi/l/email-protection which 404s for
+  // crawlers that don't execute JS).
+  document.querySelectorAll('a.js-email').forEach(function (a) {
+    var addr = a.dataset.emailUser + '\u0040' + a.dataset.emailDomain;
+    a.setAttribute('href', 'mail' + 'to:' + addr);
+    if (a.hasAttribute('data-show-address') || a.textContent.trim() === '') a.textContent = addr;
+  });
+})();
+</script>
 </body>
 </html>

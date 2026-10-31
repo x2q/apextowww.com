@@ -4,6 +4,15 @@ This document captures the visual language, component patterns, and tooling
 conventions of the apextowww.com landing page so that new sections, blog
 templates, and provider guides stay visually consistent.
 
+> **Oct 2026 — homepage redesign.** `index.html` no longer uses Tailwind or
+> `styles.css`. It is self-contained: colour tokens live in an inline `<style>`
+> block (`:root` for light, `html.dark` for dark, toggled by the same
+> `localStorage.theme` key), components are inline-styled, and the accent is
+> indigo (`#4338CA` light, `#9AA2FF` dark). The glass navbar, gradients, blur
+> blobs, rotating word and A/B subtitle test are gone. The rest of this document
+> (sections 3–7) still describes the Tailwind sub-pages — blog, provider guides
+> and 404 — and is the reference for new guides until they are migrated.
+
 ---
 
 ## 1. Brand
