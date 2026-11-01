@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+        (function () {
+            try {
+                var t = localStorage.theme;
+                if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                }
+            } catch (e) {}
+        })();
+    </script>
+        <title>Free Subdomain Forwarding: How to Redirect Domains Without Hosting | ApexToWWW</title>
+        <meta name="description" content="Learn how to set up free subdomain forwarding and domain redirects without paying for hosting. Compare DNS-based redirect services, Cloudflare Page Rules, and registrar forwarding options." />
+        <link rel="canonical" href="https://www.apextowww.com/blog/free-subdomain-forwarding/" />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://www.apextowww.com/blog/free-subdomain-forwarding/" />
+        <meta property="og:title" content="Free Subdomain Forwarding: How to Redirect Domains Without Hosting" />
+        <meta property="og:description" content="Learn how to set up free subdomain forwarding and domain redirects without paying for hosting. Compare DNS-based services, Cloudflare, and registrar forwarding." />
+        <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Free Subdomain Forwarding: How to Redirect Domains Without Hosting" />
+        <meta name="twitter:description" content="Learn how to set up free subdomain forwarding and domain redirects without paying for hosting." />
+        <link rel="stylesheet" href="/styles.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCDJZQW377"></script>
+        <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-NCDJZQW377");</script>
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": "Free Subdomain Forwarding: How to Redirect Domains Without Hosting",
+            "description": "Learn how to set up free subdomain forwarding and domain redirects without paying for hosting.",
+            "datePublished": "2026-04-11",
+            "dateModified": "2026-04-11",
+            "author": { "@type": "Organization", "name": "ApexToWWW" },
+            "publisher": { "@type": "Organization", "name": "ApexToWWW", "url": "https://www.apextowww.com" },
+            "mainEntityOfPage": "https://www.apextowww.com/blog/free-subdomain-forwarding/"
+        }
+        </script>
+    </head>
+<body class="font-sans bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white antialiased">
+    <a class="skip" href="#main">Skip to content</a>
+    <!-- Navigation -->
+    <header style="position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line)">
+  <div class="hdr" style="max-width:1160px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="/" aria-label="ApexToWWW home" style="display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:20px;letter-spacing:-0.02em">
+      <span aria-hidden="true" style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#3B82F6,#9333EA);display:flex;align-items:center;justify-content:center;color:#fff">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+      </span>
+      ApexToWWW
+    </a>
+    <nav aria-label="Primary" class="nav-links" style="display:flex;gap:28px;font-size:15px;font-weight:500">
+      <a href="/#how">How it works</a>
+      <a href="/#providers">Providers</a>
+      <a href="/blog/">Guides</a>
+      <a href="/#faq">FAQ</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Dark mode" aria-pressed="false">
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      </button>
+      <a class="btn btn-primary btn-sm" href="/#records"><span>Get <span class="hide-xs">the </span>records</span></a>
+    </div>
+  </div>
+</header>
+
+    <main id="main" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="max-w-3xl mx-auto">
+
+            <!-- Breadcrumbs -->
+            <nav class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-8" aria-label="Breadcrumb">
+                <a href="/" class="hover:text-gray-900 dark:hover:text-white transition">Home</a>
+                <span>/</span>
+                <a href="/blog/" class="hover:text-gray-900 dark:hover:text-white transition">Blog</a>
+                <span>/</span>
+                <span class="text-gray-900 dark:text-white">Free Subdomain Forwarding</span>
+            </nav>
+
+            <!-- Article Header -->
+            <article>
+                <header class="mb-10">
+                    <div class="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400 mb-4">
+                        <time datetime="2026-04-11">April 11, 2026</time>
+                        <span>&middot;</span>
+                        <span>5 min read</span>
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight mb-4">Free Subdomain Forwarding: How to Redirect Domains Without Hosting</h1>
+                    <div class="my-8 p-6 rounded-2xl border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-900/20">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fas fa-bolt text-blue-600 dark:text-blue-400"></i>
+                            <span class="text-sm font-bold uppercase tracking-wide text-blue-600 dark:text-blue-400">TL;DR</span>
+                        </div>
+                        <p class="text-gray-800 dark:text-gray-200 leading-relaxed">
+                            Free subdomain forwarding means redirecting apex domain traffic (example.com) to a subdomain (www.example.com) without paying for hosting or DNS providers. The cleanest free option is a DNS-based 301 redirect service like ApexToWWW &mdash; you add two records and the service handles SSL, IPv6, and path preservation automatically.
+                        </p>
+                    </div>
+                    <p class="text-xl text-gray-600 dark:text-gray-400">Need to forward your domain to another URL without paying for hosting? Here are the best free domain forwarding options and how DNS-based redirects work.</p>
+                </header>
+
+                <!-- Article Body -->
+                <div class="prose prose-lg dark:prose-invert max-w-none
+                    prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white
+                    prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed
+                    prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:font-medium prose-a:no-underline hover:prose-a:underline
+                    prose-strong:text-gray-900 dark:prose-strong:text-white
+                    prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
+                    prose-li:text-gray-700 dark:prose-li:text-gray-300">
+
+                    <h2 class="text-2xl sm:text-3xl mt-10 mb-4">What Is Domain Forwarding?</h2>
+
+                    <p>Domain forwarding (also called domain redirecting or URL forwarding) is the process of automatically sending visitors from one domain name to another. When someone types in the forwarded domain, their browser is instantly redirected to the destination URL. No web server or hosting account is required on the forwarded domain itself.</p>
+
+                    <p>Subdomain forwarding works the same way but at the subdomain level. For example, you might forward <code>blog.example.com</code> to <code>www.example.com/blog</code>, or redirect an apex domain like <code>example.com</code> to <code>www.example.com</code>. The key benefit is that you do not need to set up a web server, install any software, or pay for hosting to make the redirect work.</p>
+
+                    <h2 class="text-2xl sm:text-3xl mt-10 mb-4">Common Use Cases for Free Domain Forwarding</h2>
+
+                    <p>There are several practical scenarios where free domain forwarding saves time and money:</p>
+
+                    <ul class="space-y-3 my-6">
+                        <li><strong>Redirecting apex to www:</strong> Many hosting providers and CDNs (like Netlify, Vercel, and GitHub Pages) require your site to live on the <code>www</code> subdomain. A <a href="/" class="font-semibold underline decoration-blue-500/40 hover:decoration-blue-500">free apex domain to www redirect</a> lets you point your naked domain (<code>example.com</code>) to <code>www.example.com</code> without extra infrastructure.</li>
+                        <li><strong>Migrating to a new domain:</strong> If you have rebranded or moved to a new domain name, you can forward the old domain to the new one so existing links and bookmarks continue to work.</li>
+                        <li><strong>Redirecting old or parked domains:</strong> If you own multiple domains, forwarding them all to your primary website ensures visitors always end up in the right place.</li>
+                        <li><strong>Consolidating subdomains:</strong> Forward deprecated subdomains to your main site to maintain SEO value and prevent dead links.</li>
+                        <li><strong>Marketing and vanity URLs:</strong> Register a short or memorable domain and forward it to a specific landing page or campaign URL.</li>
+                    </ul>
+
+                    <h2 class="text-2xl sm:text-3xl mt-10 mb-4">Free Domain Forwarding Options Compared</h2>
+
+                    <p>You do not need to spend money to redirect a domain. Here are the most popular free approaches:</p>
+
+                    <h3 class="text-xl sm:text-2xl mt-8 mb-3">1. DNS-Based Redirect Services (Recommended for Apex-to-WWW)</h3>
+
+                    <p>Services like <strong>ApexToWWW</strong> provide free DNS-based domain redirects specifically designed for pointing your apex domain to the <code>www</code> version. You simply add DNS records to your domain, and the service handles the HTTP redirect, SSL certificate provisioning, and path forwarding automatically.</p>
+
+                    <p>This approach is ideal because it requires no hosting, no account sign-up, and works with any DNS provider. The redirect happens at the network level with minimal latency, and the service issues a proper 301 (permanent) redirect that preserves your SEO ranking signals.</p>
+
+                    <h3 class="text-xl sm:text-2xl mt-8 mb-3">2. Cloudflare Page Rules (Free Tier)</h3>
+
+                    <p>If you use Cloudflare as your DNS provider, you can set up URL forwarding using Page Rules on the free plan. Cloudflare gives you three free Page Rules per domain, which is enough for basic forwarding. You create a rule matching your domain and set the forwarding URL with a 301 redirect.</p>
+
+                    <p>The downside is that you must transfer your DNS to Cloudflare (or use them as your nameservers), and the free tier limits you to three rules. For simple apex-to-www redirects, a dedicated DNS redirect service is often simpler to configure.</p>
+
+                    <h3 class="text-xl sm:text-2xl mt-8 mb-3">3. Registrar Forwarding (GoDaddy, Namecheap, etc.)</h3>
+
+                    <p>Most domain registrars offer built-in URL forwarding, sometimes for free. GoDaddy, Namecheap, Google Domains (now Squarespace), and others let you set a forwarding destination directly from their domain management panel.</p>
+
+                    <p>However, registrar forwarding often comes with limitations. Some registrars do not support HTTPS on the forwarded domain, meaning visitors will see security warnings. Others do not preserve the URL path (so <code>example.com/about</code> redirects to <code>www.example.com</code> instead of <code>www.example.com/about</code>). Some registrars also inject frames or use masked forwarding, which hurts SEO and can confuse search engines.</p>
+
+                    <h2 class="text-2xl sm:text-3xl mt-10 mb-4">How ApexToWWW Works for Free Apex-to-WWW Forwarding</h2>
+
+                    <p><a href="/">ApexToWWW</a> is a free DNS redirect service built specifically for the most common forwarding scenario: redirecting your apex domain to <code>www</code>. Setting it up takes less than two minutes:</p>
+
+                    <div class="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 my-6">
+                        <p class="font-semibold text-lg mb-4">DNS Records to Add</p>
+                        <p class="mb-2">Log into your DNS provider and add these two records for your apex domain:</p>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm mt-4">
+                                <thead>
+                                    <tr class="border-b border-gray-200 dark:border-gray-700">
+                                        <th class="text-left py-2 pr-4 font-semibold">Type</th>
+                                        <th class="text-left py-2 pr-4 font-semibold">Name</th>
+                                        <th class="text-left py-2 font-semibold">Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-gray-100 dark:border-gray-800">
+                                        <td class="py-2 pr-4"><code>A</code></td>
+                                        <td class="py-2 pr-4"><code>@</code></td>
+                                        <td class="py-2"><code>65.21.184.101</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 pr-4"><code>AAAA</code></td>
+                                        <td class="py-2 pr-4"><code>@</code></td>
+                                        <td class="py-2"><code>2a01:4f9:c012:a304::1</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <p>Once the DNS records propagate (usually within a few minutes to a few hours), ApexToWWW automatically handles the rest:</p>
+
+                    <ul class="space-y-3 my-6">
+                        <li><strong>Automatic SSL certificates:</strong> A free TLS certificate is issued for your apex domain so the redirect works securely over HTTPS with no browser warnings.</li>
+                        <li><strong>301 permanent redirect:</strong> Visitors and search engines are sent a proper 301 redirect, which tells search engines to transfer ranking signals to your <code>www</code> domain.</li>
+                        <li><strong>Full path and query string preservation:</strong> Requests to <code>example.com/page?ref=123</code> are forwarded to <code>www.example.com/page?ref=123</code>, keeping deep links and tracking parameters intact.</li>
+                    </ul>
+
+                    <p>There is no account to create, no configuration dashboard to manage, and no monthly fees. The service runs entirely through DNS records.</p>
+
+                    <h2 class="text-2xl sm:text-3xl mt-10 mb-4">Paid Alternatives and Why Free Works for Simple Redirects</h2>
+
+                    <p>Several paid services offer domain forwarding as part of a larger platform. Hosting providers, premium DNS services, and redirect management tools charge anywhere from a few dollars to tens of dollars per month. These paid options make sense if you need advanced features like conditional redirects based on geography, device type, or custom headers, A/B testing different redirect destinations, or detailed analytics on redirect traffic.</p>
+
+                    <p>However, for the vast majority of use cases, especially the simple apex-to-www redirect, a free service does the job perfectly. There is no performance difference between a paid redirect and a free DNS-based redirect. Both return a 301 response in milliseconds. Paying for something that can be accomplished with two DNS records and a free service is unnecessary overhead.</p>
+
+                    <p>If all you need is to get <code>example.com</code> pointing to <code>www.example.com</code>, keep it simple and free.</p>
+
+                    <h2 class="text-2xl sm:text-3xl mt-10 mb-4">Get Started with Free Domain Forwarding</h2>
+
+                    <p>Setting up free subdomain forwarding with ApexToWWW takes less than two minutes. Add two DNS records, wait for propagation, and your apex domain will automatically redirect to your <code>www</code> site with full HTTPS support and path preservation.</p>
+
+                    <div class="my-8">
+                        <a href="/#records" class="inline-flex items-center px-6 py-3 rounded-lg text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
+                            Set Up Free Domain Forwarding <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </article>
+
+            <!-- Back to Blog -->
+            <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+                <a href="/blog/" class="text-blue-600 dark:text-blue-400 font-medium hover:underline">&larr; Back to all articles</a>
+            </div>
+        </div>
+    </main>
+
+    <footer style="background:var(--surface);border-top:1px solid var(--line)">
+  <div style="max-width:1160px;margin:0 auto;padding:64px 24px 32px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:40px 32px;margin-bottom:48px">
+      <div>
+        <a href="/" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:18px;margin-bottom:16px">
+          <span aria-hidden="true" style="width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#3B82F6,#9333EA);display:flex;align-items:center;justify-content:center;color:#fff"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></span>
+          ApexToWWW
+        </a>
+        <p style="margin:0 0 12px;color:var(--muted);font-size:15px">Free apex domain to www redirect with automatic SSL, IPv6 and HTTP/3.</p>      </div>
+      <nav aria-label="Hosting guides">
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Hosting guides</h2>
+        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:15px">
+          <li><a href="/cloudflare-pages-apex-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Cloudflare Pages</a></li>
+          <li><a href="/vercel-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Vercel</a></li>
+          <li><a href="/netlify-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Netlify</a></li>
+          <li><a href="/blog/github-pages-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">GitHub Pages</a></li>
+          <li><a href="/heroku-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Heroku</a></li>
+          <li><a href="/firebase-hosting-apex-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Firebase Hosting</a></li>
+          <li><a href="/render-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Render</a></li>
+          <li><a href="/aws-amplify-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">AWS Amplify</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Guides">
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Guides</h2>
+        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:15px">
+          <li><a href="/blog/how-to-redirect-apex-domain-to-www/" style="display:inline-block;padding:6px 0;text-decoration:none">How to redirect apex to www</a></li>
+          <li><a href="/blog/what-is-an-apex-domain/" style="display:inline-block;padding:6px 0;text-decoration:none">What is an apex domain?</a></li>
+          <li><a href="/blog/apex-domain-vs-www/" style="display:inline-block;padding:6px 0;text-decoration:none">Apex domain vs www</a></li>
+          <li><a href="/blog/apex-domain-redirect-methods-compared/" style="display:inline-block;padding:6px 0;text-decoration:none">Redirect methods compared</a></li>
+          <li><a href="/redirect-www-to-apex-domain/" style="display:inline-block;padding:6px 0;text-decoration:none">Redirect www to apex</a></li>
+          <li><a href="/blog/hreflang-and-canonical-tags/" style="display:inline-block;padding:6px 0;text-decoration:none">Hreflang &amp; canonical tags</a></li>
+          <li><a href="/blog/free-subdomain-forwarding/" style="display:inline-block;padding:6px 0;text-decoration:none">Free subdomain forwarding</a></li>
+          <li><a href="/blog/" style="display:inline-block;padding:6px 0;text-decoration:none;font-weight:600">All guides</a></li>
+        </ul>
+      </nav>
+      <div>
+        <span id="contact" class="alias"></span>
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Contact</h2>
+        <p style="margin:0 0 8px;font-size:15px"><a href="#" class="js-email" data-email-user="hi" data-email-domain="apextowww.com" data-show-address style="display:inline-block;padding:6px 0">Email us</a></p>
+        <address style="font-style:normal;color:var(--muted);font-size:14px;line-height:1.6">Sandbox.ventures<br>P. O. Pedersens Vej 2<br>8200 Aarhus N, Denmark</address>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--line);padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;color:var(--muted);font-size:14px">
+      <span>&copy; <span id="current-year">2026</span> ApexToWWW. All rights reserved.</span>
+      <span>A service provided by <a href="https://sandbox.ventures" rel="noopener" style="color:var(--ink);font-weight:600;text-decoration:underline">Sandbox.ventures</a></span>
+    </div>
+  </div>
+</footer>
+    <script src="/site.js" defer></script>
+</body>
+</html>

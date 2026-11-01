@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+        (function () {
+            try {
+                var t = localStorage.theme;
+                if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                }
+            } catch (e) {}
+        })();
+    </script>
+        <title>Render Apex Domain Redirect — Free, 2 DNS Records</title>
+        <meta name="description" content="Redirect your apex domain to a Render web service or static site in 60 seconds. Free 301, auto-SSL, IPv6, HTTP/3. No ALIAS/ANAME support required — 2 DNS records." />
+        <meta name="keywords" content="render apex domain, render custom domain www, render naked domain redirect, render onrender.com apex, render root domain, render static site custom domain" />
+        <link rel="canonical" href="https://www.apextowww.com/render-apex-domain-redirect/" />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://www.apextowww.com/render-apex-domain-redirect/" />
+        <meta property="og:title" content="Render Apex Domain Redirect — Free, 2 DNS Records" />
+        <meta property="og:description" content="Redirect your apex domain to a Render web service or static site in 60 seconds. Free 301, auto-SSL, IPv6, HTTP/3. No ALIAS/ANAME support required." />
+        <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
+        <meta property="og:site_name" content="ApexToWWW" />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Render Apex Domain Redirect — Free, 2 DNS Records" />
+        <meta name="twitter:description" content="Redirect your apex domain to a Render web service or static site in 60 seconds. Free 301, auto-SSL, IPv6, HTTP/3." />
+        <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
+
+        <link rel="stylesheet" href="/styles.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCDJZQW377"></script>
+        <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-NCDJZQW377");</script>
+
+        <!-- HowTo Schema -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": "How to Redirect Apex Domain to Render via WWW",
+            "description": "Set up a Render web service or static site custom domain on www and redirect the naked apex domain to www using ApexToWWW.",
+            "totalTime": "PT5M",
+            "estimatedCost": { "@type": "MonetaryAmount", "currency": "USD", "value": "0" },
+            "step": [
+                {
+                    "@type": "HowToStep",
+                    "name": "Add www as a custom domain in Render",
+                    "text": "In the Render Dashboard, open your service, go to Settings > Custom Domains, and add www.yourdomain.com."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Get the CNAME target from Render",
+                    "text": "Render displays a CNAME target for the www subdomain immediately after you add it."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Add a CNAME record for www",
+                    "text": "At your DNS provider, add a CNAME record for www pointing to the target Render provided."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Add ApexToWWW A record",
+                    "text": "Create an A record for @ pointing to 65.21.184.101."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Add ApexToWWW AAAA record",
+                    "text": "Create an AAAA record for @ pointing to 2a01:4f9:c012:a304::1."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Wait for Render verification and SSL",
+                    "text": "Render verifies www and provisions a Let's Encrypt certificate automatically. ApexToWWW provisions SSL for the apex on first request."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Test the redirect",
+                    "text": "Run curl -I https://yourdomain.com to confirm a 301 redirect to https://www.yourdomain.com."
+                }
+            ]
+        }
+        </script>
+
+        <!-- FAQ Schema -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "Does this work with both Render web services and static sites?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Yes. Render's custom domain flow is identical for web services, static sites, and Docker-based services: add the domain in Settings > Custom Domains, get a CNAME target, and point www at it. ApexToWWW handles the apex redirect regardless of which Render product type is behind www." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Do I still need my DNS provider to support ALIAS or ANAME records?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "No, that's the point. Render's native apex setup requires ALIAS, ANAME, or CNAME flattening at your DNS provider (DNSimple, Route 53, and Cloudflare support these; many registrars like GoDaddy and Namecheap don't). ApexToWWW uses plain A and AAAA records instead, which every DNS provider supports, so you don't need any special record type." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Does this affect Render's automatic SSL?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "No. Render provisions and renews its own Let's Encrypt certificate for www.yourdomain.com as soon as the CNAME verifies. ApexToWWW separately provisions a Let's Encrypt certificate for the apex. Both renew automatically and independently." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What about Render preview environments and PR previews?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Unaffected. Render's preview environments use auto-generated onrender.com subdomains that are completely separate from your custom domain. The apex redirect only applies to yourdomain.com and has no interaction with preview URLs." }
+                }
+            ]
+        }
+        </script>
+    </head>
+<body class="font-sans bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white antialiased">
+    <a class="skip" href="#main">Skip to content</a>
+    <!-- Navigation -->
+    <header style="position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line)">
+  <div class="hdr" style="max-width:1160px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="/" aria-label="ApexToWWW home" style="display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:20px;letter-spacing:-0.02em">
+      <span aria-hidden="true" style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#3B82F6,#9333EA);display:flex;align-items:center;justify-content:center;color:#fff">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+      </span>
+      ApexToWWW
+    </a>
+    <nav aria-label="Primary" class="nav-links" style="display:flex;gap:28px;font-size:15px;font-weight:500">
+      <a href="/#how">How it works</a>
+      <a href="/#providers">Providers</a>
+      <a href="/blog/">Guides</a>
+      <a href="/#faq">FAQ</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Dark mode" aria-pressed="false">
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      </button>
+      <a class="btn btn-primary btn-sm" href="/#records"><span>Get <span class="hide-xs">the </span>records</span></a>
+    </div>
+  </div>
+</header>
+
+    <main id="main" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <article class="max-w-3xl mx-auto">
+            <!-- Breadcrumbs -->
+            <nav aria-label="Breadcrumb" class="mb-8">
+                <ol class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                    <li><a href="/" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Home</a></li>
+                    <li><i class="fas fa-chevron-right text-xs mx-1"></i></li>
+                    <li class="text-gray-900 dark:text-white font-medium">Render Apex Domain Redirect</li>
+                </ol>
+            </nav>
+
+            <!-- Hero -->
+            <header class="mb-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 text-purple-700 dark:text-purple-300 text-xs font-semibold mb-5">
+                    <i class="fas fa-server"></i> Render
+                </div>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-6">Redirect Your Apex Domain to Render</h1>
+                <p class="text-xl text-gray-600 dark:text-gray-400 leading-relaxed mb-8">Render works best on <code class="text-base bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded font-mono">www.yourdomain.com</code> via a CNAME. The apex needs either ALIAS/ANAME support at your DNS provider, or a redirect. ApexToWWW gives you the redirect &mdash; free, with stable IPs, IPv6, and HTTP/3, no matter which DNS provider you use.</p>
+                <a href="#setup" class="inline-flex items-center px-6 py-3 rounded-lg text-base font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
+                    Jump to Setup <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </header>
+
+            <!-- TL;DR -->
+            <div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 rounded-r-xl p-6 mb-12">
+                <div class="flex items-center gap-2 text-blue-700 dark:text-blue-300 font-bold text-sm uppercase tracking-wide mb-2"><i class="fas fa-bolt"></i> TL;DR</div>
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">Render's custom domains work through a CNAME, which apex domains can't use per RFC 1034. Render's own apex workaround requires your DNS provider to support ALIAS, ANAME, or CNAME flattening &mdash; not all do. Point <code class="bg-white dark:bg-gray-900 px-1.5 py-0.5 rounded text-sm">www</code> to Render via CNAME, then redirect apex to www using <a href="/" class="text-blue-600 dark:text-blue-400 underline font-semibold">ApexToWWW</a>. Free, works with any DNS provider, automatic SSL.</p>
+            </div>
+
+            <div class="prose prose-lg dark:prose-invert max-w-none
+                prose-headings:font-bold prose-headings:tracking-tight
+                prose-h2:text-2xl prose-h2:sm:text-3xl prose-h2:mt-12 prose-h2:mb-4
+                prose-h3:text-xl prose-h3:sm:text-2xl prose-h3:mt-8 prose-h3:mb-3
+                prose-p:text-gray-700 prose-p:dark:text-gray-300 prose-p:leading-relaxed prose-p:mb-4
+                prose-a:text-blue-600 prose-a:dark:text-blue-400 prose-a:underline prose-a:underline-offset-2
+                prose-strong:text-gray-900 prose-strong:dark:text-white
+                prose-code:bg-gray-100 prose-code:dark:bg-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
+                prose-li:text-gray-700 prose-li:dark:text-gray-300">
+
+                <h2 id="render-official">Render's Official Approach</h2>
+                <p>When you add a custom domain to a Render service (web service, static site, or Docker deployment), the Render Dashboard walks you through <strong>Settings &rarr; Custom Domains &rarr; Add Custom Domain</strong>. For a subdomain like <code>www.yourdomain.com</code>, Render shows you a CNAME target immediately &mdash; you add that CNAME at your DNS provider and you're done.</p>
+
+                <p>For the apex domain, Render's docs point you toward whatever apex workaround your DNS provider supports: an <strong>ALIAS</strong> or <strong>ANAME</strong> record (offered by providers like DNSimple and AWS Route 53), or <strong>CNAME flattening</strong> (Cloudflare's approach). If your provider supports one of these, Render will show you the value to enter and it behaves like a CNAME at the apex, working around the RFC 1034 restriction.</p>
+
+                <p>The catch: <strong>not every DNS provider supports ALIAS, ANAME, or CNAME flattening.</strong> Many popular registrars &mdash; GoDaddy, Namecheap, Google Domains successors, and others &mdash; simply don't offer a CNAME-like record type at the apex. If yours doesn't, Render's native apex setup isn't available to you at all, and you need a different approach.</p>
+
+                <h2 id="setup">The ApexToWWW Approach &mdash; Step by Step</h2>
+
+                <p>This setup keeps your Render service on <code>www.yourdomain.com</code> using Render's standard CNAME path, and uses ApexToWWW to handle the apex 301 redirect. It works regardless of what your DNS provider supports. Total time: about 5 minutes plus DNS propagation.</p>
+
+                <ol class="space-y-3 mb-6">
+                    <li><strong>Step 1.</strong> In the Render Dashboard, open your service, go to <strong>Settings &rarr; Custom Domains</strong>, and click <strong>Add Custom Domain</strong>. Enter <code>www.yourdomain.com</code>.</li>
+                    <li><strong>Step 2.</strong> Render displays a CNAME target for the <code>www</code> subdomain. Copy this value.</li>
+                    <li><strong>Step 3.</strong> In your DNS provider, add a CNAME record: host <code>www</code>, value the target Render provided.</li>
+                    <li><strong>Step 4.</strong> Add an A record: host <code>@</code>, value <code>65.21.184.101</code>.</li>
+                    <li><strong>Step 5.</strong> Add an AAAA record: host <code>@</code>, value <code>2a01:4f9:c012:a304::1</code>.</li>
+                    <li><strong>Step 6.</strong> Wait for Render to verify <code>www</code> and provision its Let's Encrypt certificate (usually a few minutes).</li>
+                    <li><strong>Step 7.</strong> Test: <code>curl -I https://yourdomain.com</code> &rarr; you should see <code>HTTP/2 301</code> with a <code>Location</code> header pointing at <code>https://www.yourdomain.com/</code>.</li>
+                </ol>
+
+                <h3 id="dns-records">DNS Records Summary</h3>
+
+                <div class="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 my-8 not-prose">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-gray-200 dark:border-gray-700">
+                                    <th class="text-left py-2 pr-4 font-semibold">Type</th>
+                                    <th class="text-left py-2 pr-4 font-semibold">Name</th>
+                                    <th class="text-left py-2 font-semibold">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-100 dark:border-gray-800">
+                                    <td class="py-3 pr-4"><code class="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-0.5 rounded font-bold">A</code></td>
+                                    <td class="py-3 pr-4"><code>@</code></td>
+                                    <td class="py-3"><code>65.21.184.101</code></td>
+                                </tr>
+                                <tr class="border-b border-gray-100 dark:border-gray-800">
+                                    <td class="py-3 pr-4"><code class="text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/30 px-2 py-0.5 rounded font-bold">AAAA</code></td>
+                                    <td class="py-3 pr-4"><code>@</code></td>
+                                    <td class="py-3"><code>2a01:4f9:c012:a304::1</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 pr-4"><code class="text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30 px-2 py-0.5 rounded font-bold">CNAME</code></td>
+                                    <td class="py-3 pr-4"><code>www</code></td>
+                                    <td class="py-3"><code class="text-gray-500">(Render target)</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <h2 id="comparison">Comparison: Render's Native Apex vs ApexToWWW</h2>
+
+                <div class="overflow-x-auto my-6 not-prose">
+                    <table class="w-full text-sm border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden">
+                        <thead class="bg-gray-50 dark:bg-gray-900">
+                            <tr>
+                                <th class="text-left p-3 font-semibold border-b border-gray-200 dark:border-gray-800">Approach</th>
+                                <th class="text-center p-3 font-semibold border-b border-gray-200 dark:border-gray-800">Works on any DNS</th>
+                                <th class="text-center p-3 font-semibold border-b border-gray-200 dark:border-gray-800">IPv6</th>
+                                <th class="text-center p-3 font-semibold border-b border-gray-200 dark:border-gray-800">HTTP/3</th>
+                                <th class="text-center p-3 font-semibold border-b border-gray-200 dark:border-gray-800">Apex SSL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-100 dark:border-gray-800">
+                                <td class="p-3 font-semibold">Render ALIAS/ANAME apex</td>
+                                <td class="p-3 text-center text-red-500"><i class="fas fa-times-circle"></i> Requires support</td>
+                                <td class="p-3 text-center text-amber-600">Depends</td>
+                                <td class="p-3 text-center text-green-600"><i class="fas fa-check-circle"></i> Yes</td>
+                                <td class="p-3 text-center text-green-600"><i class="fas fa-check-circle"></i> Yes</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold">ApexToWWW redirect</td>
+                                <td class="p-3 text-center text-green-600"><i class="fas fa-check-circle"></i> Yes</td>
+                                <td class="p-3 text-center text-green-600"><i class="fas fa-check-circle"></i> Yes</td>
+                                <td class="p-3 text-center text-green-600"><i class="fas fa-check-circle"></i> Yes</td>
+                                <td class="p-3 text-center text-green-600"><i class="fas fa-check-circle"></i> Yes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 id="when-native">When to Use Render's Native Apex Setup Instead</h2>
+
+                <p>The ApexToWWW redirect pattern is not always the right choice. Use Render's native ALIAS/ANAME/CNAME-flattening setup if:</p>
+
+                <ul class="space-y-2 mb-6">
+                    <li><strong>Your DNS provider already supports it.</strong> If you're on Cloudflare, Route 53, or DNSimple, the native path is one less external dependency and serves your Render app directly on the apex &mdash; no redirect hop at all.</li>
+                    <li><strong>You want the apex as your canonical URL.</strong> Some teams prefer <code>example.com</code> with no <code>www</code>. In that case you want Render serving content on the apex directly, not redirecting away from it.</li>
+                    <li><strong>You're comfortable managing DNS with your provider's proprietary record type.</strong> ALIAS/ANAME records behave slightly differently across providers, and moving DNS providers later can mean reconfiguring this record.</li>
+                </ul>
+
+                <p>Otherwise &mdash; especially if your registrar doesn't support ALIAS/ANAME at all &mdash; the redirect pattern is the only option that works everywhere, and it adds IPv6 and HTTP/3 on top.</p>
+
+                <h2 id="other-platforms">Other Hosting Platforms</h2>
+
+                <p>The same pattern works for any platform that prefers a CNAME on <code>www</code>:</p>
+
+                <ul class="space-y-2 mb-6">
+                    <li><a href="/cloudflare-pages-apex-redirect/">Cloudflare Pages apex redirect</a></li>
+                    <li><a href="/vercel-apex-domain-redirect/">Vercel apex domain redirect</a></li>
+                    <li><a href="/netlify-apex-domain-redirect/">Netlify apex domain redirect</a></li>
+                    <li><a href="/heroku-apex-domain-redirect/">Heroku apex domain redirect</a></li>
+                    <li><a href="/firebase-hosting-apex-redirect/">Firebase Hosting apex domain redirect</a></li>
+                    <li><a href="/aws-amplify-apex-domain-redirect/">AWS Amplify apex domain redirect</a></li>
+                    <li><a href="/blog/github-pages-apex-domain-redirect/">GitHub Pages apex domain redirect</a></li>
+                </ul>
+
+                <h2 id="faq">Frequently Asked Questions</h2>
+
+                <h3 id="faq-service-types">Does this work with both Render web services and static sites?</h3>
+                <p>Yes. Render's custom domain flow is identical for web services, static sites, and Docker-based services: add the domain in Settings &rarr; Custom Domains, get a CNAME target, and point <code>www</code> at it. ApexToWWW handles the apex redirect regardless of which Render product type is behind <code>www</code>.</p>
+
+                <h3 id="faq-alias">Do I still need my DNS provider to support ALIAS or ANAME records?</h3>
+                <p>No, that's the point. Render's native apex setup requires ALIAS, ANAME, or CNAME flattening at your DNS provider &mdash; DNSimple, Route 53, and Cloudflare support these, but many registrars don't. ApexToWWW uses plain A and AAAA records instead, which every DNS provider supports, so you don't need any special record type.</p>
+
+                <h3 id="faq-ssl">Does this affect Render's automatic SSL?</h3>
+                <p>No. Render provisions and renews its own Let's Encrypt certificate for <code>www.yourdomain.com</code> as soon as the CNAME verifies. ApexToWWW separately provisions a Let's Encrypt certificate for the apex. Both renew automatically and independently &mdash; there's nothing to monitor manually.</p>
+
+                <h3 id="faq-preview">What about Render preview environments and PR previews?</h3>
+                <p>Unaffected. Render's preview environments use auto-generated <code>onrender.com</code> subdomains that are completely separate from your custom domain. The apex redirect only applies to <code>yourdomain.com</code> and has no interaction with preview URLs.</p>
+
+            </div>
+
+            <!-- CTA Section -->
+            <div class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-8 my-12 text-center">
+                <h2 class="text-2xl font-bold mb-3">Ready to Set Up Your Render Apex Redirect?</h2>
+                <p class="text-gray-600 dark:text-gray-400 mb-6">Add two DNS records and your naked domain redirects to your Render service over HTTPS. Free, no signup, works with any DNS provider.</p>
+                <a href="/#records" class="inline-flex items-center px-6 py-3 rounded-lg text-base font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
+                    Get Started Now <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+                <p class="text-xs text-gray-500 mt-4">Questions? Email <a href="#" data-email-user="hi" data-email-domain="apextowww.com" class="js-email text-blue-600 dark:text-blue-400 underline">hi@apextowww.com</a></p>
+            </div>
+        </article>
+    </main>
+
+    <footer style="background:var(--surface);border-top:1px solid var(--line)">
+  <div style="max-width:1160px;margin:0 auto;padding:64px 24px 32px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:40px 32px;margin-bottom:48px">
+      <div>
+        <a href="/" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:18px;margin-bottom:16px">
+          <span aria-hidden="true" style="width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#3B82F6,#9333EA);display:flex;align-items:center;justify-content:center;color:#fff"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></span>
+          ApexToWWW
+        </a>
+        <p style="margin:0 0 12px;color:var(--muted);font-size:15px">Free apex domain to www redirect with automatic SSL, IPv6 and HTTP/3.</p>      </div>
+      <nav aria-label="Hosting guides">
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Hosting guides</h2>
+        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:15px">
+          <li><a href="/cloudflare-pages-apex-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Cloudflare Pages</a></li>
+          <li><a href="/vercel-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Vercel</a></li>
+          <li><a href="/netlify-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Netlify</a></li>
+          <li><a href="/blog/github-pages-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">GitHub Pages</a></li>
+          <li><a href="/heroku-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Heroku</a></li>
+          <li><a href="/firebase-hosting-apex-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Firebase Hosting</a></li>
+          <li><a href="/render-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Render</a></li>
+          <li><a href="/aws-amplify-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">AWS Amplify</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Guides">
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Guides</h2>
+        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:15px">
+          <li><a href="/blog/how-to-redirect-apex-domain-to-www/" style="display:inline-block;padding:6px 0;text-decoration:none">How to redirect apex to www</a></li>
+          <li><a href="/blog/what-is-an-apex-domain/" style="display:inline-block;padding:6px 0;text-decoration:none">What is an apex domain?</a></li>
+          <li><a href="/blog/apex-domain-vs-www/" style="display:inline-block;padding:6px 0;text-decoration:none">Apex domain vs www</a></li>
+          <li><a href="/blog/apex-domain-redirect-methods-compared/" style="display:inline-block;padding:6px 0;text-decoration:none">Redirect methods compared</a></li>
+          <li><a href="/redirect-www-to-apex-domain/" style="display:inline-block;padding:6px 0;text-decoration:none">Redirect www to apex</a></li>
+          <li><a href="/blog/hreflang-and-canonical-tags/" style="display:inline-block;padding:6px 0;text-decoration:none">Hreflang &amp; canonical tags</a></li>
+          <li><a href="/blog/free-subdomain-forwarding/" style="display:inline-block;padding:6px 0;text-decoration:none">Free subdomain forwarding</a></li>
+          <li><a href="/blog/" style="display:inline-block;padding:6px 0;text-decoration:none;font-weight:600">All guides</a></li>
+        </ul>
+      </nav>
+      <div>
+        <span id="contact" class="alias"></span>
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Contact</h2>
+        <p style="margin:0 0 8px;font-size:15px"><a href="#" class="js-email" data-email-user="hi" data-email-domain="apextowww.com" data-show-address style="display:inline-block;padding:6px 0">Email us</a></p>
+        <address style="font-style:normal;color:var(--muted);font-size:14px;line-height:1.6">Sandbox.ventures<br>P. O. Pedersens Vej 2<br>8200 Aarhus N, Denmark</address>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--line);padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;color:var(--muted);font-size:14px">
+      <span>&copy; <span id="current-year">2026</span> ApexToWWW. All rights reserved.</span>
+      <span>A service provided by <a href="https://sandbox.ventures" rel="noopener" style="color:var(--ink);font-weight:600;text-decoration:underline">Sandbox.ventures</a></span>
+    </div>
+  </div>
+</footer>
+    <script src="/site.js" defer></script>
+</body>
+</html>

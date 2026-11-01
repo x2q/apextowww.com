@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+        (function () {
+            try {
+                var t = localStorage.theme;
+                if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                }
+            } catch (e) {}
+        })();
+    </script>
+        <title>What Is an Apex Domain? A Complete Beginner's Guide | ApexToWWW</title>
+        <meta name="description" content="Learn what an apex domain is, how it differs from subdomains, why it causes DNS limitations, and how to solve the naked domain problem with a simple redirect." />
+        <link rel="canonical" href="https://www.apextowww.com/blog/what-is-an-apex-domain/" />
+
+        <!-- Open Graph -->
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://www.apextowww.com/blog/what-is-an-apex-domain/" />
+        <meta property="og:title" content="What Is an Apex Domain? A Complete Beginner's Guide" />
+        <meta property="og:description" content="Learn what an apex domain is, how it differs from subdomains, why it causes DNS limitations, and how to solve the naked domain problem." />
+        <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
+        <meta property="og:site_name" content="ApexToWWW" />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="What Is an Apex Domain? A Complete Beginner's Guide" />
+        <meta name="twitter:description" content="Learn what an apex domain is, how it differs from subdomains, why it causes DNS limitations, and how to solve the naked domain problem." />
+        <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
+
+        <link rel="stylesheet" href="/styles.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCDJZQW377"></script>
+        <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-NCDJZQW377");</script>
+
+        <!-- Article Structured Data -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "What Is an Apex Domain? A Complete Beginner's Guide",
+            "description": "Learn what an apex domain is, how it differs from subdomains, why it causes DNS limitations, and how to solve the naked domain problem with a simple redirect.",
+            "url": "https://www.apextowww.com/blog/what-is-an-apex-domain/",
+            "datePublished": "2026-04-11",
+            "dateModified": "2026-07-02",
+            "publisher": {
+                "@type": "Organization",
+                "name": "ApexToWWW",
+                "url": "https://www.apextowww.com"
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "https://www.apextowww.com/blog/what-is-an-apex-domain/"
+            }
+        }
+        </script>
+
+        <!-- DefinedTerm Structured Data -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "DefinedTerm",
+            "name": "Apex Domain",
+            "alternateName": ["Root Domain", "Bare Domain", "Naked Domain", "Zone Apex"],
+            "description": "An apex domain is a domain name without any subdomain prefix, such as example.com rather than www.example.com. It sits at the top (apex) of the domain's DNS zone and, per RFC 1034, cannot use a CNAME record.",
+            "inDefinedTermSet": {
+                "@type": "DefinedTermSet",
+                "name": "ApexToWWW DNS Glossary",
+                "url": "https://www.apextowww.com/blog/"
+            },
+            "url": "https://www.apextowww.com/blog/what-is-an-apex-domain/"
+        }
+        </script>
+
+        <!-- FAQ Schema -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What is an apex domain in simple terms?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "An apex domain is your domain name with nothing in front of it -- example.com instead of www.example.com, blog.example.com, or shop.example.com. It's the domain exactly as you registered it." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Is 'domain apex' the same thing as 'apex domain'?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Yes. \"Domain apex\" and \"apex domain\" are used interchangeably, along with \"zone apex,\" \"root domain,\" \"bare domain,\" and \"naked domain.\" They all refer to the same thing: the domain name with no subdomain prefix." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What does apex domain meaning refer to in DNS?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "In DNS, the apex is the top node of a zone file -- the point where the SOA (Start of Authority) and NS (Name Server) records live. The apex domain is the domain name at that exact point, before any subdomain label is added." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How do I check if a domain name is an apex domain?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "A domain is an apex domain if it has no subdomain label before the registrable domain and TLD -- for example example.com or example.co.uk. If there's a prefix like www, blog, or api before the domain (www.example.com), it's a subdomain, not the apex." }
+                }
+            ]
+        }
+        </script>
+    </head>
+<body class="font-sans bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white antialiased">
+    <a class="skip" href="#main">Skip to content</a>
+    <!-- Navigation -->
+    <header style="position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line)">
+  <div class="hdr" style="max-width:1160px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="/" aria-label="ApexToWWW home" style="display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:20px;letter-spacing:-0.02em">
+      <span aria-hidden="true" style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#3B82F6,#9333EA);display:flex;align-items:center;justify-content:center;color:#fff">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+      </span>
+      ApexToWWW
+    </a>
+    <nav aria-label="Primary" class="nav-links" style="display:flex;gap:28px;font-size:15px;font-weight:500">
+      <a href="/#how">How it works</a>
+      <a href="/#providers">Providers</a>
+      <a href="/blog/">Guides</a>
+      <a href="/#faq">FAQ</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Dark mode" aria-pressed="false">
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      </button>
+      <a class="btn btn-primary btn-sm" href="/#records"><span>Get <span class="hide-xs">the </span>records</span></a>
+    </div>
+  </div>
+</header>
+
+    <main id="main" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="max-w-3xl mx-auto">
+
+            <!-- Breadcrumbs -->
+            <nav aria-label="Breadcrumb" class="mb-8">
+                <ol class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                    <li><a href="/" class="hover:text-gray-900 dark:hover:text-white transition">Home</a></li>
+                    <li><span class="mx-1">/</span></li>
+                    <li><a href="/blog/" class="hover:text-gray-900 dark:hover:text-white transition">Blog</a></li>
+                    <li><span class="mx-1">/</span></li>
+                    <li class="text-gray-900 dark:text-white font-medium">What Is an Apex Domain?</li>
+                </ol>
+            </nav>
+
+            <!-- Article Header -->
+            <header class="mb-10">
+                <div class="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400 mb-4">
+                    <time datetime="2026-04-11">April 11, 2026</time>
+                    <span>&middot;</span>
+                    <span>Updated <time datetime="2026-07-02">July 2, 2026</time></span>
+                    <span>&middot;</span>
+                    <span>7 min read</span>
+                </div>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">What Is an Apex Domain? A Complete Beginner's Guide</h1>
+                <div class="my-8 p-6 rounded-2xl border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-900/20">
+                    <div class="flex items-center gap-2 mb-2">
+                        <i class="fas fa-bolt text-blue-600 dark:text-blue-400"></i>
+                        <span class="text-sm font-bold uppercase tracking-wide text-blue-600 dark:text-blue-400">TL;DR</span>
+                    </div>
+                    <p class="text-gray-800 dark:text-gray-200 leading-relaxed">
+                        An apex domain is the root of your domain name &mdash; yourdomain.com without any prefix like www or blog. Also called root, naked, or bare domain. Due to DNS RFC 1034, apex domains can only use A/AAAA records (not CNAME), which limits compatibility with modern hosting services. The common fix is to redirect the apex to www.
+                    </p>
+                </div>
+                <p class="text-lg text-gray-600 dark:text-gray-400">Everything you need to know about apex domains &mdash; what they are, how DNS hierarchy works, why apex domains cause problems, and how to fix them.</p>
+            </header>
+
+            <!-- Article Body -->
+            <article class="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:before:content-none prose-code:after:content-none">
+
+                <h2 id="what-is-an-apex-domain" class="text-2xl sm:text-3xl mt-10 mb-4">What Is an Apex Domain?</h2>
+
+                <p>An <strong>apex domain</strong> &mdash; also called a <strong>root domain</strong>, <strong>naked domain</strong>, <strong>bare domain</strong>, or <strong>zone apex</strong> &mdash; is a domain name with no subdomain prefix in front of it. <code>example.com</code> is an apex domain; <code>www.example.com</code> is not. It's the domain exactly as you registered it, sitting at the very top of your DNS zone.</p>
+
+                <p>For example, if your website is <code>www.example.com</code>, then the apex domain is simply <code>example.com</code>. There is no <code>www</code>, no <code>blog</code>, no <code>shop</code> &mdash; just the domain name and its top-level domain (TLD).</p>
+
+                <p>Here are a few more examples to make it clear:</p>
+
+                <div class="overflow-x-auto my-6">
+                    <table class="min-w-full text-sm border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                        <thead class="bg-gray-50 dark:bg-gray-800">
+                            <tr>
+                                <th class="px-4 py-3 text-left font-semibold">Full URL</th>
+                                <th class="px-4 py-3 text-left font-semibold">Apex Domain</th>
+                                <th class="px-4 py-3 text-left font-semibold">Subdomain</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                            <tr><td class="px-4 py-3"><code>www.example.com</code></td><td class="px-4 py-3"><code>example.com</code></td><td class="px-4 py-3"><code>www</code></td></tr>
+                            <tr><td class="px-4 py-3"><code>blog.mysite.org</code></td><td class="px-4 py-3"><code>mysite.org</code></td><td class="px-4 py-3"><code>blog</code></td></tr>
+                            <tr><td class="px-4 py-3"><code>shop.store.co.uk</code></td><td class="px-4 py-3"><code>store.co.uk</code></td><td class="px-4 py-3"><code>shop</code></td></tr>
+                            <tr><td class="px-4 py-3"><code>example.com</code></td><td class="px-4 py-3"><code>example.com</code></td><td class="px-4 py-3"><em>none</em></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 id="other-names" class="text-2xl sm:text-3xl mt-10 mb-4">Other Names for Apex Domain</h2>
+
+                <p>The apex domain goes by several names. You will encounter all of these terms in documentation, forums, and DNS provider dashboards &mdash; they all mean exactly the same thing:</p>
+
+                <ul>
+                    <li><strong>Root domain</strong> &mdash; emphasizes that it sits at the root of the DNS zone</li>
+                    <li><strong>Bare domain</strong> &mdash; "bare" because there is no subdomain attached</li>
+                    <li><strong>Naked domain</strong> &mdash; same idea as bare, with nothing in front of it</li>
+                    <li><strong>Zone apex</strong> &mdash; the technical DNS term, referring to the top of the DNS zone file</li>
+                </ul>
+
+                <p>Whether someone says "naked domain," "bare domain," or "zone apex," they are all talking about <code>example.com</code> without any prefix.</p>
+
+                <h2 id="dns-hierarchy" class="text-2xl sm:text-3xl mt-10 mb-4">How the DNS Hierarchy Works</h2>
+
+                <p>To understand why apex domains matter, it helps to know how the Domain Name System (DNS) is structured. DNS is organized as a tree, read from right to left:</p>
+
+                <div class="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 my-6 font-mono text-sm">
+                    <p class="mb-2"><strong class="text-blue-600 dark:text-blue-400">Level 1 &mdash; TLD:</strong> <code>.com</code>, <code>.org</code>, <code>.net</code>, <code>.io</code></p>
+                    <p class="mb-2"><strong class="text-purple-600 dark:text-purple-400">Level 2 &mdash; Apex domain:</strong> <code>example.com</code></p>
+                    <p class="mb-0"><strong class="text-pink-600 dark:text-pink-400">Level 3 &mdash; Subdomain:</strong> <code>www.example.com</code>, <code>blog.example.com</code></p>
+                </div>
+
+                <p>When you register a domain like <code>example.com</code>, you are registering the apex domain. The TLD (<code>.com</code>) is managed by a registry (Verisign, in this case). Everything below your apex domain &mdash; like <code>www</code>, <code>mail</code>, or <code>api</code> &mdash; are subdomains that you control through your DNS records.</p>
+
+                <p>This hierarchy is important because of a critical technical limitation that affects the apex domain specifically.</p>
+
+                <h2 id="apex-domain-limitations" class="text-2xl sm:text-3xl mt-10 mb-4">Why Apex Domains Have DNS Limitations</h2>
+
+                <p>Here is the core problem: according to <a href="https://www.rfc-editor.org/rfc/rfc1034" target="_blank" rel="noopener"><strong>RFC 1034</strong></a> (the specification that defines how DNS works), you <strong>cannot place a CNAME record at the apex of a DNS zone</strong>.</p>
+
+                <p>A CNAME record is an alias that points one domain name to another. For example, you might point <code>www.example.com</code> to <code>myapp.herokuapp.com</code> using a CNAME. This works perfectly for subdomains.</p>
+
+                <p>But at the apex (<code>example.com</code>), the DNS specification requires that other essential records &mdash; like SOA (Start of Authority) and NS (Name Server) records &mdash; also exist. A CNAME record cannot coexist with any other record type at the same name. If you placed a CNAME at the apex, it would conflict with these mandatory records and break DNS resolution entirely.</p>
+
+                <p>This means that if your hosting provider gives you a hostname (like <code>myapp.netlify.app</code> or <code>your-site.vercel.app</code>) instead of an IP address, you cannot point your apex domain to it using a standard CNAME record.</p>
+
+                <h2 id="alias-aname-workaround" class="text-2xl sm:text-3xl mt-10 mb-4">The ALIAS and ANAME Workaround</h2>
+
+                <p>Some DNS providers offer proprietary record types that work around the CNAME-at-apex restriction:</p>
+
+                <ul>
+                    <li><strong>ALIAS records</strong> (used by DNSimple, AWS Route 53, and others)</li>
+                    <li><strong>ANAME records</strong> (used by some other providers)</li>
+                    <li><strong>CNAME flattening</strong> (Cloudflare's approach)</li>
+                </ul>
+
+                <p>These work by resolving the target hostname to an IP address at query time and returning an A record to the client. The client never sees a CNAME &mdash; it just gets an IP address, which satisfies the DNS specification.</p>
+
+                <p>However, these solutions have drawbacks. Not all DNS providers support them. They are non-standard, so behavior can vary. And some hosting platforms may not work correctly with ALIAS records because the resolved IP address can change without notice, potentially causing downtime if caching is involved.</p>
+
+                <h2 id="when-apex-domain-matters" class="text-2xl sm:text-3xl mt-10 mb-4">When Does the Apex Domain Problem Actually Matter?</h2>
+
+                <p>The apex domain limitation becomes a real issue when you are hosting your website on a platform that <strong>requires a CNAME record</strong> instead of providing a static IP address. This includes many popular services:</p>
+
+                <ul>
+                    <li><strong>GitHub Pages</strong> &mdash; provides a <code>.github.io</code> hostname</li>
+                    <li><strong>Netlify</strong> &mdash; assigns a <code>.netlify.app</code> hostname</li>
+                    <li><strong>Vercel</strong> &mdash; uses <code>.vercel.app</code> hostnames</li>
+                    <li><strong>Heroku</strong> &mdash; provides <code>.herokuapp.com</code> hostnames</li>
+                    <li><strong>AWS Elastic Load Balancer</strong> &mdash; gives you a long <code>.elb.amazonaws.com</code> hostname</li>
+                </ul>
+
+                <p>If you want visitors who type <code>example.com</code> into their browser to reach your site on one of these platforms, you have a problem. You cannot create a CNAME at the apex, and you may not have access to ALIAS records.</p>
+
+                <h2 id="how-to-solve" class="text-2xl sm:text-3xl mt-10 mb-4">How to Solve the Problem: Redirect Apex to WWW</h2>
+
+                <p>The simplest and most reliable solution is to <a href="/" class="font-bold underline decoration-blue-500/40 hover:decoration-blue-500"><strong>redirect your apex domain to www</strong></a>. This approach works with every DNS provider and every hosting platform, because:</p>
+
+                <ol>
+                    <li>You point your apex domain (<code>example.com</code>) to a redirect server using standard A records (IP addresses)</li>
+                    <li>The redirect server sends a <strong>301 permanent redirect</strong> to <code>www.example.com</code></li>
+                    <li>You point <code>www.example.com</code> to your hosting platform using a CNAME record (which is perfectly allowed on subdomains)</li>
+                </ol>
+
+                <p>This is exactly what <strong>ApexToWWW</strong> does. It is a free service that provides the redirect server for you. All you need to do is add two DNS records and your apex domain will automatically redirect to the www version of your site.</p>
+
+                <div class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/50 dark:to-purple-950/50 border border-blue-200 dark:border-blue-800 rounded-xl p-6 my-8">
+                    <h3 class="text-lg font-bold mb-2 text-gray-900 dark:text-white">Set it up in under a minute</h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">Add two A records to your DNS, and ApexToWWW handles the rest &mdash; automatic SSL, IPv6 support, and HTTP/3 included. No account required.</p>
+                    <a href="/#records" class="inline-flex items-center px-5 py-2.5 rounded-lg text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
+                        Get Started Free <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <p>The redirect approach is preferred by many large organizations because it is standards-compliant, works everywhere, and avoids the complexity of non-standard DNS record types. Visitors who type <code>example.com</code> are seamlessly forwarded to <code>www.example.com</code>, and search engines consolidate both versions under a single canonical URL.</p>
+
+                <h2 id="faq" class="text-2xl sm:text-3xl mt-10 mb-4">Frequently Asked Questions</h2>
+
+                <h3 id="faq-simple" class="text-xl sm:text-2xl mt-8 mb-3">What is an apex domain in simple terms?</h3>
+                <p>An apex domain is your domain name with nothing in front of it &mdash; <code>example.com</code> instead of <code>www.example.com</code>, <code>blog.example.com</code>, or <code>shop.example.com</code>. It's the domain exactly as you registered it.</p>
+
+                <h3 id="faq-domain-apex" class="text-xl sm:text-2xl mt-8 mb-3">Is "domain apex" the same thing as "apex domain"?</h3>
+                <p>Yes. "Domain apex" and "apex domain" are used interchangeably, along with "zone apex," "root domain," "bare domain," and "naked domain." They all refer to the same thing: the domain name with no subdomain prefix.</p>
+
+                <h3 id="faq-meaning" class="text-xl sm:text-2xl mt-8 mb-3">What does "apex domain" meaning refer to in DNS?</h3>
+                <p>In DNS, the apex is the top node of a zone file &mdash; the point where the SOA (Start of Authority) and NS (Name Server) records live. The apex domain is the domain name at that exact point, before any subdomain label is added.</p>
+
+                <h3 id="faq-check" class="text-xl sm:text-2xl mt-8 mb-3">How do I check if a domain name is an apex domain?</h3>
+                <p>A domain is an apex domain if it has no subdomain label before the registrable domain and TLD &mdash; for example <code>example.com</code> or <code>example.co.uk</code>. If there's a prefix like <code>www</code>, <code>blog</code>, or <code>api</code> before the domain (<code>www.example.com</code>), it's a subdomain, not the apex.</p>
+
+                <h2 id="summary" class="text-2xl sm:text-3xl mt-10 mb-4">Summary</h2>
+
+                <p>An <strong>apex domain</strong> (also called a root domain, bare domain, naked domain, or zone apex) is your domain name without any subdomain prefix &mdash; for example, <code>example.com</code>. Due to the DNS specification (RFC 1034), you cannot place a CNAME record at the apex, which creates problems when hosting on platforms that require CNAME-based configuration.</p>
+
+                <p>The most reliable fix is to redirect your apex domain to <code>www</code> using a service like <a href="/">ApexToWWW</a>. It takes less than a minute to set up, requires no account, and works with any DNS provider and any hosting platform.</p>
+
+            </article>
+
+            <!-- Author / Share -->
+            <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Published on <time datetime="2026-04-11">April 11, 2026</time></p>
+                    <a href="/blog/" class="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline">&larr; Back to all articles</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer style="background:var(--surface);border-top:1px solid var(--line)">
+  <div style="max-width:1160px;margin:0 auto;padding:64px 24px 32px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:40px 32px;margin-bottom:48px">
+      <div>
+        <a href="/" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:18px;margin-bottom:16px">
+          <span aria-hidden="true" style="width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#3B82F6,#9333EA);display:flex;align-items:center;justify-content:center;color:#fff"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></span>
+          ApexToWWW
+        </a>
+        <p style="margin:0 0 12px;color:var(--muted);font-size:15px">Free apex domain to www redirect with automatic SSL, IPv6 and HTTP/3.</p>      </div>
+      <nav aria-label="Hosting guides">
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Hosting guides</h2>
+        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:15px">
+          <li><a href="/cloudflare-pages-apex-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Cloudflare Pages</a></li>
+          <li><a href="/vercel-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Vercel</a></li>
+          <li><a href="/netlify-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Netlify</a></li>
+          <li><a href="/blog/github-pages-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">GitHub Pages</a></li>
+          <li><a href="/heroku-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Heroku</a></li>
+          <li><a href="/firebase-hosting-apex-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Firebase Hosting</a></li>
+          <li><a href="/render-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Render</a></li>
+          <li><a href="/aws-amplify-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">AWS Amplify</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Guides">
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Guides</h2>
+        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:15px">
+          <li><a href="/blog/how-to-redirect-apex-domain-to-www/" style="display:inline-block;padding:6px 0;text-decoration:none">How to redirect apex to www</a></li>
+          <li><a href="/blog/what-is-an-apex-domain/" style="display:inline-block;padding:6px 0;text-decoration:none">What is an apex domain?</a></li>
+          <li><a href="/blog/apex-domain-vs-www/" style="display:inline-block;padding:6px 0;text-decoration:none">Apex domain vs www</a></li>
+          <li><a href="/blog/apex-domain-redirect-methods-compared/" style="display:inline-block;padding:6px 0;text-decoration:none">Redirect methods compared</a></li>
+          <li><a href="/redirect-www-to-apex-domain/" style="display:inline-block;padding:6px 0;text-decoration:none">Redirect www to apex</a></li>
+          <li><a href="/blog/hreflang-and-canonical-tags/" style="display:inline-block;padding:6px 0;text-decoration:none">Hreflang &amp; canonical tags</a></li>
+          <li><a href="/blog/free-subdomain-forwarding/" style="display:inline-block;padding:6px 0;text-decoration:none">Free subdomain forwarding</a></li>
+          <li><a href="/blog/" style="display:inline-block;padding:6px 0;text-decoration:none;font-weight:600">All guides</a></li>
+        </ul>
+      </nav>
+      <div>
+        <span id="contact" class="alias"></span>
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Contact</h2>
+        <p style="margin:0 0 8px;font-size:15px"><a href="#" class="js-email" data-email-user="hi" data-email-domain="apextowww.com" data-show-address style="display:inline-block;padding:6px 0">Email us</a></p>
+        <address style="font-style:normal;color:var(--muted);font-size:14px;line-height:1.6">Sandbox.ventures<br>P. O. Pedersens Vej 2<br>8200 Aarhus N, Denmark</address>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--line);padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;color:var(--muted);font-size:14px">
+      <span>&copy; <span id="current-year">2026</span> ApexToWWW. All rights reserved.</span>
+      <span>A service provided by <a href="https://sandbox.ventures" rel="noopener" style="color:var(--ink);font-weight:600;text-decoration:underline">Sandbox.ventures</a></span>
+    </div>
+  </div>
+</footer>
+    <script src="/site.js" defer></script>
+</body>
+</html>
