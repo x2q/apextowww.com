@@ -34,6 +34,8 @@ rsync -a \
   --exclude 'DESIGN.md' \
   --exclude 'BACKLINK_SUBMISSIONS.md' \
   --exclude 'tailwind.input.css' \
+  --exclude 'package.json' \
+  --exclude 'package-lock.json' \
   --exclude 'deploy.sh' \
   ./ "$DIST/"
 

@@ -4,6 +4,25 @@ This document captures the visual language, component patterns, and tooling
 conventions of the apextowww.com landing page so that new sections, blog
 templates, and provider guides stay visually consistent.
 
+> **Oct 2026 — redesign.** The look is now flat and indigo (`#4338CA` light,
+> `#9AA2FF` dark) on a cool slate neutral scale, with no glass navbar, blur
+> blobs, rotating word or A/B test. Two layers share the same tokens:
+>
+> - `index.html` is self-contained: tokens live in an inline `<style>` block
+>   (`:root` / `html.dark`, same `localStorage.theme` key), components are
+>   inline-styled, and it does not load `styles.css`.
+> - Sub-pages (blog, provider guides, 404) still use Tailwind, rebuilt with
+>   `npm run build:css`. `tailwind.input.css` remaps `gray-*` to the slate scale
+>   and `blue-*`/`purple-*` to the indigo accent, so existing utility classes pick
+>   up the new palette (old blue→purple gradients render flat). The shared
+>   header and footer are the homepage's markup; `/site.js` handles the theme
+>   toggle, year and the runtime-assembled email. Article bodies use
+>   `@tailwindcss/typography` (`prose`).
+>
+> Where sections 3–7 below mention gradients, glass or the old blue/purple
+> accents, the notes above win. New guide pages should copy the header/footer
+> from an existing sub-page.
+
 ---
 
 ## 1. Brand

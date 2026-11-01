@@ -1,6 +1,19 @@
 # ApexToWWW — Backlink Submission Drafts
 
-All drafts ready to submit. Copy-paste or follow the links.
+Drafts for manual posting. **Nothing here has been posted.** Claims were fact-checked
+on 2026-10-30; two were wrong in the first version and have been corrected:
+
+- ~~"No tracking"~~ — the website runs Google Analytics (GA4), so it is not tracking-free. Removed.
+- ~~"<50ms redirect latency"~~ — measured 90-200 ms end to end from Denmark (TLS handshake
+  included). Server-side time is not measured, so the drafts now quote the end-to-end figure.
+
+Posting notes:
+- Post to **one** subreddit at a time, days apart. Identical text in three subs in one day
+  reads as spam and risks the account. Rewrite the body per community and answer comments.
+- Hacker News: the first comment matters more than the title; be there to answer questions.
+- Lists/PRs (free-for-dev etc.) have contribution rules; read them before opening a PR.
+- Link equity from most of these is nofollow. The value is discovery and traffic, plus
+  a few crawl paths for Google. Do not expect ranking jumps from any single post.
 
 ---
 
@@ -36,9 +49,9 @@ Technical details:
 - Auto SSL via Let's Encrypt
 - IPv4 + IPv6 dual stack
 - HTTP/3 (QUIC)
-- <50ms redirect latency
+- ~100 ms end to end, TLS handshake included (measured from Denmark)
 - ARM64 infrastructure (Hetzner)
-- No account, no signup, no tracking
+- No account, no signup
 
 The service has been running reliably for a few months now.
 Happy to answer any questions about the architecture or DNS
@@ -71,8 +84,8 @@ Features:
 - Path + query string preservation
 - No account needed
 
-It's been running for a few months and handles redirects in
-under 50ms.
+It's been running for a few months. A redirect takes ~100 ms end
+to end, TLS handshake included.
 
 Site: https://www.apextowww.com
 
@@ -102,7 +115,7 @@ DNS records:
 - A: 65.21.184.101
 - AAAA: 2a01:4f9:c012:a304::1
 
-No signup, no tracking, no cost. Running on ARM64 (Hetzner).
+No signup, no cost. Running on ARM64 (Hetzner).
 
 https://www.apextowww.com
 
@@ -130,7 +143,7 @@ Technical details:
 - 301 with full path/query preservation
 - Dual-stack IPv4/IPv6
 - HTTP/3 support
-- <50ms latency
+- ~100 ms end to end (TLS included)
 - No account or signup needed
 
 https://www.apextowww.com
@@ -175,7 +188,7 @@ apex domain, you need a redirect. That's what we do.
 
 - Automatic SSL via Let's Encrypt
 - IPv6 + HTTP/3 support
-- <50ms redirect speed
+- ~100 ms redirects, TLS included
 - Full path and query preservation
 - 100% free, no account needed
 ```
