@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+        (function () {
+            try {
+                var t = localStorage.theme;
+                if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                }
+            } catch (e) {}
+        })();
+    </script>
+        <title>GitHub Pages Apex Domain Redirect — Free, 2 DNS Records</title>
+        <meta name="description" content="Redirect your apex domain to a GitHub Pages custom domain in 5 steps. Free 301, auto-SSL via Let's Encrypt, IPv6. CNAME on www, ApexToWWW on the apex." />
+        <link rel="canonical" href="https://www.apextowww.com/blog/github-pages-apex-domain-redirect/" />
+
+        <!-- Open Graph -->
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://www.apextowww.com/blog/github-pages-apex-domain-redirect/" />
+        <meta property="og:title" content="GitHub Pages Apex Domain Redirect — Free, 2 DNS Records" />
+        <meta property="og:description" content="Redirect your apex domain to a GitHub Pages custom domain in 5 steps. Free 301, auto-SSL via Let's Encrypt, IPv6. CNAME on www, ApexToWWW on the apex." />
+        <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
+        <meta property="og:site_name" content="ApexToWWW" />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="GitHub Pages Apex Domain Redirect — Free, 2 DNS Records" />
+        <meta name="twitter:description" content="Redirect your apex domain to a GitHub Pages custom domain in 5 steps. Free 301, auto-SSL, IPv6. CNAME on www, ApexToWWW on the apex." />
+        <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
+
+        <link rel="stylesheet" href="/styles.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCDJZQW377"></script>
+        <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-NCDJZQW377");</script>
+
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": "How to Set Up Apex Domain Redirect for GitHub Pages",
+            "description": "Learn how to set up a custom apex domain redirect for GitHub Pages using ApexToWWW. Step-by-step guide for naked domain to www redirection.",
+            "datePublished": "2026-04-11",
+            "dateModified": "2026-04-11",
+            "author": {
+                "@type": "Organization",
+                "name": "ApexToWWW",
+                "url": "https://www.apextowww.com"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "ApexToWWW",
+                "url": "https://www.apextowww.com"
+            },
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "https://www.apextowww.com/blog/github-pages-apex-domain-redirect/"
+            },
+            "keywords": ["github pages apex domain", "github pages custom domain redirect", "github pages naked domain"]
+        }
+        </script>
+
+        <!-- HowTo Schema -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": "How to Set Up GitHub Pages with a Custom Domain and Apex Redirect",
+            "description": "Set up a GitHub Pages custom domain on www and redirect your apex (naked) domain to www using ApexToWWW's free DNS redirect.",
+            "totalTime": "PT10M",
+            "estimatedCost": { "@type": "MonetaryAmount", "currency": "USD", "value": "0" },
+            "step": [
+                {
+                    "@type": "HowToStep",
+                    "name": "Add a CNAME file to your repository",
+                    "text": "In the root of your GitHub Pages repository (or the docs/ folder if that's your publishing source), create a file named CNAME containing a single line: www.yourdomain.com. Commit and push it, or set the custom domain under repository Settings > Pages."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Configure the www CNAME record",
+                    "text": "At your DNS provider, add a CNAME record: host www, value username.github.io (replace username with your GitHub username or organization)."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Set up the apex redirect with ApexToWWW",
+                    "text": "Add an A record for @ pointing to 65.21.184.101 and an AAAA record for @ pointing to 2a01:4f9:c012:a304::1. ApexToWWW responds to apex requests with a 301 redirect to www, preserving the path and query string, with SSL provisioned automatically."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Enable HTTPS in GitHub Pages settings",
+                    "text": "Once DNS propagates (5-30 minutes), go to Settings > Pages, confirm the custom domain is detected, and check Enforce HTTPS. GitHub provisions a Let's Encrypt certificate for www.yourdomain.com."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Verify the redirect",
+                    "text": "Run curl -I yourdomain.com and confirm a 301 Moved Permanently response with a Location header pointing to https://www.yourdomain.com. Test all four URL variations (http/https, apex/www) to confirm they resolve to the same www destination."
+                }
+            ]
+        }
+        </script>
+    </head>
+<body class="font-sans bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white antialiased">
+    <a class="skip" href="#main">Skip to content</a>
+    <!-- Navigation -->
+    <header style="position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line)">
+  <div class="hdr" style="max-width:1160px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="/" aria-label="ApexToWWW home" style="display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:20px;letter-spacing:-0.02em">
+      <span aria-hidden="true" style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#3B82F6,#9333EA);display:flex;align-items:center;justify-content:center;color:#fff">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+      </span>
+      ApexToWWW
+    </a>
+    <nav aria-label="Primary" class="nav-links" style="display:flex;gap:28px;font-size:15px;font-weight:500">
+      <a href="/#how">How it works</a>
+      <a href="/#providers">Providers</a>
+      <a href="/blog/">Guides</a>
+      <a href="/#faq">FAQ</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Dark mode" aria-pressed="false">
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      </button>
+      <a class="btn btn-primary btn-sm" href="/#records"><span>Get <span class="hide-xs">the </span>records</span></a>
+    </div>
+  </div>
+</header>
+
+    <main id="main" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="max-w-3xl mx-auto">
+            <!-- Breadcrumbs -->
+            <nav class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-8" aria-label="Breadcrumb">
+                <a href="/" class="hover:text-gray-900 dark:hover:text-white transition">Home</a>
+                <span>/</span>
+                <a href="/blog/" class="hover:text-gray-900 dark:hover:text-white transition">Blog</a>
+                <span>/</span>
+                <span class="text-gray-900 dark:text-white">GitHub Pages Apex Domain Redirect</span>
+            </nav>
+
+            <!-- Article Header -->
+            <article>
+                <header class="mb-10">
+                    <div class="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400 mb-4">
+                        <time datetime="2026-04-11">April 11, 2026</time>
+                        <span>&middot;</span>
+                        <span>7 min read</span>
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">How to Set Up Apex Domain Redirect for GitHub Pages</h1>
+                    <div class="my-8 p-6 rounded-2xl border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-900/20">
+                        <div class="flex items-center gap-2 mb-2">
+                            <i class="fas fa-bolt text-blue-600 dark:text-blue-400"></i>
+                            <span class="text-sm font-bold uppercase tracking-wide text-blue-600 dark:text-blue-400">TL;DR</span>
+                        </div>
+                        <p class="text-gray-800 dark:text-gray-200 leading-relaxed">
+                            GitHub Pages requires a CNAME to <code>&lt;username&gt;.github.io</code>, but apex domains can't CNAME per RFC 1034. Solution: set www as your CNAME target for GitHub Pages, then add A+AAAA records on the apex pointing to ApexToWWW, which 301-redirects apex traffic to www. Two DNS records, free, automatic SSL.
+                        </p>
+                    </div>
+                    <p class="text-xl text-gray-600 dark:text-gray-400">GitHub Pages works best with a www subdomain. Here is how to redirect your naked domain so visitors always reach your site.</p>
+                </header>
+
+                <!-- Article Body -->
+                <div class="prose prose-lg dark:prose-invert max-w-none
+                    prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white
+                    prose-p:text-gray-700 dark:prose-p:text-gray-300
+                    prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:font-medium
+                    prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
+                    prose-pre:bg-gray-900 dark:prose-pre:bg-gray-800 prose-pre:rounded-xl prose-pre:border prose-pre:border-gray-700
+                    prose-li:text-gray-700 dark:prose-li:text-gray-300
+                    prose-strong:text-gray-900 dark:prose-strong:text-white">
+
+                    <h2 class="text-2xl sm:text-3xl mt-10 mb-4">The Problem: GitHub Pages and Apex Domains</h2>
+                    <p>GitHub Pages is one of the most popular free hosting solutions for static websites, documentation, and project pages. It works beautifully out of the box with a <code>username.github.io</code> URL, but most people want to use their own custom domain.</p>
+                    <p>Here is where things get tricky. GitHub Pages custom domains rely on a <strong>CNAME record</strong> to route traffic from your domain to GitHub's servers. CNAME records work perfectly for subdomains like <code>www.yourdomain.com</code>, but there is a fundamental DNS limitation: <strong>you cannot place a CNAME record on an apex domain</strong> (also called a root, bare, or naked domain).</p>
+                    <p>The reason is technical but important. The DNS specification (RFC 1034) states that a CNAME record cannot coexist with other records at the same name. Since the apex domain (<code>yourdomain.com</code>) must have SOA and NS records to function, placing a CNAME there would break DNS resolution entirely. This means you cannot simply point <code>yourdomain.com</code> at <code>username.github.io</code> using a CNAME.</p>
+                    <p>So what happens when someone types <code>yourdomain.com</code> into their browser? Without proper configuration, they get an error. That is a terrible experience, especially since many visitors omit the <code>www</code> prefix.</p>
+
+                    <h2 class="text-2xl sm:text-3xl mt-10 mb-4">GitHub's Solution vs. ApexToWWW</h2>
+                    <p>GitHub does offer its own approach to this problem. You can add <strong>A records</strong> pointing your apex domain directly to GitHub's IP addresses (185.199.108.153 through 185.199.111.153). This sends traffic for <code>yourdomain.com</code> straight to GitHub's servers, which then serve your site.</p>
+                    <p>While this works, it comes with drawbacks:</p>
+                    <ul>
+                        <li><strong>No CDN flexibility</strong> &mdash; Your apex domain traffic is locked to GitHub's infrastructure. If you later move your site to Netlify, Vercel, or another host, you have to reconfigure everything.</li>
+                        <li><strong>Mixed configuration</strong> &mdash; You end up with A records for the apex and a CNAME for www, creating two different paths to your content.</li>
+                        <li><strong>IPv6 limitations</strong> &mdash; GitHub's A records are IPv4 only. Modern best practice includes AAAA records for IPv6 connectivity.</li>
+                    </ul>
+                    <p>A cleaner approach is to <strong>serve your site exclusively on <code>www.yourdomain.com</code></strong> and set up a proper 301 redirect from the apex domain. This is where <strong>ApexToWWW</strong> comes in. Instead of pointing your apex domain at GitHub, you point it at ApexToWWW, which issues an instant 301 redirect to <code>www.yourdomain.com</code>. Your www subdomain then resolves to GitHub Pages (or any other host) via a standard CNAME.</p>
+                    <p>This architecture is cleaner because it separates concerns: the apex redirect is handled by a dedicated service, and your actual hosting can be anywhere.</p>
+
+                    <h2 class="text-2xl sm:text-3xl mt-10 mb-4">Step-by-Step: Setting Up GitHub Pages with a Custom Domain and Apex Redirect</h2>
+                    <p>Follow these five steps to get your GitHub Pages site running on a custom domain with a proper apex redirect.</p>
+
+                    <h3 class="text-xl font-bold mt-8 mb-3">Step 1: Add a CNAME File to Your Repository</h3>
+                    <p>In the root of your GitHub Pages repository (or the <code>docs/</code> folder if that is your publishing source), create a file named <code>CNAME</code> with a single line containing your www subdomain:</p>
+                    <pre class="text-sm"><code>www.yourdomain.com</code></pre>
+                    <p>Commit and push this file. GitHub will automatically detect it and begin serving your site on that domain once DNS is configured. You can also set this through the GitHub repository settings under <strong>Pages &gt; Custom domain</strong>.</p>
+
+                    <h3 class="text-xl font-bold mt-8 mb-3">Step 2: Configure the WWW CNAME Record</h3>
+                    <p>Log in to your DNS provider (Cloudflare, Namecheap, GoDaddy, Route 53, or whichever you use) and add a CNAME record for the <code>www</code> subdomain:</p>
+                    <div class="bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700 p-5 my-6">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="text-left text-gray-500 dark:text-gray-400">
+                                    <th class="pb-2 font-medium">Type</th>
+                                    <th class="pb-2 font-medium">Name</th>
+                                    <th class="pb-2 font-medium">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody class="font-mono text-gray-900 dark:text-white">
+                                <tr>
+                                    <td class="py-1">CNAME</td>
+                                    <td class="py-1">www</td>
+                                    <td class="py-1">username.github.io</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>Replace <code>username</code> with your actual GitHub username (or organization name). This tells DNS to route all <code>www.yourdomain.com</code> traffic to GitHub's servers.</p>
+
+                    <h3 class="text-xl font-bold mt-8 mb-3">Step 3: Set Up the Apex Redirect with ApexToWWW</h3>
+                    <p>Now for the apex domain. Instead of using GitHub's A records, add the following DNS records to redirect <code>yourdomain.com</code> to <code>www.yourdomain.com</code> via ApexToWWW:</p>
+                    <div class="bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700 p-5 my-6">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="text-left text-gray-500 dark:text-gray-400">
+                                    <th class="pb-2 font-medium">Type</th>
+                                    <th class="pb-2 font-medium">Name</th>
+                                    <th class="pb-2 font-medium">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody class="font-mono text-gray-900 dark:text-white">
+                                <tr>
+                                    <td class="py-1">A</td>
+                                    <td class="py-1">@</td>
+                                    <td class="py-1">65.21.184.101</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-1">AAAA</td>
+                                    <td class="py-1">@</td>
+                                    <td class="py-1">2a01:4f9:c012:a304::1</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>That is it for DNS. The A record handles IPv4 traffic and the AAAA record handles IPv6. When a visitor goes to <code>yourdomain.com</code>, ApexToWWW responds with a <strong>301 permanent redirect</strong> to <code>www.yourdomain.com</code>, which then loads your GitHub Pages site. The redirect preserves the full path and query string, so <code>yourdomain.com/about?ref=nav</code> becomes <code>www.yourdomain.com/about?ref=nav</code>.</p>
+                    <p>ApexToWWW handles SSL automatically via Let's Encrypt, so both HTTP and HTTPS requests are redirected securely. No account or signup is required.</p>
+
+                    <h3 class="text-xl font-bold mt-8 mb-3">Step 4: Enable HTTPS in GitHub Pages Settings</h3>
+                    <p>Once DNS has propagated (usually 5 to 30 minutes), go to your repository's <strong>Settings &gt; Pages</strong> section in GitHub. You should see your custom domain listed. Check the <strong>"Enforce HTTPS"</strong> box. GitHub will provision an SSL certificate for <code>www.yourdomain.com</code> through Let's Encrypt.</p>
+                    <p>If the option is grayed out, wait a few more minutes for DNS propagation and certificate provisioning to complete. You can verify DNS resolution by running:</p>
+                    <pre class="text-sm"><code>dig www.yourdomain.com CNAME
+dig yourdomain.com A
+dig yourdomain.com AAAA</code></pre>
+
+                    <h3 class="text-xl font-bold mt-8 mb-3">Step 5: Verify Everything Works</h3>
+                    <p>Test all four URL variations to make sure they resolve correctly:</p>
+                    <ul>
+                        <li><code>http://yourdomain.com</code> &rarr; redirects to <code>https://www.yourdomain.com</code></li>
+                        <li><code>https://yourdomain.com</code> &rarr; redirects to <code>https://www.yourdomain.com</code></li>
+                        <li><code>http://www.yourdomain.com</code> &rarr; redirects to <code>https://www.yourdomain.com</code></li>
+                        <li><code>https://www.yourdomain.com</code> &rarr; loads your site</li>
+                    </ul>
+                    <p>You can test redirects from the command line with <code>curl -I yourdomain.com</code> to inspect the response headers. You should see a <code>301 Moved Permanently</code> with a <code>Location</code> header pointing to your www URL.</p>
+
+                    <h2 class="text-2xl sm:text-3xl mt-10 mb-4">This Pattern Works Beyond GitHub Pages</h2>
+                    <p>The approach described here is not specific to GitHub Pages. The same "www via CNAME, apex via redirect" pattern works with virtually any hosting platform that supports custom domains through CNAME records:</p>
+                    <ul>
+                        <li><strong>Netlify</strong> &mdash; Point your www CNAME to your Netlify site URL and use ApexToWWW for the apex.</li>
+                        <li><strong>Vercel</strong> &mdash; Set <code>www</code> as a CNAME to <code>cname.vercel-dns.com</code> and redirect the apex.</li>
+                        <li><strong>Heroku</strong> &mdash; CNAME your www to your Heroku app's DNS target and redirect the apex.</li>
+                        <li><strong>Firebase Hosting</strong> &mdash; Use a CNAME for www and let ApexToWWW handle the naked domain.</li>
+                        <li><strong>Render, Fly.io, Railway</strong> &mdash; Same pattern applies wherever CNAME-based custom domains are used.</li>
+                    </ul>
+                    <p>The beauty of this setup is portability. If you later migrate from GitHub Pages to Netlify, you only need to update the www CNAME record. The apex redirect through ApexToWWW stays exactly the same.</p>
+
+                    <h2 class="text-2xl sm:text-3xl mt-10 mb-4">Summary</h2>
+                    <p>Setting up a GitHub Pages custom domain with an apex redirect takes about five minutes and requires just three DNS records: a CNAME for <code>www</code> pointing to GitHub, plus an A and AAAA record for the apex pointing to ApexToWWW. This gives you a clean, portable setup with automatic SSL on both the apex and www, full path preservation on redirects, and IPv6 support out of the box.</p>
+
+                    <!-- CTA -->
+                    <div class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/30 dark:to-purple-950/30 border border-blue-200 dark:border-blue-800 rounded-2xl p-8 my-10 text-center">
+                        <h3 class="text-2xl font-bold mb-3">Ready to Set Up Your Apex Redirect?</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">Get started in under a minute. Add two DNS records and your apex domain will redirect to www automatically. Free forever, no account needed.</p>
+                        <a href="/#records" class="inline-flex items-center px-6 py-3 rounded-lg text-base font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
+                            Get Started Free <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Back to Blog -->
+            <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+                <a href="/blog/" class="text-blue-600 dark:text-blue-400 font-medium hover:underline">&larr; Back to all articles</a>
+            </div>
+        </div>
+    </main>
+
+    <footer style="background:var(--surface);border-top:1px solid var(--line)">
+  <div style="max-width:1160px;margin:0 auto;padding:64px 24px 32px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:40px 32px;margin-bottom:48px">
+      <div>
+        <a href="/" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:18px;margin-bottom:16px">
+          <span aria-hidden="true" style="width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#3B82F6,#9333EA);display:flex;align-items:center;justify-content:center;color:#fff"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></span>
+          ApexToWWW
+        </a>
+        <p style="margin:0 0 12px;color:var(--muted);font-size:15px">Free apex domain to www redirect with automatic SSL, IPv6 and HTTP/3.</p>      </div>
+      <nav aria-label="Hosting guides">
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Hosting guides</h2>
+        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:15px">
+          <li><a href="/cloudflare-pages-apex-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Cloudflare Pages</a></li>
+          <li><a href="/vercel-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Vercel</a></li>
+          <li><a href="/netlify-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Netlify</a></li>
+          <li><a href="/blog/github-pages-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">GitHub Pages</a></li>
+          <li><a href="/heroku-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Heroku</a></li>
+          <li><a href="/firebase-hosting-apex-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Firebase Hosting</a></li>
+          <li><a href="/render-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Render</a></li>
+          <li><a href="/aws-amplify-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">AWS Amplify</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Guides">
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Guides</h2>
+        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:15px">
+          <li><a href="/blog/how-to-redirect-apex-domain-to-www/" style="display:inline-block;padding:6px 0;text-decoration:none">How to redirect apex to www</a></li>
+          <li><a href="/blog/what-is-an-apex-domain/" style="display:inline-block;padding:6px 0;text-decoration:none">What is an apex domain?</a></li>
+          <li><a href="/blog/apex-domain-vs-www/" style="display:inline-block;padding:6px 0;text-decoration:none">Apex domain vs www</a></li>
+          <li><a href="/blog/apex-domain-redirect-methods-compared/" style="display:inline-block;padding:6px 0;text-decoration:none">Redirect methods compared</a></li>
+          <li><a href="/redirect-www-to-apex-domain/" style="display:inline-block;padding:6px 0;text-decoration:none">Redirect www to apex</a></li>
+          <li><a href="/blog/hreflang-and-canonical-tags/" style="display:inline-block;padding:6px 0;text-decoration:none">Hreflang &amp; canonical tags</a></li>
+          <li><a href="/blog/free-subdomain-forwarding/" style="display:inline-block;padding:6px 0;text-decoration:none">Free subdomain forwarding</a></li>
+          <li><a href="/blog/" style="display:inline-block;padding:6px 0;text-decoration:none;font-weight:600">All guides</a></li>
+        </ul>
+      </nav>
+      <div>
+        <span id="contact" class="alias"></span>
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Contact</h2>
+        <p style="margin:0 0 8px;font-size:15px"><a href="#" class="js-email" data-email-user="hi" data-email-domain="apextowww.com" data-show-address style="display:inline-block;padding:6px 0">Email us</a></p>
+        <address style="font-style:normal;color:var(--muted);font-size:14px;line-height:1.6">Sandbox.ventures<br>P. O. Pedersens Vej 2<br>8200 Aarhus N, Denmark</address>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--line);padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;color:var(--muted);font-size:14px">
+      <span>&copy; <span id="current-year">2026</span> ApexToWWW. All rights reserved.</span>
+      <span>A service provided by <a href="https://sandbox.ventures" rel="noopener" style="color:var(--ink);font-weight:600;text-decoration:underline">Sandbox.ventures</a></span>
+    </div>
+  </div>
+</footer>
+    <script src="/site.js" defer></script>
+</body>
+</html>

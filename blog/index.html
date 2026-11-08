@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+        (function () {
+            try {
+                var t = localStorage.theme;
+                if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                }
+            } catch (e) {}
+        })();
+    </script>
+        <title>Blog - ApexToWWW | DNS, Domains & Web Infrastructure Guides</title>
+        <meta name="description" content="Learn about apex domains, DNS redirects, www subdomains, and web infrastructure. Practical guides and tutorials from ApexToWWW." />
+        <link rel="canonical" href="https://www.apextowww.com/blog/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.apextowww.com/blog/" />
+        <meta property="og:title" content="Blog - ApexToWWW" />
+        <meta property="og:description" content="Guides about apex domains, DNS redirects, and web infrastructure." />
+        <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
+        <link rel="stylesheet" href="/styles.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCDJZQW377"></script>
+        <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-NCDJZQW377");</script>
+    </head>
+<body class="font-sans bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white antialiased">
+    <a class="skip" href="#main">Skip to content</a>
+    <!-- Navigation -->
+    <header style="position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line)">
+  <div class="hdr" style="max-width:1160px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="/" aria-label="ApexToWWW home" style="display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:20px;letter-spacing:-0.02em">
+      <span aria-hidden="true" style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#3B82F6,#9333EA);display:flex;align-items:center;justify-content:center;color:#fff">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+      </span>
+      ApexToWWW
+    </a>
+    <nav aria-label="Primary" class="nav-links" style="display:flex;gap:28px;font-size:15px;font-weight:500">
+      <a href="/#how">How it works</a>
+      <a href="/#providers">Providers</a>
+      <a href="/blog/">Guides</a>
+      <a href="/#faq">FAQ</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Dark mode" aria-pressed="false">
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      </button>
+      <a class="btn btn-primary btn-sm" href="/#records"><span>Get <span class="hide-xs">the </span>records</span></a>
+    </div>
+  </div>
+</header>
+
+    <main id="main" class="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">Blog</h1>
+            <p class="text-xl text-gray-600 dark:text-gray-400 mb-12">Guides and tutorials about DNS, domains, and web infrastructure.</p>
+
+            <div class="space-y-8">
+                <!-- Article 1 -->
+                <article class="group border border-gray-200 dark:border-gray-800 rounded-2xl p-6 sm:p-8 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-lg transition">
+                    <div class="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                        <time datetime="2026-07-02">July 2, 2026</time>
+                        <span>&middot;</span>
+                        <span>8 min read</span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
+                        <a href="/blog/hreflang-and-canonical-tags/">Hreflang and Canonical Tags: The Complete Guide</a>
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">How rel=canonical and hreflang work, why they conflict when misconfigured, and the self-referencing-canonical pattern that fixes almost every case.</p>
+                    <a href="/blog/hreflang-and-canonical-tags/" class="text-blue-600 dark:text-blue-400 font-medium hover:underline">Read more &rarr;</a>
+                </article>
+
+                <article class="group border border-gray-200 dark:border-gray-800 rounded-2xl p-6 sm:p-8 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-lg transition">
+                    <div class="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                        <time datetime="2026-07-02">July 2, 2026</time>
+                        <span>&middot;</span>
+                        <span>8 min read</span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
+                        <a href="/blog/apex-domain-redirect-methods-compared/">Apex Domain Redirect: 5 Methods Compared (Free &amp; Paid)</a>
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">DNS redirect services, Cloudflare Redirect Rules, ALIAS/ANAME records, registrar forwarding, or self-hosted nginx — which one should you actually use?</p>
+                    <a href="/blog/apex-domain-redirect-methods-compared/" class="text-blue-600 dark:text-blue-400 font-medium hover:underline">Read more &rarr;</a>
+                </article>
+
+                <article class="group border border-gray-200 dark:border-gray-800 rounded-2xl p-6 sm:p-8 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-lg transition">
+                    <div class="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                        <time datetime="2026-04-11">April 11, 2026</time>
+                        <span>&middot;</span>
+                        <span>8 min read</span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
+                        <a href="/blog/how-to-redirect-apex-domain-to-www/">How to Redirect Your Apex Domain to WWW (Step-by-Step Guide)</a>
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Learn how to set up a 301 redirect from your naked/root domain to www using DNS records. Complete guide with instructions for Cloudflare, GoDaddy, Namecheap, and more.</p>
+                    <a href="/blog/how-to-redirect-apex-domain-to-www/" class="text-blue-600 dark:text-blue-400 font-medium hover:underline">Read more &rarr;</a>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="group border border-gray-200 dark:border-gray-800 rounded-2xl p-6 sm:p-8 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-lg transition">
+                    <div class="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                        <time datetime="2026-04-11">April 11, 2026</time>
+                        <span>&middot;</span>
+                        <span>6 min read</span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
+                        <a href="/blog/apex-domain-vs-www/">Apex Domain vs WWW: What's the Difference and Which Should You Use?</a>
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Understand the technical differences between apex domains and www subdomains, why it matters for CDNs and hosting, and which one to choose for your website.</p>
+                    <a href="/blog/apex-domain-vs-www/" class="text-blue-600 dark:text-blue-400 font-medium hover:underline">Read more &rarr;</a>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="group border border-gray-200 dark:border-gray-800 rounded-2xl p-6 sm:p-8 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-lg transition">
+                    <div class="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                        <time datetime="2026-04-11">April 11, 2026</time>
+                        <span>&middot;</span>
+                        <span>5 min read</span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
+                        <a href="/blog/what-is-an-apex-domain/">What Is an Apex Domain? A Complete Beginner's Guide</a>
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Everything you need to know about apex domains (also called root, bare, or naked domains) - what they are, how DNS works, and why they matter for your website.</p>
+                    <a href="/blog/what-is-an-apex-domain/" class="text-blue-600 dark:text-blue-400 font-medium hover:underline">Read more &rarr;</a>
+                </article>
+
+                <!-- Article 4 -->
+                <article class="group border border-gray-200 dark:border-gray-800 rounded-2xl p-6 sm:p-8 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-lg transition">
+                    <div class="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                        <time datetime="2026-04-11">April 11, 2026</time>
+                        <span>&middot;</span>
+                        <span>7 min read</span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
+                        <a href="/blog/github-pages-apex-domain-redirect/">How to Set Up Apex Domain Redirect for GitHub Pages</a>
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">GitHub Pages requires a www subdomain for custom domains. Learn how to redirect your apex domain to www so your GitHub Pages site works perfectly with your custom domain.</p>
+                    <a href="/blog/github-pages-apex-domain-redirect/" class="text-blue-600 dark:text-blue-400 font-medium hover:underline">Read more &rarr;</a>
+                </article>
+
+                <!-- Article 5 -->
+                <article class="group border border-gray-200 dark:border-gray-800 rounded-2xl p-6 sm:p-8 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-lg transition">
+                    <div class="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400 mb-3">
+                        <time datetime="2026-04-11">April 11, 2026</time>
+                        <span>&middot;</span>
+                        <span>5 min read</span>
+                    </div>
+                    <h2 class="text-2xl font-bold mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
+                        <a href="/blog/free-subdomain-forwarding/">Free Subdomain Forwarding: How to Redirect Domains Without Hosting</a>
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Need to forward your domain to another URL without paying for hosting? Learn about free subdomain forwarding options and how DNS-based redirects work.</p>
+                    <a href="/blog/free-subdomain-forwarding/" class="text-blue-600 dark:text-blue-400 font-medium hover:underline">Read more &rarr;</a>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <footer style="background:var(--surface);border-top:1px solid var(--line)">
+  <div style="max-width:1160px;margin:0 auto;padding:64px 24px 32px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:40px 32px;margin-bottom:48px">
+      <div>
+        <a href="/" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:18px;margin-bottom:16px">
+          <span aria-hidden="true" style="width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#3B82F6,#9333EA);display:flex;align-items:center;justify-content:center;color:#fff"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></span>
+          ApexToWWW
+        </a>
+        <p style="margin:0 0 12px;color:var(--muted);font-size:15px">Free apex domain to www redirect with automatic SSL, IPv6 and HTTP/3.</p>      </div>
+      <nav aria-label="Hosting guides">
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Hosting guides</h2>
+        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:15px">
+          <li><a href="/cloudflare-pages-apex-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Cloudflare Pages</a></li>
+          <li><a href="/vercel-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Vercel</a></li>
+          <li><a href="/netlify-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Netlify</a></li>
+          <li><a href="/blog/github-pages-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">GitHub Pages</a></li>
+          <li><a href="/heroku-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Heroku</a></li>
+          <li><a href="/firebase-hosting-apex-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Firebase Hosting</a></li>
+          <li><a href="/render-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Render</a></li>
+          <li><a href="/aws-amplify-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">AWS Amplify</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Guides">
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Guides</h2>
+        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:15px">
+          <li><a href="/blog/how-to-redirect-apex-domain-to-www/" style="display:inline-block;padding:6px 0;text-decoration:none">How to redirect apex to www</a></li>
+          <li><a href="/blog/what-is-an-apex-domain/" style="display:inline-block;padding:6px 0;text-decoration:none">What is an apex domain?</a></li>
+          <li><a href="/blog/apex-domain-vs-www/" style="display:inline-block;padding:6px 0;text-decoration:none">Apex domain vs www</a></li>
+          <li><a href="/blog/apex-domain-redirect-methods-compared/" style="display:inline-block;padding:6px 0;text-decoration:none">Redirect methods compared</a></li>
+          <li><a href="/redirect-www-to-apex-domain/" style="display:inline-block;padding:6px 0;text-decoration:none">Redirect www to apex</a></li>
+          <li><a href="/blog/hreflang-and-canonical-tags/" style="display:inline-block;padding:6px 0;text-decoration:none">Hreflang &amp; canonical tags</a></li>
+          <li><a href="/blog/free-subdomain-forwarding/" style="display:inline-block;padding:6px 0;text-decoration:none">Free subdomain forwarding</a></li>
+          <li><a href="/blog/" style="display:inline-block;padding:6px 0;text-decoration:none;font-weight:600">All guides</a></li>
+        </ul>
+      </nav>
+      <div>
+        <span id="contact" class="alias"></span>
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Contact</h2>
+        <p style="margin:0 0 8px;font-size:15px"><a href="#" class="js-email" data-email-user="hi" data-email-domain="apextowww.com" data-show-address style="display:inline-block;padding:6px 0">Email us</a></p>
+        <address style="font-style:normal;color:var(--muted);font-size:14px;line-height:1.6">Sandbox.ventures<br>P. O. Pedersens Vej 2<br>8200 Aarhus N, Denmark</address>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--line);padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;color:var(--muted);font-size:14px">
+      <span>&copy; <span id="current-year">2026</span> ApexToWWW. All rights reserved.</span>
+      <span>A service provided by <a href="https://sandbox.ventures" rel="noopener" style="color:var(--ink);font-weight:600;text-decoration:underline">Sandbox.ventures</a></span>
+    </div>
+  </div>
+</footer>
+    <script src="/site.js" defer></script>
+</body>
+</html>

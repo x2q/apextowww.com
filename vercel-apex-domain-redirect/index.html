@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+        (function () {
+            try {
+                var t = localStorage.theme;
+                if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                }
+            } catch (e) {}
+        })();
+    </script>
+        <title>Vercel Apex Domain Redirect to WWW — Free, 2 DNS Records</title>
+        <meta name="description" content="Redirect your Vercel apex domain to www with 2 DNS records: a free 301 with auto SSL, no 76.76.21.21 A record needed. Also covers www to apex on Vercel." />
+        <meta name="keywords" content="vercel apex domain, vercel naked domain redirect, cname.vercel-dns.com, vercel custom domain www, 76.76.21.21 alternative, vercel root domain, vercel redirect www to apex domain" />
+        <link rel="canonical" href="https://www.apextowww.com/vercel-apex-domain-redirect/" />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://www.apextowww.com/vercel-apex-domain-redirect/" />
+        <meta property="og:title" content="Vercel Apex Domain Redirect to WWW — Free, 2 DNS Records" />
+        <meta property="og:description" content="Redirect your Vercel apex domain to www with 2 DNS records: a free 301 with auto SSL, no 76.76.21.21 A record needed. Also covers www to apex on Vercel." />
+        <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
+        <meta property="og:site_name" content="ApexToWWW" />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Vercel Apex Domain Redirect to WWW — Free, 2 DNS Records" />
+        <meta name="twitter:description" content="Redirect your Vercel apex domain to www with 2 DNS records: a free 301 with auto SSL, no 76.76.21.21 A record needed. Also covers www to apex on Vercel." />
+        <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
+
+        <link rel="stylesheet" href="/styles.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCDJZQW377"></script>
+        <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-NCDJZQW377");</script>
+
+        <!-- HowTo Schema -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": "How to Redirect Your Apex Domain to a Vercel App",
+            "description": "Set up a free 301 redirect from your apex domain to your www subdomain on Vercel using two DNS records.",
+            "step": [
+                {
+                    "@type": "HowToStep",
+                    "name": "Add www to Vercel",
+                    "text": "In the Vercel dashboard, go to your project Settings > Domains and add www.yourdomain.com."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Create the www CNAME",
+                    "text": "Add a CNAME record at your DNS provider: www -> cname.vercel-dns.com."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Add the apex A record",
+                    "text": "Add an A record at your DNS provider: @ -> 65.21.184.101 (ApexToWWW)."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Add the apex AAAA record",
+                    "text": "Add an AAAA record at your DNS provider: @ -> 2a01:4f9:c012:a304::1 (ApexToWWW)."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Set www as primary in Vercel",
+                    "text": "In the Vercel Domains panel, mark www.yourdomain.com as the primary domain."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Verify the redirect",
+                    "text": "Run curl -I https://yourdomain.com and confirm a 301 response with Location: https://www.yourdomain.com/."
+                }
+            ]
+        }
+        </script>
+
+        <!-- FAQ Schema -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What is 76.76.21.21 and do I still need it?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "76.76.21.21 is Vercel's Anycast IPv4 address for apex (naked) domains. It is not required if you redirect the apex to www instead. Use a CNAME on www pointing to cname.vercel-dns.com for your real traffic, then point the apex A record at ApexToWWW (65.21.184.101) for a free 301 redirect with IPv6 and HTTP/3." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Does this work with Vercel Edge Functions?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Yes. All real traffic still hits Vercel through the www CNAME, which is the canonical setup that Edge Functions, middleware, and Edge Config expect. ApexToWWW only handles the bare-domain hit and immediately 301s to www, where Vercel takes over and runs your edge logic exactly as designed." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can I still use Vercel Analytics?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Yes. Vercel Analytics, Speed Insights, and Web Analytics all attach to the project, not the hostname. Once www.yourdomain.com is set as primary in Vercel and traffic redirects there, every analytics event is recorded normally. The redirect happens at the network layer before any page renders, so there is no double-counting." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What about Vercel preview deployments?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Untouched. Preview deployments use Vercel-generated subdomains (your-project-git-branch.vercel.app) and never resolve through your apex. ApexToWWW only sees requests to your registered apex domain, so previews, branch deployments, and the production *.vercel.app URL all keep working." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Does this preserve Vercel's SSL certificate?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Yes, on both ends. Vercel continues to issue and renew its own Let's Encrypt certificate for www.yourdomain.com. ApexToWWW issues a separate Let's Encrypt certificate for the apex automatically on first request. After the 301 the browser is on Vercel's certificate. No mixed content, no manual cert management." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How do I redirect www to apex on Vercel (the reverse direction)?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Vercel handles this natively, without ApexToWWW. Add both www.yourdomain.com and yourdomain.com in Settings > Domains, use the three-dot menu on the www entry to redirect it to the apex, and set the apex as primary. Alternatively, add a host-matched redirect rule in next.config.js (redirects() with a host condition) or vercel.json." }
+                }
+            ]
+        }
+        </script>
+    </head>
+<body class="font-sans bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white antialiased">
+    <a class="skip" href="#main">Skip to content</a>
+    <!-- Navigation -->
+    <header style="position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line)">
+  <div class="hdr" style="max-width:1160px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="/" aria-label="ApexToWWW home" style="display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:20px;letter-spacing:-0.02em">
+      <span aria-hidden="true" style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#3B82F6,#9333EA);display:flex;align-items:center;justify-content:center;color:#fff">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+      </span>
+      ApexToWWW
+    </a>
+    <nav aria-label="Primary" class="nav-links" style="display:flex;gap:28px;font-size:15px;font-weight:500">
+      <a href="/#how">How it works</a>
+      <a href="/#providers">Providers</a>
+      <a href="/blog/">Guides</a>
+      <a href="/#faq">FAQ</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Dark mode" aria-pressed="false">
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      </button>
+      <a class="btn btn-primary btn-sm" href="/#records"><span>Get <span class="hide-xs">the </span>records</span></a>
+    </div>
+  </div>
+</header>
+
+    <main id="main">
+        <!-- Hero -->
+        <section class="relative overflow-hidden bg-gradient-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24">
+                <div class="max-w-3xl mx-auto text-center">
+                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 mb-6">
+                        <i class="fas fa-bolt"></i> Vercel deployment solution
+                    </span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
+                        Redirect Your Apex Domain to Your <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Vercel App</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
+                        Vercel routes custom domains through <code class="font-mono text-sm bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">cname.vercel-dns.com</code>, but DNS standards forbid CNAME records on the apex. ApexToWWW fills the gap with a free, DNS-based 301 redirect from your naked domain to the www subdomain Vercel actually wants.
+                    </p>
+                    <div class="flex items-center justify-center gap-4">
+                        <a href="#setup" class="inline-flex items-center px-6 py-3 rounded-lg text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
+                            See the Setup <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="#tldr" class="inline-flex items-center px-6 py-3 rounded-lg text-base font-semibold text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition">
+                            TL;DR
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <article class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="max-w-3xl mx-auto">
+
+                <!-- TL;DR Box -->
+                <aside id="tldr" class="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border-l-4 border-blue-600 dark:border-blue-400 rounded-r-2xl p-6 sm:p-8 my-4 shadow-sm">
+                    <div class="flex items-center gap-2 mb-3">
+                        <i class="fas fa-bookmark text-blue-600 dark:text-blue-400"></i>
+                        <span class="text-xs font-bold tracking-widest uppercase text-blue-700 dark:text-blue-300">TL;DR</span>
+                    </div>
+                    <p class="text-base sm:text-lg text-gray-800 dark:text-gray-200 leading-relaxed mb-0">
+                        Vercel serves custom domains via <code class="font-mono text-sm bg-white/60 dark:bg-black/30 px-1.5 py-0.5 rounded">cname.vercel-dns.com</code>, which requires a CNAME record. But apex domains (<code class="font-mono text-sm bg-white/60 dark:bg-black/30 px-1.5 py-0.5 rounded">yourdomain.com</code>) can&rsquo;t use CNAME per RFC 1034. The fix: point <code class="font-mono text-sm bg-white/60 dark:bg-black/30 px-1.5 py-0.5 rounded">www</code> to Vercel via CNAME, then redirect apex to www using ApexToWWW. Free, two DNS records, auto SSL. Want it the <a href="#reverse-direction" class="underline decoration-blue-500/50 hover:decoration-blue-500">other way round (www&rarr;apex)</a>? Jump straight there.
+                    </p>
+                </aside>
+
+                <!-- Quick reference card -->
+                <aside class="bg-gray-900 dark:bg-gray-950 rounded-2xl p-6 sm:p-8 my-8 shadow-lg border border-gray-800">
+                    <div class="flex items-center gap-2 mb-5">
+                        <i class="fas fa-server text-blue-400"></i>
+                        <span class="text-xs font-bold tracking-widest uppercase text-blue-400">DNS Records &mdash; Vercel + ApexToWWW</span>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="grid grid-cols-12 gap-3 items-center">
+                            <span class="col-span-2 text-xs font-semibold text-gray-400 uppercase tracking-wide">A</span>
+                            <code class="col-span-2 text-xs font-mono text-gray-400">@</code>
+                            <code class="col-span-8 text-sm font-mono text-green-400 break-all">65.21.184.101 <span class="text-gray-500">&larr; ApexToWWW (replaces 76.76.21.21)</span></code>
+                        </div>
+                        <div class="grid grid-cols-12 gap-3 items-center">
+                            <span class="col-span-2 text-xs font-semibold text-gray-400 uppercase tracking-wide">AAAA</span>
+                            <code class="col-span-2 text-xs font-mono text-gray-400">@</code>
+                            <code class="col-span-8 text-sm font-mono text-green-400 break-all">2a01:4f9:c012:a304::1 <span class="text-gray-500">&larr; ApexToWWW (IPv6)</span></code>
+                        </div>
+                        <div class="grid grid-cols-12 gap-3 items-center">
+                            <span class="col-span-2 text-xs font-semibold text-gray-400 uppercase tracking-wide">CNAME</span>
+                            <code class="col-span-2 text-xs font-mono text-gray-400">www</code>
+                            <code class="col-span-8 text-sm font-mono text-blue-400 break-all">cname.vercel-dns.com <span class="text-gray-500">&larr; Vercel</span></code>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-5 leading-relaxed">
+                        Result: <code class="font-mono text-blue-400">yourdomain.com</code> &rarr; HTTP 301 &rarr; <code class="font-mono text-blue-400">https://www.yourdomain.com</code> (Vercel). Free, auto-SSL, IPv6, HTTP/3.
+                    </p>
+                </aside>
+
+                <div class="prose prose-lg dark:prose-invert max-w-none
+                    prose-headings:font-bold prose-headings:tracking-tight
+                    prose-h2:text-2xl prose-h2:sm:text-3xl prose-h2:mt-12 prose-h2:mb-4
+                    prose-h3:text-xl prose-h3:sm:text-2xl prose-h3:mt-8 prose-h3:mb-3
+                    prose-p:text-gray-700 prose-p:dark:text-gray-300 prose-p:leading-relaxed prose-p:mb-4
+                    prose-a:text-blue-600 prose-a:dark:text-blue-400 prose-a:underline prose-a:underline-offset-2
+                    prose-strong:text-gray-900 prose-strong:dark:text-white
+                    prose-code:bg-gray-100 prose-code:dark:bg-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
+                    prose-li:text-gray-700 prose-li:dark:text-gray-300">
+
+                    <!-- The Vercel DNS situation -->
+                    <h2 id="vercel-dns">The Vercel DNS Situation</h2>
+
+                    <p>If you have ever added a custom domain to a Vercel project, you have run into the <strong>vercel apex domain</strong> problem. Vercel hands you a friendly setup screen that asks you to add either a CNAME for <code>www</code> or an A record for the <strong>vercel root domain</strong>. The recommended path is the CNAME, because <code>cname.vercel-dns.com</code> resolves to whichever edge node is closest to your visitor and gets updated automatically as Vercel grows its network.</p>
+
+                    <p>The complication is that DNS does not allow a CNAME record at the apex (also called the zone apex, naked domain, or root domain). RFC 1034 forbids a CNAME at any name that also has SOA and NS records, which is exactly what your apex has. So Vercel suggests an alternative: a plain A record pointing to <code>76.76.21.21</code>, their Anycast IP for apex domains.</p>
+
+                    <p>That works, but it has trade-offs:</p>
+
+                    <ul class="space-y-2 mb-6">
+                        <li><strong>It bypasses CNAME-based routing.</strong> The CNAME flow lets Vercel return different IPs per request based on geography, network, and load. The single A record at <code>76.76.21.21</code> is a more static entry point and may not always pick the optimal edge.</li>
+                        <li><strong>No native IPv6 path on apex.</strong> Vercel does not publish a matching AAAA address for the apex Anycast endpoint, so IPv6 visitors hitting your naked domain may fall back to IPv4 or fail entirely depending on their resolver.</li>
+                        <li><strong>Edge Functions and middleware behave inconsistently on apex.</strong> Some advanced features in the Vercel platform — including certain Edge Function configurations, custom middleware behavior, and ISR cache invalidation — assume the CNAME-based setup. Putting your traffic on the apex A record can produce subtle differences from your <code>www</code> behavior.</li>
+                        <li><strong>You end up serving two URLs.</strong> Without an explicit redirect, both <code>yourdomain.com</code> and <code>www.yourdomain.com</code> may render your app, splitting analytics, dropping cookies twice, and creating duplicate-content headaches for SEO.</li>
+                    </ul>
+
+                    <p>The cleaner approach is to put your real site on <code>www.yourdomain.com</code> via the recommended CNAME and use a tiny redirect service for the apex. That is what ApexToWWW does — and it is a drop-in <strong>76.76.21.21 alternative</strong> that gives you proper IPv6, a real 301, and clean separation.</p>
+
+                    <!-- Step-by-step -->
+                    <h2 id="setup">Step-by-Step: Vercel + ApexToWWW</h2>
+
+                    <p>Here is the full <strong>vercel naked domain redirect</strong> setup, end to end. It assumes you already have a Vercel project deployed.</p>
+
+                    <ol class="space-y-4 mb-8">
+                        <li><strong>Step 1 &mdash; Add www in Vercel.</strong> In the Vercel dashboard, open your project, then go to <strong>Settings &rarr; Domains</strong> and add <code>www.yourdomain.com</code>. Vercel will display the DNS records you need to add at your registrar.</li>
+                        <li><strong>Step 2 &mdash; Add the www CNAME at your DNS provider.</strong> Vercel will tell you to add a CNAME record: host <code>www</code>, value <code>cname.vercel-dns.com</code>. Save it. This is the <strong>vercel custom domain www</strong> entry that does the real work.</li>
+                        <li><strong>Step 3 &mdash; Add the apex A record (ApexToWWW).</strong> Add a new A record: host <code>@</code> (or leave blank), value <code>65.21.184.101</code>. Remove any existing A record on <code>@</code> first, including any old <code>76.76.21.21</code> entry from a previous Vercel setup.</li>
+                        <li><strong>Step 4 &mdash; Add the apex AAAA record (ApexToWWW).</strong> Add an AAAA record: host <code>@</code>, value <code>2a01:4f9:c012:a304::1</code>. This gives IPv6 visitors a clean redirect path that the Vercel apex IP cannot offer.</li>
+                        <li><strong>Step 5 &mdash; Mark www as primary in Vercel.</strong> Back in the Vercel Domains panel, find <code>www.yourdomain.com</code> and set it as the primary domain. This makes Vercel canonicalize internal links and the ISR cache to the www hostname.</li>
+                        <li><strong>Step 6 &mdash; Verify.</strong> Wait a few minutes for DNS to propagate, then run <code>curl -I https://yourdomain.com</code>. You should see <code>HTTP/2 301</code> and <code>location: https://www.yourdomain.com/</code>. Visit <code>https://yourdomain.com/some/path?q=1</code> in a browser and confirm you land on the same path under www.</li>
+                    </ol>
+
+                    <!-- DNS records table -->
+                    <div class="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 my-8">
+                        <h3 class="text-lg font-bold mb-4 mt-0">DNS Records for Vercel + ApexToWWW</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm">
+                                <thead>
+                                    <tr class="border-b border-gray-200 dark:border-gray-700">
+                                        <th class="text-left py-2 pr-4 font-semibold">Type</th>
+                                        <th class="text-left py-2 pr-4 font-semibold">Name / Host</th>
+                                        <th class="text-left py-2 pr-4 font-semibold">Value</th>
+                                        <th class="text-left py-2 font-semibold">Purpose</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-gray-100 dark:border-gray-800">
+                                        <td class="py-3 pr-4"><code class="text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30 px-2 py-0.5 rounded font-bold">CNAME</code></td>
+                                        <td class="py-3 pr-4"><code>www</code></td>
+                                        <td class="py-3 pr-4"><code>cname.vercel-dns.com</code></td>
+                                        <td class="py-3 text-gray-600 dark:text-gray-400">Vercel app</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-100 dark:border-gray-800">
+                                        <td class="py-3 pr-4"><code class="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-0.5 rounded font-bold">A</code></td>
+                                        <td class="py-3 pr-4"><code>@</code></td>
+                                        <td class="py-3 pr-4"><code>65.21.184.101</code></td>
+                                        <td class="py-3 text-gray-600 dark:text-gray-400">ApexToWWW (IPv4)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-3 pr-4"><code class="text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/30 px-2 py-0.5 rounded font-bold">AAAA</code></td>
+                                        <td class="py-3 pr-4"><code>@</code></td>
+                                        <td class="py-3 pr-4"><code>2a01:4f9:c012:a304::1</code></td>
+                                        <td class="py-3 text-gray-600 dark:text-gray-400">ApexToWWW (IPv6)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Comparison -->
+                    <h2 id="comparison">Vercel Apex Alternatives Compared</h2>
+
+                    <p>If you are deciding between Vercel&rsquo;s built-in apex A record and a redirect service, this is the trade-off:</p>
+
+                    <div class="overflow-x-auto my-6">
+                        <table class="w-full text-sm border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden">
+                            <thead class="bg-gray-50 dark:bg-gray-900">
+                                <tr>
+                                    <th class="text-left py-3 px-4 font-semibold">Method</th>
+                                    <th class="text-left py-3 px-4 font-semibold">CNAME used</th>
+                                    <th class="text-left py-3 px-4 font-semibold">IPv6</th>
+                                    <th class="text-left py-3 px-4 font-semibold">CDN optimized</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-gray-200 dark:border-gray-800">
+                                    <td class="py-3 px-4">Vercel A record (<code>76.76.21.21</code>)</td>
+                                    <td class="py-3 px-4 text-red-600 dark:text-red-400">No</td>
+                                    <td class="py-3 px-4 text-red-600 dark:text-red-400">No</td>
+                                    <td class="py-3 px-4 text-amber-600 dark:text-amber-400">Partial</td>
+                                </tr>
+                                <tr class="border-t border-gray-200 dark:border-gray-800 bg-blue-50/40 dark:bg-blue-900/10">
+                                    <td class="py-3 px-4 font-semibold">ApexToWWW redirect</td>
+                                    <td class="py-3 px-4 text-green-600 dark:text-green-400">For www only</td>
+                                    <td class="py-3 px-4 text-green-600 dark:text-green-400">Yes</td>
+                                    <td class="py-3 px-4 text-green-600 dark:text-green-400">Yes</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>The redirect path is what most production Vercel sites end up doing once they outgrow the quick-start A record.</p>
+
+                    <!-- Reverse direction -->
+                    <h2 id="reverse-direction">Wanted the Opposite? Vercel Redirect WWW to Apex Domain</h2>
+
+                    <p>If you landed here looking for <code>www.yourdomain.com</code> &rarr; <code>yourdomain.com</code> (the reverse direction), Vercel actually handles that natively &mdash; you do not need ApexToWWW for it. There are two clean ways to do it.</p>
+
+                    <p><strong>Option 1: Vercel's domain settings.</strong> In your project's <em>Settings &rarr; Domains</em>, add both <code>www.yourdomain.com</code> and <code>yourdomain.com</code>. Click the three-dot menu on the www entry and choose <em>Redirect to yourdomain.com</em>. Vercel issues a 308 redirect at the edge before any function runs. Set the apex as <em>Primary Domain</em>. The DNS shape is then: an A record on <code>@</code> pointing to <code>76.76.21.21</code> (Vercel's apex Anycast IP), and a CNAME on <code>www</code> pointing to <code>cname.vercel-dns.com</code>.</p>
+
+                    <p><strong>Option 2: <code>next.config.js</code> redirects (Next.js apps).</strong> Add a host-matched redirect so the rule lives in code:</p>
+
+                    <pre class="text-sm bg-gray-900 text-gray-100 rounded-xl p-4 overflow-x-auto"><code>// next.config.js
+module.exports = {
+  async redirects() {
+    return [{
+      source: '/:path*',
+      has: [{ type: 'host', value: 'www.yourdomain.com' }],
+      destination: 'https://yourdomain.com/:path*',
+      permanent: true,
+    }];
+  },
+};</code></pre>
+
+                    <p><strong>Or with <code>vercel.json</code></strong> for any framework:</p>
+
+                    <pre class="text-sm bg-gray-900 text-gray-100 rounded-xl p-4 overflow-x-auto"><code>// vercel.json
+{
+  "redirects": [{
+    "source": "/:path*",
+    "has": [{ "type": "host", "value": "www.yourdomain.com" }],
+    "destination": "https://yourdomain.com/:path*",
+    "permanent": true
+  }]
+}</code></pre>
+
+                    <p class="text-sm text-gray-600 dark:text-gray-400"><strong>Should you redirect apex&rarr;www or www&rarr;apex?</strong> Both work. <strong>www&rarr;apex</strong> is shorter and a bit more modern, but you stay on <code>76.76.21.21</code> on the apex and lose the geo-aware CNAME routing that <code>cname.vercel-dns.com</code> provides. <strong>Apex&rarr;www</strong> (what the rest of this page describes) keeps your real traffic on Vercel's CNAME-based edge routing &mdash; usually the better choice for production sites. If you specifically want the apex as your canonical URL, the rules above are the right answer. For other platforms, see the full <a href="/redirect-www-to-apex-domain/">redirect www to apex guide</a>.</p>
+
+                    <!-- Other platforms -->
+                    <h2 id="other-platforms">Works With Other Platforms Too</h2>
+
+                    <p>The same two records work for any host that prefers a CNAME on www. If you are not on Vercel, see the platform-specific guides:</p>
+
+                    <ul class="space-y-2 mb-6">
+                        <li><a href="/cloudflare-pages-apex-redirect/">Cloudflare Pages apex domain redirect</a> &mdash; for the Cloudflare Pages setup with CNAME flattening or external DNS.</li>
+                        <li><a href="/heroku-apex-domain-redirect/">Heroku apex domain redirect</a> &mdash; Heroku DNS targets need a CNAME, exactly like Vercel.</li>
+                        <li><a href="/netlify-apex-domain-redirect/">Netlify apex domain redirect</a> &mdash; an alternative to Netlify&rsquo;s load-balancer A record.</li>
+                        <li><a href="/firebase-hosting-apex-redirect/">Firebase Hosting apex domain redirect</a> &mdash; same pattern for Firebase's apex A records.</li>
+                        <li><a href="/render-apex-domain-redirect/">Render apex domain redirect</a> &mdash; for Render web services and static sites.</li>
+                        <li><a href="/aws-amplify-apex-domain-redirect/">AWS Amplify apex domain redirect</a> &mdash; if your DNS isn't on Route 53.</li>
+                        <li><a href="/blog/github-pages-apex-domain-redirect/">GitHub Pages apex domain redirect</a> &mdash; for users who want a single canonical www URL.</li>
+                    </ul>
+
+                    <!-- FAQ -->
+                    <h2 id="faq">Vercel-Specific FAQ</h2>
+
+                    <h3>Does this work with Vercel Edge Functions?</h3>
+                    <p>Yes. All your real traffic continues to hit Vercel through the <code>www</code> CNAME, which is the canonical setup that Edge Functions, middleware, and Edge Config all expect. ApexToWWW only handles the bare-domain hit and immediately 301s to www, where Vercel takes over and runs your edge logic exactly as designed.</p>
+
+                    <h3>Can I still use Vercel Analytics?</h3>
+                    <p>Yes. Vercel Analytics, Speed Insights, and Web Analytics all attach to the project, not the hostname. Once <code>www.yourdomain.com</code> is set as primary in Vercel and traffic redirects there, every analytics event is recorded normally. There is no double-counting from the apex hit because the redirect happens at the network layer before any page renders.</p>
+
+                    <h3>What about preview deployments?</h3>
+                    <p>Untouched. Preview deployments use Vercel-generated subdomains (<code>your-project-git-branch.vercel.app</code>) and never resolve through your apex. ApexToWWW only sees requests to your registered apex domain, so preview URLs, branch deployments, and the production <code>*.vercel.app</code> URL all keep working as before.</p>
+
+                    <h3>Does it preserve Vercel&rsquo;s SSL?</h3>
+                    <p>Yes, on both ends. Vercel continues to issue and renew its own Let&rsquo;s Encrypt certificate for <code>www.yourdomain.com</code>. ApexToWWW issues a separate Let&rsquo;s Encrypt certificate for <code>yourdomain.com</code> automatically on first request, so HTTPS works on the apex too &mdash; and after the 301 the browser is on Vercel&rsquo;s certificate. No mixed-content warnings, no manual cert management.</p>
+
+                    <h3 id="faq-reverse">How do I redirect www to apex on Vercel (the reverse direction)?</h3>
+                    <p>Vercel handles this natively &mdash; you don&rsquo;t need ApexToWWW. Add both <code>www.yourdomain.com</code> and <code>yourdomain.com</code> in <em>Settings &rarr; Domains</em>, then use the three-dot menu on the www entry to redirect it to the apex, and set the apex as primary. Or add a host-matched rule in <code>next.config.js</code> or <code>vercel.json</code>. See the <a href="#reverse-direction">full walkthrough above</a>.</p>
+
+                </div>
+
+                <!-- CTA Section -->
+                <div class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-8 my-12 text-center">
+                    <h2 class="text-2xl sm:text-3xl font-bold mb-3 mt-0">Ship Your Vercel Apex Redirect in 2 Minutes</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6">Two DNS records. No signup. Free forever. Works with Vercel&rsquo;s CNAME setup out of the box.</p>
+                    <a href="/#records" class="inline-flex items-center px-6 py-3 rounded-lg text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
+                        Get Started <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                    <p class="text-sm text-gray-500 dark:text-gray-500 mt-4">Questions? Email <a href="#" data-email-user="hi" data-email-domain="apextowww.com" class="js-email text-blue-600 dark:text-blue-400 underline">hi@apextowww.com</a></p>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer style="background:var(--surface);border-top:1px solid var(--line)">
+  <div style="max-width:1160px;margin:0 auto;padding:64px 24px 32px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:40px 32px;margin-bottom:48px">
+      <div>
+        <a href="/" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:18px;margin-bottom:16px">
+          <span aria-hidden="true" style="width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#3B82F6,#9333EA);display:flex;align-items:center;justify-content:center;color:#fff"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></span>
+          ApexToWWW
+        </a>
+        <p style="margin:0 0 12px;color:var(--muted);font-size:15px">Free apex domain to www redirect with automatic SSL, IPv6 and HTTP/3.</p>      </div>
+      <nav aria-label="Hosting guides">
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Hosting guides</h2>
+        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:15px">
+          <li><a href="/cloudflare-pages-apex-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Cloudflare Pages</a></li>
+          <li><a href="/vercel-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Vercel</a></li>
+          <li><a href="/netlify-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Netlify</a></li>
+          <li><a href="/blog/github-pages-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">GitHub Pages</a></li>
+          <li><a href="/heroku-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Heroku</a></li>
+          <li><a href="/firebase-hosting-apex-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Firebase Hosting</a></li>
+          <li><a href="/render-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Render</a></li>
+          <li><a href="/aws-amplify-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">AWS Amplify</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Guides">
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Guides</h2>
+        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:15px">
+          <li><a href="/blog/how-to-redirect-apex-domain-to-www/" style="display:inline-block;padding:6px 0;text-decoration:none">How to redirect apex to www</a></li>
+          <li><a href="/blog/what-is-an-apex-domain/" style="display:inline-block;padding:6px 0;text-decoration:none">What is an apex domain?</a></li>
+          <li><a href="/blog/apex-domain-vs-www/" style="display:inline-block;padding:6px 0;text-decoration:none">Apex domain vs www</a></li>
+          <li><a href="/blog/apex-domain-redirect-methods-compared/" style="display:inline-block;padding:6px 0;text-decoration:none">Redirect methods compared</a></li>
+          <li><a href="/redirect-www-to-apex-domain/" style="display:inline-block;padding:6px 0;text-decoration:none">Redirect www to apex</a></li>
+          <li><a href="/blog/hreflang-and-canonical-tags/" style="display:inline-block;padding:6px 0;text-decoration:none">Hreflang &amp; canonical tags</a></li>
+          <li><a href="/blog/free-subdomain-forwarding/" style="display:inline-block;padding:6px 0;text-decoration:none">Free subdomain forwarding</a></li>
+          <li><a href="/blog/" style="display:inline-block;padding:6px 0;text-decoration:none;font-weight:600">All guides</a></li>
+        </ul>
+      </nav>
+      <div>
+        <span id="contact" class="alias"></span>
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Contact</h2>
+        <p style="margin:0 0 8px;font-size:15px"><a href="#" class="js-email" data-email-user="hi" data-email-domain="apextowww.com" data-show-address style="display:inline-block;padding:6px 0">Email us</a></p>
+        <address style="font-style:normal;color:var(--muted);font-size:14px;line-height:1.6">Sandbox.ventures<br>P. O. Pedersens Vej 2<br>8200 Aarhus N, Denmark</address>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--line);padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;color:var(--muted);font-size:14px">
+      <span>&copy; <span id="current-year">2026</span> ApexToWWW. All rights reserved.</span>
+      <span>A service provided by <a href="https://sandbox.ventures" rel="noopener" style="color:var(--ink);font-weight:600;text-decoration:underline">Sandbox.ventures</a></span>
+    </div>
+  </div>
+</footer>
+    <script src="/site.js" defer></script>
+</body>
+</html>

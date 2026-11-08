@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+        (function () {
+            try {
+                var t = localStorage.theme;
+                if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                }
+            } catch (e) {}
+        })();
+    </script>
+        <title>Heroku Apex&rarr;WWW Redirect — Free, 2 DNS Records, Auto-SSL</title>
+        <meta name="description" content="Heroku needs a www subdomain. Redirect your apex domain to www in 60 seconds — 2 DNS records, free 301, auto Let's Encrypt SSL, IPv6, HTTP/3. No signup." />
+        <meta name="keywords" content="heroku apex domain, heroku naked domain, heroku custom domain www, heroku apex record, heroku root domain, heroku dns target, herokudns.com CNAME" />
+        <link rel="canonical" href="https://www.apextowww.com/heroku-apex-domain-redirect/" />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://www.apextowww.com/heroku-apex-domain-redirect/" />
+        <meta property="og:title" content="Heroku Apex&rarr;WWW Redirect — Free, 2 DNS Records, Auto-SSL" />
+        <meta property="og:description" content="Heroku needs a www subdomain. Redirect your apex domain to www in 60 seconds — 2 DNS records, free 301, auto Let's Encrypt SSL, IPv6, HTTP/3. No signup." />
+        <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
+        <meta property="og:site_name" content="ApexToWWW" />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Heroku Apex&rarr;WWW Redirect — Free, 2 DNS Records, Auto-SSL" />
+        <meta name="twitter:description" content="Heroku needs a www subdomain. Redirect your apex domain to www in 60 seconds — 2 DNS records, free 301, auto Let's Encrypt SSL, IPv6, HTTP/3. No signup." />
+        <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
+
+        <link rel="stylesheet" href="/styles.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCDJZQW377"></script>
+        <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-NCDJZQW377");</script>
+
+        <!-- HowTo Schema -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": "How to Redirect a Heroku Apex Domain to WWW",
+            "description": "Set up a Heroku custom domain with an apex-to-www redirect using ApexToWWW. Two DNS records, free, automatic SSL.",
+            "step": [
+                {
+                    "@type": "HowToStep",
+                    "name": "Add the www subdomain to your Heroku app",
+                    "text": "Run 'heroku domains:add www.example.com' or add it from the Heroku dashboard. Heroku returns a DNS target like example-app-12345.herokudns.com."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Create a CNAME record for www",
+                    "text": "At your DNS provider, create a CNAME record with name 'www' pointing to your Heroku DNS target (e.g. example-app-12345.herokudns.com)."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Add an A record for the apex",
+                    "text": "Create an A record for @ (the apex) pointing to 65.21.184.101."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Add an AAAA record for the apex",
+                    "text": "Create an AAAA record for @ pointing to 2a01:4f9:c012:a304::1 for IPv6 support."
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "Verify the redirect",
+                    "text": "Run 'curl -I https://yourdomain.com'. You should see HTTP/1.1 301 Moved Permanently with a Location header pointing to https://www.yourdomain.com/."
+                }
+            ]
+        }
+        </script>
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {"@type":"Question","name":"Does this work with Heroku's automated certificate management (ACM)?","acceptedAnswer":{"@type":"Answer","text":"Yes. Heroku's ACM provisions an SSL certificate for your www subdomain. ApexToWWW provisions its own Let's Encrypt certificate for the apex domain. The two work independently — visitors hitting the apex get an HTTPS 301 redirect to your secure www URL served by Heroku."}},
+                {"@type":"Question","name":"Do I need to change my nameservers to use this with Heroku?","acceptedAnswer":{"@type":"Answer","text":"No. Keep your existing nameservers and DNS provider. You only add three DNS records: a CNAME for www pointing to Heroku, plus an A and AAAA record for the apex pointing to ApexToWWW."}},
+                {"@type":"Question","name":"What about Heroku's SNI endpoint?","acceptedAnswer":{"@type":"Answer","text":"Heroku SSL uses SNI by default for all custom domains. Because your www subdomain uses a CNAME pointing directly at your Heroku DNS target, SNI works as Heroku intends. ApexToWWW handles SNI on the apex separately and serves its own certificate for the redirect response."}},
+                {"@type":"Question","name":"Will it work with Heroku Enterprise or Private Spaces?","acceptedAnswer":{"@type":"Answer","text":"Yes. Heroku Enterprise and Private Spaces still issue herokudns.com CNAME targets for custom domains, so the same setup applies. Point www at your Private Space DNS target via CNAME, and let ApexToWWW handle the apex redirect."}}
+            ]
+        }
+        </script>
+    </head>
+<body class="font-sans bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white antialiased">
+    <a class="skip" href="#main">Skip to content</a>
+    <!-- Navigation -->
+    <header style="position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line)">
+  <div class="hdr" style="max-width:1160px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="/" aria-label="ApexToWWW home" style="display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:20px;letter-spacing:-0.02em">
+      <span aria-hidden="true" style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#3B82F6,#9333EA);display:flex;align-items:center;justify-content:center;color:#fff">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+      </span>
+      ApexToWWW
+    </a>
+    <nav aria-label="Primary" class="nav-links" style="display:flex;gap:28px;font-size:15px;font-weight:500">
+      <a href="/#how">How it works</a>
+      <a href="/#providers">Providers</a>
+      <a href="/blog/">Guides</a>
+      <a href="/#faq">FAQ</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Dark mode" aria-pressed="false">
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      </button>
+      <a class="btn btn-primary btn-sm" href="/#records"><span>Get <span class="hide-xs">the </span>records</span></a>
+    </div>
+  </div>
+</header>
+
+    <main id="main">
+        <!-- Hero -->
+        <section class="relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-blue-950/20 dark:via-gray-950 dark:to-purple-950/20"></div>
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 relative">
+                <div class="max-w-3xl mx-auto text-center">
+                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 mb-6">
+                        <i class="fas fa-bolt"></i> Heroku custom domain solution
+                    </span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
+                        Redirect Your <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Apex Domain</span> to Your Heroku App
+                    </h1>
+                    <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
+                        Heroku only accepts CNAME records for custom domains, but DNS standards forbid CNAME at the apex. The fix: point <code class="font-mono text-base">www</code> at Heroku, then redirect your naked domain to <code class="font-mono text-base">www</code> with two DNS records.
+                    </p>
+                    <a href="/#records" class="inline-flex items-center px-6 py-3 rounded-lg text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
+                        Get Started — Free <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <article class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="max-w-3xl mx-auto">
+                <!-- Breadcrumb -->
+                <nav aria-label="Breadcrumb" class="mb-8">
+                    <ol class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                        <li><a href="/" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Home</a></li>
+                        <li><i class="fas fa-chevron-right text-xs mx-1"></i></li>
+                        <li class="text-gray-900 dark:text-white font-medium">Heroku Apex Domain Redirect</li>
+                    </ol>
+                </nav>
+
+                <!-- TL;DR -->
+                <div class="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border-l-4 border-blue-600 dark:border-blue-400 rounded-r-xl p-6 mb-12">
+                    <div class="flex items-center gap-2 mb-3">
+                        <i class="fas fa-bookmark text-blue-600 dark:text-blue-400"></i>
+                        <span class="text-sm font-bold uppercase tracking-wider text-blue-700 dark:text-blue-300">TL;DR</span>
+                    </div>
+                    <p class="text-gray-800 dark:text-gray-200 leading-relaxed">
+                        Heroku only allows CNAME records for custom domains, but apex domains (<code class="font-mono">yourdomain.com</code> without <code class="font-mono">www</code>) can't use CNAME per <a href="https://datatracker.ietf.org/doc/html/rfc1034" class="underline" rel="noopener">RFC 1034</a>. The fix: point <code class="font-mono">www</code> to your Heroku app via CNAME, then redirect the apex to <code class="font-mono">www</code> using ApexToWWW. Two DNS records, free, automatic SSL.
+                    </p>
+                </div>
+
+                <div class="prose prose-lg dark:prose-invert max-w-none
+                    prose-headings:font-bold prose-headings:tracking-tight
+                    prose-h2:text-2xl prose-h2:sm:text-3xl prose-h2:mt-12 prose-h2:mb-4
+                    prose-h3:text-xl prose-h3:sm:text-2xl prose-h3:mt-8 prose-h3:mb-3
+                    prose-p:text-gray-700 prose-p:dark:text-gray-300 prose-p:leading-relaxed prose-p:mb-4
+                    prose-a:text-blue-600 prose-a:dark:text-blue-400 prose-a:underline prose-a:underline-offset-2
+                    prose-strong:text-gray-900 prose-strong:dark:text-white
+                    prose-code:bg-gray-100 prose-code:dark:bg-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
+                    prose-li:text-gray-700 prose-li:dark:text-gray-300">
+
+                    <h2 id="the-problem">The Heroku Apex Domain Problem</h2>
+
+                    <p>When you add a custom domain to a Heroku app, Heroku gives you a <strong>DNS target</strong> that looks something like <code>shielded-meadow-12345.herokudns.com</code> or <code>mydomain-abc123.herokudns.com</code>. You're expected to point your domain at that target with a <strong>CNAME record</strong>. This works perfectly for subdomains like <code>www.example.com</code>, <code>app.example.com</code>, or <code>api.example.com</code>.</p>
+
+                    <p>But it fails at the <strong>apex domain</strong> — also called the root domain, naked domain, or bare domain. That's the version without any subdomain prefix: <code>example.com</code> instead of <code>www.example.com</code>.</p>
+
+                    <h3 id="why-cname-doesnt-work-at-apex">Why CNAME doesn't work at the apex</h3>
+
+                    <p><a href="https://datatracker.ietf.org/doc/html/rfc1034#section-3.6.2" rel="noopener">RFC 1034 section 3.6.2</a> states that a CNAME record cannot coexist with any other record type at the same DNS name. The apex of every domain must have <code>NS</code> records (pointing to the authoritative nameservers) and an <code>SOA</code> record. Because those records are mandatory, you cannot legally place a CNAME at the apex. Most DNS providers will simply refuse to save the configuration.</p>
+
+                    <p>So when Heroku tells you to "create a CNAME pointing to <code>your-app-12345.herokudns.com</code>", you can do that for <code>www</code> but not for the bare <code>example.com</code>. Heroku does not publish a static IP address for your custom domain either, so you can't fall back to an A record pointing at Heroku.</p>
+
+                    <h3 id="common-errors">Common errors users see</h3>
+
+                    <ul>
+                        <li><strong>"This site can't be reached"</strong> when typing <code>example.com</code> in the browser — there's simply no DNS record at the apex.</li>
+                        <li><strong>"DNS_PROBE_FINISHED_NXDOMAIN"</strong> for the naked domain.</li>
+                        <li>The apex resolves to your registrar's parking page instead of your Heroku app.</li>
+                        <li>Cloudflare's CNAME flattening seems to "work" but breaks during outages, region failover, or when Heroku rotates IPs.</li>
+                        <li>Heroku ACM fails to issue a certificate for the apex because the domain doesn't actually point at Heroku.</li>
+                    </ul>
+
+                    <h2 id="the-solution">The Solution: Point WWW at Heroku, Apex at ApexToWWW</h2>
+
+                    <p>The clean fix is a two-part DNS setup. Your <code>www</code> subdomain points at your Heroku app via CNAME (which Heroku fully supports). Your apex domain points at ApexToWWW, which serves a 301 redirect to <code>www</code>. No nameserver changes, no CNAME flattening tricks, no DNS provider lock-in.</p>
+
+                    <h3 id="step-1">Step 1: Add your www subdomain to Heroku</h3>
+
+                    <p>From your project directory, run:</p>
+
+                    <div class="bg-gray-900 dark:bg-black rounded-xl p-4 my-6 overflow-x-auto">
+                        <pre class="text-green-400 text-sm font-mono leading-relaxed mb-0"><code>heroku domains:add www.example.com</code></pre>
+                    </div>
+
+                    <p>Heroku will print the DNS target you need:</p>
+
+                    <div class="bg-gray-900 dark:bg-black rounded-xl p-4 my-6 overflow-x-auto">
+                        <pre class="text-green-400 text-sm font-mono leading-relaxed mb-0"><code>Adding www.example.com to ⬢ your-app... done
+ ▸    Configure your app's DNS provider to point to the DNS Target
+ ▸    shielded-meadow-12345.herokudns.com</code></pre>
+                    </div>
+
+                    <p>You can also add the domain from the Heroku dashboard under <strong>Settings → Domains → Add domain</strong>. Either way, copy the <code>herokudns.com</code> target — you'll need it in the next step.</p>
+
+                    <h3 id="step-2">Step 2: Create a CNAME record for www</h3>
+
+                    <p>At your DNS provider, add a CNAME record:</p>
+
+                    <ul>
+                        <li><strong>Type:</strong> CNAME</li>
+                        <li><strong>Name / Host:</strong> <code>www</code></li>
+                        <li><strong>Value / Target:</strong> <code>shielded-meadow-12345.herokudns.com</code> (your actual Heroku DNS target)</li>
+                        <li><strong>TTL:</strong> 300 or Auto</li>
+                    </ul>
+
+                    <h3 id="step-3">Step 3: Add an A record for the apex</h3>
+
+                    <p>Now create an A record for the apex (host <code>@</code>) pointing to ApexToWWW's IPv4 address:</p>
+
+                    <ul>
+                        <li><strong>Type:</strong> A</li>
+                        <li><strong>Name / Host:</strong> <code>@</code></li>
+                        <li><strong>Value:</strong> <code>65.21.184.101</code></li>
+                    </ul>
+
+                    <h3 id="step-4">Step 4: Add an AAAA record for the apex</h3>
+
+                    <p>And the matching IPv6 record:</p>
+
+                    <ul>
+                        <li><strong>Type:</strong> AAAA</li>
+                        <li><strong>Name / Host:</strong> <code>@</code></li>
+                        <li><strong>Value:</strong> <code>2a01:4f9:c012:a304::1</code></li>
+                    </ul>
+
+                    <h3 id="step-5">Step 5: Verify with curl</h3>
+
+                    <p>Wait 5 to 30 minutes for DNS to propagate, then test:</p>
+
+                    <div class="bg-gray-900 dark:bg-black rounded-xl p-4 my-6 overflow-x-auto">
+                        <pre class="text-green-400 text-sm font-mono leading-relaxed mb-0"><code>curl -I https://yourdomain.com
+
+HTTP/1.1 301 Moved Permanently
+Location: https://www.yourdomain.com/</code></pre>
+                    </div>
+
+                    <p>You should also see your Heroku app respond on the www version:</p>
+
+                    <div class="bg-gray-900 dark:bg-black rounded-xl p-4 my-6 overflow-x-auto">
+                        <pre class="text-green-400 text-sm font-mono leading-relaxed mb-0"><code>curl -I https://www.yourdomain.com
+# HTTP/1.1 200 OK (or whatever your Heroku app returns)</code></pre>
+                    </div>
+
+                    <h2 id="dns-summary">DNS records summary</h2>
+
+                    <p>Here are all three records you need at your DNS provider, in one table:</p>
+                </div>
+
+                <!-- DNS Summary table -->
+                <div class="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 my-8">
+                    <h3 class="text-lg font-bold mb-4">DNS Records for a Heroku Custom Domain Setup</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-gray-200 dark:border-gray-700">
+                                    <th class="text-left py-2 pr-4 font-semibold">Type</th>
+                                    <th class="text-left py-2 pr-4 font-semibold">Name / Host</th>
+                                    <th class="text-left py-2 pr-4 font-semibold">Value / Points To</th>
+                                    <th class="text-left py-2 font-semibold">Purpose</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-100 dark:border-gray-800">
+                                    <td class="py-3 pr-4"><code class="text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30 px-2 py-0.5 rounded font-bold">CNAME</code></td>
+                                    <td class="py-3 pr-4"><code>www</code></td>
+                                    <td class="py-3 pr-4"><code>your-app-12345.herokudns.com</code></td>
+                                    <td class="py-3 text-gray-600 dark:text-gray-400">Routes www to Heroku</td>
+                                </tr>
+                                <tr class="border-b border-gray-100 dark:border-gray-800">
+                                    <td class="py-3 pr-4"><code class="text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-0.5 rounded font-bold">A</code></td>
+                                    <td class="py-3 pr-4"><code>@</code></td>
+                                    <td class="py-3 pr-4"><code>65.21.184.101</code></td>
+                                    <td class="py-3 text-gray-600 dark:text-gray-400">Apex IPv4 → redirect</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 pr-4"><code class="text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/30 px-2 py-0.5 rounded font-bold">AAAA</code></td>
+                                    <td class="py-3 pr-4"><code>@</code></td>
+                                    <td class="py-3 pr-4"><code>2a01:4f9:c012:a304::1</code></td>
+                                    <td class="py-3 text-gray-600 dark:text-gray-400">Apex IPv6 → redirect</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="prose prose-lg dark:prose-invert max-w-none
+                    prose-headings:font-bold prose-headings:tracking-tight
+                    prose-h2:text-2xl prose-h2:sm:text-3xl prose-h2:mt-12 prose-h2:mb-4
+                    prose-h3:text-xl prose-h3:sm:text-2xl prose-h3:mt-8 prose-h3:mb-3
+                    prose-p:text-gray-700 prose-p:dark:text-gray-300 prose-p:leading-relaxed prose-p:mb-4
+                    prose-a:text-blue-600 prose-a:dark:text-blue-400 prose-a:underline prose-a:underline-offset-2
+                    prose-strong:text-gray-900 prose-strong:dark:text-white
+                    prose-code:bg-gray-100 prose-code:dark:bg-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
+                    prose-li:text-gray-700 prose-li:dark:text-gray-300">
+
+                    <h2 id="why-not-heroku-a-records">Why Not Just Use Heroku's A Records?</h2>
+
+                    <p>This is the most common question developers ask: "Why doesn't Heroku just publish A records I can use at the apex?"</p>
+
+                    <p>The short answer: <strong>Heroku doesn't publish static A records for custom domains</strong>. Heroku's routing layer runs on AWS, and the underlying IP addresses change as the platform scales, fails over between availability zones, and rotates load balancers. If you hardcoded an IP at the apex, your site would eventually break without warning.</p>
+
+                    <p>Some DNS providers offer <strong>ALIAS</strong> or <strong>ANAME</strong> records — vendor extensions that resolve a CNAME-like target server-side and return the result as A/AAAA records to clients. Providers that support this for Heroku include:</p>
+
+                    <ul>
+                        <li><strong>DNSimple</strong> (ALIAS records)</li>
+                        <li><strong>DNS Made Easy</strong> (ANAME records)</li>
+                        <li><strong>easyDNS</strong> (ANAME records)</li>
+                        <li><strong>Cloudflare</strong> (CNAME flattening at the apex, but only if Cloudflare is your authoritative DNS)</li>
+                        <li><strong>Route 53</strong> (alias records, but only for AWS resources — not Heroku)</li>
+                    </ul>
+
+                    <p>If you happen to use one of those providers, ALIAS/ANAME records are a valid alternative. But they lock you into a specific DNS vendor, add an extra resolution hop on every request, and don't work with the majority of registrars (GoDaddy, Namecheap, Google Domains, Porkbun, and most resellers all lack ALIAS support).</p>
+
+                    <p><strong>ApexToWWW works with any DNS provider</strong> because it only needs plain A and AAAA records — the most basic record types in DNS, supported universally. Your apex resolves to a fixed pair of IPs that we maintain, and we serve the 301 redirect.</p>
+
+                    <h2 id="other-platforms">Works With Other Platforms Too</h2>
+
+                    <p>The same setup works for any host that requires (or recommends) a <code>www</code> subdomain. If you're considering moving off Heroku or running a multi-cloud setup, ApexToWWW handles the apex redirect identically across providers:</p>
+
+                    <ul>
+                        <li><a href="/vercel-apex-domain-redirect/">Vercel apex domain redirect</a> — Vercel recommends www and uses CNAME for custom domains.</li>
+                        <li><a href="/netlify-apex-domain-redirect/">Netlify apex redirect</a> — Same CNAME pattern as Heroku and Vercel.</li>
+                        <li><a href="/cloudflare-pages-apex-redirect/">Cloudflare Pages apex redirect</a> — CNAME flattening or ApexToWWW, depending on your DNS provider.</li>
+                        <li><a href="/blog/github-pages-apex-domain-redirect/">GitHub Pages apex setup</a> — A records exist but lack IPv6 and SSL nuances; many users still prefer www.</li>
+                        <li><a href="/firebase-hosting-apex-redirect/">Firebase Hosting</a> — Firebase issues a CNAME target for custom domains.</li>
+                        <li><a href="/render-apex-domain-redirect/">Render apex domain redirect</a> — issues a CNAME target and benefits from the same redirect pattern.</li>
+                        <li><a href="/aws-amplify-apex-domain-redirect/">AWS Amplify apex domain redirect</a> — for teams not using Route 53 DNS.</li>
+                    </ul>
+
+                    <h2 id="faq">Frequently Asked Questions</h2>
+
+                    <h3 id="faq-acm">Does this work with Heroku's automated certificate management (ACM)?</h3>
+                    <p>Yes. Heroku ACM provisions a TLS certificate for your <code>www</code> subdomain automatically. ApexToWWW provisions its own Let's Encrypt certificate for the apex. The two operate independently, so visitors who hit <code>example.com</code> get a secure HTTPS 301 redirect from us, and the actual page is served over HTTPS by Heroku. You don't have to upload, manage, or renew certificates anywhere.</p>
+
+                    <h3 id="faq-nameservers">Do I need to change my nameservers?</h3>
+                    <p>No. Keep using whatever DNS provider you already have — GoDaddy, Namecheap, Cloudflare, Google Domains, Porkbun, AWS Route 53, or anything else. You only need to add three records (a <code>www</code> CNAME and two apex records). There are no nameserver changes and no proxy in front of your traffic.</p>
+
+                    <h3 id="faq-sni">What about the Heroku SNI endpoint?</h3>
+                    <p>Heroku uses SNI (Server Name Indication) for SSL on all custom domains by default, including paid SNI endpoints on legacy plans. Your <code>www</code> CNAME points directly at the Heroku DNS target, so SNI works exactly as Heroku expects. ApexToWWW handles SNI on its own end for the apex — we look at the SNI hostname in the TLS handshake to serve the right Let's Encrypt certificate before issuing the redirect.</p>
+
+                    <h3 id="faq-enterprise">Will it work with Heroku Enterprise or Private Spaces?</h3>
+                    <p>Yes. Heroku Enterprise, Shield Private Spaces, and standard Private Spaces all use <code>herokudns.com</code> CNAME targets for custom domains. The setup is identical: <code>www</code> CNAME to your Private Space DNS target, then an A and AAAA record on the apex pointing at ApexToWWW.</p>
+
+                </div>
+            </div>
+        </article>
+
+        <!-- CTA Section -->
+        <section class="py-16 sm:py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-4xl mx-auto rounded-3xl bg-gradient-to-br from-blue-600 to-purple-600 p-10 sm:p-16 text-center shadow-2xl shadow-purple-500/25">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">Fix Your Heroku Apex Domain in 2 Minutes</h2>
+                    <p class="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">No signup, no credit card, no nameserver changes. Add three DNS records and your naked domain redirects cleanly to your Heroku app.</p>
+                    <a href="/" class="inline-flex items-center px-8 py-4 rounded-lg text-base font-semibold text-blue-600 bg-white hover:bg-gray-100 transition shadow-lg">
+                        Set Up Your Redirect — Free <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background:var(--surface);border-top:1px solid var(--line)">
+  <div style="max-width:1160px;margin:0 auto;padding:64px 24px 32px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:40px 32px;margin-bottom:48px">
+      <div>
+        <a href="/" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:18px;margin-bottom:16px">
+          <span aria-hidden="true" style="width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#3B82F6,#9333EA);display:flex;align-items:center;justify-content:center;color:#fff"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></span>
+          ApexToWWW
+        </a>
+        <p style="margin:0 0 12px;color:var(--muted);font-size:15px">Free apex domain to www redirect with automatic SSL, IPv6 and HTTP/3.</p>      </div>
+      <nav aria-label="Hosting guides">
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Hosting guides</h2>
+        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:15px">
+          <li><a href="/cloudflare-pages-apex-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Cloudflare Pages</a></li>
+          <li><a href="/vercel-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Vercel</a></li>
+          <li><a href="/netlify-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Netlify</a></li>
+          <li><a href="/blog/github-pages-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">GitHub Pages</a></li>
+          <li><a href="/heroku-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Heroku</a></li>
+          <li><a href="/firebase-hosting-apex-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Firebase Hosting</a></li>
+          <li><a href="/render-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Render</a></li>
+          <li><a href="/aws-amplify-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">AWS Amplify</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Guides">
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Guides</h2>
+        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:15px">
+          <li><a href="/blog/how-to-redirect-apex-domain-to-www/" style="display:inline-block;padding:6px 0;text-decoration:none">How to redirect apex to www</a></li>
+          <li><a href="/blog/what-is-an-apex-domain/" style="display:inline-block;padding:6px 0;text-decoration:none">What is an apex domain?</a></li>
+          <li><a href="/blog/apex-domain-vs-www/" style="display:inline-block;padding:6px 0;text-decoration:none">Apex domain vs www</a></li>
+          <li><a href="/blog/apex-domain-redirect-methods-compared/" style="display:inline-block;padding:6px 0;text-decoration:none">Redirect methods compared</a></li>
+          <li><a href="/redirect-www-to-apex-domain/" style="display:inline-block;padding:6px 0;text-decoration:none">Redirect www to apex</a></li>
+          <li><a href="/blog/hreflang-and-canonical-tags/" style="display:inline-block;padding:6px 0;text-decoration:none">Hreflang &amp; canonical tags</a></li>
+          <li><a href="/blog/free-subdomain-forwarding/" style="display:inline-block;padding:6px 0;text-decoration:none">Free subdomain forwarding</a></li>
+          <li><a href="/blog/" style="display:inline-block;padding:6px 0;text-decoration:none;font-weight:600">All guides</a></li>
+        </ul>
+      </nav>
+      <div>
+        <span id="contact" class="alias"></span>
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Contact</h2>
+        <p style="margin:0 0 8px;font-size:15px"><a href="#" class="js-email" data-email-user="hi" data-email-domain="apextowww.com" data-show-address style="display:inline-block;padding:6px 0">Email us</a></p>
+        <address style="font-style:normal;color:var(--muted);font-size:14px;line-height:1.6">Sandbox.ventures<br>P. O. Pedersens Vej 2<br>8200 Aarhus N, Denmark</address>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--line);padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;color:var(--muted);font-size:14px">
+      <span>&copy; <span id="current-year">2026</span> ApexToWWW. All rights reserved.</span>
+      <span>A service provided by <a href="https://sandbox.ventures" rel="noopener" style="color:var(--ink);font-weight:600;text-decoration:underline">Sandbox.ventures</a></span>
+    </div>
+  </div>
+</footer>
+    <script src="/site.js" defer></script>
+</body>
+</html>

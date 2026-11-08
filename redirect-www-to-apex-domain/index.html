@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+        (function () {
+            try {
+                var t = localStorage.theme;
+                if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                }
+            } catch (e) {}
+        })();
+    </script>
+        <title>Redirect WWW to Apex Domain — Free &amp; Native Methods</title>
+        <meta name="description" content="Redirect www.yourdomain.com to yourdomain.com (reverse direction): native methods for Cloudflare, Vercel, Netlify, and any host via nginx or redirect rules." />
+        <meta name="keywords" content="redirect www to apex domain, redirect www to apex, cloudflare pages redirect www to apex, vercel redirect www to apex domain, www to root domain redirect" />
+        <link rel="canonical" href="https://www.apextowww.com/redirect-www-to-apex-domain/" />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://www.apextowww.com/redirect-www-to-apex-domain/" />
+        <meta property="og:title" content="Redirect WWW to Apex Domain — Free &amp; Native Methods" />
+        <meta property="og:description" content="Redirect www.yourdomain.com to yourdomain.com (reverse direction): native methods for Cloudflare, Vercel, Netlify, and any host via nginx or redirect rules." />
+        <meta property="og:image" content="https://www.apextowww.com/og-image.png" />
+        <meta property="og:site_name" content="ApexToWWW" />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Redirect WWW to Apex Domain — Free &amp; Native Methods" />
+        <meta name="twitter:description" content="Redirect www.yourdomain.com to yourdomain.com (reverse direction): native methods for Cloudflare, Vercel, Netlify, and any host via nginx or redirect rules." />
+        <meta name="twitter:image" content="https://www.apextowww.com/og-image.png" />
+
+        <link rel="stylesheet" href="/styles.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCDJZQW377"></script>
+        <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-NCDJZQW377");</script>
+
+        <!-- FAQ Schema -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "How do I redirect www.yourdomain.com to yourdomain.com?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Point your apex domain at your host (natively on platforms like Netlify, or via ALIAS/ANAME/CNAME flattening elsewhere), then add a redirect rule that 301s www to the apex. The exact steps depend on your host -- see the platform-specific instructions above for Cloudflare Pages, Vercel, and Netlify, or use a generic Cloudflare Redirect Rule / nginx config for any other host." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Does ApexToWWW redirect www to apex?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "No. ApexToWWW only redirects apex to www (yourdomain.com to www.yourdomain.com), which is the more common and generally recommended direction since it keeps you on CNAME-based hosting. For the reverse direction, use your hosting platform's native redirect feature or a service like Cloudflare Redirect Rules." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Should I use apex or www as my canonical domain?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "Both work. WWW is usually the safer default: it supports CNAME records required by most CDNs and hosting platforms, and enables cookie isolation between subdomains. Apex as canonical is shorter and works well if your DNS provider supports ALIAS/ANAME or your host resolves the apex natively. The important thing is picking one and 301-redirecting the other." }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Will redirecting www to apex hurt my SEO?",
+                    "acceptedAnswer": { "@type": "Answer", "text": "No, as long as it's a proper HTTP 301 (permanent redirect). Google explicitly supports either apex or www as canonical -- the redirect direction itself has no SEO penalty. What matters is consistency: pick one version and make sure every URL variant (http/https, www/apex) redirects to it." }
+                }
+            ]
+        }
+        </script>
+    </head>
+<body class="font-sans bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white antialiased">
+    <a class="skip" href="#main">Skip to content</a>
+    <!-- Navigation -->
+    <header style="position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line)">
+  <div class="hdr" style="max-width:1160px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="/" aria-label="ApexToWWW home" style="display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:20px;letter-spacing:-0.02em">
+      <span aria-hidden="true" style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#3B82F6,#9333EA);display:flex;align-items:center;justify-content:center;color:#fff">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+      </span>
+      ApexToWWW
+    </a>
+    <nav aria-label="Primary" class="nav-links" style="display:flex;gap:28px;font-size:15px;font-weight:500">
+      <a href="/#how">How it works</a>
+      <a href="/#providers">Providers</a>
+      <a href="/blog/">Guides</a>
+      <a href="/#faq">FAQ</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Dark mode" aria-pressed="false">
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      </button>
+      <a class="btn btn-primary btn-sm" href="/#records"><span>Get <span class="hide-xs">the </span>records</span></a>
+    </div>
+  </div>
+</header>
+
+    <main id="main" class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <article class="max-w-3xl mx-auto">
+            <!-- Breadcrumbs -->
+            <nav aria-label="Breadcrumb" class="mb-8">
+                <ol class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                    <li><a href="/" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Home</a></li>
+                    <li><i class="fas fa-chevron-right text-xs mx-1"></i></li>
+                    <li class="text-gray-900 dark:text-white font-medium">Redirect WWW to Apex Domain</li>
+                </ol>
+            </nav>
+
+            <!-- Hero -->
+            <header class="mb-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-50 dark:bg-pink-900/20 border border-pink-200 dark:border-pink-800 text-pink-700 dark:text-pink-300 text-xs font-semibold mb-5">
+                    <i class="fas fa-right-left"></i> Reverse Direction
+                </div>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-6">Redirect WWW to Apex Domain</h1>
+                <p class="text-xl text-gray-600 dark:text-gray-400 leading-relaxed mb-8">Looking to redirect <code class="text-base bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded font-mono">www.yourdomain.com</code> &rarr; <code class="text-base bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded font-mono">yourdomain.com</code> instead of the other way around? This is the opposite direction from what ApexToWWW does &mdash; here's how to set it up natively on the platform you're using.</p>
+            </header>
+
+            <!-- TL;DR -->
+            <div class="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 rounded-r-xl p-6 mb-12">
+                <div class="flex items-center gap-2 text-blue-700 dark:text-blue-300 font-bold text-sm uppercase tracking-wide mb-2"><i class="fas fa-bolt"></i> TL;DR</div>
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">ApexToWWW only redirects apex &rarr; www, not the reverse. To redirect www &rarr; apex, your hosting platform (or CDN) needs to serve the apex directly &mdash; via ALIAS/ANAME, CNAME flattening, or native apex support &mdash; then apply a redirect rule on www. Jump to instructions for <a href="#cloudflare" class="underline decoration-blue-500/40 hover:decoration-blue-500">Cloudflare Pages</a>, <a href="#vercel" class="underline decoration-blue-500/40 hover:decoration-blue-500">Vercel</a>, <a href="#netlify" class="underline decoration-blue-500/40 hover:decoration-blue-500">Netlify</a>, or <a href="#generic" class="underline decoration-blue-500/40 hover:decoration-blue-500">any other host</a>.</p>
+            </div>
+
+            <div class="prose prose-lg dark:prose-invert max-w-none
+                prose-headings:font-bold prose-headings:tracking-tight
+                prose-h2:text-2xl prose-h2:sm:text-3xl prose-h2:mt-12 prose-h2:mb-4
+                prose-h3:text-xl prose-h3:sm:text-2xl prose-h3:mt-8 prose-h3:mb-3
+                prose-p:text-gray-700 prose-p:dark:text-gray-300 prose-p:leading-relaxed prose-p:mb-4
+                prose-a:text-blue-600 prose-a:dark:text-blue-400 prose-a:underline prose-a:underline-offset-2
+                prose-strong:text-gray-900 prose-strong:dark:text-white
+                prose-code:bg-gray-100 prose-code:dark:bg-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
+                prose-li:text-gray-700 prose-li:dark:text-gray-300">
+
+                <h2 id="should-you">Should You Redirect WWW to Apex? Consider This First</h2>
+
+                <p>Both directions are valid choices &mdash; Google treats apex and www as equally canonical-able, and there's no SEO penalty either way as long as the redirect is a proper 301. But the two directions have different technical trade-offs:</p>
+
+                <ul class="space-y-2 mb-6">
+                    <li><strong>WWW as canonical</strong> supports CNAME records (required by most CDNs and PaaS platforms), enables cookie isolation between subdomains, and is the path of least friction on hosts like Vercel, Netlify, GitHub Pages, and Heroku.</li>
+                    <li><strong>Apex as canonical</strong> is shorter and feels more "native," but requires your DNS provider to support ALIAS/ANAME/CNAME flattening, or your host to resolve the apex directly &mdash; not all hosts or DNS providers support this.</li>
+                </ul>
+
+                <p>For the full breakdown of trade-offs, see <a href="/blog/apex-domain-vs-www/">Apex Domain vs WWW: Which Should You Use?</a> If you're set on apex as canonical, the instructions below cover the most common platforms.</p>
+
+                <h2 id="cloudflare">Cloudflare Pages: Redirect WWW to Apex</h2>
+
+                <p>Point the apex at your Cloudflare Pages project &mdash; CNAME flattening on <code>@</code> to <code>your-project.pages.dev</code>, or an ALIAS/ANAME record if your DNS provider supports one &mdash; then add a Cloudflare Redirect Rule matching <code>http.host eq "www.yourdomain.com"</code> that 301s to <code>https://yourdomain.com</code>. On the legacy free plan, a Page Rule (<code>www.yourdomain.com/*</code> &rarr; <code>https://yourdomain.com/$1</code>, 301) does the same job.</p>
+
+                <p>Full walkthrough with a Worker-based alternative: <a href="/cloudflare-pages-apex-redirect/#reverse-direction">Cloudflare Pages apex redirect guide &mdash; reverse direction section</a>.</p>
+
+                <h2 id="vercel">Vercel: Redirect WWW to Apex</h2>
+
+                <p>Vercel handles this natively. Add both <code>www.yourdomain.com</code> and <code>yourdomain.com</code> in <strong>Settings &rarr; Domains</strong>, use the three-dot menu on the www entry to redirect it to the apex, and set the apex as primary. Or add a host-matched rule in <code>next.config.js</code> or <code>vercel.json</code> if you'd rather keep the rule in code.</p>
+
+                <p>Full walkthrough with working code snippets: <a href="/vercel-apex-domain-redirect/#reverse-direction">Vercel apex redirect guide &mdash; reverse direction section</a>.</p>
+
+                <h2 id="netlify">Netlify: Redirect WWW to Apex</h2>
+
+                <p>Netlify supports serving directly from the apex out of the box &mdash; it provides its own load-balancer IP for apex A records, so you don't need ALIAS/ANAME at all. In <strong>Site settings &rarr; Domain management &rarr; Custom domains</strong>, add both <code>yourdomain.com</code> and <code>www.yourdomain.com</code>, then use the "Set as primary domain" option on the apex entry. Netlify automatically 301-redirects the other variant for you &mdash; no separate redirect rule needed.</p>
+
+                <h2 id="generic">Any Other Host: Generic Approach</h2>
+
+                <p>For platforms without a built-in www&rarr;apex toggle, you need two pieces:</p>
+
+                <ol class="space-y-3 mb-6">
+                    <li><strong>Serve the apex.</strong> Either your host resolves the apex directly (check their docs for apex/root domain support), or your DNS provider offers ALIAS/ANAME/CNAME flattening to point the apex at your host's target hostname.</li>
+                    <li><strong>Redirect www to apex.</strong> If your DNS or CDN sits in front of requests (e.g., Cloudflare, even for a non-Cloudflare-hosted site), add a redirect rule there. If you run your own server, a two-line nginx config does it:</li>
+                </ol>
+
+                <div class="bg-gray-900 dark:bg-black rounded-xl p-4 my-6 overflow-x-auto">
+                    <pre class="text-green-400 text-sm font-mono leading-relaxed mb-0"><code>server {
+    listen 443 ssl;
+    server_name www.yourdomain.com;
+    return 301 https://yourdomain.com$request_uri;
+}</code></pre>
+                </div>
+
+                <p>This preserves the path and query string, exactly like a DNS-based redirect service would.</p>
+
+                <h2 id="faq">Frequently Asked Questions</h2>
+
+                <h3 id="faq-how">How do I redirect www.yourdomain.com to yourdomain.com?</h3>
+                <p>Point your apex domain at your host (natively on platforms like Netlify, or via ALIAS/ANAME/CNAME flattening elsewhere), then add a redirect rule that 301s www to the apex. The exact steps depend on your host &mdash; see the platform-specific instructions above for Cloudflare Pages, Vercel, and Netlify, or use a generic Cloudflare Redirect Rule / nginx config for any other host.</p>
+
+                <h3 id="faq-apextowww">Does ApexToWWW redirect www to apex?</h3>
+                <p>No. ApexToWWW only redirects apex to www (<code>yourdomain.com</code> to <code>www.yourdomain.com</code>), which is the more common and generally recommended direction since it keeps you on CNAME-based hosting. For the reverse direction, use your hosting platform's native redirect feature or a service like Cloudflare Redirect Rules.</p>
+
+                <h3 id="faq-which">Should I use apex or www as my canonical domain?</h3>
+                <p>Both work. WWW is usually the safer default: it supports CNAME records required by most CDNs and hosting platforms, and enables cookie isolation between subdomains. Apex as canonical is shorter and works well if your DNS provider supports ALIAS/ANAME or your host resolves the apex natively. The important thing is picking one and 301-redirecting the other.</p>
+
+                <h3 id="faq-seo">Will redirecting www to apex hurt my SEO?</h3>
+                <p>No, as long as it's a proper HTTP 301 (permanent redirect). Google explicitly supports either apex or www as canonical &mdash; the redirect direction itself has no SEO penalty. What matters is consistency: pick one version and make sure every URL variant (http/https, www/apex) redirects to it.</p>
+
+            </div>
+
+            <!-- CTA Section -->
+            <div class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800 rounded-2xl p-8 my-12 text-center">
+                <h2 class="text-2xl font-bold mb-3">Actually Want Apex &rarr; WWW Instead?</h2>
+                <p class="text-gray-600 dark:text-gray-400 mb-6">That's what ApexToWWW does &mdash; free, 2 DNS records, automatic SSL, no signup.</p>
+                <a href="/#records" class="inline-flex items-center px-6 py-3 rounded-lg text-base font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition shadow-lg shadow-blue-500/25">
+                    Get Started Now <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+                <p class="text-xs text-gray-500 mt-4">Questions? Email <a href="#" data-email-user="hi" data-email-domain="apextowww.com" class="js-email text-blue-600 dark:text-blue-400 underline">hi@apextowww.com</a></p>
+            </div>
+        </article>
+    </main>
+
+    <footer style="background:var(--surface);border-top:1px solid var(--line)">
+  <div style="max-width:1160px;margin:0 auto;padding:64px 24px 32px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:40px 32px;margin-bottom:48px">
+      <div>
+        <a href="/" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:18px;margin-bottom:16px">
+          <span aria-hidden="true" style="width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#3B82F6,#9333EA);display:flex;align-items:center;justify-content:center;color:#fff"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></span>
+          ApexToWWW
+        </a>
+        <p style="margin:0 0 12px;color:var(--muted);font-size:15px">Free apex domain to www redirect with automatic SSL, IPv6 and HTTP/3.</p>      </div>
+      <nav aria-label="Hosting guides">
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Hosting guides</h2>
+        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:15px">
+          <li><a href="/cloudflare-pages-apex-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Cloudflare Pages</a></li>
+          <li><a href="/vercel-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Vercel</a></li>
+          <li><a href="/netlify-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Netlify</a></li>
+          <li><a href="/blog/github-pages-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">GitHub Pages</a></li>
+          <li><a href="/heroku-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Heroku</a></li>
+          <li><a href="/firebase-hosting-apex-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Firebase Hosting</a></li>
+          <li><a href="/render-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">Render</a></li>
+          <li><a href="/aws-amplify-apex-domain-redirect/" style="display:inline-block;padding:6px 0;text-decoration:none">AWS Amplify</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Guides">
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Guides</h2>
+        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:15px">
+          <li><a href="/blog/how-to-redirect-apex-domain-to-www/" style="display:inline-block;padding:6px 0;text-decoration:none">How to redirect apex to www</a></li>
+          <li><a href="/blog/what-is-an-apex-domain/" style="display:inline-block;padding:6px 0;text-decoration:none">What is an apex domain?</a></li>
+          <li><a href="/blog/apex-domain-vs-www/" style="display:inline-block;padding:6px 0;text-decoration:none">Apex domain vs www</a></li>
+          <li><a href="/blog/apex-domain-redirect-methods-compared/" style="display:inline-block;padding:6px 0;text-decoration:none">Redirect methods compared</a></li>
+          <li><a href="/redirect-www-to-apex-domain/" style="display:inline-block;padding:6px 0;text-decoration:none">Redirect www to apex</a></li>
+          <li><a href="/blog/hreflang-and-canonical-tags/" style="display:inline-block;padding:6px 0;text-decoration:none">Hreflang &amp; canonical tags</a></li>
+          <li><a href="/blog/free-subdomain-forwarding/" style="display:inline-block;padding:6px 0;text-decoration:none">Free subdomain forwarding</a></li>
+          <li><a href="/blog/" style="display:inline-block;padding:6px 0;text-decoration:none;font-weight:600">All guides</a></li>
+        </ul>
+      </nav>
+      <div>
+        <span id="contact" class="alias"></span>
+        <h2 style="margin:0 0 14px;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-weight:600">Contact</h2>
+        <p style="margin:0 0 8px;font-size:15px"><a href="#" class="js-email" data-email-user="hi" data-email-domain="apextowww.com" data-show-address style="display:inline-block;padding:6px 0">Email us</a></p>
+        <address style="font-style:normal;color:var(--muted);font-size:14px;line-height:1.6">Sandbox.ventures<br>P. O. Pedersens Vej 2<br>8200 Aarhus N, Denmark</address>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--line);padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;color:var(--muted);font-size:14px">
+      <span>&copy; <span id="current-year">2026</span> ApexToWWW. All rights reserved.</span>
+      <span>A service provided by <a href="https://sandbox.ventures" rel="noopener" style="color:var(--ink);font-weight:600;text-decoration:underline">Sandbox.ventures</a></span>
+    </div>
+  </div>
+</footer>
+    <script src="/site.js" defer></script>
+</body>
+</html>
